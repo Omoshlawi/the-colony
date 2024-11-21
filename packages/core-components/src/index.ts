@@ -6,3 +6,4 @@ export { StyledListItem } from "./components/StyledListItem";
 export { StyledTabBarIcon } from "./components/StyledTabIcon";
 export { StyledText } from "./components/StyledText";
 export { Widget } from "./components/Widget";
+export { StyledInput } from "./components/StyledInput";

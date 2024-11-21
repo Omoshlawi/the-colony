@@ -1,3 +1,3 @@
-export { CallUsScreen } from "./LoginScreen";
-export { ChatWithUsScreen } from "./AccountVerificationScreen";
-export { SupportScreen } from "./RegistrationScreen";
+export { LoginScreen } from "./LoginScreen";
+export { AccountVerificationScreen } from "./AccountVerificationScreen";
+export { RegistrationScreen } from "./RegistrationScreen";
