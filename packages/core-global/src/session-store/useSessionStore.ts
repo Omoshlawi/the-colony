@@ -1,21 +1,18 @@
 import { create } from "zustand";
-
-type User = {};
-
-export type Session = {
-  isAuthenticated: boolean;
-  user?: User;
-};
+import { Session, User } from "../types";
 
 export type SessionStore = {
   session: Session;
   setSession: (session: Session) => void;
   setSessionUser: (user: User) => void;
+  setSessionToken: (token: string) => void;
 };
 
 export const useSesionStore = create<SessionStore>((set) => ({
   session: { isAuthenticated: false },
-  setSession: (session: Session) => set({ session }),
+  setSession: (session: Session) => set((state) => ({ ...state, session })),
   setSessionUser: (user: User) =>
     set((state) => ({ ...state, session: { ...state.session, user: user } })),
+  setSessionToken: (token: string) =>
+    set((state) => ({ ...state, session: { ...state.session, token } })),
 }));
