@@ -4,7 +4,7 @@ import { ThemeProvider } from "@colony/core-theme";
 export default function Layout() {
   return (
     <ThemeProvider>
-      <Stack screenOptions={{ headerShown: false }} />;
+      <Stack screenOptions={{ headerShown: false }} />
     </ThemeProvider>
   );
 }
