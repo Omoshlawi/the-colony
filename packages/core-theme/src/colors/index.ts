@@ -9,12 +9,14 @@ const blue = "#275CB2";
 
 const lightBlack = "#11181C";
 const black = "#000000";
-
+const dark = "#25292e";
 const lightRed = "#E99B90";
 const darkRed = "#AB4031";
 
 const lightGreen = "#A1CD74";
 const darkGreen = "#40651F";
+
+const greyBlue = "##636B7C";
 
 export const pallet = {
   white,
@@ -28,7 +30,9 @@ export const pallet = {
   darkRed,
   lightGreen,
   darkGreen,
-  lightBlack
+  lightBlack,
+  dark,
+  greyBlue,
 };
 
 export const microTheme = {

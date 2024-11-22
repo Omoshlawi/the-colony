@@ -14,6 +14,7 @@
     "react-dom": "18.3.1",
     "react-native": "0.76.2",
     "react-native-media-query": "^2.0.1",
+    "@colony/core-theme": "*",
     "react-native-svg": "15.9.0"
   },
   "devDependencies": {
