@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Switch, View } from "react-native";
 
 import { StyledPageLayout, StyledText } from "@colony/core-components";
 import { useNavigation } from "expo-router";
@@ -7,7 +7,6 @@ import { LoginForm } from "../forms";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
-  
 
   useEffect(() => {
     navigation.setOptions({
@@ -19,8 +18,10 @@ export const LoginScreen = () => {
 
   return (
     <StyledPageLayout>
-      <StyledText style={styles.title}>login screen</StyledText>
-      <LoginForm/>
+      <View>
+        <StyledText style={styles.title}>{`login screen`}</StyledText>
+        <LoginForm />
+      </View>
     </StyledPageLayout>
   );
 };

@@ -42,6 +42,7 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.4",
     "@colony/core-components": "*",
+    "@colony/core-theme": "*",
     "@colony/features-support": "*"
   },
   "devDependencies": {

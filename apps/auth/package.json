@@ -40,6 +40,7 @@
     "react-native-webview": "13.12.4",
     "@colony/core-components": "*",
     "@colony/features-auth": "*",
+    "@colony/core-theme": "*",
     "@colony/core-global": "*"
   },
   "devDependencies": {
