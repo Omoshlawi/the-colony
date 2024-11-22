@@ -1,18 +1,19 @@
 import { createBox, createText, createTheme } from "@shopify/restyle";
-import { pallet } from "../colors";
+import { darkColorScheme, lightColorScheme, pallet } from "../colors";
 import { textVariantsLight } from "../text-variants";
 
 export const theme = createTheme({
   colors: {
     text: pallet.lightBlack,
-    background: pallet.white,
     tint: pallet.blue,
     icon: "#687076",
     tabIconDefault: "#687076",
     tabIconSelected: pallet.blue,
-    primary: pallet.blue,
+    // primary: pallet.blue,
     disabled: pallet.darkRed,
-    onPrimary: pallet.greyBlue,
+    // onPrimary: pallet.greyBlue,
+    ...lightColorScheme,
+    // background: pallet.white,
   },
   spacing: {
     s: 8,
@@ -64,13 +65,13 @@ export const darktheme: Theme = {
   ...theme,
   colors: {
     ...theme.colors,
-    // TODO update dark theme colors
     text: pallet.lightGrey,
-    background: pallet.dark,
     tint: pallet.white,
     icon: "#687076",
     tabIconDefault: "#687076",
     tabIconSelected: pallet.blue,
+    ...darkColorScheme,
+    // background: pallet.dark,
   },
 };
 

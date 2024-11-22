@@ -1,25 +1,34 @@
-import { PropsWithChildren } from "react";
-import { View } from "react-native";
-import StyleSheet from "react-native-media-query";
+import { FC, PropsWithChildren } from "react";
 
 import { SafeAreaView } from "react-native-safe-area-context";
 import { microColors } from "../../colors";
+import { Box } from "@colony/core-theme";
+import { useUserPreferences } from "@colony/core-global";
+import { Switch } from "react-native";
 
-const { ids, styles } = StyleSheet.create({
-  container: {
-    padding: 25,
-    "@media (min-width: 800px)": {
-      padding: "60px 20%",
-    },
-  },
-});
+interface Props extends PropsWithChildren {
+  withSafeArea?: boolean;
+}
 
-export const StyledPageLayout = ({ children }: PropsWithChildren) => {
+export const StyledPageLayout: FC<Props> = ({
+  children,
+  withSafeArea = true,
+}) => {
+  const {
+    userPreferences: { theme },
+    setTheme,
+  } = useUserPreferences();
   return (
-    <SafeAreaView style={{ backgroundColor: microColors.lightGrey, flex: 1 }}>
-      <View style={styles.container} dataSet={{ media: ids.container }}>
-        {children}
-      </View>
-    </SafeAreaView>
+    <Box backgroundColor={"background"} flex={1} height={"100%"}>
+      {withSafeArea && (
+        <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
+      )}
+      {!withSafeArea && children}
+      <Switch
+        style={{ position: "absolute", bottom: 40, right: 40 }}
+        value={theme === "dark"}
+        onValueChange={(enabled) => setTheme(enabled ? "dark" : "light")}
+      />
+    </Box>
   );
 };

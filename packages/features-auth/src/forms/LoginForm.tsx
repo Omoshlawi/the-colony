@@ -17,31 +17,39 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {};
   return (
     <View>
-      <Text>{JSON.stringify(form.formState.errors, null, 2)}</Text>
       <Controller
         control={form.control}
         name="identifier"
-        render={({ field: { onChange, value, disabled } }) => (
+        render={({
+          field: { onChange, value, disabled },
+          fieldState: { error },
+        }) => (
           <StyledInput
             value={value}
             label="Username"
             readOnly={disabled}
             onChangeText={onChange}
-            placeholder="Username"
+            placeholder="Enter username"
+            error={error?.message}
+            helperText="fudncdnc"
           />
         )}
       />
       <Controller
         control={form.control}
         name="password"
-        render={({ field: { onChange, value, disabled, onBlur, ref } }) => (
+        render={({
+          field: { onChange, value, disabled, onBlur, ref },
+          fieldState: { error },
+        }) => (
           <StyledInput
             label="Password"
             value={value}
             readOnly={disabled}
             onChangeText={onChange}
-            placeholder="Passoword"
+            placeholder="Enter passoword"
             onBlur={onBlur}
+            error={error?.message}
           />
         )}
       />

@@ -8,10 +8,20 @@ interface Props {
   style?: TextStyle;
 }
 
-
+const getStyle = (type?: TextType) => {
+  switch (type) {
+    case "bold":
+      return styles.bold;
+    case "caption":
+      return styles.caption;
+    case "default":
+    default:
+      return styles.text;
+  }
+};
 
 export const StyledText = ({ type, children, style }: Props) => {
-  return <Text>{children}</Text>;
+  return <Text style={[getStyle(type), style]}>{children}</Text>;
 };
 
 const styles = StyleSheet.create({

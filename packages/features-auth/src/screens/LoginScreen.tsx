@@ -1,7 +1,7 @@
 import { StyleSheet, Switch, View } from "react-native";
 
 import { StyledPageLayout, StyledText } from "@colony/core-components";
-import { Box, Text } from "@colony/core-theme";
+import { Box, Text, useTheme } from "@colony/core-theme";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 import { LoginForm } from "../forms";
@@ -9,6 +9,9 @@ import { useUserPreferences } from "@colony/core-global";
 
 export const LoginScreen = () => {
   const navigation = useNavigation();
+  const {
+    colors: { background, text },
+  } = useTheme();
 
   const {
     userPreferences: { theme },
@@ -19,32 +22,27 @@ export const LoginScreen = () => {
       headerShown: true,
       headerTitle: "Login",
       headerBackTitleVisible: false,
+      headerTintColor: text,
+      headerStyle: {
+        backgroundColor: background,
+      },
     });
   }, [navigation]);
 
   return (
     <StyledPageLayout>
-      <View>
-        <Box
-          padding="xl"
-          margin="xl"
-          borderRadius={"medium"}
-          backgroundColor={"background"}
+      <Box padding={"m"}>
+        <Text
+          color={"text"}
+          variant={"headlineLarge"}
+          fontWeight={"700"}
+          textAlign={"center"}
         >
-          <Text color={"text"} variant={"labelLarge"}>
-            themed text here
-          </Text>
-        </Box>
-        <Switch
-          value={theme === "dark"}
-          onValueChange={(enabled) => setTheme(enabled ? "dark" : "light")}
-        />
-        <StyledText
-          style={styles.title}
-          type="caption"
-        >{`login screen`}</StyledText>
+          Sign In
+        </Text>
         <LoginForm />
-      </View>
+        
+      </Box>
     </StyledPageLayout>
   );
 };

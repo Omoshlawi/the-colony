@@ -1,10 +1,20 @@
 import { Stack } from "expo-router/stack";
 import { ThemeProvider } from "@colony/core-theme";
+import { StatusBar } from "expo-status-bar";
+import { useUserPreferences } from "@colony/core-global";
 
 export default function Layout() {
+  const {
+    userPreferences: { theme },
+  } = useUserPreferences();
   return (
     <ThemeProvider>
-      <Stack screenOptions={{ headerShown: false }} />
+      <StatusBar style={theme == "dark" ? "light" : "dark"} />
+      <Stack
+        screenOptions={{
+          headerShown: false,
+        }}
+      />
     </ThemeProvider>
   );
 }

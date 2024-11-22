@@ -17,6 +17,7 @@ const lightGreen = "#A1CD74";
 const darkGreen = "#40651F";
 
 const greyBlue = "##636B7C";
+const tertiaryGray = "##636B7C";
 
 export const pallet = {
   white,
@@ -33,6 +34,7 @@ export const pallet = {
   lightBlack,
   dark,
   greyBlue,
+  tertiaryGray,
 };
 
 export const microTheme = {
@@ -53,3 +55,5 @@ export const microTheme = {
     tabIconSelected: blue,
   },
 } as const;
+export * from "./dark";
+export * from "./light";
