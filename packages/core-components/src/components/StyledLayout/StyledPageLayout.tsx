@@ -19,7 +19,13 @@ export const StyledPageLayout: FC<Props> = ({
     setTheme,
   } = useUserPreferences();
   return (
-    <Box backgroundColor={"background"} flex={1} height={"100%"}>
+    <Box
+      backgroundColor={"background"}
+      flex={1}
+      height={"100%"}
+      flexGrow={1}
+      flexDirection={"column"}
+    >
       {withSafeArea && (
         <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
       )}

@@ -64,10 +64,3 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
-
-const styles = StyleSheet.create({
-  fomeContainer: {
-    width: "100%",
-    gap: 10,
-  },
-});

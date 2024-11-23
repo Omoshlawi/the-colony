@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 import { AppBar, Logo, StyledPageLayout } from "@colony/core-components";
 import { Box, Text } from "@colony/core-theme";
@@ -9,26 +9,29 @@ export const LoginScreen = () => {
     <StyledPageLayout>
       <AppBar title={"Login"} />
 
-      <Box
-        padding={"m"}
-        flex={1}
-        flexDirection={"column"}
-        alignItems={"center"}
-        width={"100%"}
-        justifyContent={"center"}
-        gap={"m"}
-      >
-        <Logo size={150} />
-        <Text
-          color={"text"}
-          variant={"headlineLarge"}
-          fontWeight={"700"}
-          textAlign={"center"}
+      <ScrollView>
+        <Box
+          padding={"m"}
+          flex={1}
+          flexDirection={"column"}
+          alignItems={"center"}
+          width={"100%"}
+          justifyContent={"center"}
+          gap={"m"}
+          mb={"l"}
         >
-          Sign In
-        </Text>
-        <LoginForm />
-      </Box>
+          <Logo size={150} />
+          <Text
+            color={"text"}
+            variant={"headlineLarge"}
+            fontWeight={"700"}
+            textAlign={"center"}
+          >
+            Sign In
+          </Text>
+          <LoginForm />
+        </Box>
+      </ScrollView>
     </StyledPageLayout>
   );
 };

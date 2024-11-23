@@ -1,8 +1,8 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import React, { FC, ReactNode } from "react";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
+import React, { FC, ReactNode } from "react";
+import { TouchableOpacity } from "react-native";
 
 type AppBarProps = {
   title?: string;
@@ -21,6 +21,8 @@ const AppBar: FC<AppBarProps> = ({ title, leading, actions }) => {
       flexDirection={"row"}
       alignItems={"center"}
       justifyContent={"space-between"}
+      mb={"s"}
+      p={"s"}
     >
       <Box gap={"s"} flexDirection={"row"}>
         {leading ?? (
@@ -42,5 +44,3 @@ const AppBar: FC<AppBarProps> = ({ title, leading, actions }) => {
 };
 
 export default AppBar;
-
-const styles = StyleSheet.create({});
