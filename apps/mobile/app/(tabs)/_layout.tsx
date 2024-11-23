@@ -1,9 +1,14 @@
-import { Tabs } from "expo-router";
+import { Redirect, Tabs } from "expo-router";
 import React from "react";
+import { RoutePaths } from "@colony/features-auth";
 
 import { microColors, StyledTabBarIcon } from "@colony/core-components";
+import { useSession } from "@colony/core-global";
 
 export default function TabLayout() {
+  const { isAuthenticated } = useSession();
+  if (!isAuthenticated)
+    return <Redirect href={RoutePaths.LOGIN_SCREEN as any} />;
   return (
     <Tabs
       screenOptions={{

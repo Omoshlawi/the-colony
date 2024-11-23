@@ -7,16 +7,17 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@colony/core-components": "*",
+    "@colony/core-global": "*",
+    "@colony/core-theme": "*",
     "@hookform/resolvers": "^3.9.1",
     "@react-navigation/native": "^7.0.0",
+    "axios": "^1.7.7",
     "expo": "~52.0.9",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-hook-form": "^7.53.2",
     "react-native": "0.76.2",
-    "@colony/core-global": "*",
-    "@colony/core-theme": "*",
-    "@colony/core-components": "*",
     "zod": "^3.23.8"
   },
   "devDependencies": {

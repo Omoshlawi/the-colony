@@ -6,7 +6,9 @@ import { LoginFormData } from "../types";
 import { LoginShema } from "../utils";
 import { StyledButton, StyledInput } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { useAuthAPi } from "../hooks";
 const LoginForm = () => {
+  const { loginUser, handleError } = useAuthAPi();
   const form = useForm<LoginFormData>({
     defaultValues: {
       identifier: "",
@@ -16,7 +18,19 @@ const LoginForm = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {};
+  const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
+    try {
+      await loginUser(data);
+    } catch (error) {
+      const e = handleError<LoginFormData>(error);
+      if (e.detail) {
+        console.log(__filename, error);
+      } else
+        Object.entries(e).forEach(([key, val]) =>
+          form.setError(key as keyof LoginFormData, { message: val })
+        );
+    }
+  };
   return (
     <Box width={"100%"} gap={"l"}>
       <Controller
@@ -34,6 +48,8 @@ const LoginForm = () => {
             placeholder="Enter username"
             error={error?.message}
             helperText="Username, email or phone number"
+            autoCapitalize="none"
+            autoCorrect={false}
           />
         )}
       />
@@ -55,6 +71,8 @@ const LoginForm = () => {
             placeholder="Enter passoword"
             onBlur={onBlur}
             error={error?.message}
+            autoCapitalize="none"
+            autoCorrect={false}
           />
         )}
       />

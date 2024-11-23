@@ -43,6 +43,7 @@
     "@colony/core-navigation": "*",
     "@colony/features-payments": "*",
     "@colony/core-global": "*",
+    "@colony/features-auth": "*",
     "@colony/core-theme": "*",
     "@colony/features-support": "*"
   },

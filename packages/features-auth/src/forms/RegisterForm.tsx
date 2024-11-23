@@ -1,13 +1,16 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyledButton, StyledInput } from "@colony/core-components";
+import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
+import { useAuthAPi } from "../hooks";
 import { RegisterFormData } from "../types";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { RegisterSchema } from "../utils";
-import { Box } from "@colony/core-theme";
-import { StyledButton, StyledInput } from "@colony/core-components";
 
 const RegisterForm = () => {
+  const { registerUser, handleError } = useAuthAPi();
+
   const form = useForm<RegisterFormData>({
     defaultValues: {
       username: "",
@@ -20,7 +23,19 @@ const RegisterForm = () => {
   });
   const [showPassword, setShowPassword] = useState(false);
 
-  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {};
+  const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
+    try {
+      await registerUser(data);
+    } catch (error) {
+      const e = handleError<RegisterFormData>(error);
+      if (e.detail) {
+        console.log(__filename, error);
+      } else
+        Object.entries(e).forEach(([key, val]) =>
+          form.setError(key as keyof RegisterFormData, { message: val })
+        );
+    }
+  };
   return (
     <Box width={"100%"} gap={"m"}>
       <Controller
@@ -37,6 +52,8 @@ const RegisterForm = () => {
             onChangeText={onChange}
             placeholder="Enter username"
             error={error?.message}
+            autoCapitalize="none"
+            autoCorrect={false}
           />
         )}
       />
@@ -55,6 +72,8 @@ const RegisterForm = () => {
             onChangeText={onChange}
             placeholder="Enter email"
             error={error?.message}
+            autoCapitalize="none"
+            autoCorrect={false}
           />
         )}
       />

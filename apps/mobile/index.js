@@ -14,6 +14,10 @@ const contexts = [
     context: require.context("../support/app/(support)", true, /.*/),
     prefix: "(support)",
   },
+  {
+    context: require.context("../auth/app/(auth)", true, /.*/),
+    prefix: "(auth)",
+  },
 ];
 
 // Must be exported or Fast Refresh won't update the context
