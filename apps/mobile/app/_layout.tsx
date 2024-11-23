@@ -6,7 +6,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
+// Prevent the splash screen from auto-hiding before asset and auth state loading is complete.
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -16,12 +16,12 @@ export default function RootLayout() {
   const { isLoading } = useLoadInitialAuthState();
 
   useEffect(() => {
-    if (loaded || isLoading) {
+    if (loaded && !isLoading) {
       SplashScreen.hideAsync();
     }
   }, [loaded, isLoading]);
 
-  if (!loaded) {
+  if (!loaded || isLoading) {
     return null;
   }
 
