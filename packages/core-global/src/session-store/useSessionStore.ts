@@ -6,6 +6,7 @@ export type SessionStore = {
   setSession: (session: Session) => void;
   setSessionUser: (user: User) => void;
   setSessionToken: (token: string) => void;
+  clearSession: () => void;
 };
 
 export const useSesionStore = create<SessionStore>((set) => ({
@@ -15,4 +16,10 @@ export const useSesionStore = create<SessionStore>((set) => ({
     set((state) => ({ ...state, session: { ...state.session, user: user } })),
   setSessionToken: (token: string) =>
     set((state) => ({ ...state, session: { ...state.session, token } })),
+  clearSession: () => {
+    set((state) => ({
+      ...state,
+      session: { isAuthenticated: false, user: undefined, token: undefined },
+    }));
+  },
 }));

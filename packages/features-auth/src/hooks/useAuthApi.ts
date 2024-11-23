@@ -2,6 +2,8 @@ import { User, useSesionStore } from "@colony/core-global";
 import axios, { isAxiosError } from "axios";
 import { LoginFormData, RegisterFormData, TokenPair } from "../types";
 import { unknown } from "zod";
+import { useSecureStorage } from "@colony/core-storage";
+import { SESSION_TOKEN_KEY } from "../utils";
 
 const httpClient = axios.create({ baseURL: "http://localhost:5000" });
 
@@ -56,7 +58,7 @@ const getSessionUserByToken = async (token: string) => {
   return responseData;
 };
 
-export const handleError = <T extends Record<string, unknown>>(
+const handleError = <T extends Record<string, unknown>>(
   error: any
 ): { [field in keyof T]?: string } & { detail?: string } => {
   if (isAxiosError(error)) {
@@ -82,6 +84,36 @@ export const handleError = <T extends Record<string, unknown>>(
   };
 };
 
+const logoutUser = () => {
+  useSesionStore.setState((state) => ({
+    ...state,
+    session: {
+      isAuthenticated: false,
+      token: undefined,
+      user: undefined,
+    },
+  }));
+};
+
 export const useAuthAPi = () => {
-  return { loginUser, registerUser, getSessionUserByToken, handleError };
+  const [, setToken] = useSecureStorage<TokenPair>(SESSION_TOKEN_KEY);
+
+  return {
+    loginUser: async (data: LoginFormData) => {
+      const response = await loginUser(data);
+      setToken(response.token);
+      return response;
+    },
+    registerUser: async (data: RegisterFormData) => {
+      const response = await registerUser(data);
+      setToken(response.token);
+      return response;
+    },
+    getSessionUserByToken,
+    handleError,
+    logoutUser: () => {
+      logoutUser();
+      setToken(null);
+    },
+  };
 };
