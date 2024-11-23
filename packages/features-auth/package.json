@@ -16,6 +16,7 @@
     "react-native": "0.76.2",
     "@colony/core-global": "*",
     "@colony/core-theme": "*",
+    "@colony/core-components": "*",
     "zod": "^3.23.8"
   },
   "devDependencies": {

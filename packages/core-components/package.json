@@ -7,14 +7,15 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@react-navigation/native": "^7.0.0",
+    "@colony/core-theme": "*",
     "@expo/vector-icons": "^14.0.2",
+    "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.9",
+    "expo-image": "~2.0.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.2",
     "react-native-media-query": "^2.0.1",
-    "@colony/core-theme": "*",
     "react-native-svg": "15.9.0"
   },
   "devDependencies": {

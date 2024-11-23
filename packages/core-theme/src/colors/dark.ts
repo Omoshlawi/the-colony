@@ -18,7 +18,7 @@ export const darkColorScheme = {
   onTertiaryContainer: "#36003d",
   outline: "#8f9099",
   outlineVariant: "#44464f",
-  primary: "#b0c6ff",
+  primary: "#d0a136",
   primaryContainer: "#2f4578",
   scrim: "#000000",
   secondary: "#c0c6dc",

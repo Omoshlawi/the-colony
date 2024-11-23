@@ -18,7 +18,7 @@ export const lightColorScheme = {
   onTertiaryContainer: "#001f24",
   outline: "#73777f",
   outlineVariant: "#c3c7cf",
-  primary: "#001126",
+  primary: "#d0a136",
   primaryContainer: "#d3e3ff",
   scrim: "#000000",
   secondary: "#535f70",
