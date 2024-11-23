@@ -26,7 +26,6 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider>
-      {/* <Slot /> */}
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" />
         <Stack.Screen name="(auth)" />

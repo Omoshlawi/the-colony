@@ -1,9 +1,13 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { WelcomeScreen } from "@colony/features-auth";
+import { OpenRoute, WelcomeScreen } from "@colony/features-auth";
 
 const Welcome = () => {
-  return <WelcomeScreen />;
+  return (
+    <OpenRoute>
+      <WelcomeScreen />
+    </OpenRoute>
+  );
 };
 
 export default Welcome;

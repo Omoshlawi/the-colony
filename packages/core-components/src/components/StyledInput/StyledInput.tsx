@@ -1,5 +1,6 @@
 import {
   NativeSyntheticEvent,
+  Platform,
   StyleSheet,
   TextInput,
   TextInputFocusEventData,
@@ -40,6 +41,7 @@ const StyledInput: FC<Props> = ({
   const [isFocused, setIsFocused] = useState(false);
   const {
     colors: { hintColor, text, icon },
+    spacing,
   } = useTheme();
   const handleFocus = (e: any) => {
     setIsFocused(true);
@@ -60,28 +62,42 @@ const StyledInput: FC<Props> = ({
       <Box
         borderWidth={isFocused ? 2 : 1}
         borderRadius={"small"}
-        padding={"m"}
         borderColor={error ? "error" : isFocused ? "primary" : "outline"}
-        // flex={1}
+        flex={1}
         flexDirection={"row"}
-        gap={"s"}
         alignItems={"center"}
       >
         {prefixIcon && (
-          <TouchableOpacity onPress={onPrefixIconPressed}>
-            <Ionicons {...suffixIcon} />
+          <TouchableOpacity
+            onPress={onPrefixIconPressed}
+            style={{ marginLeft: spacing.s }}
+          >
+            <Ionicons {...prefixIcon} color={icon} />
           </TouchableOpacity>
         )}
         <TextInput
           {...props}
-          style={[inputStyles, style, { color: text, flexGrow: 1 }]}
+          style={[
+            style,
+            {
+              color: text,
+              flexGrow: 1,
+              paddingVertical: spacing.m,
+              paddingLeft: prefixIcon ? spacing.s : spacing.m,
+              paddingRight: suffixIcon ? spacing.s : spacing.m,
+            },
+            Platform.OS === "web" && ({ outlineStyle: "none" } as any),
+          ]}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholderTextColor={hintColor}
           cursorColor={text}
         />
         {suffixIcon && (
-          <TouchableOpacity onPress={onSuffixIconPressed}>
+          <TouchableOpacity
+            onPress={onSuffixIconPressed}
+            style={{ marginRight: spacing.s }}
+          >
             <Ionicons {...suffixIcon} color={icon} />
           </TouchableOpacity>
         )}
