@@ -1,10 +1,11 @@
 import { Button, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, Form, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "../types";
 import { LoginShema } from "../utils";
-import { StyledInput } from "@colony/core-components";
+import { StyledButton, StyledInput } from "@colony/core-components";
+import { Box } from "@colony/core-theme";
 const LoginForm = () => {
   const form = useForm<LoginFormData>({
     defaultValues: {
@@ -13,10 +14,11 @@ const LoginForm = () => {
     },
     resolver: zodResolver(LoginShema),
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {};
   return (
-    <View>
+    <Box width={"100%"} gap={"l"}>
       <Controller
         control={form.control}
         name="identifier"
@@ -31,7 +33,7 @@ const LoginForm = () => {
             onChangeText={onChange}
             placeholder="Enter username"
             error={error?.message}
-            helperText="fudncdnc"
+            helperText="Username, email or phone number"
           />
         )}
       />
@@ -44,6 +46,9 @@ const LoginForm = () => {
         }) => (
           <StyledInput
             label="Password"
+            suffixIcon={{ name: !showPassword ? "eye-off" : "eye", size: 20 }}
+            secureTextEntry={!showPassword}
+            onSuffixIconPressed={() => setShowPassword(!showPassword)}
             value={value}
             readOnly={disabled}
             onChangeText={onChange}
@@ -53,11 +58,16 @@ const LoginForm = () => {
           />
         )}
       />
-      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
-    </View>
+      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+    </Box>
   );
 };
 
 export default LoginForm;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  fomeContainer: {
+    width: "100%",
+    gap: 10,
+  },
+});

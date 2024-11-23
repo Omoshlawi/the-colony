@@ -33,6 +33,6 @@ export const darkColorScheme = {
   dividerColor: "#1fe2e2e9",
   focusColor: "#1fffffff",
   highlightColor: "#40cccccc",
-  hintColor: "#99ffffff",
+  hintColor: "#6a6e74",
   hoverColor: "#0affffff",
 };

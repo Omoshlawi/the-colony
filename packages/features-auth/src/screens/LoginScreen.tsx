@@ -1,37 +1,24 @@
-import { StyleSheet, Switch, View } from "react-native";
+import { StyleSheet } from "react-native";
 
-import { StyledPageLayout, StyledText } from "@colony/core-components";
-import { Box, Text, useTheme } from "@colony/core-theme";
-import { useNavigation } from "expo-router";
-import { useEffect } from "react";
+import { AppBar, Logo, StyledPageLayout } from "@colony/core-components";
+import { Box, Text } from "@colony/core-theme";
 import { LoginForm } from "../forms";
-import { useUserPreferences } from "@colony/core-global";
 
 export const LoginScreen = () => {
-  const navigation = useNavigation();
-  const {
-    colors: { background, text },
-  } = useTheme();
-
-  const {
-    userPreferences: { theme },
-    setTheme,
-  } = useUserPreferences();
-  useEffect(() => {
-    navigation.setOptions({
-      headerShown: true,
-      headerTitle: "Login",
-      headerBackTitleVisible: false,
-      headerTintColor: text,
-      headerStyle: {
-        backgroundColor: background,
-      },
-    });
-  }, [navigation]);
-
   return (
     <StyledPageLayout>
-      <Box padding={"m"}>
+      <AppBar title={"Login"} />
+
+      <Box
+        padding={"m"}
+        flex={1}
+        flexDirection={"column"}
+        alignItems={"center"}
+        width={"100%"}
+        justifyContent={"center"}
+        gap={"m"}
+      >
+        <Logo size={150} />
         <Text
           color={"text"}
           variant={"headlineLarge"}
@@ -41,7 +28,6 @@ export const LoginScreen = () => {
           Sign In
         </Text>
         <LoginForm />
-        
       </Box>
     </StyledPageLayout>
   );

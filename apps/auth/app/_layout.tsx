@@ -14,7 +14,10 @@ export default function Layout() {
         screenOptions={{
           headerShown: false,
         }}
-      />
+      >
+        <Stack.Screen name="index" />
+        <Stack.Screen name="(auth)" />
+      </Stack>
     </ThemeProvider>
   );
 }

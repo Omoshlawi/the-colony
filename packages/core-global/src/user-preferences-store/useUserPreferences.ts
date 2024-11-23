@@ -15,3 +15,12 @@ export const useUserPreferences = () => {
     },
   };
 };
+
+export const useUserPreferedTheme = () => {
+  const theme = useColorScheme(); // System theme
+  const userTtheme = useUserPreferenceStore(
+    (state) => state.userPreferences.theme
+  ); // Access store
+
+  return userTtheme === "system" ? theme : userTtheme;
+};

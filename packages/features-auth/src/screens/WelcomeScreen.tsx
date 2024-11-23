@@ -1,20 +1,21 @@
 import { Logo, StyledButton, StyledPageLayout } from "@colony/core-components";
-import { useUserPreferences } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Switch, View } from "react-native";
-import { WelcomeHeader } from "../widgets";
+import { StyleSheet, View } from "react-native";
+import { RoutePaths } from "../utils";
+import { useRouter } from "expo-router";
 
 const WelcomeScreen = () => {
   const navigation = useNavigation();
+  const router = useRouter();
 
   return (
     <StyledPageLayout withSafeArea={true}>
       <View style={styles.container}>
         <View />
         <Logo size={200} />
-        <View>
+        <Box gap={"l"} p={"m"}>
           <Text
             variant={"titleLarge"}
             color={"text"}
@@ -24,9 +25,17 @@ const WelcomeScreen = () => {
           >
             Get started
           </Text>
-          <StyledButton title="Login" variant="filled" />
-          <StyledButton title="Register" variant="outline" />
-        </View>
+          <StyledButton
+            title="Login"
+            variant="filled"
+            onPress={() => router.navigate(RoutePaths.LOGIN_SCREEN)}
+          />
+          <StyledButton
+            title="Register"
+            variant="outline"
+            onPress={() => router.navigate(RoutePaths.REGISTER_SCREEN)}
+          />
+        </Box>
         <View />
       </View>
     </StyledPageLayout>

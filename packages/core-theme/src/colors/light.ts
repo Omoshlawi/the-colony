@@ -34,6 +34,6 @@ export const lightColorScheme = {
   dividerColor: "#1f191c20",
   focusColor: "#1f000000",
   highlightColor: "#66bcbcbc",
-  hintColor: "#99000000",
+  hintColor: "#b4bbc5",
   hoverColor: "#0a000000",
 };
