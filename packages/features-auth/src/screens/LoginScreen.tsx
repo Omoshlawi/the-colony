@@ -9,29 +9,30 @@ export const LoginScreen = () => {
     <StyledPageLayout>
       <AppBar title={"Login"} />
 
-      <ScrollView>
-        <Box
-          padding={"m"}
-          flex={1}
-          flexDirection={"column"}
-          alignItems={"center"}
-          width={"100%"}
-          justifyContent={"center"}
-          gap={"m"}
-          mb={"l"}
-        >
-          <Logo size={150} />
-          <Text
-            color={"text"}
-            variant={"headlineLarge"}
-            fontWeight={"700"}
-            textAlign={"center"}
+      <Box flexDirection={"column"} flex={1} justifyContent={"center"}>
+        <ScrollView style={{ flexGrow: 0 }}>
+          <Box
+            padding={"m"}
+            flexDirection={"column"}
+            alignItems={"center"}
+            width={"100%"}
+            justifyContent={"center"}
+            gap={"m"}
+            mb={"l"}
           >
-            Sign In
-          </Text>
-          <LoginForm />
-        </Box>
-      </ScrollView>
+            <Logo size={150} />
+            <Text
+              color={"text"}
+              variant={"headlineLarge"}
+              fontWeight={"700"}
+              textAlign={"center"}
+            >
+              Sign In
+            </Text>
+            <LoginForm />
+          </Box>
+        </ScrollView>
+      </Box>
     </StyledPageLayout>
   );
 };
