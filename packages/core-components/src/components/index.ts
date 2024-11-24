@@ -9,3 +9,4 @@ export { StyledInput } from "./StyledInput";
 export { default as Logo } from "./Logo";
 export { StyledButton } from "./StyledButton";
 export { default as AppBar } from "./AppBar";
+export * from "./ExpoIcons";

@@ -1,20 +1,13 @@
-import {
-  NativeSyntheticEvent,
-  Platform,
-  StyleSheet,
-  TextInput,
-  TextInputFocusEventData,
-  TextInputProps,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { FC, useRef, useState } from "react";
-import { inputStyles } from "./inputStyles";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import Ionicons from "@expo/vector-icons/MaterialCommunityIcons";
 import { type IconProps } from "@expo/vector-icons/build/createIconSet";
-import { type ComponentProps } from "react";
+import React, { FC, useState, type ComponentProps } from "react";
+import {
+  Platform,
+  TextInput,
+  TextInputProps,
+  TouchableOpacity
+} from "react-native";
 
 interface Props extends TextInputProps {
   label?: string;
