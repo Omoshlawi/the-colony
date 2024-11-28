@@ -1,7 +1,6 @@
-import { hiveFetch } from "@colony/core-api";
 import * as Icons from "@expo/vector-icons";
 import React, { FC } from "react";
-import useSWR from "swr";
+import { FontAwesome5Icons } from "./fontAwsome5";
 
 const EXPO_ICON_FAMILIES = {
   AntDesign: Icons.AntDesign,
@@ -30,6 +29,7 @@ export const getExpoIcons = (
   // Get icon names from the selected family
   return families.reduce<ExpoIcon[]>((prev, family) => {
     const IconComponent = EXPO_ICON_FAMILIES[family];
+
     if (IconComponent?.glyphMap) {
       const iconNames = Object.keys(IconComponent.glyphMap);
       //   return [...prev, ...iconNames.map((icon) => ({ family, name: icon }))];
@@ -38,6 +38,8 @@ export const getExpoIcons = (
         family,
       }));
       return [...prev, ...categoryIcons];
+    } else if (!IconComponent?.glyphMap && family === "FontAwesome5") {
+      return [...prev, ...FontAwesome5Icons];
     }
     return prev;
   }, []);
@@ -55,16 +57,10 @@ export const ExpoIconComponent: FC<ExpoIconComponentProps> = ({
   family,
   name,
   size = 30,
-  color
+  color,
 }) => {
-
   const IconComponent = EXPO_ICON_FAMILIES[family];
+  if (family === "FontAwesome5")
+    return <Icons.FontAwesome5 name={name} size={size} color={color} />;
   return <IconComponent name={name} size={size} color={color} />;
 };
-
-// export const useIcons = (family?: string, search?: string) => {
-//   const params = new URLSearchParams({ family, search });
-//   const url = `http://192.168.1.102/api/icons`;
-//   const { isLoading, error, data, mutate } = useSWR(url, hiveFetch);
-//   return { isLoading, mutate, error, icons: data?.data };
-// };
