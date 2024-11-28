@@ -1,5 +1,10 @@
-import React, { FC, useState } from "react";
-import { FlatList, ScrollView, TouchableOpacity } from "react-native";
+import React, { FC, useRef, useState } from "react";
+import {
+  FlatList,
+  ScrollView,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import useSWR from "swr";
 import { ExpoIcon, ExpoIconComponent } from "./helpers";
 import { StyledInput } from "../StyledInput";
@@ -26,6 +31,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
   getIconFamilies,
   onSelectIconFamily,
 }) => {
+  const ref = useRef<TextInput>(null);
   const {
     data: iconsFamiliesNames,
     error: familyError,
@@ -45,6 +51,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
     const fetchInitialIcons = async () => {
       if (typeof onSearchIcon === "function") {
         // Fetch icons for the selected family when it changes
+        ref.current?.clear();
         const initialIcons = await onSearchIcon("", selectedIconFamily);
         seticons(initialIcons);
       }
@@ -66,10 +73,6 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
   const handleSelectIconFamily = (family: string) => {
     if (typeof onSelectIconFamily === "function") {
       onSelectIconFamily!(family);
-      // handleSearchIcon("");
-      // if (typeof onSelectIcon === "function") {
-      //   onSelectIcon(undefined);
-      // }
     }
   };
 
@@ -79,6 +82,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
       <StyledInput
         placeholder="Search icons..."
         onChangeText={handleSearchIcon}
+        ref={ref}
         // style={{ marginTop: theme.spacing.m }}
         label="Search"
         helperText="Search by name, filter by category"

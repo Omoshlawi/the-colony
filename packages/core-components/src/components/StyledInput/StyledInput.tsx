@@ -1,7 +1,12 @@
 import { Box, Text, useTheme } from "@colony/core-theme";
 import Ionicons from "@expo/vector-icons/MaterialCommunityIcons";
 import { type IconProps } from "@expo/vector-icons/build/createIconSet";
-import React, { FC, useState, type ComponentProps } from "react";
+import React, {
+  forwardRef,
+  Ref,
+  useState,
+  type ComponentProps
+} from "react";
 import {
   Platform,
   TextInput,
@@ -21,109 +26,115 @@ interface Props extends TextInputProps {
   height?: number;
 }
 
-const StyledInput: FC<Props> = ({
-  label,
-  error,
-  style,
-  helperText,
-  prefixIcon,
-  suffixIcon,
-  onPrefixIconPressed,
-  onSuffixIconPressed,
-  height = 50,
-  ...props
-}) => {
-  const [isFocused, setIsFocused] = useState(false);
-  const theme = useTheme();
-  const {
-    colors: { hintColor, text, icon },
-    spacing,
-  } = useTheme();
+const StyledInput = forwardRef<TextInput, Props>(
+  (
+    {
+      label,
+      error,
+      style,
+      helperText,
+      prefixIcon,
+      suffixIcon,
+      onPrefixIconPressed,
+      onSuffixIconPressed,
+      height = 50,
+      ...props
+    },
+    ref: Ref<TextInput>
+  ) => {
+    const [isFocused, setIsFocused] = useState(false);
+    const theme = useTheme();
+    const {
+      colors: { hintColor, text, icon },
+      spacing,
+    } = useTheme();
 
-  const handleFocus = (e: any) => {
-    setIsFocused(true);
-    props.onFocus?.(e);
-  };
+    const handleFocus = (e: any) => {
+      setIsFocused(true);
+      props.onFocus?.(e);
+    };
 
-  const handleBlur = (e: any) => {
-    setIsFocused(false);
-    props.onBlur?.(e);
-  };
+    const handleBlur = (e: any) => {
+      setIsFocused(false);
+      props.onBlur?.(e);
+    };
 
-  return (
-    <View style={{ width: "100%" }}>
-      {label && (
-        <Text
-          variant={"bodyMedium"}
-          color={"text"}
-          style={{ marginBottom: theme.spacing.s }}
-        >
-          {label}
-        </Text>
-      )}
-      <Box
-        borderWidth={isFocused ? 2 : 1}
-        borderRadius={"small"}
-        borderColor={error ? "error" : isFocused ? "primary" : "outline"}
-        flexDirection={"row"}
-        alignItems={"center"}
-        height={height} // Fixed height to prevent layout shifts
-        width={"100%"}
-      >
-        {prefixIcon && (
-          <TouchableOpacity
-            onPress={onPrefixIconPressed}
-            style={{
-              paddingHorizontal: spacing.s,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
+    return (
+      <View style={{ width: "100%" }}>
+        {label && (
+          <Text
+            variant={"bodyMedium"}
+            color={"text"}
+            style={{ marginBottom: theme.spacing.s }}
           >
-            <Ionicons {...prefixIcon} color={icon} />
-          </TouchableOpacity>
+            {label}
+          </Text>
         )}
-        <TextInput
-          {...props}
-          style={[
-            {
-              flex: 1,
-              color: text,
-              paddingVertical: spacing.s,
-              paddingHorizontal: spacing.m,
-              height: "100%",
-            },
-            Platform.OS === "web" && ({ outlineStyle: "none" } as any),
-            style,
-          ]}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          placeholderTextColor={hintColor}
-          cursorColor={text}
-        />
-        {suffixIcon && (
-          <TouchableOpacity
-            onPress={onSuffixIconPressed}
-            style={{
-              paddingHorizontal: spacing.s,
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Ionicons {...suffixIcon} color={icon} />
-          </TouchableOpacity>
-        )}
-      </Box>
-      {(error || helperText) && (
-        <Text
-          variant={"bodySmall"}
-          color={error ? "error" : "hintColor"}
-          style={{ marginTop: theme.spacing.s }}
+        <Box
+          borderWidth={isFocused ? 2 : 1}
+          borderRadius={"small"}
+          borderColor={error ? "error" : isFocused ? "primary" : "outline"}
+          flexDirection={"row"}
+          alignItems={"center"}
+          height={height} // Fixed height to prevent layout shifts
+          width={"100%"}
         >
-          {error || helperText}
-        </Text>
-      )}
-    </View>
-  );
-};
+          {prefixIcon && (
+            <TouchableOpacity
+              onPress={onPrefixIconPressed}
+              style={{
+                paddingHorizontal: spacing.s,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons {...prefixIcon} color={icon} />
+            </TouchableOpacity>
+          )}
+          <TextInput
+            ref={ref}
+            {...props}
+            style={[
+              {
+                flex: 1,
+                color: text,
+                paddingVertical: spacing.s,
+                paddingHorizontal: spacing.m,
+                height: "100%",
+              },
+              Platform.OS === "web" && ({ outlineStyle: "none" } as any),
+              style,
+            ]}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            placeholderTextColor={hintColor}
+            cursorColor={text}
+          />
+          {suffixIcon && (
+            <TouchableOpacity
+              onPress={onSuffixIconPressed}
+              style={{
+                paddingHorizontal: spacing.s,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons {...suffixIcon} color={icon} />
+            </TouchableOpacity>
+          )}
+        </Box>
+        {(error || helperText) && (
+          <Text
+            variant={"bodySmall"}
+            color={error ? "error" : "hintColor"}
+            style={{ marginTop: theme.spacing.s }}
+          >
+            {error || helperText}
+          </Text>
+        )}
+      </View>
+    );
+  }
+);
 
 export default StyledInput;

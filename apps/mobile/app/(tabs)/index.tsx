@@ -21,7 +21,9 @@ export default function HomeScreen() {
       <StyledText style={styles.title}>Welcome to Micro</StyledText>
       <ExpoIconPicker
         onSearchIcon={async (search, category) => {
-          return getExpoIcons([category as any]);
+          return getExpoIcons([category as any]).filter((icon) =>
+            icon.name.toLowerCase().includes(search?.toLowerCase() ?? "")
+          );
         }}
         getIconFamilies={async () => getExpoIconFamiliesNames()}
         selectedIconFamily={iconFamily}

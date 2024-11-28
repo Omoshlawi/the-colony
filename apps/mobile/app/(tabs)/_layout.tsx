@@ -1,16 +1,21 @@
 import { Tabs } from "expo-router";
 import React from "react";
 
-import { microColors, StyledTabBarIcon } from "@colony/core-components";
+import { StyledTabBarIcon } from "@colony/core-components";
+import { useTheme } from "@colony/core-theme";
 import { SecureRoute } from "@colony/features-auth";
 
 export default function TabLayout() {
+  const theme = useTheme();
   return (
     <SecureRoute>
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: microColors.blue,
+          tabBarActiveTintColor: theme.colors.primary,
           headerShown: false,
+          tabBarStyle: {
+            backgroundColor: theme.colors.background,
+          },
         }}
       >
         <Tabs.Screen
@@ -19,7 +24,7 @@ export default function TabLayout() {
             title: "Home",
             tabBarIcon: ({ color, focused }) => (
               <StyledTabBarIcon
-                name={focused ? "home-outline" : "home-outline"}
+                name={focused ? "home" : "home-outline"}
                 color={color}
               />
             ),
