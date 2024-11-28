@@ -16,8 +16,8 @@ const darkRed = "#AB4031";
 const lightGreen = "#A1CD74";
 const darkGreen = "#40651F";
 
-const greyBlue = "##636B7C";
-const tertiaryGray = "##636B7C";
+const greyBlue = "#636B7C";
+const tertiaryGray = "#636B7C";
 
 export const pallet = {
   white,

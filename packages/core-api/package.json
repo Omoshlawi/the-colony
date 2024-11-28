@@ -1,5 +1,5 @@
 {
-  "name": "@colony/core-components",
+  "name": "@colony/core-api",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "license": "MIT",
@@ -7,24 +7,15 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@colony/core-theme": "*",
-    "@colony/core-api": "*",
-    "@expo/vector-icons": "^14.0.2",
-    "@react-navigation/native": "^7.0.0",
+    "axios": "^1.7.8",
     "expo": "~52.0.9",
-    "expo-image": "~2.0.2",
-    "lodash": "^4.17.21",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.2",
-    "react-native-media-query": "^2.0.1",
-    "react-native-svg": "15.9.0",
-    "swr": "^2.2.5"
+    "react-native": "0.76.2"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@types/jest": "^29.5.12",
-    "@types/lodash": "^4.17.13",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
     "jest": "^29.2.1",

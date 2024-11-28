@@ -6,7 +6,8 @@ import {
   Platform,
   TextInput,
   TextInputProps,
-  TouchableOpacity
+  TouchableOpacity,
+  View,
 } from "react-native";
 
 interface Props extends TextInputProps {
@@ -17,6 +18,7 @@ interface Props extends TextInputProps {
   prefixIcon?: IconProps<ComponentProps<typeof Ionicons>["name"]>;
   onPrefixIconPressed?: () => void;
   onSuffixIconPressed?: () => void;
+  height?: number;
 }
 
 const StyledInput: FC<Props> = ({
@@ -28,14 +30,16 @@ const StyledInput: FC<Props> = ({
   suffixIcon,
   onPrefixIconPressed,
   onSuffixIconPressed,
-
+  height = 50,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
+  const theme = useTheme();
   const {
     colors: { hintColor, text, icon },
     spacing,
   } = useTheme();
+
   const handleFocus = (e: any) => {
     setIsFocused(true);
     props.onFocus?.(e);
@@ -45,10 +49,15 @@ const StyledInput: FC<Props> = ({
     setIsFocused(false);
     props.onBlur?.(e);
   };
+
   return (
-    <Box gap={"s"} mb={"s"}>
+    <View style={{ width: "100%" }}>
       {label && (
-        <Text variant={"bodyMedium"} color={"text"}>
+        <Text
+          variant={"bodyMedium"}
+          color={"text"}
+          style={{ marginBottom: theme.spacing.s }}
+        >
           {label}
         </Text>
       )}
@@ -56,14 +65,19 @@ const StyledInput: FC<Props> = ({
         borderWidth={isFocused ? 2 : 1}
         borderRadius={"small"}
         borderColor={error ? "error" : isFocused ? "primary" : "outline"}
-        flex={1}
         flexDirection={"row"}
         alignItems={"center"}
+        height={height} // Fixed height to prevent layout shifts
+        width={"100%"}
       >
         {prefixIcon && (
           <TouchableOpacity
             onPress={onPrefixIconPressed}
-            style={{ marginLeft: spacing.s }}
+            style={{
+              paddingHorizontal: spacing.s,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Ionicons {...prefixIcon} color={icon} />
           </TouchableOpacity>
@@ -71,15 +85,15 @@ const StyledInput: FC<Props> = ({
         <TextInput
           {...props}
           style={[
-            style,
             {
+              flex: 1,
               color: text,
-              flexGrow: 1,
-              paddingVertical: spacing.m,
-              paddingLeft: prefixIcon ? spacing.s : spacing.m,
-              paddingRight: suffixIcon ? spacing.s : spacing.m,
+              paddingVertical: spacing.s,
+              paddingHorizontal: spacing.m,
+              height: "100%",
             },
             Platform.OS === "web" && ({ outlineStyle: "none" } as any),
+            style,
           ]}
           onFocus={handleFocus}
           onBlur={handleBlur}
@@ -89,23 +103,26 @@ const StyledInput: FC<Props> = ({
         {suffixIcon && (
           <TouchableOpacity
             onPress={onSuffixIconPressed}
-            style={{ marginRight: spacing.s }}
+            style={{
+              paddingHorizontal: spacing.s,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
           >
             <Ionicons {...suffixIcon} color={icon} />
           </TouchableOpacity>
         )}
       </Box>
-      {error && (
-        <Text variant={"bodySmall"} color={"error"}>
-          {error}
+      {(error || helperText) && (
+        <Text
+          variant={"bodySmall"}
+          color={error ? "error" : "hintColor"}
+          style={{ marginTop: theme.spacing.s }}
+        >
+          {error || helperText}
         </Text>
       )}
-      {!error && helperText && (
-        <Text variant={"bodySmall"} color={"hintColor"}>
-          {helperText}
-        </Text>
-      )}
-    </Box>
+    </View>
   );
 };
 

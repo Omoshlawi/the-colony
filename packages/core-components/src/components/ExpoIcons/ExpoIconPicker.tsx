@@ -1,82 +1,113 @@
-import React, { useState, useEffect, FC, useMemo } from "react";
-import * as Icons from "@expo/vector-icons";
-import {
-  View,
-  TextInput,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-} from "react-native";
-import {
-  ExpoIcon,
-  ExpoIconComponent,
-  ExpoIconFamily,
-  getExpoIconFamiliesNames,
-  getExpoIcons,
-} from "./helpers";
+import React, { FC, useState } from "react";
+import { FlatList, ScrollView, TouchableOpacity } from "react-native";
+import useSWR from "swr";
+import { ExpoIcon, ExpoIconComponent } from "./helpers";
+import { StyledInput } from "../StyledInput";
+import { Box, Text, useTheme } from "@colony/core-theme";
+import debounce from "lodash/debounce";
 
 type ExpoIconPickerProps = {
-  onSelectIcon?: (selected: ExpoIcon) => void;
+  onSelectIcon?: (selected?: ExpoIcon) => void;
+  selectedIcon?: ExpoIcon;
+  onSearchIcon?: (
+    nameSearchText?: string,
+    family?: string
+  ) => Promise<ExpoIcon[]>;
+  selectedIconFamily?: string;
+  onSelectIconFamily?: (selected: string) => void;
+  getIconFamilies?: () => Promise<string[]>;
 };
 
-const ExpoIconPicker: FC<ExpoIconPickerProps> = ({ onSelectIcon }) => {
-  const icons = useMemo(() => getExpoIcons(), []);
-  const iconsFamiliesNames = useMemo(() => getExpoIconFamiliesNames(), []);
-
-  const [selectedFamily, setSelectedFamily] =
-    useState<ExpoIconFamily>("MaterialIcons");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [selectedIcon, setSelectedIcon] = useState<ExpoIcon | null>(null);
-
-  const filteredIcons = icons.filter(({ name }) =>
-    name.toLowerCase().includes(searchTerm.toLowerCase())
+const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
+  onSelectIcon,
+  onSearchIcon,
+  selectedIcon,
+  selectedIconFamily = "MaterialIcons",
+  getIconFamilies,
+  onSelectIconFamily,
+}) => {
+  const {
+    data: iconsFamiliesNames,
+    error: familyError,
+    isLoading: familyLoading,
+    mutate: mutateFamily,
+  } = useSWR(
+    typeof getIconFamilies === "function" ? "__getIconFamilyNames__" : null,
+    async () => {
+      return getIconFamilies!();
+    }
   );
+  const theme = useTheme();
+  const [icons, seticons] = useState<ExpoIcon[]>([]);
 
-  console.log(icons);
+  // Add useEffect to fetch icons when selectedIconFamily changes
+  React.useEffect(() => {
+    const fetchInitialIcons = async () => {
+      if (typeof onSearchIcon === "function") {
+        // Fetch icons for the selected family when it changes
+        const initialIcons = await onSearchIcon("", selectedIconFamily);
+        seticons(initialIcons);
+      }
+    };
 
+    fetchInitialIcons();
+  }, [selectedIconFamily, onSearchIcon]);
+
+  const handleSearchIcon = debounce(async (search: string) => {
+    if (typeof onSearchIcon === "function") {
+      const searchResults = await onSearchIcon(search, selectedIconFamily);
+      seticons(searchResults);
+    }
+  }, 300); // 300ms delay to reduce unnecessary API calls
   const handleIconSelect = (icon: ExpoIcon) => {
-    setSelectedIcon(icon);
     onSelectIcon?.(icon);
   };
 
-  return (
-    <View style={{ flex: 1, padding: 16 }}>
-      {/* Search Input */}
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: "gray",
-          borderWidth: 1,
-          borderRadius: 8,
-          paddingHorizontal: 12,
-          marginBottom: 16,
-        }}
-        placeholder="Search icons..."
-        value={searchTerm}
-        onChangeText={setSearchTerm}
-      />
+  const handleSelectIconFamily = (family: string) => {
+    if (typeof onSelectIconFamily === "function") {
+      onSelectIconFamily!(family);
+      // handleSearchIcon("");
+      // if (typeof onSelectIcon === "function") {
+      //   onSelectIcon(undefined);
+      // }
+    }
+  };
 
+  return (
+    <Box flex={1} gap={"m"} flexDirection={"column"} p={"m"}>
+      {/* Search Input */}
+      <StyledInput
+        placeholder="Search icons..."
+        onChangeText={handleSearchIcon}
+        // style={{ marginTop: theme.spacing.m }}
+        label="Search"
+        helperText="Search by name, filter by category"
+      />
       {/* Icon Family Selector */}
       <ScrollView
         horizontal
         showsHorizontalScrollIndicator={false}
         style={{ flexGrow: 0 }}
       >
-        {iconsFamiliesNames.map((family) => (
+        {iconsFamiliesNames?.map((family) => (
           <TouchableOpacity
+            accessibilityRole="button"
+            accessibilityLabel={`Select ${family} icon family`}
             key={family}
-            onPress={() => setSelectedFamily(family)}
+            onPress={() => handleSelectIconFamily(family)}
             style={{
               padding: 8,
               marginRight: 8,
               backgroundColor:
-                family === selectedFamily ? "#007AFF" : "#EEEEEE",
+                family === selectedIconFamily
+                  ? theme.colors.primary
+                  : theme.colors.disabledColor,
               borderRadius: 8,
             }}
           >
             <Text
               style={{
-                color: family === selectedFamily ? "white" : "black",
+                color: family === selectedIconFamily ? "white" : "black",
                 fontSize: 12,
               }}
             >
@@ -88,67 +119,75 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({ onSelectIcon }) => {
 
       {/* Selected Icon Display */}
       {selectedIcon && (
-        <View
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            padding: 8,
-            backgroundColor: "#E3F2FD",
-            borderRadius: 8,
-            marginBottom: 16,
-          }}
+        <Box
+          flexDirection={"row"}
+          alignItems={"center"}
+          p={"m"}
+          backgroundColor={"primaryContainer"}
+          borderRadius={"medium"}
+          marginVertical={"m"}
         >
-          <ExpoIconComponent {...selectedIcon} />
+          <ExpoIconComponent {...selectedIcon} color={theme.colors.primary} />
           <Text style={{ marginLeft: 8 }}>
             {selectedIcon.family} / {selectedIcon.name}
           </Text>
-        </View>
+        </Box>
       )}
 
       {/* Icons Grid */}
-      <ScrollView style={{ flex: 1 }}>
-        <View
-          style={{
-            flexDirection: "row",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        >
-          {filteredIcons.map((icon, key) => (
-            <TouchableOpacity
-              key={key}
-              onPress={() => handleIconSelect(icon)}
+
+      <FlatList
+        data={icons}
+        style={{ flex: 1 }}
+        keyExtractor={(icon) => `${icon.name}-${icon.family}`}
+        numColumns={4}
+        initialNumToRender={8} // Render fewer items initially
+        maxToRenderPerBatch={10} // Limit render batch size
+        windowSize={5} // Adjust rendering window
+        removeClippedSubviews={true} // Improve memory performance
+        renderItem={({ item: icon }) => (
+          <TouchableOpacity
+            onPress={() => handleIconSelect(icon)}
+            style={{
+              width: "23%",
+              aspectRatio: 1,
+              padding: 8,
+              marginBottom: 8,
+              alignItems: "center",
+              justifyContent: "center",
+              backgroundColor:
+                selectedIcon?.name === icon.name
+                  ? theme.colors.primaryContainer
+                  : "transparent",
+              borderRadius: 8,
+              borderWidth: selectedIcon?.name === icon.name ? 2 : 0,
+              borderColor: "#007AFF",
+            }}
+          >
+            <ExpoIconComponent
+              {...icon}
+              color={
+                selectedIcon?.name === icon.name
+                  ? theme.colors.primary
+                  : theme.colors.icon
+              }
+            />
+            <Text
+              numberOfLines={1}
+              color={"text"}
               style={{
-                width: "23%",
-                aspectRatio: 1,
-                padding: 8,
-                marginBottom: 8,
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor:
-                  selectedIcon?.name === icon.name ? "#E3F2FD" : "transparent",
-                borderRadius: 8,
-                borderWidth: selectedIcon?.name === icon.name ? 2 : 0,
-                borderColor: "#007AFF",
+                fontSize: 10,
+                textAlign: "center",
+                marginTop: 4,
               }}
             >
-              <ExpoIconComponent {...icon} />
-              <Text
-                numberOfLines={1}
-                style={{
-                  fontSize: 10,
-                  textAlign: "center",
-                  marginTop: 4,
-                }}
-              >
-                {icon.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </View>
-      </ScrollView>
-    </View>
+              {icon.name}
+            </Text>
+          </TouchableOpacity>
+        )}
+      />
+    </Box>
   );
 };
 
-export default ExpoIconPicker;
+export default React.memo(ExpoIconPicker);

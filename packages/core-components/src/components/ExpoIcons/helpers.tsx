@@ -1,5 +1,7 @@
+import { hiveFetch } from "@colony/core-api";
 import * as Icons from "@expo/vector-icons";
 import React, { FC } from "react";
+import useSWR from "swr";
 
 const EXPO_ICON_FAMILIES = {
   AntDesign: Icons.AntDesign,
@@ -52,9 +54,17 @@ type ExpoIconComponentProps = ExpoIcon & {
 export const ExpoIconComponent: FC<ExpoIconComponentProps> = ({
   family,
   name,
-  color = 24,
-  size = "#007AFF",
+  size = 30,
+  color
 }) => {
+
   const IconComponent = EXPO_ICON_FAMILIES[family];
   return <IconComponent name={name} size={size} color={color} />;
 };
+
+// export const useIcons = (family?: string, search?: string) => {
+//   const params = new URLSearchParams({ family, search });
+//   const url = `http://192.168.1.102/api/icons`;
+//   const { isLoading, error, data, mutate } = useSWR(url, hiveFetch);
+//   return { isLoading, mutate, error, icons: data?.data };
+// };
