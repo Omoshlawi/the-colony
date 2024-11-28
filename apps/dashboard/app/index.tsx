@@ -1,5 +1,5 @@
-import { PaymentScreen } from "@colony/features-payments";
+import { DashboardsScreen } from "@colony/features-dashboard";
 
 export default function HomeScreen() {
-  return <PaymentScreen />;
+  return <DashboardsScreen />;
 }

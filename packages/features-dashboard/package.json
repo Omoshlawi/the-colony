@@ -11,7 +11,10 @@
     "expo": "~52.0.9",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.2"
+    "react-native": "0.76.2",
+    "@colony/core-components": "*",
+    "@colony/core-global": "*",
+    "@colony/core-theme": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
