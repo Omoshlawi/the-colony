@@ -2,20 +2,31 @@ import { useSecureStorage } from "@colony/core-storage";
 import { SESSION_TOKEN_KEY } from "../utils";
 import { useEffect, useState } from "react";
 import { useAuthAPi } from "./useAuthApi";
-import { useSesionStore } from "@colony/core-global";
-import { TokenPair } from "../types";
+import { TokenPair, useSessionStore } from "@colony/core-global";
 
-const useLoadAuthState = () => {
+const useLoadInitialAuthState = () => {
   const [isLoading, setIsLoading] = useState(false);
-  const [token, _] = useSecureStorage<TokenPair>(SESSION_TOKEN_KEY);
-  const setSession = useSesionStore((state) => state.setSession);
+  const [token, setToken] = useSecureStorage<TokenPair>(SESSION_TOKEN_KEY);
+  const updateSessionStore = useSessionStore((state) => state.update);
   const { getSessionUserByToken } = useAuthAPi();
   useEffect(() => {
     if (token) {
       setIsLoading(true);
       getSessionUserByToken(token.accessToken)
         .then((user) => {
-          setSession({ isAuthenticated: true, user, token: token.accessToken });
+          updateSessionStore({
+            session: {
+              isAuthenticated: true,
+              user,
+              token: token,
+            },
+            cacheSession: (session) => {
+              setToken(session.token ?? null);
+            },
+            clearCache: () => {
+              setToken(null);
+            },
+          });
         })
         .catch((e) => {})
         .finally(() => setIsLoading(false));
@@ -24,4 +35,4 @@ const useLoadAuthState = () => {
   return { isLoading };
 };
 
-export default useLoadAuthState;
+export default useLoadInitialAuthState;

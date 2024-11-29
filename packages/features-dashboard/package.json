@@ -10,6 +10,7 @@
     "@colony/core-components": "*",
     "@colony/core-global": "*",
     "@colony/core-theme": "*",
+    "@colony/core-api": "*",
     "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.9",
     "react": "18.3.1",

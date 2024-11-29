@@ -46,6 +46,7 @@
     "@colony/features-auth": "*",
     "@colony/core-theme": "*",
     "@colony/core-storage": "*",
+    "@colony/core-api": "*",
     "@colony/features-support": "*"
   },
   "devDependencies": {

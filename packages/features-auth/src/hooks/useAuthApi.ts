@@ -1,7 +1,6 @@
-import { User, useSesionStore } from "@colony/core-global";
+import { TokenPair, User, useSessionStore } from "@colony/core-global";
 import axios, { isAxiosError } from "axios";
-import { LoginFormData, RegisterFormData, TokenPair } from "../types";
-import { unknown } from "zod";
+import { LoginFormData, RegisterFormData } from "../types";
 import { useSecureStorage } from "@colony/core-storage";
 import { SESSION_TOKEN_KEY } from "../utils";
 
@@ -11,12 +10,12 @@ const loginUser = async (data: LoginFormData) => {
   const resp = await httpClient.post("/api/auth/signin/credentials", data);
   const responseData = resp.data as { user: User; token: TokenPair };
 
-  useSesionStore.setState((state) => ({
+  useSessionStore.setState((state) => ({
     ...state,
     session: {
       ...state.session,
       isAuthenticated: true,
-      token: responseData.token.accessToken,
+      token: responseData.token,
       user: responseData.user,
     },
   }));
@@ -29,12 +28,12 @@ const registerUser = async (data: RegisterFormData) => {
     user: User;
     token: TokenPair;
   };
-  useSesionStore.setState((state) => ({
+  useSessionStore.setState((state) => ({
     ...state,
     session: {
       ...state.session,
       isAuthenticated: true,
-      token: responseData.token.accessToken,
+      token: responseData.token,
       user: responseData.user,
     },
   }));
@@ -48,7 +47,7 @@ const getSessionUserByToken = async (token: string) => {
     headers: { "x-access-token": token },
   });
   const responseData = resp.data as User;
-  useSesionStore.setState((state) => ({
+  useSessionStore.setState((state) => ({
     ...state,
     session: {
       ...state.session,
@@ -85,7 +84,7 @@ const handleError = <T extends Record<string, unknown>>(
 };
 
 const logoutUser = () => {
-  useSesionStore.setState((state) => ({
+  useSessionStore.setState((state) => ({
     ...state,
     session: {
       isAuthenticated: false,

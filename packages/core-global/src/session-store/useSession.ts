@@ -1,6 +1,6 @@
-import { useSesionStore } from "./useSessionStore";
+import { useSessionStore } from "./useSessionStore";
 
 export const useSession = () => {
-  const session = useSesionStore((state) => state.session);
+  const session = useSessionStore((state) => state.session);
   return session;
 };

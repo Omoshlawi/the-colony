@@ -34,11 +34,6 @@ export interface Person {
   name?: string;
 }
 
-export interface TokenPair {
-  accessToken: string;
-  refreshToken: string;
-}
-
 export interface Account {
   id: string;
   userId: string;
