@@ -3,14 +3,14 @@ import React from "react";
 import { AppBar, StyledPageLayout } from "@colony/core-components";
 import { Box, Text } from "@colony/core-theme";
 import { useAttributeTypes } from "../hooks";
+import { AttributeTypes } from "../widgets";
 const AttributeTypesScreen = () => {
   const { isLoading, attributeTypes, error } = useAttributeTypes();
   return (
     <StyledPageLayout>
       <AppBar title="Amenities" />
       <Box flex={1} p={"m"}>
-        <Text>{JSON.stringify(attributeTypes, null, 2)}</Text>
-        <Text>{JSON.stringify(error?.response?.data, null, 2)}</Text>
+        <AttributeTypes />
       </Box>
     </StyledPageLayout>
   );

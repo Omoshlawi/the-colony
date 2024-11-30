@@ -1,4 +1,6 @@
 export const lightColorScheme = {
+  skeleton: "#e0e0e0",
+  onSkeleton: "#d4d4d4",
   background: "#f8f9ff",
   error: "#ba1a1a",
   errorContainer: "#ffdad6",
