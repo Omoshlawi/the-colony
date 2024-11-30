@@ -10,6 +10,19 @@ const ApiConfigProvider: FC<ApiConfigProviderProps> = ({ children }) => {
     <SWRConfig
       value={{
         fetcher: async (resource, init) => await hiveFetch(resource, init),
+        // dedupingInterval: 2000, // Prevent duplicate requests within 2 seconds
+        // revalidateOnFocus: true, // Refetch when the app regains focus
+        // revalidateOnReconnect: true, // Refetch when network reconnects
+        // shouldRetryOnError: true, // Retry failed requests
+        // onErrorRetry: (error, key, config, revalidate, { retryCount }) => {
+        //   // Limit retries to prevent infinite loops
+        //   if (retryCount >= 3) return;
+
+        //   // Retry only for network-related errors
+        //   if (!error.response || error.response.status >= 500) {
+        //     setTimeout(() => revalidate({ retryCount }), 2000); // Retry after 2 seconds
+        //   }
+        // },
       }}
     >
       {children}
@@ -18,5 +31,3 @@ const ApiConfigProvider: FC<ApiConfigProviderProps> = ({ children }) => {
 };
 
 export default ApiConfigProvider;
-
-const styles = StyleSheet.create({});

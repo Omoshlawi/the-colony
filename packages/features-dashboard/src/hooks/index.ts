@@ -1,1 +1,1 @@
-export {default as useAttributeTypes} from "./useAttributeTypes"
+export { default as useAttributeTypes } from "./useAttributeTypes";
