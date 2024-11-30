@@ -1,6 +1,7 @@
 import * as Icons from "@expo/vector-icons";
 import React, { FC } from "react";
 import { FontAwesome5Icons } from "./fontAwsome5";
+import { useTheme } from "@colony/core-theme";
 
 const EXPO_ICON_FAMILIES = {
   AntDesign: Icons.AntDesign,
@@ -60,7 +61,14 @@ export const ExpoIconComponent: FC<ExpoIconComponentProps> = ({
   color,
 }) => {
   const IconComponent = EXPO_ICON_FAMILIES[family];
+  const { colors } = useTheme();
   if (family === "FontAwesome5")
-    return <Icons.FontAwesome5 name={name} size={size} color={color} />;
-  return <IconComponent name={name} size={size} color={color} />;
+    return (
+      <Icons.FontAwesome5
+        name={name}
+        size={size}
+        color={color ?? colors.icon}
+      />
+    );
+  return <IconComponent name={name} size={size} color={color ?? colors.icon} />;
 };

@@ -31,8 +31,14 @@ const Amenities = () => {
           <ListTile
             title={item.name}
             subtitle={item.icon.name}
-            leading={<ExpoIconComponent {...(item.icon as any)} />}
-            trailing={<Text>{"Mambo"}</Text>}
+            leading={<ExpoIconComponent {...(item.icon as any)} size={24} />}
+            trailing={
+              <ExpoIconComponent
+                family="MaterialCommunityIcons"
+                name="chevron-right"
+                size={24}
+              />
+            }
             borderBottom
           />
         )}

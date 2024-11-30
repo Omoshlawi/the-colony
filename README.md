@@ -45,3 +45,54 @@ If you have created a new micro app above, go and add it to the main apps index.
 ```
 
 In the new micro app, create a file in `new-app/app/(new-app)`. Everything you want to export to the main app should be located in the folder with parenthisis. Any other navigation that should be part of the micro app but not the main app can be put directly in the app folder.
+
+## Code snippets
+
+1. react native useApi
+
+https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
+
+```json
+
+"react native use api hook": {
+		"prefix": "rnuseapi",
+		"body": [
+			"import { hiveFetch } from \"@colony/core-api\";",
+			"import { $1, $1FormData } from \"../types\";",
+			"",
+			"const add$1 = async (data: $1FormData) => {",
+			"  return await hiveFetch<$1>(\"/$3\", { method: \"POST\", data });",
+			"};",
+			"",
+			"const update$1 = async (",
+			"  ${2:id}: string,",
+			"  data: $1FormData,",
+			"  method: \"PUT\" | \"PATCH\" = \"PATCH\"",
+			") => {",
+			"  return await hiveFetch<$1>(`/$3/\\${${2:id}}`, {",
+			"    method: method,",
+			"    data,",
+			"  });",
+			"};",
+			"",
+			"const delete$1 = async (",
+			"  ${2:id}: string,",
+			"  method: \"DELETE\" | \"PURGE\" = \"DELETE\"",
+			") => {",
+			"  return await hiveFetch<$1>(`/$3/\\${${2:id}}`, {",
+			"    method: method,",
+			"  });",
+			"};",
+			"",
+			"export const use$1Api = () => {",
+			"  return {",
+			"    add$1,",
+			"    update$1,",
+			"    delete$1,",
+			"  };",
+			"};",
+			""
+		],
+		"description": "react native use api hook"
+	}
+```

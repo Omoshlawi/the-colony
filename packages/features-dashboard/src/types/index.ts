@@ -1,4 +1,11 @@
 import { ExpoIcon } from "@colony/core-components";
+import { z } from "zod";
+import {
+  AmenitySchema,
+  AttributeTypeSchema,
+  CategorySchema,
+  RelationshipTypeSchema,
+} from "../utils/validation";
 
 export type MenuItem = {
   name: string;
@@ -50,3 +57,8 @@ export interface Amenity {
   createdAt: string;
   updatedAt: string;
 }
+
+export type AmenityFormData = z.infer<typeof AmenitySchema>;
+export type CategoryFormData = z.infer<typeof CategorySchema>;
+export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;
+export type AttributeTypeFormData = z.infer<typeof AttributeTypeSchema>;
