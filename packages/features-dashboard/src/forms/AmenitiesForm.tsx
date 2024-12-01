@@ -1,4 +1,4 @@
-import { handleApiErrors } from "@colony/core-api";
+import { handleApiErrors, mutate } from "@colony/core-api";
 import {
   ClickableModalWrapper,
   ExpoIcon,
@@ -40,6 +40,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
         await addAmenity(data);
       }
       onSuccess?.();
+      mutate("/amenities");
     } catch (error) {
       const e = handleApiErrors<AmenityFormData>(error);
       if (e.detail) {

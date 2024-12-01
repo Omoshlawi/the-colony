@@ -40,6 +40,8 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
           }
         }}
         animationType="slide"
+        accessibilityLabel="Close modal"
+        accessibilityRole="button"
       >
         <StyledPageLayout withSafeArea={false}>
           <View
@@ -69,7 +71,7 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
   );
 };
 
-export default ClickableModalWrapper;
+export default React.memo(ClickableModalWrapper);
 
 const styles = StyleSheet.create({
   safeArea: {
