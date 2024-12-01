@@ -1,10 +1,9 @@
 import { FC, PropsWithChildren } from "react";
 
-import { SafeAreaView } from "react-native-safe-area-context";
-import { microColors } from "../../colors";
-import { Box } from "@colony/core-theme";
 import { useUserPreferences } from "@colony/core-global";
+import { Box } from "@colony/core-theme";
 import { Switch } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props extends PropsWithChildren {
   withSafeArea?: boolean;
@@ -27,7 +26,7 @@ export const StyledPageLayout: FC<Props> = ({
       flexDirection={"column"}
     >
       {withSafeArea && (
-        <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }} >{children}</SafeAreaView>
       )}
       {!withSafeArea && children}
       <Switch

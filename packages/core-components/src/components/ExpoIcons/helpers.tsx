@@ -57,7 +57,7 @@ type ExpoIconComponentProps = ExpoIcon & {
 export const ExpoIconComponent: FC<ExpoIconComponentProps> = ({
   family,
   name,
-  size = 30,
+  size = 28,
   color,
 }) => {
   const IconComponent = EXPO_ICON_FAMILIES[family];

@@ -3,9 +3,10 @@ import Ionicons from "@expo/vector-icons/MaterialCommunityIcons";
 import { type IconProps } from "@expo/vector-icons/build/createIconSet";
 import React, {
   forwardRef,
+  ReactNode,
   Ref,
   useState,
-  type ComponentProps
+  type ComponentProps,
 } from "react";
 import {
   Platform,
@@ -19,8 +20,8 @@ interface Props extends TextInputProps {
   label?: string;
   error?: string;
   helperText?: string;
-  suffixIcon?: IconProps<ComponentProps<typeof Ionicons>["name"]>;
-  prefixIcon?: IconProps<ComponentProps<typeof Ionicons>["name"]>;
+  suffixIcon?: ReactNode;
+  prefixIcon?: ReactNode;
   onPrefixIconPressed?: () => void;
   onSuffixIconPressed?: () => void;
   height?: number;
@@ -88,7 +89,7 @@ const StyledInput = forwardRef<TextInput, Props>(
                 alignItems: "center",
               }}
             >
-              <Ionicons {...prefixIcon} color={icon} />
+              {prefixIcon}
             </TouchableOpacity>
           )}
           <TextInput
@@ -119,7 +120,7 @@ const StyledInput = forwardRef<TextInput, Props>(
                 alignItems: "center",
               }}
             >
-              <Ionicons {...suffixIcon} color={icon} />
+              {suffixIcon}
             </TouchableOpacity>
           )}
         </Box>
