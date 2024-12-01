@@ -27,7 +27,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
     defaultValues: {
       name: amenity?.name ?? "",
       icon: amenity?.icon,
-      organizationId: amenity?.organizationId,
+      organizationId: amenity?.organizationId ?? undefined,
     },
     resolver: zodResolver(AmenitySchema),
   });

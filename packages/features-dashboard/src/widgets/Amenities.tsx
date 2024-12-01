@@ -2,19 +2,51 @@ import {
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
+  showDialog,
+  showModal,
   showModalBottomSheet,
+  StyledButton,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import React from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import { FlatList, ScrollView, StyleSheet, Text, View } from "react-native";
 import { useAmenities } from "../hooks";
 import { Amenity } from "../types";
+import { AmenitiesForm } from "../forms";
 
 const Amenities = () => {
   const { amenities, error, isLoading } = useAmenities();
 
+  const handleUpdate = (amenity: Amenity) => {
+    const dispose = showModal(
+      <AmenitiesForm amenity={amenity} onSuccess={() => dispose()} />,
+      { title: "Update amenity" }
+    );
+  };
+
   const handleLaunchBottomsheet = (amenity: Amenity) => {
-    showModalBottomSheet(<Text>{JSON.stringify(amenities, null, 2)}</Text>);
+    const dispose = showModalBottomSheet(
+      <ScrollView>
+        <Box gap={"s"} p={"m"}>
+          <StyledButton
+            title="Update"
+            variant="outline"
+            onPress={() => {
+              handleUpdate(amenity);
+            }}
+          />
+          <StyledButton
+            title="Delete"
+            variant="outline"
+            onPress={() => {
+              dispose();
+              handleUpdate;
+            }}
+          />
+        </Box>
+      </ScrollView>,
+      { title: `${amenity.name} actions` }
+    );
   };
   if (isLoading) {
     return (
