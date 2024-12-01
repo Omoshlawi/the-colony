@@ -7,7 +7,6 @@ import { RoutePaths } from "../utils";
 import { useRouter } from "expo-router";
 
 const WelcomeScreen = () => {
-  const navigation = useNavigation();
   const router = useRouter();
 
   return (

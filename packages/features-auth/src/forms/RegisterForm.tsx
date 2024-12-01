@@ -1,4 +1,8 @@
-import { StyledButton, StyledInput } from "@colony/core-components";
+import {
+  ExpoIconComponent,
+  StyledButton,
+  StyledInput,
+} from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
@@ -104,7 +108,13 @@ const RegisterForm = () => {
         }) => (
           <StyledInput
             label="Password"
-            suffixIcon={{ name: !showPassword ? "eye-off" : "eye", size: 20 }}
+            suffixIcon={
+              <ExpoIconComponent
+                family="Ionicons"
+                name={!showPassword ? "eye-off" : "eye"}
+                size={20}
+              />
+            }
             secureTextEntry={!showPassword}
             onSuffixIconPressed={() => setShowPassword(!showPassword)}
             value={value}
@@ -125,7 +135,13 @@ const RegisterForm = () => {
         }) => (
           <StyledInput
             label="Confirm password"
-            suffixIcon={{ name: !showPassword ? "eye-off" : "eye", size: 20 }}
+            suffixIcon={
+              <ExpoIconComponent
+                family="Ionicons"
+                name={!showPassword ? "eye-off" : "eye"}
+                size={20}
+              />
+            }
             secureTextEntry={!showPassword}
             onSuffixIconPressed={() => setShowPassword(!showPassword)}
             value={value}

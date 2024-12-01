@@ -9,7 +9,7 @@ const OverlayPortal: FC<Props> = ({ children }) => {
   return (
     <>
       {children}
-      <Modal>{component}</Modal>
+      <Modal visible={visible}>{component}</Modal>
     </>
   );
 };

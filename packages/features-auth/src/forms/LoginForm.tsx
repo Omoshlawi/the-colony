@@ -4,7 +4,11 @@ import { Controller, Form, SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { LoginFormData } from "../types";
 import { LoginShema } from "../utils";
-import { StyledButton, StyledInput } from "@colony/core-components";
+import {
+  ExpoIconComponent,
+  StyledButton,
+  StyledInput,
+} from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { useAuthAPi } from "../hooks";
 const LoginForm = () => {
@@ -62,7 +66,13 @@ const LoginForm = () => {
         }) => (
           <StyledInput
             label="Password"
-            suffixIcon={{ name: !showPassword ? "eye-off" : "eye", size: 20 }}
+            suffixIcon={
+              <ExpoIconComponent
+                family="Ionicons"
+                name={!showPassword ? "eye-off" : "eye"}
+                size={20}
+              />
+            }
             secureTextEntry={!showPassword}
             onSuffixIconPressed={() => setShowPassword(!showPassword)}
             value={value}
