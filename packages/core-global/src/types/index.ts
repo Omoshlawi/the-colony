@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type User = {};
 
 export interface TokenPair {
@@ -18,3 +20,10 @@ export type UserPreference = {
 };
 
 export type Appconfig = {};
+
+export type ModalOverlay = {
+  visible: boolean;
+  component?: ReactNode;
+  transparent: boolean;
+  
+};

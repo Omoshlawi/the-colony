@@ -38,9 +38,11 @@
     "react-native-screens": "~4.1.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.4",
+    "@colony/features-payments": "*",
     "@colony/core-components": "*",
     "@colony/core-theme": "*",
-    "@colony/features-payments": "*"
+    "@colony/core-global": "*",
+    "@colony/core-api": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

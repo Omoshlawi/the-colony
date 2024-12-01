@@ -6,6 +6,9 @@ import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import "react-native-reanimated";
 import { ApiConfigProvider } from "@colony/core-api";
+import { OverlayPortal } from "@colony/core-components";
+import { StatusBar } from "expo-status-bar";
+import { useUserPreferences } from "@colony/core-global";
 
 // Prevent the splash screen from auto-hiding before asset and auth state loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -14,6 +17,9 @@ export default function RootLayout() {
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
   });
+  const {
+    userPreferences: { theme },
+  } = useUserPreferences();
   const { isLoading } = useLoadInitialAuthState();
 
   useEffect(() => {
@@ -29,12 +35,15 @@ export default function RootLayout() {
   return (
     <ThemeProvider>
       <ApiConfigProvider>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="+not-found" />
-        </Stack>
+        <OverlayPortal>
+          <StatusBar style={theme == "dark" ? "light" : "dark"} />
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(tabs)" />
+            <Stack.Screen name="(auth)" />
+            <Stack.Screen name="+not-found" />
+          </Stack>
+        </OverlayPortal>
       </ApiConfigProvider>
     </ThemeProvider>
   );

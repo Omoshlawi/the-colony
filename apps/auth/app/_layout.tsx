@@ -3,6 +3,7 @@ import { ThemeProvider } from "@colony/core-theme";
 import { StatusBar } from "expo-status-bar";
 import { useUserPreferences } from "@colony/core-global";
 import { ApiConfigProvider } from "@colony/core-api";
+import { OverlayPortal } from "@colony/core-components";
 
 export default function Layout() {
   const {
@@ -11,15 +12,17 @@ export default function Layout() {
   return (
     <ThemeProvider>
       <ApiConfigProvider>
-        <StatusBar style={theme == "dark" ? "light" : "dark"} />
-        <Stack
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Stack.Screen name="index" />
-          <Stack.Screen name="(auth)" />
-        </Stack>
+        <OverlayPortal>
+          <StatusBar style={theme == "dark" ? "light" : "dark"} />
+          <Stack
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Stack.Screen name="index" />
+            <Stack.Screen name="(auth)" />
+          </Stack>
+        </OverlayPortal>
       </ApiConfigProvider>
     </ThemeProvider>
   );

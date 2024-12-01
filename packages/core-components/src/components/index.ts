@@ -12,5 +12,4 @@ export { default as AppBar } from "./AppBar";
 export * from "./ExpoIcons";
 export * from "./SkeletonLoader";
 export * from "./ListTile";
-export * from "./ClickableModalWrapper";
-export * from "./ModalBottomSheet";
+export * from "./Overlays";

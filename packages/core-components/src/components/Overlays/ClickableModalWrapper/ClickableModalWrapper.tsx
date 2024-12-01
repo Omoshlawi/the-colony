@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
-import AppBar from "../AppBar";
-import { ExpoIconComponent } from "../ExpoIcons";
-import { StyledPageLayout } from "../StyledLayout";
+import AppBar from "../../AppBar";
+import { ExpoIconComponent } from "../../ExpoIcons";
+import { StyledPageLayout } from "../../StyledLayout";
 
 interface ClickableModalWrapperProps extends PropsWithChildren {
   renderContent: (dismiss?: () => void) => ReactNode;
