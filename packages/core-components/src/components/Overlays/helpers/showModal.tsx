@@ -5,7 +5,7 @@ import { ModalWrapper } from "../wrappers";
 
 export const showModal = (
   component?: ReactNode,
-  options: ModalOptions & { title?: string } = {}
+  options: ModalOptions & { title?: string; actions?: ReactNode } = {}
 ) => {
   const state = useModalOverlayStore.getState();
   const dismiss = () =>
@@ -16,7 +16,11 @@ export const showModal = (
   state.updateModalOverlay({
     visible: true,
     component: component && (
-      <ModalWrapper title={options?.title} onClose={dismiss}>
+      <ModalWrapper
+        title={options?.title}
+        onClose={dismiss}
+        actions={options?.actions}
+      >
         {component}
       </ModalWrapper>
     ),

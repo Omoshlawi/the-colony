@@ -13,14 +13,16 @@ import { ExpoIconComponent } from "../../ExpoIcons";
 type Props = PropsWithChildren<{
   title?: string;
   onClose?: () => void;
+  actions?: React.ReactNode;
 }>;
 
-const ModalWrapper: FC<Props> = ({ children, title, onClose }) => {
+const ModalWrapper: FC<Props> = ({ children, title, onClose, actions }) => {
   return (
     <StyledPageLayout withSafeArea={false}>
       <View style={[styles.safeArea]}>
         <AppBar
           title={title}
+          actions={actions}
           leading={
             <TouchableOpacity activeOpacity={0.5} onPress={onClose}>
               <ExpoIconComponent
