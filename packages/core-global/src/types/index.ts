@@ -25,5 +25,5 @@ export type ModalOverlay = {
   visible: boolean;
   component?: ReactNode;
   transparent: boolean;
-  
+  dismissable: boolean;
 };

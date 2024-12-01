@@ -1,6 +1,6 @@
-import { Modal, StyleSheet, Text, View } from "react-native";
+import { Modal, StyleSheet, Switch, Text, View } from "react-native";
 import React, { FC, PropsWithChildren } from "react";
-import { useModalOverlay } from "@colony/core-global";
+import { useModalOverlay, useModalOverlayStore } from "@colony/core-global";
 
 type Props = PropsWithChildren<{}>;
 
@@ -9,7 +9,11 @@ const OverlayPortal: FC<Props> = ({ children }) => {
   return (
     <>
       {children}
-      <Modal visible={visible}>{component}</Modal>
+      {visible && (
+        <Modal visible={visible} transparent={transparent}>
+          {component}
+        </Modal>
+      )}
     </>
   );
 };

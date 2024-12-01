@@ -9,7 +9,7 @@ type ModalOverlayStore = {
 };
 
 const useModalOverlayStore = create<ModalOverlayStore>((set) => ({
-  modalOverlay: { visible: false, transparent: true },
+  modalOverlay: { visible: false, transparent: true, dismissable: true },
   update: (store: Partial<ModalOverlayStore>) =>
     set((state) => ({
       ...state,
@@ -25,12 +25,15 @@ const useModalOverlayStore = create<ModalOverlayStore>((set) => ({
   updateModalOverlay: (modalOverlay: Partial<ModalOverlay>) =>
     set((state) => ({
       ...state,
-      ...Object.entries(modalOverlay)?.reduce((prev, [key, val]) => {
-        if (val !== undefined && val !== null) {
-          return { ...prev, [key]: val };
-        }
-        return prev;
-      }, {}),
+      modalOverlay: {
+        ...state.modalOverlay,
+        ...Object.entries(modalOverlay)?.reduce((prev, [key, val]) => {
+          if (val !== undefined && val !== null) {
+            return { ...prev, [key]: val };
+          }
+          return prev;
+        }, {}),
+      },
     })),
 }));
 
