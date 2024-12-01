@@ -1,19 +1,21 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import { useAmenities } from "../hooks";
 import {
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
-  ModalBottomSheet,
-  SkeletonLoader,
-  StyledListItem,
+  showModalBottomSheet,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import React from "react";
+import { FlatList, StyleSheet, Text, View } from "react-native";
+import { useAmenities } from "../hooks";
+import { Amenity } from "../types";
 
 const Amenities = () => {
   const { amenities, error, isLoading } = useAmenities();
-  const [show, setShow] = useState(false);
+
+  const handleLaunchBottomsheet = (amenity: Amenity) => {
+    showModalBottomSheet(<Text>{JSON.stringify(amenities, null, 2)}</Text>);
+  };
   if (isLoading) {
     return (
       <Box gap={"m"}>
@@ -31,7 +33,7 @@ const Amenities = () => {
         keyExtractor={(amenity) => amenity.id}
         renderItem={({ item }) => (
           <ListTile
-            onPress={() => setShow(true)}
+            onPress={() => handleLaunchBottomsheet(item)}
             title={item.name}
             subtitle={item.icon.name}
             leading={<ExpoIconComponent {...(item.icon as any)} size={24} />}
@@ -45,11 +47,6 @@ const Amenities = () => {
             borderBottom
           />
         )}
-      />
-      <ModalBottomSheet
-        isVisible={show}
-        onClose={() => setShow(false)}
-        title="Options"
       />
     </View>
   );

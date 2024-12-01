@@ -10,7 +10,11 @@ const OverlayPortal: FC<Props> = ({ children }) => {
     <>
       {children}
       {visible && (
-        <Modal visible={visible} transparent={transparent}>
+        <Modal
+          visible={visible}
+          transparent={transparent}
+          animationType="slide"
+        >
           {component}
         </Modal>
       )}
