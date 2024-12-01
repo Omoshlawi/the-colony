@@ -12,7 +12,7 @@ import { ExpoIconComponent } from "../ExpoIcons";
 import { StyledPageLayout } from "../StyledLayout";
 
 interface ClickableModalWrapperProps extends PropsWithChildren {
-  content: ReactNode;
+  renderContent: (dismiss?: () => void) => ReactNode;
   onRequestClose?: () => boolean;
   title: string;
   renderActions?: (dismiss?: () => void) => ReactNode;
@@ -20,10 +20,10 @@ interface ClickableModalWrapperProps extends PropsWithChildren {
 
 const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
   children,
-  content,
   onRequestClose,
   title,
   renderActions,
+  renderContent,
 }) => {
   const [showModal, setShowModal] = useState(false);
   const handleDismiss = () => setShowModal(false);
@@ -61,7 +61,7 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
                 </TouchableOpacity>
               }
             />
-            {content}
+            {renderContent(handleDismiss)}
           </View>
         </StyledPageLayout>
       </Modal>

@@ -18,7 +18,7 @@ const AmenitiesScreen = () => {
         actions={
           <ClickableModalWrapper
             title="Add Amenity"
-            content={<AmenitiesForm />}
+            renderContent={(dismiss) => <AmenitiesForm onSuccess={dismiss} />}
           >
             <ExpoIconComponent family="Entypo" name="add-to-list" />
           </ClickableModalWrapper>

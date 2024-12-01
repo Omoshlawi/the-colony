@@ -18,9 +18,10 @@ import { AmenitySchema } from "../utils/validation";
 
 type AmenitiesFormProps = {
   amenity?: Amenity;
+  onSuccess?: () => void;
 };
 
-const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity }) => {
+const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
   const { addAmenity, updateAmenity } = useAmenitiesApi();
   const form = useForm<AmenityFormData>({
     defaultValues: {
@@ -38,6 +39,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity }) => {
       } else {
         await addAmenity(data);
       }
+      onSuccess?.();
     } catch (error) {
       const e = handleApiErrors<AmenityFormData>(error);
       if (e.detail) {
@@ -74,41 +76,37 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity }) => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <>
-            <StyledInput
-              prefixIcon={
-                value && <ExpoIconComponent {...(value as ExpoIcon)} />
-              }
-              value={value && `${value.family} / ${value.name}`}
-              placeholder="Select icon"
-              suffixIcon={
-                <ClickableModalWrapper
-                  title="Seach Icon"
-                  onRequestClose={() => true}
-                  renderActions={(dismiss) => (
-                    <TouchableOpacity onPress={dismiss} disabled={!value}>
-                      <ExpoIconComponent
-                        family="Ionicons"
-                        name="checkmark"
-                        size={28}
-                      />
-                    </TouchableOpacity>
-                  )}
-                  content={
-                    <LocalExpoIconPicker
-                      selectedIcon={value as ExpoIcon}
-                      onSelectIcon={onChange}
+          <StyledInput
+            prefixIcon={value && <ExpoIconComponent {...(value as ExpoIcon)} />}
+            value={value && `${value.family} / ${value.name}`}
+            placeholder="Select icon"
+            suffixIcon={
+              <ClickableModalWrapper
+                title="Seach Icon"
+                onRequestClose={() => true}
+                renderActions={(dismiss) => (
+                  <TouchableOpacity onPress={dismiss} disabled={!value}>
+                    <ExpoIconComponent
+                      family="Ionicons"
+                      name="checkmark"
+                      size={28}
                     />
-                  }
-                >
-                  <ExpoIconComponent family="Ionicons" name="add" />
-                </ClickableModalWrapper>
-              }
-              readOnly
-              label="Amenity icon"
-              error={error?.message}
-            />
-          </>
+                  </TouchableOpacity>
+                )}
+                renderContent={() => (
+                  <LocalExpoIconPicker
+                    selectedIcon={value as ExpoIcon}
+                    onSelectIcon={onChange}
+                  />
+                )}
+              >
+                <ExpoIconComponent family="Ionicons" name="add" />
+              </ClickableModalWrapper>
+            }
+            readOnly
+            label="Amenity icon"
+            error={error?.message}
+          />
         )}
       />
       <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
