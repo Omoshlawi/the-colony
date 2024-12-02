@@ -17,7 +17,7 @@ export default function Layout() {
 
           <Stack screenOptions={{ headerShown: false }}>
             <Stack.Screen name="index" />
-            <Stack.Screen name="(dashboard)" />
+            <Stack.Screen name="(properties)" />
           </Stack>
         </OverlayPortal>
       </ThemeProvider>

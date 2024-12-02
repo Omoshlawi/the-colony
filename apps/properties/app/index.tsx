@@ -1,5 +1,5 @@
-import { DashboardsScreen } from "../../../packages/features-properties/src";
+import { PropertiesScreen } from "@colony/features-properties";
 
 export default function HomeScreen() {
-  return <DashboardsScreen />;
+  return <PropertiesScreen />;
 }

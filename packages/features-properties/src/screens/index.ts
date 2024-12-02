@@ -1,3 +1,1 @@
-export { CallUsScreen } from "./CallUsScreen";
-export { ChatWithUsScreen } from "./ChatWithUsScreen";
-export { SupportScreen } from "./SupportScreen";
+export { default as PropertiesScreen } from "./PropertiesScreen";
