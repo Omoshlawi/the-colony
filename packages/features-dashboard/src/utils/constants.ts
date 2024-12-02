@@ -14,7 +14,7 @@ export const dashboardMenuitems: MenuItem[] = [
   },
   {
     name: "Relationship Types",
-    icon: { family: "MaterialCommunityIcons", name: "family-tree" },
+    icon: { family: "FontAwesome6", name: "sitemap" },
     route: RoutePaths.RELATIONSHIP_TYPES_LISTING_SCREEN,
   },
   {
@@ -27,4 +27,9 @@ export const dashboardMenuitems: MenuItem[] = [
     icon: { family: "MaterialCommunityIcons", name: "tournament" },
     route: RoutePaths.AMENITIES_LISTING_SCREEN,
   },
+  // {
+  //   name: "Properties",
+  //   icon: { family: "MaterialIcons", name: "apartment" },
+  //   route: RoutePaths.AMENITIES_LISTING_SCREEN,
+  // },
 ];
