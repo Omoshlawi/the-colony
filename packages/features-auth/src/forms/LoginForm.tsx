@@ -6,6 +6,7 @@ import { LoginFormData } from "../types";
 import { LoginShema } from "../utils";
 import {
   ExpoIconComponent,
+  showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
@@ -25,10 +26,15 @@ const LoginForm = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     try {
       await loginUser(data);
+      showSnackbar({
+        title: "succes",
+        subtitle: "login succesfull",
+        kind: "success",
+      });
     } catch (error) {
       const e = handleError<LoginFormData>(error);
       if (e.detail) {
-        console.log(__filename, error);
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
         Object.entries(e).forEach(([key, val]) =>
           form.setError(key as keyof LoginFormData, { message: val })

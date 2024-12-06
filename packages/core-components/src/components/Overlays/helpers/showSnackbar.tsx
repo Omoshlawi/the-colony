@@ -1,5 +1,5 @@
 import { useModalOverlayStore, useSnackBarOverlay } from "@colony/core-global";
-import { Box, Text } from "@colony/core-theme";
+import { Box, Text, useTheme } from "@colony/core-theme";
 import uniqueId from "lodash/uniqueId";
 import React, { FC, useEffect } from "react";
 import { ExpoIconComponent } from "../../ExpoIcons";
@@ -9,9 +9,11 @@ export const showSnackbar = ({
   options,
   subtitle,
   title,
+  kind = "info",
 }: {
   title?: string;
   subtitle?: string;
+  kind?: "success" | "error" | "warning" | "info";
   options?: { timeout?: number; dismissible?: boolean };
 } = {}) => {
   const timeout = options?.timeout;
@@ -28,6 +30,7 @@ export const showSnackbar = ({
           title={title}
           dismissible={options?.dismissible}
           subtitle={subtitle}
+          kind={kind}
           onRemove={() => {
             useModalOverlayStore.setState((state) => ({
               ...state,
@@ -49,6 +52,7 @@ type Props = {
   timeout?: number;
   onRemove?: () => void;
   dismissible?: boolean;
+  kind?: "success" | "error" | "warning" | "info";
 };
 const Snackbaritem: FC<Props> = ({
   subtitle,
@@ -56,7 +60,9 @@ const Snackbaritem: FC<Props> = ({
   timeout = 3000,
   onRemove,
   dismissible = false,
+  kind,
 }) => {
+  const theme = useTheme();
   useEffect(() => {
     const timer = setTimeout(() => {
       onRemove?.();
@@ -66,28 +72,57 @@ const Snackbaritem: FC<Props> = ({
   }, [timeout, onRemove]);
 
   return (
-    <Box p={"s"} backgroundColor={"text"} borderRadius={"small"}>
-      <Box flex={1} flexDirection={"row"} justifyContent={"space-between"}>
-        {title && (
-          <Text color={"background"} variant={"bodySmall"}>
-            {title}
+    <Box
+      style={{ backgroundColor: "white" }}
+      borderRadius={"small"}
+      overflow={"hidden"}
+    >
+      <Box
+        overflow={"hidden"}
+        p={"s"}
+        backgroundColor={
+          kind === "info"
+            ? "text"
+            : kind === "error"
+            ? "errorContainer"
+            : kind === "warning"
+            ? "warningContainer"
+            : "successContainer"
+        }
+      >
+        <Box flex={1} flexDirection={"row"} justifyContent={"space-between"}>
+          {title && (
+            <Text
+              style={{
+                color: kind === "info" ? theme.colors.background : "black",
+              }}
+              variant={"bodySmall"}
+              fontWeight={"700"}
+            >
+              {title}
+            </Text>
+          )}
+          {dismissible && (
+            <TouchableOpacity onPress={onRemove}>
+              <ExpoIconComponent
+                family="AntDesign"
+                name="closesquareo"
+                size={16}
+              />
+            </TouchableOpacity>
+          )}
+        </Box>
+        {subtitle && (
+          <Text
+            style={{
+              color: kind === "info" ? theme.colors.background : "black",
+            }}
+            variant={"bodySmall"}
+          >
+            {subtitle}
           </Text>
         )}
-        {dismissible && (
-          <TouchableOpacity onPress={onRemove}>
-            <ExpoIconComponent
-              family="AntDesign"
-              name="closesquareo"
-              size={16}
-            />
-          </TouchableOpacity>
-        )}
       </Box>
-      {subtitle && (
-        <Text color={"outline"} variant={"bodySmall"}>
-          {subtitle}
-        </Text>
-      )}
     </Box>
   );
 };

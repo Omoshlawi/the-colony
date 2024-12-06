@@ -5,6 +5,7 @@ import {
   ExpoIconComponent,
   ListTile,
   SectionCard,
+  showSnackbar,
   StyledPageLayout,
   StyledText,
 } from "@colony/core-components";
@@ -22,6 +23,7 @@ export const SettingsScreen = () => (
             title="Laurent Ouma"
             subtitle="lawiomosh3@gmail.com"
             leading={<ExpoIconComponent family="Feather" name="user" />}
+            onPress={() => {}}
             trailing={
               <ExpoIconComponent
                 family="MaterialCommunityIcons"

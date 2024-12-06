@@ -4,6 +4,10 @@ import { textVariantsLight } from "../text-variants";
 
 export const theme = createTheme({
   colors: {
+    success: "green",
+    warning: "yellow",
+    warningContainer: "rgba(255, 165, 0, 0.3)",
+    successContainer: "rgba(0, 128, 0, 0.3)",
     text: pallet.lightBlack,
     tint: pallet.blue,
     icon: "#687076",
@@ -13,6 +17,7 @@ export const theme = createTheme({
     disabled: pallet.darkRed,
     // onPrimary: pallet.greyBlue,
     ...lightColorScheme,
+    errorContainer: "rgba(255, 49, 49, 0.3)",
     // background: pallet.white,
   },
   spacing: {
@@ -72,6 +77,7 @@ export const darktheme: Theme = {
     tabIconSelected: pallet.blue,
     ...darkColorScheme,
     // background: pallet.dark,
+    errorContainer: "rgba(255, 49, 49, 0.3)",
   },
 };
 

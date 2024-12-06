@@ -14,13 +14,6 @@ import { View } from "react-native";
 export const LogoutSection = () => {
   const { logoutUser } = useAuthAPi();
   const handleLogout = () => {
-    showSnackbar({
-      title: "Hello",
-      subtitle: "Description",
-      options: { timeout: 5000 },
-    });
-
-    return;
     const dispose = showDialog(
       <Box
         gap={"m"}
@@ -49,6 +42,10 @@ export const LogoutSection = () => {
               onPress={() => {
                 dispose();
                 logoutUser();
+                showSnackbar({
+                  title: "success",
+                  subtitle: "Session ended succesfully",
+                });
               }}
             />
           </Box>
