@@ -4,6 +4,7 @@ import {
   ExpoIcon,
   ExpoIconComponent,
   LocalExpoIconPicker,
+  showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
@@ -41,10 +42,15 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
       }
       onSuccess?.();
       mutate("/amenities");
+      showSnackbar({
+        title: "succes",
+        subtitle: `amenity ${amenity ? "updated" : "created"} succesfull`,
+        kind: "success",
+      });
     } catch (error) {
       const e = handleApiErrors<AmenityFormData>(error);
       if (e.detail) {
-        console.log(__filename, error);
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
         Object.entries(e).forEach(([key, val]) =>
           form.setError(key as keyof AmenityFormData, { message: val })

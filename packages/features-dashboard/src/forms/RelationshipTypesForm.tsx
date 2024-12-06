@@ -7,7 +7,11 @@ import { RelationshipTypeSchema } from "../utils/validation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import { Box } from "@colony/core-theme";
-import { StyledButton, StyledInput } from "@colony/core-components";
+import {
+  showSnackbar,
+  StyledButton,
+  StyledInput,
+} from "@colony/core-components";
 
 type RelationshipTypesFormProps = {
   relationshipType?: RelationshipType;
@@ -37,11 +41,18 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
         await addRelationshipType(data);
       }
       onSuccess?.();
+      showSnackbar({
+        title: "succes",
+        subtitle: `relationship type ${
+          relationshipType ? "updated" : "created"
+        } succesfull`,
+        kind: "success",
+      });
       mutate("/relationship-types");
     } catch (error) {
       const e = handleApiErrors<RelationshipTypeFormData>(error);
       if (e.detail) {
-        console.log(__filename, error);
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
         Object.entries(e).forEach(([key, val]) =>
           form.setError(key as keyof RelationshipTypeFormData, { message: val })

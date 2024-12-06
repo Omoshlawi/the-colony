@@ -12,6 +12,7 @@ import {
   ExpoIcon,
   ExpoIconComponent,
   LocalExpoIconPicker,
+  showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
@@ -42,10 +43,15 @@ const CategoriesForm: FC<CategoriesFormProps> = ({ category, onSuccess }) => {
       }
       onSuccess?.();
       mutate("/categories");
+      showSnackbar({
+        title: "succes",
+        subtitle: `category ${category ? "updated" : "created"} succesfull`,
+        kind: "success",
+      });
     } catch (error) {
       const e = handleApiErrors<CategoryFormData>(error);
       if (e.detail) {
-        console.log(__filename, error);
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
         Object.entries(e).forEach(([key, val]) =>
           form.setError(key as keyof CategoryFormData, { message: val })

@@ -4,6 +4,7 @@ import {
   ExpoIcon,
   ExpoIconComponent,
   LocalExpoIconPicker,
+  showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
@@ -42,12 +43,19 @@ const AttributeTypesForm: FC<AttributeTypesFormProps> = ({
       } else {
         await addAttributeType(data);
       }
+      showSnackbar({
+        title: "succes",
+        subtitle: `attribute ${
+          attributeType ? "updated" : "created"
+        } succesfull`,
+        kind: "success",
+      });
       onSuccess?.();
       mutate("/attribute-types");
     } catch (error) {
       const e = handleApiErrors<AttributeTypeFormData>(error);
       if (e.detail) {
-        console.log(__filename, error);
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
         Object.entries(e).forEach(([key, val]) =>
           form.setError(key as keyof AttributeTypeFormData, { message: val })

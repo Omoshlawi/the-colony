@@ -53,6 +53,7 @@ type Props = {
   onRemove?: () => void;
   dismissible?: boolean;
   kind?: "success" | "error" | "warning" | "info";
+  leading?: React.ReactNode;
 };
 const Snackbaritem: FC<Props> = ({
   subtitle,
@@ -61,6 +62,7 @@ const Snackbaritem: FC<Props> = ({
   onRemove,
   dismissible = false,
   kind,
+  leading,
 }) => {
   const theme = useTheme();
   useEffect(() => {
@@ -80,6 +82,8 @@ const Snackbaritem: FC<Props> = ({
       <Box
         overflow={"hidden"}
         p={"s"}
+        gap={"m"}
+        flexDirection={"row"}
         backgroundColor={
           kind === "info"
             ? "text"
@@ -90,11 +94,21 @@ const Snackbaritem: FC<Props> = ({
             : "successContainer"
         }
       >
-        <Box flex={1} flexDirection={"row"} justifyContent={"space-between"}>
+        {leading ?? (
+          <ExpoIconComponent
+            size={18}
+            family="AntDesign"
+            name={
+              kind === "info" || kind === "success" ? "infocirlceo" : "warning"
+            }
+          />
+        )}
+        <Box flex={1} flexDirection={"column"}>
           {title && (
             <Text
               style={{
                 color: kind === "info" ? theme.colors.background : "black",
+                flex: 1,
               }}
               variant={"bodySmall"}
               fontWeight={"700"}
@@ -102,25 +116,25 @@ const Snackbaritem: FC<Props> = ({
               {title}
             </Text>
           )}
-          {dismissible && (
-            <TouchableOpacity onPress={onRemove}>
-              <ExpoIconComponent
-                family="AntDesign"
-                name="closesquareo"
-                size={16}
-              />
-            </TouchableOpacity>
+          {subtitle && (
+            <Text
+              style={{
+                color: kind === "info" ? theme.colors.background : "black",
+              }}
+              variant={"bodySmall"}
+            >
+              {subtitle}
+            </Text>
           )}
         </Box>
-        {subtitle && (
-          <Text
-            style={{
-              color: kind === "info" ? theme.colors.background : "black",
-            }}
-            variant={"bodySmall"}
-          >
-            {subtitle}
-          </Text>
+        {dismissible && (
+          <TouchableOpacity onPress={onRemove}>
+            <ExpoIconComponent
+              family="AntDesign"
+              name="closesquareo"
+              size={16}
+            />
+          </TouchableOpacity>
         )}
       </Box>
     </Box>
