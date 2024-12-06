@@ -1,15 +1,22 @@
 import { create } from "zustand";
-import { ModalOverlay } from "../types";
+import { ModalOverlay, SnackBarOverlay } from "../types";
 
 type ModalOverlayStore = {
   modalOverlay: ModalOverlay;
   update: (store: Partial<ModalOverlayStore>) => void;
   setModalOverlay: (modalOverlay: ModalOverlay) => void;
   updateModalOverlay: (modalOverlay: Partial<ModalOverlay>) => void;
+  snackbarOverlay: Array<SnackBarOverlay>;
+  updateSnackbarOverlay: (modalOverlay: Array<SnackBarOverlay>) => void;
 };
 
 const useModalOverlayStore = create<ModalOverlayStore>((set) => ({
-  modalOverlay: { visible: false, transparent: true, dismissable: true },
+  modalOverlay: {
+    visible: false,
+    transparent: true,
+    dismissable: true,
+  },
+  snackbarOverlay: [],
   update: (store: Partial<ModalOverlayStore>) =>
     set((state) => ({
       ...state,
@@ -34,6 +41,11 @@ const useModalOverlayStore = create<ModalOverlayStore>((set) => ({
           return prev;
         }, {}),
       },
+    })),
+  updateSnackbarOverlay: (snackbarOverlay: Array<SnackBarOverlay>) =>
+    set((state) => ({
+      ...state,
+      snackbarOverlay,
     })),
 }));
 

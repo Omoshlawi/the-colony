@@ -16,6 +16,8 @@ export function ExtensionSlot<S = any>({
     [name]
   );
 
+  if (!extensions.length) return <></>;
+
   return (
     <View>
       {extensions.map((extension) => {

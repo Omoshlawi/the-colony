@@ -4,7 +4,7 @@ export const registerExtensions = () => {
   extensionRegistry.registerExtension({
     name: "logout-extension",
     load: async () => {
-      await new Promise((resolve) => setTimeout(resolve, 5000)); // Simpulate loading
+      // await new Promise((resolve) => setTimeout(resolve, 5000)); // Simpulate loading
       const module = require("../widgets");
       //   const module = await import("../widgets/LogoutSection"); //Works bt requires further ts configuation
       return {

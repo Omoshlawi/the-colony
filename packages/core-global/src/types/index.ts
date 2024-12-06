@@ -11,6 +11,7 @@ export type Session = {
   isAuthenticated: boolean;
   user?: User;
   token?: TokenPair;
+  currentOrganization?: string;
 };
 
 export type ThemeName = "dark" | "light" | "system";
@@ -22,8 +23,13 @@ export type UserPreference = {
 export type Appconfig = {};
 
 export type ModalOverlay = {
-  visible: boolean;
+  visible: boolean; // Modal visibility
   component?: ReactNode;
   transparent: boolean;
   dismissable: boolean;
+};
+
+export type SnackBarOverlay = {
+  id: string;
+  component?: ReactNode;
 };

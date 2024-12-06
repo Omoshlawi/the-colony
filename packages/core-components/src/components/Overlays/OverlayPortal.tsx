@@ -1,11 +1,13 @@
-import { Modal, StyleSheet, Switch, Text, View } from "react-native";
+import { useModalOverlay, useSnackBarOverlay } from "@colony/core-global";
 import React, { FC, PropsWithChildren } from "react";
-import { useModalOverlay, useModalOverlayStore } from "@colony/core-global";
+import { Modal, StyleSheet } from "react-native";
+import { SnackBar } from "./wrappers";
 
 type Props = PropsWithChildren<{}>;
 
 const OverlayPortal: FC<Props> = ({ children }) => {
   const { transparent, visible, component } = useModalOverlay();
+  const snackItems = useSnackBarOverlay();
   return (
     <>
       {children}
@@ -18,6 +20,7 @@ const OverlayPortal: FC<Props> = ({ children }) => {
           {component}
         </Modal>
       )}
+      <SnackBar items={snackItems} />
     </>
   );
 };
