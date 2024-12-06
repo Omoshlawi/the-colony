@@ -13,3 +13,4 @@ export * from "./ExpoIcons";
 export * from "./SkeletonLoader";
 export * from "./ListTile";
 export * from "./Overlays";
+export * from "./SectionCard";

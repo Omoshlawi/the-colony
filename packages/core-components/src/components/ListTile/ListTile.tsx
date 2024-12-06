@@ -3,7 +3,7 @@ import React, { FC, ReactNode } from "react";
 import { Box, Text, useTheme } from "@colony/core-theme";
 
 type ListTileProps = {
-  title: string;
+  title?: string;
   subtitle?: string;
   trailing?: ReactNode;
   leading?: ReactNode;
