@@ -1,5 +1,8 @@
 import { ThemeProvider } from "@colony/core-theme";
-import { useLoadInitialAuthState } from "@colony/features-auth";
+import {
+  registerExtensions,
+  useLoadInitialAuthState,
+} from "@colony/features-auth";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -27,6 +30,10 @@ export default function RootLayout() {
       SplashScreen.hideAsync();
     }
   }, [loaded, isLoading]);
+
+  useEffect(() => {
+    registerExtensions();
+  }, []);
 
   if (!loaded || isLoading) {
     return null;

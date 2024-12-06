@@ -54,6 +54,18 @@ export default function TabLayout() {
             ),
           }}
         />
+        <Tabs.Screen
+          name="settings"
+          options={{
+            title: "Settings",
+            tabBarIcon: ({ color, focused }) => (
+              <StyledTabBarIcon
+                name={focused ? "cog" : "cog-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
       </Tabs>
     </SecureRoute>
   );

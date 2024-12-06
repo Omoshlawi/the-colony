@@ -10,7 +10,6 @@ import {
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { ThemeTogglerSection } from "../widgets";
-import { ExtensionSlot } from "@colony/core-extensions";
 
 export const SettingsScreen = () => (
   <StyledPageLayout>
@@ -54,8 +53,8 @@ export const SettingsScreen = () => (
             }
           />
         </SectionCard>
+
         <ThemeTogglerSection />
-        <ExtensionSlot name="logout-slot" />
       </Box>
     </ScrollView>
   </StyledPageLayout>

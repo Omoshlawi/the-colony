@@ -44,6 +44,7 @@
     "@colony/features-payments": "*",
     "@colony/core-global": "*",
     "@colony/features-auth": "*",
+    "@colony/features-settings": "*",
     "@colony/core-theme": "*",
     "@colony/core-storage": "*",
     "@colony/core-api": "*",
