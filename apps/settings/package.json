@@ -45,6 +45,7 @@
     "@colony/core-theme": "*",
     "@colony/features-settings": "*",
     "@colony/core-global": "*",
+    "@colony/core-extensions": "*",
     "@colony/core-api": "*"
   },
   "devDependencies": {
