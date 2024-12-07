@@ -14,8 +14,10 @@ import { OrganizationContextTile, ThemeTogglerSection } from "../widgets";
 import { ExtensionSlot } from "@colony/core-extensions";
 import { useRouter } from "expo-router";
 import { RoutePaths } from "../utils";
+import { User, useSession } from "@colony/core-global";
 
 export const SettingsScreen = () => {
+  const { user } = useSession();
   const router = useRouter();
   return (
     <StyledPageLayout>
@@ -24,8 +26,8 @@ export const SettingsScreen = () => {
         <Box p={"m"} flex={1} flexDirection={"column"} gap={"m"}>
           <SectionCard title="Account">
             <ListTile
-              title="Laurent Ouma"
-              subtitle="lawiomosh3@gmail.com"
+              title={user?.person.name ?? user?.username}
+              subtitle={user?.person?.email}
               leading={<ExpoIconComponent family="Feather" name="user" />}
               onPress={() => {}}
               trailing={
@@ -35,7 +37,7 @@ export const SettingsScreen = () => {
                 />
               }
             />
-            <OrganizationContextTile/>
+            <OrganizationContextTile />
             <ListTile
               title="Change password"
               leading={<ExpoIconComponent family="Feather" name="key" />}
