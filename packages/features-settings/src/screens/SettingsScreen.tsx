@@ -10,7 +10,7 @@ import {
   StyledText,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
-import { ThemeTogglerSection } from "../widgets";
+import { OrganizationContextTile, ThemeTogglerSection } from "../widgets";
 import { ExtensionSlot } from "@colony/core-extensions";
 import { useRouter } from "expo-router";
 import { RoutePaths } from "../utils";
@@ -35,25 +35,7 @@ export const SettingsScreen = () => {
                 />
               }
             />
-            <ListTile
-              title="Platven LTD"
-              subtitle="Tap to view organization scope"
-              onPress={() =>
-                router.navigate(RoutePaths.MY_ORGANIZATIONS_SCREEN)
-              }
-              leading={
-                <ExpoIconComponent
-                  family="SimpleLineIcons"
-                  name="organization"
-                />
-              }
-              trailing={
-                <ExpoIconComponent
-                  family="MaterialCommunityIcons"
-                  name="chevron-right"
-                />
-              }
-            />
+            <OrganizationContextTile/>
             <ListTile
               title="Change password"
               leading={<ExpoIconComponent family="Feather" name="key" />}
