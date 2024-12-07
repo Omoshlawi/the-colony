@@ -12,8 +12,9 @@ import {
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { useAuthAPi } from "../hooks";
+import { handleApiErrors } from "@colony/core-api";
 const LoginForm = () => {
-  const { loginUser, handleError } = useAuthAPi();
+  const { loginUser } = useAuthAPi();
   const form = useForm<LoginFormData>({
     defaultValues: {
       identifier: "",
@@ -32,7 +33,7 @@ const LoginForm = () => {
         kind: "success",
       });
     } catch (error) {
-      const e = handleError<LoginFormData>(error);
+      const e = handleApiErrors<LoginFormData>(error);
       if (e.detail) {
         showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else

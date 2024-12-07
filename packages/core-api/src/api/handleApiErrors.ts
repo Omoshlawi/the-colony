@@ -18,7 +18,10 @@ const handleAPIErrors = <T extends Record<string, unknown>>(
       );
     }
     return {
-      detail: error?.response?.data ?? error.message ?? "Unknown error occured",
+      detail:
+        error?.response?.data?.detail ??
+        error.message ??
+        "Unknown error occured",
     };
   }
   return {

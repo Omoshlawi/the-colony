@@ -12,9 +12,10 @@ import { StyleSheet } from "react-native";
 import { useAuthAPi } from "../hooks";
 import { RegisterFormData } from "../types";
 import { RegisterSchema } from "../utils";
+import { handleApiErrors } from "@colony/core-api";
 
 const RegisterForm = () => {
-  const { registerUser, handleError } = useAuthAPi();
+  const { registerUser } = useAuthAPi();
 
   const form = useForm<RegisterFormData>({
     defaultValues: {
@@ -37,7 +38,7 @@ const RegisterForm = () => {
         kind: "success",
       });
     } catch (error) {
-      const e = handleError<RegisterFormData>(error);
+      const e = handleApiErrors<RegisterFormData>(error);
       if (e.detail) {
         showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else

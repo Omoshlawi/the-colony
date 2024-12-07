@@ -3,7 +3,11 @@ import React from "react";
 import { Stack } from "expo-router";
 
 const SettingsLayout = () => {
-  return <Stack />;
+  return (
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="my-organizations" />
+    </Stack>
+  );
 };
 
 export default SettingsLayout;

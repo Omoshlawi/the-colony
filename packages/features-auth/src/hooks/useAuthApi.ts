@@ -1,14 +1,18 @@
 import { TokenPair, User, useSessionStore } from "@colony/core-global";
-import axios, { isAxiosError } from "axios";
 import { LoginFormData, RegisterFormData } from "../types";
 import { useSecureStorage } from "@colony/core-storage";
 import { SESSION_TOKEN_KEY } from "../utils";
-
-const httpClient = axios.create({ baseURL: "http://localhost:5000" });
-
+import { hiveFetch } from "@colony/core-api";
+import { decode } from "jsonwebtoken";
 const loginUser = async (data: LoginFormData) => {
-  const resp = await httpClient.post("/api/auth/signin/credentials", data);
-  const responseData = resp.data as { user: User; token: TokenPair };
+  const resp = await hiveFetch<{ user: User; token: TokenPair }>(
+    "/auth/signin/credentials",
+    {
+      data: data,
+      method: "POST",
+    }
+  );
+  const responseData = resp.data;
 
   useSessionStore.setState((state) => ({
     ...state,
@@ -17,17 +21,19 @@ const loginUser = async (data: LoginFormData) => {
       isAuthenticated: true,
       token: responseData.token,
       user: responseData.user,
+      currentOrganization: (decode(responseData.token.accessToken) as any)
+        ?.organizationId,
     },
   }));
 
   return responseData;
 };
 const registerUser = async (data: RegisterFormData) => {
-  const resp = await httpClient.post("/api/auth/signup", data);
-  const responseData = resp.data as {
-    user: User;
-    token: TokenPair;
-  };
+  const resp = await hiveFetch<{ user: User; token: TokenPair }>(
+    "/auth/signup",
+    { data: data, method: "POST" }
+  );
+  const responseData = resp.data;
   useSessionStore.setState((state) => ({
     ...state,
     session: {
@@ -35,6 +41,8 @@ const registerUser = async (data: RegisterFormData) => {
       isAuthenticated: true,
       token: responseData.token,
       user: responseData.user,
+      currentOrganization: (decode(responseData.token.accessToken) as any)
+        ?.organizationId,
     },
   }));
   return responseData;
@@ -42,11 +50,11 @@ const registerUser = async (data: RegisterFormData) => {
 
 const getSessionUserByToken = async (token: string) => {
   const v = "custom:include(person,accounts)";
-  const resp = await httpClient.get("/api/users/profile", {
+  const resp = await hiveFetch<User>("/users/profile", {
     params: { v },
     headers: { "x-access-token": token },
   });
-  const responseData = resp.data as User;
+  const responseData = resp.data;
   useSessionStore.setState((state) => ({
     ...state,
     session: {
@@ -57,32 +65,6 @@ const getSessionUserByToken = async (token: string) => {
   return responseData;
 };
 
-const handleError = <T extends Record<string, unknown>>(
-  error: any
-): { [field in keyof T]?: string } & { detail?: string } => {
-  if (isAxiosError(error)) {
-    if (error.response?.status === 400) {
-      return Object.entries(error.response?.data ?? {}).reduce(
-        (prev, [key, value]) => {
-          if (key === "_errors")
-            return { ...prev, detail: (value as string[]).join(", ") };
-          return {
-            ...prev,
-            [key]: (value as { _errors: string[] })._errors.join(", "),
-          };
-        },
-        {}
-      );
-    }
-    return {
-      detail: error?.response?.data ?? error.message ?? "Unknown error occured",
-    };
-  }
-  return {
-    detail: error?.message ?? "Unknown error occured",
-  };
-};
-
 const logoutUser = () => {
   useSessionStore.setState((state) => ({
     ...state,
@@ -90,6 +72,7 @@ const logoutUser = () => {
       isAuthenticated: false,
       token: undefined,
       user: undefined,
+      currentOrganization: undefined,
     },
   }));
 };
@@ -109,7 +92,6 @@ export const useAuthAPi = () => {
       return response;
     },
     getSessionUserByToken,
-    handleError,
     logoutUser: () => {
       logoutUser();
       setToken(null);

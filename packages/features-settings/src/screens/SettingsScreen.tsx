@@ -12,55 +12,66 @@ import {
 import { Box } from "@colony/core-theme";
 import { ThemeTogglerSection } from "../widgets";
 import { ExtensionSlot } from "@colony/core-extensions";
+import { useRouter } from "expo-router";
+import { RoutePaths } from "../utils";
 
-export const SettingsScreen = () => (
-  <StyledPageLayout>
-    <AppBar title="Settings" leading={false} />
-    <ScrollView>
-      <Box p={"m"} flex={1} flexDirection={"column"} gap={"m"}>
-        <SectionCard title="Account">
-          <ListTile
-            title="Laurent Ouma"
-            subtitle="lawiomosh3@gmail.com"
-            leading={<ExpoIconComponent family="Feather" name="user" />}
-            onPress={() => {}}
-            trailing={
-              <ExpoIconComponent
-                family="MaterialCommunityIcons"
-                name="chevron-right"
-              />
-            }
-          />
-          <ListTile
-            title="Platven LTD"
-            subtitle="Tap to change organization scope"
-            leading={
-              <ExpoIconComponent family="SimpleLineIcons" name="organization" />
-            }
-            trailing={
-              <ExpoIconComponent
-                family="MaterialCommunityIcons"
-                name="chevron-right"
-              />
-            }
-          />
-          <ListTile
-            title="Change password"
-            leading={<ExpoIconComponent family="Feather" name="key" />}
-            subtitle="Use string secure password"
-            trailing={
-              <ExpoIconComponent
-                family="MaterialCommunityIcons"
-                name="chevron-right"
-              />
-            }
-          />
-        </SectionCard>
-        <ThemeTogglerSection />
-        <ExtensionSlot name="logout-slot" />
-      </Box>
-    </ScrollView>
-  </StyledPageLayout>
-);
+export const SettingsScreen = () => {
+  const router = useRouter();
+  return (
+    <StyledPageLayout>
+      <AppBar title="Settings" leading={false} />
+      <ScrollView>
+        <Box p={"m"} flex={1} flexDirection={"column"} gap={"m"}>
+          <SectionCard title="Account">
+            <ListTile
+              title="Laurent Ouma"
+              subtitle="lawiomosh3@gmail.com"
+              leading={<ExpoIconComponent family="Feather" name="user" />}
+              onPress={() => {}}
+              trailing={
+                <ExpoIconComponent
+                  family="MaterialCommunityIcons"
+                  name="chevron-right"
+                />
+              }
+            />
+            <ListTile
+              title="Platven LTD"
+              subtitle="Tap to view organization scope"
+              onPress={() =>
+                router.navigate(RoutePaths.MY_ORGANIZATIONS_SCREEN)
+              }
+              leading={
+                <ExpoIconComponent
+                  family="SimpleLineIcons"
+                  name="organization"
+                />
+              }
+              trailing={
+                <ExpoIconComponent
+                  family="MaterialCommunityIcons"
+                  name="chevron-right"
+                />
+              }
+            />
+            <ListTile
+              title="Change password"
+              leading={<ExpoIconComponent family="Feather" name="key" />}
+              subtitle="Use string secure password"
+              trailing={
+                <ExpoIconComponent
+                  family="MaterialCommunityIcons"
+                  name="chevron-right"
+                />
+              }
+            />
+          </SectionCard>
+          <ThemeTogglerSection />
+          <ExtensionSlot name="logout-slot" />
+        </Box>
+      </ScrollView>
+    </StyledPageLayout>
+  );
+};
 
 const styles = StyleSheet.create({});

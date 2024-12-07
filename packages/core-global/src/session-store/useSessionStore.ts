@@ -41,6 +41,7 @@ export const useSessionStore = create<SessionStore>((set) => ({
         user: undefined,
         token: undefined,
         refreshToken: undefined,
+        currentOrganization:undefined
       },
     }));
     clearCash?.();

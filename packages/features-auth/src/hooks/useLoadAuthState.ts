@@ -3,6 +3,7 @@ import { SESSION_TOKEN_KEY } from "../utils";
 import { useEffect, useState } from "react";
 import { useAuthAPi } from "./useAuthApi";
 import { TokenPair, useSessionStore } from "@colony/core-global";
+import { decode } from "jsonwebtoken";
 
 const useLoadInitialAuthState = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -19,6 +20,8 @@ const useLoadInitialAuthState = () => {
               isAuthenticated: true,
               user,
               token: token,
+              currentOrganization: (decode(token.accessToken) as any)
+                ?.organizationId,
             },
             cacheSession: (session) => {
               setToken(session.token ?? null);
