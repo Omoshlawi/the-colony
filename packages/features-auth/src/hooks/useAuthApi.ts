@@ -1,9 +1,8 @@
 import { TokenPair, User, useSessionStore } from "@colony/core-global";
 import { LoginFormData, RegisterFormData } from "../types";
 import { useSecureStorage } from "@colony/core-storage";
-import { SESSION_TOKEN_KEY } from "../utils";
+import { decodeJWTtoken, SESSION_TOKEN_KEY } from "../utils";
 import { hiveFetch } from "@colony/core-api";
-import { decode } from "jsonwebtoken";
 const loginUser = async (data: LoginFormData) => {
   const resp = await hiveFetch<{ user: User; token: TokenPair }>(
     "/auth/signin/credentials",
@@ -21,7 +20,7 @@ const loginUser = async (data: LoginFormData) => {
       isAuthenticated: true,
       token: responseData.token,
       user: responseData.user,
-      currentOrganization: (decode(responseData.token.accessToken) as any)
+      currentOrganization: decodeJWTtoken(responseData.token.accessToken)
         ?.organizationId,
     },
   }));
@@ -41,7 +40,7 @@ const registerUser = async (data: RegisterFormData) => {
       isAuthenticated: true,
       token: responseData.token,
       user: responseData.user,
-      currentOrganization: (decode(responseData.token.accessToken) as any)
+      currentOrganization: decodeJWTtoken(responseData.token.accessToken)
         ?.organizationId,
     },
   }));

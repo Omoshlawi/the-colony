@@ -1,9 +1,9 @@
 import { useSecureStorage } from "@colony/core-storage";
-import { SESSION_TOKEN_KEY } from "../utils";
+import { decodeJWTtoken, SESSION_TOKEN_KEY } from "../utils";
 import { useEffect, useState } from "react";
 import { useAuthAPi } from "./useAuthApi";
 import { TokenPair, useSessionStore } from "@colony/core-global";
-import { decode } from "jsonwebtoken";
+import { showSnackbar } from "@colony/core-components";
 
 const useLoadInitialAuthState = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ const useLoadInitialAuthState = () => {
               isAuthenticated: true,
               user,
               token: token,
-              currentOrganization: (decode(token.accessToken) as any)
+              currentOrganization: decodeJWTtoken(token.accessToken)
                 ?.organizationId,
             },
             cacheSession: (session) => {
@@ -31,7 +31,13 @@ const useLoadInitialAuthState = () => {
             },
           });
         })
-        .catch((e) => {})
+        .catch((e) => {
+          showSnackbar({
+            kind: "error",
+            title: "error authenticating",
+            subtitle: e?.message,
+          });
+        })
         .finally(() => setIsLoading(false));
     }
   }, [token]);
