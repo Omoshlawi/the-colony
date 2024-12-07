@@ -8,7 +8,7 @@ type Props = {
 };
 
 const SnackBar: FC<Props> = ({ items = [] }) => {
-  const { spacing } = useTheme();
+  const { spacing, zIndices } = useTheme();
   if (!items.length) return false;
   return (
     <View
@@ -21,10 +21,11 @@ const SnackBar: FC<Props> = ({ items = [] }) => {
         padding: spacing.m,
         display: "flex",
         flexDirection: "column",
+        zIndex: zIndices.overlay,
       }}
     >
-      {(items ?? []).map((item, index) => (
-        <View key={index}>{item.component}</View>
+      {(items ?? []).map((item) => (
+        <View key={item.id}>{item.component}</View>
       ))}
     </View>
   );

@@ -43,6 +43,9 @@ const registerUser = async (data: RegisterFormData) => {
       currentOrganization: decodeJWTtoken(responseData.token.accessToken)
         ?.organizationId,
     },
+    decodeSesionToken: (token) => {
+      return decodeJWTtoken(token.accessToken);
+    },
   }));
   return responseData;
 };
@@ -59,6 +62,9 @@ const getSessionUserByToken = async (token: string) => {
     session: {
       ...state.session,
       user: responseData,
+    },
+    decodeSesionToken: (token) => {
+      return decodeJWTtoken(token.accessToken);
     },
   }));
   return responseData;

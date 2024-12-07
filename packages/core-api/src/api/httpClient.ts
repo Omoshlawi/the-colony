@@ -42,6 +42,9 @@ httpClient.interceptors.response.use(
           );
 
           const newToken = refreshResponse.data;
+          const decoded = sessionStore.decodeSesionToken?.(newToken); // decode new token nd stor in session
+          if (decoded?.organizationId)
+            sessionStore.setSessionOrganization(decoded!.organizationId);
           sessionStore.setSessionToken(newToken); // Update session with new token
           sessionStore.cacheSession?.({ token: newToken }); // Update cache
           // Retry the original request with the new token

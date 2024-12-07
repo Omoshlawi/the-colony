@@ -1,6 +1,6 @@
 import { useModalOverlay, useSnackBarOverlay } from "@colony/core-global";
 import React, { FC, PropsWithChildren } from "react";
-import { Modal, StyleSheet } from "react-native";
+import { Modal, StyleSheet, Text } from "react-native";
 import { SnackBar } from "./wrappers";
 
 type Props = PropsWithChildren<{}>;
@@ -18,6 +18,7 @@ const OverlayPortal: FC<Props> = ({ children }) => {
           animationType="slide"
         >
           {component}
+          <SnackBar items={snackItems} />
         </Modal>
       )}
       <SnackBar items={snackItems} />

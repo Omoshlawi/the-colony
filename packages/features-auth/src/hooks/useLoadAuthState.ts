@@ -26,6 +26,9 @@ const useLoadInitialAuthState = () => {
             cacheSession: (session) => {
               setToken(session.token ?? null);
             },
+            decodeSesionToken: (token) => {
+              return decodeJWTtoken(token.accessToken);
+            },
             clearCache: () => {
               setToken(null);
             },
@@ -35,7 +38,7 @@ const useLoadInitialAuthState = () => {
           showSnackbar({
             kind: "error",
             title: "error authenticating",
-            subtitle: e?.message,
+            subtitle: e?.response?.data?.detail ?? e?.message,
           });
         })
         .finally(() => setIsLoading(false));
