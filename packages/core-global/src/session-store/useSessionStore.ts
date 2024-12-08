@@ -12,6 +12,7 @@ export type SessionStore = {
   cacheSession?: (session: Partial<Session>) => void;
   decodeSesionToken?: (token: TokenPair) => any;
   update: (store: Partial<SessionStore>) => void;
+  updateSession: (store: Partial<Session>) => void;
 };
 
 export const useSessionStore = create<SessionStore>((set) => ({
@@ -70,5 +71,18 @@ export const useSessionStore = create<SessionStore>((set) => ({
         }
         return prev;
       }, {}),
+    })),
+  updateSession: (session: Partial<Session>) =>
+    set((state) => ({
+      ...state,
+      session: {
+        ...state.session,
+        ...Object.entries(session)?.reduce((prev, [key, val]) => {
+          if (val !== undefined && val !== null) {
+            return { ...prev, [key]: val };
+          }
+          return prev;
+        }, {}),
+      },
     })),
 }));

@@ -24,7 +24,7 @@ import { Box } from "@colony/core-theme";
 export const MyOrganizations = () => {
   const { currentOrganization } = useSession();
   const { organizationsMemberships, error, isLoading } = useMyOrganizations();
-  const { swichOrganization } = useMyOrganizationApi();
+  const { swichOrganization, exitContext } = useMyOrganizationApi();
   const [loading, setLoading] = useState(false);
   const handleUpdate = (organization: Organization) => {
     const dispose = showModal(
@@ -54,6 +54,25 @@ export const MyOrganizations = () => {
       setLoading(false);
     }
   };
+  const handleQuite = async (organization: Organization) => {
+    setLoading(true);
+    try {
+      await exitContext();
+      showSnackbar({
+        kind: "success",
+        title: "success",
+        subtitle: "Succesfully quit " + organization.name + " context",
+      });
+    } catch (error: any) {
+      showSnackbar({
+        kind: "error",
+        title: "error",
+        subtitle: error?.response?.data?.detail ?? error?.message,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
   const handleLaunchBottomsheet = (org: Organization) => {
     const dispose = showModalBottomSheet(
       <ScrollView>
@@ -66,6 +85,16 @@ export const MyOrganizations = () => {
               await handleSwitch(org);
             }}
           />
+          {org.id === currentOrganization && (
+            <StyledButton
+              title="Quite organization context"
+              variant="filled"
+              onPress={async () => {
+                dispose();
+                await handleQuite(org);
+              }}
+            />
+          )}
           <StyledButton
             title="Update"
             variant="outline"
