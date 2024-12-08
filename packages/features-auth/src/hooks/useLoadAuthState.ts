@@ -9,10 +9,27 @@ const useLoadInitialAuthState = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [token, setToken] = useSecureStorage<TokenPair>(SESSION_TOKEN_KEY);
   const updateSessionStore = useSessionStore((state) => state.update);
+  const updateSessionToken = useSessionStore((state) => state.setSessionToken);
   const { getSessionUserByToken } = useAuthAPi();
+
+  const initializeSessionHelpers = () => {
+    updateSessionStore({
+      cacheSession: (session) => {
+        setToken(session.token ?? null);
+      },
+      decodeSesionToken: (token) => {
+        return decodeJWTtoken(token.accessToken);
+      },
+      clearCache: () => {
+        setToken(null);
+      },
+    });
+  };
   useEffect(() => {
+    initializeSessionHelpers();
     if (token) {
       setIsLoading(true);
+      updateSessionToken(token);
       getSessionUserByToken(token.accessToken)
         .then((user) => {
           updateSessionStore({
@@ -22,15 +39,6 @@ const useLoadInitialAuthState = () => {
               token: token,
               currentOrganization: decodeJWTtoken(token.accessToken)
                 ?.organizationId,
-            },
-            cacheSession: (session) => {
-              setToken(session.token ?? null);
-            },
-            decodeSesionToken: (token) => {
-              return decodeJWTtoken(token.accessToken);
-            },
-            clearCache: () => {
-              setToken(null);
             },
           });
         })

@@ -32,7 +32,6 @@ httpClient.interceptors.response.use(
       originalRequest._retry = true; // Mark the request as retried to avoid infinite loops.
       const sessionStore = useSessionStore.getState();
       const { token } = sessionStore.session;
-
       if (token?.refreshToken) {
         try {
           // Attempt to refresh the token
@@ -40,7 +39,6 @@ httpClient.interceptors.response.use(
             `${httpClient.defaults.baseURL}/auth/refresh-token`,
             { headers: { "x-refresh-token": token.refreshToken } }
           );
-
           const newToken = refreshResponse.data;
           const decoded = sessionStore.decodeSesionToken?.(newToken); // decode new token nd stor in session
           if (decoded?.organizationId)
