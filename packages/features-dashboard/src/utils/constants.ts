@@ -4,6 +4,8 @@ export const RoutePaths = Object.freeze({
   RELATIONSHIP_TYPES_LISTING_SCREEN: "(dashboard)/relationship-types",
   AMENITIES_LISTING_SCREEN: "(dashboard)/amenities",
   CATEGORIES_LISTING_SCREEN: "(dashboard)/categories",
+  PRIVILEGES_LISTING_SCREEN: "(dashboard)/privileges",
+  ROLES_LISTING_SCREEN: "(dashboard)/roles",
 });
 
 export const dashboardMenuitems: MenuItem[] = [
@@ -47,13 +49,13 @@ export const dashboardMenuitems: MenuItem[] = [
   {
     name: "Roles",
     icon: { family: "FontAwesome6", name: "user-shield" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    route: RoutePaths.ROLES_LISTING_SCREEN,
     color: "magenta",
   },
   {
     name: "Priviledges",
     icon: { family: "MaterialCommunityIcons", name: "security" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    route: RoutePaths.PRIVILEGES_LISTING_SCREEN,
     color: "#09b9e8",
   },
   {

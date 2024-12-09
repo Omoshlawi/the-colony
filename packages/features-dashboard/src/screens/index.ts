@@ -3,3 +3,5 @@ export { default as AmenitiesScreen } from "./AmenitiesScreen";
 export { default as RelationshipTypesScreen } from "./RelationshipTypesScreen";
 export { default as CategoriesScreen } from "./CategoriesScreen";
 export { default as AttributeTypesScreen } from "./AttributeTypesScreen";
+export { default as RolesScreen } from "./RolesScreen";
+export { default as PrivilegesScreen } from "./PrivilegesScreen";
