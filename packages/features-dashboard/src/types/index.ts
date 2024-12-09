@@ -11,6 +11,7 @@ export type MenuItem = {
   name: string;
   icon: ExpoIcon;
   route: string;
+  color?: string;
 };
 
 export interface AttributeType {

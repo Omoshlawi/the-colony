@@ -23,7 +23,7 @@ const contexts = [
     prefix: "(settings)",
   },
   {
-    context: require.context("../dasboard/app/(dashboard)", true, /.*/),
+    context: require.context("../dashboard/app/(dashboard)", true, /.*/),
     prefix: "(dashboard)",
   },
 ];

@@ -24,7 +24,7 @@ export default function TabLayout() {
           name="dashboard"
           options={{
             href: currentOrganization ? "/(tabs)/dashboard" : null,
-            title: "Dashboard",
+            title: "Menu",
             tabBarIcon: ({ color, focused }) => (
               <StyledTabBarIcon
                 name={focused ? "view-dashboard" : "view-dashboard-outline"}

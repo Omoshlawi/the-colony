@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React, { FC } from "react";
 import { MenuItem } from "../types";
-import { Box, useTheme, Text } from "@colony/core-theme";
+import { Box, useTheme, Text, Color } from "@colony/core-theme";
 import { ExpoIconComponent } from "@colony/core-components";
 import { useRouter } from "expo-router";
 
@@ -12,6 +12,7 @@ type DashboardMenuItemProps = {
 const DashboardMenuItem: FC<DashboardMenuItemProps> = ({ item }) => {
   const router = useRouter();
   const { colors, spacing } = useTheme();
+  const colors_ = Color(item.color ?? colors.primary);
   return (
     <TouchableOpacity
       style={[styles.clickable, { margin: spacing.s }]}
@@ -23,15 +24,27 @@ const DashboardMenuItem: FC<DashboardMenuItemProps> = ({ item }) => {
         alignItems={"center"}
         justifyContent={"center"}
         borderRadius={"medium"}
-        borderWidth={1}
-        borderColor={"outline"}
+        // borderWidth={1}
+        // borderColor={"outline"}
         padding={"m"}
         gap={"m"}
         width={"100%"}
         height={"100%"}
+        style={{
+          backgroundColor: colors_.alpha(0.07).toString(),
+          // borderColor: colors_.alpha(0.07).toString(),
+        }}
       >
-        <ExpoIconComponent {...item.icon} color={colors.icon} />
-        <Text color={"icon"} variant={"bodyLarge"} fontWeight={"700"}>
+        <ExpoIconComponent
+          {...item.icon}
+          color={colors_.toString()}
+          size={50}
+        />
+        <Text
+          color={"icon"}
+          variant={"bodyLarge"}
+          style={{ color: colors_.fade(0.4).darken(0.5).toString() }}
+        >
           {item.name}
         </Text>
       </Box>

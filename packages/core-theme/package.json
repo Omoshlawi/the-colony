@@ -7,18 +7,20 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@colony/core-global": "*",
     "@expo/vector-icons": "^14.0.2",
     "@shopify/restyle": "^2.4.4",
+    "color": "^4.2.3",
     "expo": "~52.0.9",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.2",
     "react-native-media-query": "^2.0.1",
-    "react-native-svg": "15.9.0",
-    "@colony/core-global": "*"
+    "react-native-svg": "15.9.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@types/color": "^4.2.0",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
     "@types/react-test-renderer": "^18.3.0",
