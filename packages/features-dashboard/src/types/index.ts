@@ -4,7 +4,11 @@ import {
   AmenitySchema,
   AttributeTypeSchema,
   CategorySchema,
+  PrivilegeSchema,
   RelationshipTypeSchema,
+  ResourceSchema,
+  RolePrivilegeSchema,
+  RoleSchema,
 } from "../utils/validation";
 
 export type MenuItem = {
@@ -59,7 +63,29 @@ export interface Amenity {
   updatedAt: string;
 }
 
+export interface Resource {
+  id: string;
+  name: string;
+  description: string;
+  dataPoints: string[];
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+}
+
+export interface Role {
+  id: string;
+}
+
+export interface Privilege {
+  id: string;
+}
+
 export type AmenityFormData = z.infer<typeof AmenitySchema>;
 export type CategoryFormData = z.infer<typeof CategorySchema>;
 export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;
 export type AttributeTypeFormData = z.infer<typeof AttributeTypeSchema>;
+export type PrivilegeFormData = z.infer<typeof PrivilegeSchema>;
+export type RoleFormData = z.infer<typeof RoleSchema>;
+export type RolePrivilegeFormData = z.infer<typeof RolePrivilegeSchema>;
+export type ResourceFormData = z.infer<typeof ResourceSchema>;

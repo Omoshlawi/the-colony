@@ -104,4 +104,10 @@ export const dashboardMenuitems: MenuItem[] = [
     route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
     color: "#c1ff72",
   },
+  {
+    name: "Resources",
+    icon: { family: "FontAwesome", name: "server" },
+    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    color: "#38b6ff",
+  },
 ];
