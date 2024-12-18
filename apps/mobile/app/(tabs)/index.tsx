@@ -41,7 +41,12 @@ export default function HomeScreen() {
         maxSelections={2}
         valueExtractor={({ value }) => value}
         placeholderText="Seach..."
-        onValueChange={(value) => {}}
+        onValueChange={(value) => {
+          alert(JSON.stringify(value));
+        }}
+        onSelectItems={(value) => {
+          alert(JSON.stringify(value));
+        }}
       />
       {/* <AccountWidget />
       <UpcomingPaymentWidget /> */}

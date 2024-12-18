@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { Privilege, PrivilegeFormData } from "../types";
 import usePrivilegeApi from "../hooks/usePrivilegesApi";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -8,11 +8,13 @@ import { PrivilegeSchema } from "../utils/validation";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
   ExpoIconComponent,
+  SeachableDropDown,
   showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { useResources } from "../hooks";
 
 type Props = {
   privilege?: Privilege;
@@ -20,6 +22,7 @@ type Props = {
 };
 const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
   const { addPrivilege, updatePrivilege } = usePrivilegeApi();
+  const { error, isLoading, resources } = useResources();
   const form = useForm<PrivilegeFormData>({
     defaultValues: {
       name: "",
@@ -55,6 +58,15 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
         );
     }
   };
+
+  const observableSelectedResouseId = form.watch("resourceId");
+  const selectedResourseDatapoints =
+    resources.find((r) => r.id === observableSelectedResouseId)?.dataPoints ??
+    [];
+
+  useEffect(() => {
+    form.resetField("permitedResourceDataPoints");
+  }, [observableSelectedResouseId]);
   return (
     <Box width={"100%"} gap={"l"} p={"m"}>
       <Controller
@@ -88,6 +100,50 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
             placeholder="Enter privilege description"
             label="Description"
             error={error?.message}
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="resourceId"
+        render={({
+          field: { onChange, value, disabled, onBlur, ref },
+          fieldState: { error },
+        }) => (
+          <SeachableDropDown
+            data={resources}
+            label="Resource"
+            initialValue={resources.find((r) => r.id === value)}
+            keyExtractor={({ id }) => id}
+            labelExtractor={({ name }) => name}
+            valueExtractor={({ id }) => id}
+            placeholderText="Select resource"
+            onValueChange={onChange}
+            title="Select resource"
+          />
+        )}
+      />
+      <Text>
+        {JSON.stringify(form.watch("permitedResourceDataPoints"), null, 2)}
+      </Text>
+      <Controller
+        control={form.control}
+        name="permitedResourceDataPoints"
+        render={({
+          field: { onChange, value, disabled, onBlur, ref },
+          fieldState: { error },
+        }) => (
+          <SeachableDropDown
+            data={selectedResourseDatapoints}
+            multiple
+            label="Resource"
+            initialValue={value}
+            keyExtractor={(field) => field}
+            labelExtractor={(field) => field}
+            valueExtractor={(field) => field}
+            placeholderText="Select resource datapoints"
+            onValueChange={onChange}
+            title="Select resource datapoints"
           />
         )}
       />

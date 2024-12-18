@@ -1,5 +1,11 @@
 import { useTheme, Text } from "@colony/core-theme";
-import React, { useState, useCallback, useRef, useMemo } from "react";
+import React, {
+  useState,
+  useCallback,
+  useRef,
+  useMemo,
+  useEffect,
+} from "react";
 import {
   View,
   Modal,
@@ -13,11 +19,8 @@ import { StyledInput } from "../StyledInput";
 import { ExpoIconComponent } from "../ExpoIcons";
 import { StyledButton } from "../StyledButton";
 
-// Generic type for items
-type Item = Record<string, any>;
-
 // Configuration types
-interface DropdownProps<T extends Item, S> {
+interface DropdownProps<T, S> {
   // Data and extraction props
   data?: T[];
   initialValue?: T | T[];
@@ -32,6 +35,7 @@ interface DropdownProps<T extends Item, S> {
   placeholderText?: string;
   searchPlaceholder?: string;
   label?: string;
+  title?: string;
 
   // Async search function
   asyncSearchFunction?: (query: string) => Promise<T[]>;
@@ -49,13 +53,14 @@ interface DropdownProps<T extends Item, S> {
   maxSelections?: number;
 }
 
-function SearchableDropdown<T extends Item, S>({
+function SearchableDropdown<T, S>({
   data = [],
   initialValue,
   label,
-  keyExtractor = (item: T) => (item as any).id,
-  labelExtractor = (item: T) => (item as any).label,
-  valueExtractor = (item: T) => (item as any).value,
+  title,
+  keyExtractor = (item: T) => JSON.stringify(item) as any,
+  labelExtractor = (item: T) => JSON.stringify(item) as any,
+  valueExtractor = (item: T) => JSON.stringify(item) as any,
   multiple = false,
 
   placeholderText = "Select an item",
@@ -74,17 +79,13 @@ function SearchableDropdown<T extends Item, S>({
 }: DropdownProps<T, S>) {
   const theme = useTheme();
   // Determine initial selected items based on multiple flag
-  const getInitialSelectedItems = (): T | T[] | null => {
+  const getInitialSelectedItems = (value?: T | T[] | null): T | T[] | null => {
     if (multiple) {
       // For multiple mode, ensure initialValue is an array or convert to array
-      return initialValue
-        ? Array.isArray(initialValue)
-          ? initialValue
-          : [initialValue]
-        : [];
+      return value ? (Array.isArray(value) ? value : [value]) : [];
     } else {
       // For single mode, ensure initialValue is a single item or null
-      return initialValue && !Array.isArray(initialValue) ? initialValue : null;
+      return value && !Array.isArray(value) ? value : null;
     }
   };
 
@@ -93,6 +94,11 @@ function SearchableDropdown<T extends Item, S>({
   const [selectedItems, setSelectedItems] = useState<T | T[] | null>(
     getInitialSelectedItems()
   );
+
+  // update selectedItems when initialValue changes
+  useEffect(() => {
+    setSelectedItems(getInitialSelectedItems(initialValue));
+  }, [initialValue]);
 
   // Async search state
   const [isSearching, setIsSearching] = useState(false);
@@ -311,6 +317,12 @@ function SearchableDropdown<T extends Item, S>({
               },
             ]}
           >
+            {/* Dialog title */}
+            {title && (
+              <Text color={"outline"} variant={"bodyLarge"} fontWeight={"700"}>
+                {title}
+              </Text>
+            )}
             {/* Search Input */}
             <StyledInput
               placeholder={searchPlaceholder}
