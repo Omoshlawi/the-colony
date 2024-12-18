@@ -8,7 +8,6 @@ const IconSchema = z.object({
 // Amenity
 export const AmenitySchema = z.object({
   name: z.string().min(1, "Required"),
-  organizationId: z.string().uuid().optional(),
   icon: IconSchema,
 });
 
@@ -21,7 +20,6 @@ export const OrganixationSchema = z.object({
 // Category
 export const CategorySchema = z.object({
   name: z.string().min(1, "Required"),
-  organizationId: z.string().uuid().optional(),
   icon: IconSchema,
 });
 
@@ -117,7 +115,6 @@ export const PropertyAttributeSchema = z.object({
 export const PrivilegeSchema = z.object({
   name: z.string().min(1, "required"),
   description: z.string().min(1, "required"),
-  organizationId: z.string().uuid("invalid organization"),
   resourceId: z.string().uuid("invalid resource"),
   permitedResourceDataPoints: z.array(z.string().min(1, "required")),
   operations: z.array(z.enum(["Create", "Read", "Update", "Delete"])),
@@ -137,6 +134,5 @@ export const RolePrivilegeSchema = z.object({
 export const RoleSchema = z.object({
   name: z.string().min(1, "required"),
   description: z.string().min(1, "required"),
-  organizationId: z.string().uuid("invalid organization"),
   privileges: z.array(z.string().uuid()),
 });

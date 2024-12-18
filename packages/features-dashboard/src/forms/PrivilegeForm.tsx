@@ -1,20 +1,20 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC, useEffect } from "react";
-import { Privilege, PrivilegeFormData } from "../types";
-import usePrivilegeApi from "../hooks/usePrivilegesApi";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { PrivilegeSchema } from "../utils/validation";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
-  ExpoIconComponent,
   SeachableDropDown,
   showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC, useEffect } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
 import { useResources } from "../hooks";
+import usePrivilegeApi from "../hooks/usePrivilegesApi";
+import { Privilege, PrivilegeFormData } from "../types";
+import { PrivilegeSchema } from "../utils/validation";
+import { InputSkeleton } from "@colony/core-components/src/components/StyledInput";
 
 type Props = {
   privilege?: Privilege;
@@ -67,6 +67,7 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
   useEffect(() => {
     form.resetField("permitedResourceDataPoints");
   }, [observableSelectedResouseId]);
+
   return (
     <Box width={"100%"} gap={"l"} p={"m"}>
       <Controller
@@ -103,29 +104,30 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
           />
         )}
       />
-      <Controller
-        control={form.control}
-        name="resourceId"
-        render={({
-          field: { onChange, value, disabled, onBlur, ref },
-          fieldState: { error },
-        }) => (
-          <SeachableDropDown
-            data={resources}
-            label="Resource"
-            initialValue={resources.find((r) => r.id === value)}
-            keyExtractor={({ id }) => id}
-            labelExtractor={({ name }) => name}
-            valueExtractor={({ id }) => id}
-            placeholderText="Select resource"
-            onValueChange={onChange}
-            title="Select resource"
-          />
-        )}
-      />
-      <Text>
-        {JSON.stringify(form.watch("permitedResourceDataPoints"), null, 2)}
-      </Text>
+      {isLoading ? (
+        <InputSkeleton />
+      ) : (
+        <Controller
+          control={form.control}
+          name="resourceId"
+          render={({
+            field: { onChange, value, disabled, onBlur, ref },
+            fieldState: { error },
+          }) => (
+            <SeachableDropDown
+              data={resources}
+              label="Resource"
+              initialValue={resources.find((r) => r.id === value)}
+              keyExtractor={({ id }) => id}
+              labelExtractor={({ name }) => name}
+              valueExtractor={({ id }) => id}
+              placeholderText="Select resource"
+              onValueChange={onChange}
+              title="Select resource"
+            />
+          )}
+        />
+      )}
       <Controller
         control={form.control}
         name="permitedResourceDataPoints"
@@ -144,6 +146,27 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
             placeholderText="Select resource datapoints"
             onValueChange={onChange}
             title="Select resource datapoints"
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="operations"
+        render={({
+          field: { onChange, value, disabled, onBlur, ref },
+          fieldState: { error },
+        }) => (
+          <SeachableDropDown
+            data={["Create", "Read", "Update", "Delete"]}
+            multiple
+            label="Operations"
+            initialValue={value}
+            keyExtractor={(field) => field}
+            labelExtractor={(field) => field}
+            valueExtractor={(field) => field}
+            placeholderText="Select  operations"
+            onValueChange={onChange}
+            title="Select operations"
           />
         )}
       />

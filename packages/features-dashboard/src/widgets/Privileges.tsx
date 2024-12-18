@@ -41,13 +41,13 @@ const Privileges = () => {
       renderItem={({ item }) => (
         <ListTile
           // onPress={() => handleLaunchBottomsheet(item)}
-          title={item.id}
-          subtitle={item.id}
+          title={item.name}
+          subtitle={item.description}
           leading={
             <ExpoIconComponent
-              family="MaterialCommunityIcons"
-              name="chevron-right"
+              {...{ family: "MaterialCommunityIcons", name: "security" }}
               size={24}
+              color="#09b9e8"
             />
           }
           trailing={

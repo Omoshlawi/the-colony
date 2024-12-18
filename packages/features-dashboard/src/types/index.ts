@@ -73,11 +73,34 @@ export interface Resource {
   voided: boolean;
 }
 
-export interface Role {
+export type Operation = "Create" | "Read" | "Update" | "Delete";
+export interface Privilege {
   id: string;
+  name: string;
+  description: string;
+  createdBy: string;
+  organizationId: string;
+  resourceId: string;
+  permitedResourceDataPoints: string[];
+  operations: Operation[];
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  resource?: Resource;
+  organization?: Organization;
 }
 
-export interface Privilege {
+export interface Organization {
+  id: string;
+  name: string;
+  description: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+}
+
+export interface Role {
   id: string;
 }
 

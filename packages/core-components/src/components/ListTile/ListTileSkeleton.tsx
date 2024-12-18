@@ -1,36 +1,33 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { useTheme } from "@colony/core-theme";
-import { SkeletonLoader } from "../SkeletonLoader";
+import { Skeleton } from "../SkeletonLoader";
 
 const ListTileSkeleton = () => {
   const { colors, borderRadii } = useTheme();
   return (
-    <SkeletonLoader>
-      <View
-        style={[
-          styles.skeletonItem,
-          {
-            backgroundColor: colors.skeleton,
-            borderRadius: borderRadii.medium,
-          },
-        ]}
-      >
-        <View style={[styles.avatar, { backgroundColor: colors.onSkeleton }]} />
-        <View style={styles.textWrapper}>
-          <View
-            style={[styles.textLine, { backgroundColor: colors.onSkeleton }]}
-          />
-          <View
-            style={[
-              styles.textLine,
-              styles.shortLine,
-              { backgroundColor: colors.onSkeleton },
-            ]}
-          />
-        </View>
+    <View
+      style={[
+        styles.skeletonItem,
+        {
+          backgroundColor: colors.onSkeleton,
+          borderRadius: borderRadii.medium,
+        },
+      ]}
+    >
+      <Skeleton style={styles.avatar} gradientOpacity={0.5} />
+      <View style={styles.textWrapper}>
+        <Skeleton
+          style={styles.textLine}
+          shimmerColor={colors.onSkeleton}
+          gradientOpacity={0.5}
+        />
+        <Skeleton
+          style={[styles.textLine, styles.shortLine]}
+          gradientOpacity={0.5}
+        />
       </View>
-    </SkeletonLoader>
+    </View>
   );
 };
 
