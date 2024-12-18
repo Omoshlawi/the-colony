@@ -102,6 +102,14 @@ export interface Organization {
 
 export interface Role {
   id: string;
+  name: string;
+  description: string;
+  createdBy: string;
+  organizationId?: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  organization?: Organization;
 }
 
 export type AmenityFormData = z.infer<typeof AmenitySchema>;

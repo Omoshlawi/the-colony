@@ -1,5 +1,6 @@
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
+  InputSkeleton,
   SeachableDropDown,
   showSnackbar,
   StyledButton,
@@ -14,7 +15,6 @@ import { useResources } from "../hooks";
 import usePrivilegeApi from "../hooks/usePrivilegesApi";
 import { Privilege, PrivilegeFormData } from "../types";
 import { PrivilegeSchema } from "../utils/validation";
-import { InputSkeleton } from "@colony/core-components/src/components/StyledInput";
 
 type Props = {
   privilege?: Privilege;

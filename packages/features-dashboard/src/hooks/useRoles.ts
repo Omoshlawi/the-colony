@@ -6,7 +6,7 @@ const useRoles = () => {
   const { data, error, isLoading, mutate } =
     useApi<HiveFetchResponse<{ results: Role[] }>>(path);
   return {
-    resources: data?.data?.results ?? [],
+    roles: data?.data?.results ?? [],
     isLoading,
     error,
     mutate,
