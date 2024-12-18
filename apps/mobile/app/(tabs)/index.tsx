@@ -1,14 +1,10 @@
 import {
   ExpoIcon,
-  ExpoIconPicker,
-  getExpoIconFamiliesNames,
-  getExpoIcons,
+  SeachableDropDown,
   StyledPageLayout,
   StyledText,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
-import { AccountWidget } from "@colony/features-accounts";
-import { UpcomingPaymentWidget } from "@colony/features-payments";
 import { Redirect } from "expo-router";
 import { useState } from "react";
 import { LogBox, StyleSheet } from "react-native";
@@ -26,17 +22,26 @@ export default function HomeScreen() {
   return (
     <StyledPageLayout>
       <StyledText style={styles.title}>Welcome to Micro</StyledText>
-      <ExpoIconPicker
-        onSearchIcon={async (search, category) => {
-          return getExpoIcons([category as any]).filter((icon) =>
-            icon.name.toLowerCase().includes(search?.toLowerCase() ?? "")
-          );
+      <SeachableDropDown
+        // data={Array.from({ length: 100 }).map((_, i) => ({
+        //   label: i.toString(),
+        //   value: i.toString(),
+        // }))}
+        asyncSearchFunction={async () => {
+          return Array.from({ length: 100 }).map((_, i) => ({
+            label: i.toString(),
+            value: i.toString(),
+          }));
         }}
-        getIconFamilies={async () => getExpoIconFamiliesNames()}
-        selectedIconFamily={iconFamily}
-        onSelectIconFamily={seticonFamily}
-        onSelectIcon={setIcon}
-        selectedIcon={icon}
+        label="Test"
+        initialValue={{ label: "1", value: "2" }}
+        keyExtractor={({ value }) => value}
+        multiple
+        labelExtractor={({ label }) => label}
+        maxSelections={2}
+        valueExtractor={({ value }) => value}
+        placeholderText="Seach..."
+        onValueChange={(value) => {}}
       />
       {/* <AccountWidget />
       <UpcomingPaymentWidget /> */}

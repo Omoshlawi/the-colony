@@ -1,14 +1,33 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { AppBar, StyledPageLayout } from "@colony/core-components";
+import {
+  AppBar,
+  ExpoIconComponent,
+  showModal,
+  StyledPageLayout,
+} from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { Roles } from "../widgets";
+import { RolesForm } from "../forms";
 
 const RolesScreen = () => {
+  const handleAdd = () => {
+    const dispose = showModal(<RolesForm onSuccess={() => dispose()} />, {
+      title: "Add Role",
+    });
+  };
   return (
     <StyledPageLayout>
-      <AppBar title="Roles" />
+      <AppBar
+        title="Roles"
+        actions={
+          <TouchableOpacity activeOpacity={0.5} onPress={handleAdd}>
+            <ExpoIconComponent family="Entypo" name="add-to-list" />
+          </TouchableOpacity>
+        }
+      />
       <Box flex={1}>
-
+        <Roles />
       </Box>
     </StyledPageLayout>
   );
