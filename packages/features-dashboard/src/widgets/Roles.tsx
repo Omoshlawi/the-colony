@@ -3,10 +3,13 @@ import React from "react";
 import { useRoles } from "../hooks";
 import { Box } from "@colony/core-theme";
 import {
+  EmptyState,
+  ErrorState,
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
 } from "@colony/core-components";
+import { handleApiErrors } from "@colony/core-api";
 
 const Roles = () => {
   const { roles, error, isLoading } = useRoles();
@@ -20,6 +23,16 @@ const Roles = () => {
       </Box>
     );
   }
+
+  if (error)
+    return (
+      <ErrorState
+        message={`${error?.message}`}
+        detail={handleApiErrors(error)?.detail}
+      />
+    );
+
+  if (!roles.length) return <EmptyState message="No Roles" />;
 
   return (
     <FlatList

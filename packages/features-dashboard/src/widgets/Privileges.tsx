@@ -3,6 +3,8 @@ import React from "react";
 import { usePrivileges } from "../hooks";
 import { Privilege } from "../types";
 import {
+  EmptyState,
+  ErrorState,
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
@@ -12,6 +14,7 @@ import {
 } from "@colony/core-components";
 import { PrivilegeForm } from "../forms";
 import { Box } from "@colony/core-theme";
+import { handleApiErrors } from "@colony/core-api";
 
 const Privileges = () => {
   const { privileges, error, isLoading } = usePrivileges();
@@ -32,6 +35,16 @@ const Privileges = () => {
       </Box>
     );
   }
+
+  if (error)
+    return (
+      <ErrorState
+        message={`${error?.message}`}
+        detail={handleApiErrors(error)?.detail}
+      />
+    );
+
+  if (!privileges.length) return <EmptyState message="No privileges" />;
 
   return (
     <FlatList
@@ -60,6 +73,7 @@ const Privileges = () => {
           borderBottom
         />
       )}
+      ListEmptyComponent={EmptyState}
     />
   );
 };

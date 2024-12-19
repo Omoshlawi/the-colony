@@ -10,6 +10,8 @@ import React, { useState } from "react";
 import { useMyOrganizationApi, useMyOrganizations } from "../hooks";
 import { OrganizationForm } from "../forms";
 import {
+  EmptyState,
+  ErrorState,
   ExpoIconComponent,
   ListTile,
   showModal,
@@ -20,6 +22,7 @@ import {
 import { Organization } from "../types";
 import { useSession } from "@colony/core-global";
 import { Box } from "@colony/core-theme";
+import { handleApiErrors } from "@colony/core-api";
 
 export const MyOrganizations = () => {
   const { currentOrganization } = useSession();
@@ -117,6 +120,17 @@ export const MyOrganizations = () => {
       { title: `${org.name} actions` }
     );
   };
+
+  if (error)
+    return (
+      <ErrorState
+        message={`${error?.message}`}
+        detail={handleApiErrors(error)?.detail}
+      />
+    );
+
+  if (!organizationsMemberships.length)
+    return <EmptyState message="No organizations" />;
 
   return (
     <FlatList
