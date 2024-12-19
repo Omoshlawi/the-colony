@@ -25,9 +25,9 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
   const { error, isLoading, privileges } = usePrivileges();
   const form = useForm<RoleFormData>({
     defaultValues: {
-      name: "",
-      description: "",
-      privileges: [],
+      name: role?.name ?? "",
+      description: role?.description ?? "",
+      privileges: role?.privileges?.map(({ privilege: { id } }) => id) ?? [],
     },
     resolver: zodResolver(RoleSchema),
   });

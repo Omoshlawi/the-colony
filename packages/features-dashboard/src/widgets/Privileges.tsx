@@ -3,6 +3,7 @@ import React from "react";
 import { usePrivileges } from "../hooks";
 import { Privilege } from "../types";
 import {
+  ActionsBottomSheet,
   EmptyState,
   ErrorState,
   ExpoIconComponent,
@@ -52,26 +53,34 @@ const Privileges = () => {
       data={privileges}
       keyExtractor={(amenity) => amenity.id}
       renderItem={({ item }) => (
-        <ListTile
-          // onPress={() => handleLaunchBottomsheet(item)}
-          title={item.name}
-          subtitle={item.description}
-          leading={
-            <ExpoIconComponent
-              {...{ family: "MaterialCommunityIcons", name: "security" }}
-              size={24}
-              color="#09b9e8"
-            />
-          }
-          trailing={
-            <ExpoIconComponent
-              family="MaterialCommunityIcons"
-              name="chevron-right"
-              size={24}
-            />
-          }
-          borderBottom
-        />
+        <ActionsBottomSheet
+          title={`${item.name} Actions`}
+          formTitle="Update Privilege"
+          renderForm={(dispose) => (
+            <PrivilegeForm privilege={item} onSuccess={dispose} />
+          )}
+        >
+          <ListTile
+            disabled
+            title={item.name}
+            subtitle={item.description}
+            leading={
+              <ExpoIconComponent
+                {...{ family: "MaterialCommunityIcons", name: "security" }}
+                size={24}
+                color="#09b9e8"
+              />
+            }
+            trailing={
+              <ExpoIconComponent
+                family="MaterialCommunityIcons"
+                name="chevron-right"
+                size={24}
+              />
+            }
+            borderBottom
+          />
+        </ActionsBottomSheet>
       )}
       ListEmptyComponent={EmptyState}
     />

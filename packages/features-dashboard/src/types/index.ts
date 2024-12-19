@@ -100,6 +100,16 @@ export interface Organization {
   voided: boolean;
 }
 
+export interface RolePrivilege {
+  id: string;
+  privilegeId: string;
+  roleId: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  privilege: Privilege;
+}
+
 export interface Role {
   id: string;
   name: string;
@@ -110,6 +120,7 @@ export interface Role {
   updatedAt: string;
   voided: boolean;
   organization?: Organization;
+  privileges?: Array<RolePrivilege>;
 }
 
 export type AmenityFormData = z.infer<typeof AmenitySchema>;

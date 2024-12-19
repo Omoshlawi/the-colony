@@ -1,47 +1,72 @@
-import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React, { FC, PropsWithChildren } from "react";
-import { showModalBottomSheet } from "../Overlays";
+import { showModal, showModalBottomSheet } from "../Overlays";
 import { StyledButton } from "../StyledButton";
 import { Box } from "@colony/core-theme";
 
 type Props = PropsWithChildren<{
-  onUpdate?: () => void;
   onDelete?: () => void;
   title: string;
+  renderForm?: (onDispose: () => void) => React.ReactElement;
+  formTitle?: string;
 }>;
 
-const ActionsBottomSheet: FC<Props> = ({
+const ActionsBottomSheet: React.FC<Props> = ({
   onDelete,
-  onUpdate,
   children,
   title,
+  renderForm,
+  formTitle,
 }) => {
   const handleLaunchBottomsheet = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
-            title="Update"
-            variant="outline"
-            onPress={() => {
-              dispose();
-              onUpdate?.();
-            }}
-          />
-          <StyledButton
-            title="Delete"
-            variant="outline"
-            onPress={() => {
-              dispose();
-              onDelete?.();
-            }}
-          />
+          {typeof renderForm === "function" && (
+            <StyledButton
+              title="Update"
+              variant="outline"
+              onPress={() => {
+                dispose();
+                handleUpdate?.();
+              }}
+            />
+          )}
+          {typeof onDelete === "function" && (
+            <StyledButton
+              title="Delete"
+              variant="outline"
+              onPress={() => {
+                dispose();
+                onDelete?.();
+              }}
+            />
+          )}
         </Box>
       </ScrollView>,
       { title }
     );
   };
-  return <Pressable onPress={handleLaunchBottomsheet}>{children}</Pressable>;
+
+  const handleUpdate = () => {
+    const dispose = showModal(
+      renderForm?.(() => dispose()),
+      { title: formTitle }
+    );
+  };
+
+  return (
+    <TouchableOpacity onPress={handleLaunchBottomsheet}>
+      {children}
+    </TouchableOpacity>
+  );
 };
 
 export default ActionsBottomSheet;

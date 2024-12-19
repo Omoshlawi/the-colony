@@ -3,6 +3,7 @@ import React from "react";
 import { useRoles } from "../hooks";
 import { Box } from "@colony/core-theme";
 import {
+  ActionsBottomSheet,
   EmptyState,
   ErrorState,
   ExpoIconComponent,
@@ -10,6 +11,7 @@ import {
   ListTileSkeleton,
 } from "@colony/core-components";
 import { handleApiErrors } from "@colony/core-api";
+import { RolesForm } from "../forms";
 
 const Roles = () => {
   const { roles, error, isLoading } = useRoles();
@@ -40,26 +42,36 @@ const Roles = () => {
       data={roles}
       keyExtractor={(amenity) => amenity.id}
       renderItem={({ item }) => (
-        <ListTile
-          // onPress={() => handleLaunchBottomsheet(item)}
-          title={item.name}
-          subtitle={item.description}
-          leading={
-            <ExpoIconComponent
-              {...{ family: "FontAwesome6", name: "user-shield" }}
-              size={24}
-              color="magenta"
-            />
-          }
-          trailing={
-            <ExpoIconComponent
-              family="MaterialCommunityIcons"
-              name="chevron-right"
-              size={24}
-            />
-          }
-          borderBottom
-        />
+        <ActionsBottomSheet
+          // onDelete={() => {}}
+          title={`${item.name} actions`}
+          formTitle="Update Role"
+          renderForm={(dispose) => (
+            <RolesForm role={item} onSuccess={dispose} />
+          )}
+        >
+          <ListTile
+            // onPress={() => handleLaunchBottomsheet(item)}
+            title={item.name}
+            disabled
+            subtitle={item.description}
+            leading={
+              <ExpoIconComponent
+                {...{ family: "FontAwesome6", name: "user-shield" }}
+                size={24}
+                color="magenta"
+              />
+            }
+            trailing={
+              <ExpoIconComponent
+                family="MaterialCommunityIcons"
+                name="chevron-right"
+                size={24}
+              />
+            }
+            borderBottom
+          />
+        </ActionsBottomSheet>
       )}
     />
   );

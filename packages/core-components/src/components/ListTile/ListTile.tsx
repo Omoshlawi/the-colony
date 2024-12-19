@@ -9,6 +9,7 @@ type ListTileProps = {
   leading?: ReactNode;
   borderBottom?: boolean;
   onPress?: () => void;
+  disabled?: boolean;
 };
 
 const ListTile: FC<ListTileProps> = ({
@@ -18,11 +19,13 @@ const ListTile: FC<ListTileProps> = ({
   onPress,
   subtitle,
   trailing,
+  disabled = false,
 }) => {
   const { colors, spacing } = useTheme();
   return (
     <Pressable
       onPress={onPress}
+      disabled={disabled}
       style={[
         borderBottom
           ? { ...styles.borderBottom, borderColor: colors.disabledColor }

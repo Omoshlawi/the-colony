@@ -1,8 +1,9 @@
-import { HiveFetchResponse, useApi } from "@colony/core-api";
+import { constructUrl, HiveFetchResponse, useApi } from "@colony/core-api";
 import { Privilege } from "../types";
 
 const usePrivileges = () => {
-  const path = "/privileges";
+  // const customeRep = "custom:include(privileges)";
+  const path = constructUrl("/privileges", { v: undefined });
   const { data, error, isLoading, mutate } =
     useApi<HiveFetchResponse<{ results: Privilege[] }>>(path);
   return {

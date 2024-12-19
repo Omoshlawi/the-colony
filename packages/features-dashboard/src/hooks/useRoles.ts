@@ -1,8 +1,10 @@
-import { HiveFetchResponse, useApi } from "@colony/core-api";
+import { constructUrl, HiveFetchResponse, useApi } from "@colony/core-api";
 import { Role } from "../types";
 
 const useRoles = () => {
-  const path = "/roles";
+  const path = constructUrl("/roles", {
+    v: "custom:include(privileges:include(privilege))",
+  });
   const { data, error, isLoading, mutate } =
     useApi<HiveFetchResponse<{ results: Role[] }>>(path);
   return {

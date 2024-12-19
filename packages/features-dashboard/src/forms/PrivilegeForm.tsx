@@ -25,11 +25,11 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
   const { error, isLoading, resources } = useResources();
   const form = useForm<PrivilegeFormData>({
     defaultValues: {
-      name: "",
-      operations: [],
-      description: "",
-      resourceId: "",
-      permitedResourceDataPoints: [],
+      name: privilege?.name ?? "",
+      operations: privilege?.operations ?? [],
+      description: privilege?.description ?? "",
+      resourceId: privilege?.resourceId ?? "",
+      permitedResourceDataPoints: privilege?.permitedResourceDataPoints ?? [],
     },
     resolver: zodResolver(PrivilegeSchema),
   });
