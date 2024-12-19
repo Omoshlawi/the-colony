@@ -6,6 +6,7 @@ export const RoutePaths = Object.freeze({
   CATEGORIES_LISTING_SCREEN: "(dashboard)/categories",
   PRIVILEGES_LISTING_SCREEN: "(dashboard)/privileges",
   ROLES_LISTING_SCREEN: "(dashboard)/roles",
+  STAFF_ROLES_SCREEN: "(dashboard)/staff",
 });
 
 export const dashboardMenuitems: MenuItem[] = [
@@ -41,10 +42,10 @@ export const dashboardMenuitems: MenuItem[] = [
   },
 
   {
-    name: "Staff",
+    name: "Unknown",
     icon: { family: "FontAwesome5", name: "users" },
     route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
-    color: "orange",
+    color: "turquoise",
   },
   {
     name: "Roles",
@@ -57,6 +58,12 @@ export const dashboardMenuitems: MenuItem[] = [
     icon: { family: "MaterialCommunityIcons", name: "security" },
     route: RoutePaths.PRIVILEGES_LISTING_SCREEN,
     color: "#09b9e8",
+  },
+  {
+    name: "Staff",
+    icon: { family: "FontAwesome6", name: "users-gear" },
+    route: RoutePaths.STAFF_ROLES_SCREEN,
+    color: "orange",
   },
   {
     name: "Address book",
@@ -82,12 +89,7 @@ export const dashboardMenuitems: MenuItem[] = [
     route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
     color: "skyblue",
   },
-  {
-    name: "Staff roles",
-    icon: { family: "FontAwesome6", name: "users-gear" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
-    color: "turquoise",
-  },
+
   {
     name: "Listings",
     icon: { family: "FontAwesome6", name: "building-circle-check" },

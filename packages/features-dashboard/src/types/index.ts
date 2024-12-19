@@ -123,6 +123,34 @@ export interface Role {
   privileges?: Array<RolePrivilege>;
 }
 
+export interface OrganizationMembership {
+  id: string;
+  organizationId: string;
+  memberUserId: string;
+  memberUser: MemberUser;
+  isAdmin: boolean;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  organization: Organization;
+  membershipRoles: any[];
+}
+
+export type MemberUser = {
+  id: string;
+  username: string;
+  person: {
+    id: string;
+    firstName: any;
+    lastName: any;
+    surname: any;
+    phoneNumber: string;
+    gender: string;
+    email: string;
+    name: any;
+  };
+};
+
 export type AmenityFormData = z.infer<typeof AmenitySchema>;
 export type CategoryFormData = z.infer<typeof CategorySchema>;
 export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;

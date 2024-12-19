@@ -5,3 +5,4 @@ export { default as CategoriesScreen } from "./CategoriesScreen";
 export { default as AttributeTypesScreen } from "./AttributeTypesScreen";
 export { default as RolesScreen } from "./RolesScreen";
 export { default as PrivilegesScreen } from "./PrivilegesScreen";
+export { default as StaffScreen } from "./StaffScreen";

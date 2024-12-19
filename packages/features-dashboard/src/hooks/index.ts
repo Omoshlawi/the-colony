@@ -11,3 +11,4 @@ export { default as useRoles } from "./useRoles";
 export { default as useRolesApi } from "./useRolesApi";
 export { default as usePrivileges } from "./usePrivileges";
 export { default as usePrivilegesApi } from "./usePrivilegesApi";
+export * from "./useStaff";
