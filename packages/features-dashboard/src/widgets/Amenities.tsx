@@ -1,4 +1,6 @@
 import {
+  EmptyState,
+  ErrorState,
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
@@ -56,6 +58,14 @@ const Amenities = () => {
         ))}
       </Box>
     );
+  }
+
+  if (error) {
+    return <ErrorState error={error} />;
+  }
+
+  if (amenities.length === 0) {
+    return <EmptyState message="No amenities" />;
   }
   return (
     <View style={styles.scrollable}>

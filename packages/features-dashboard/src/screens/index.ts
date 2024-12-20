@@ -6,3 +6,4 @@ export { default as AttributeTypesScreen } from "./AttributeTypesScreen";
 export { default as RolesScreen } from "./RolesScreen";
 export { default as PrivilegesScreen } from "./PrivilegesScreen";
 export { default as StaffScreen } from "./StaffScreen";
+export { default as ResourcesScreen } from "./ResourcesScreen";

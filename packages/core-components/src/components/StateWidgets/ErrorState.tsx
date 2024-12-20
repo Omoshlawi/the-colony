@@ -1,15 +1,18 @@
+import { HiveFetchError } from "@colony/core-api";
 import { Box, Text } from "@colony/core-theme";
 import * as React from "react";
 import ErrorStateSvg from "./ErrorStateSvg";
 
-type ErrorStateProps = {
+type ErrorStateProps<T> = {
   message?: string;
   detail?: string;
+  error?: HiveFetchError<T>;
 };
-const ErrorState: React.FC<ErrorStateProps> = ({
-  message = "Something went wrong",
+const ErrorState = <T extends { detail?: string; [k: string]: any }>({
+  message,
   detail,
-}) => {
+  error,
+}: ErrorStateProps<T>) => {
   return (
     <Box
       flex={1}
@@ -19,12 +22,15 @@ const ErrorState: React.FC<ErrorStateProps> = ({
       alignItems={"center"}
     >
       <ErrorStateSvg width={"80%"} style={{ aspectRatio: 1 }} />
-      <Text variant={"bodyMedium"} color={"outline"}>
-        {message}
-      </Text>
-      {detail && (
+
+      {(message || error) && (
+        <Text variant={"bodyMedium"} color={"outline"}>
+          {error?.message ?? message}
+        </Text>
+      )}
+      {(detail || error) && (
         <Text variant={"bodySmall"} color={"outline"}>
-          {detail}
+          {error?.response?.data?.detail ?? detail}
         </Text>
       )}
     </Box>

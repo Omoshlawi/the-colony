@@ -7,6 +7,7 @@ export const RoutePaths = Object.freeze({
   PRIVILEGES_LISTING_SCREEN: "(dashboard)/privileges",
   ROLES_LISTING_SCREEN: "(dashboard)/roles",
   STAFF_ROLES_SCREEN: "(dashboard)/staff",
+  RESOURCES_LIST_SCREEN: "(dashboard)/resources",
 });
 
 export const dashboardMenuitems: MenuItem[] = [
@@ -111,7 +112,7 @@ export const dashboardMenuitems: MenuItem[] = [
   {
     name: "Resources",
     icon: { family: "FontAwesome", name: "server" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    route: RoutePaths.RESOURCES_LIST_SCREEN,
     color: "#38b6ff",
   },
 ];

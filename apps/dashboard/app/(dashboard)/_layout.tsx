@@ -9,6 +9,7 @@ const DashboardLayout = () => {
       <Stack.Screen name="categories" />
       <Stack.Screen name="relationship-types" />
       <Stack.Screen name="staff" />
+      <Stack.Screen name="resources" />
     </Stack>
   );
 };
