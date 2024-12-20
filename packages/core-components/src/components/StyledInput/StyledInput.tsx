@@ -1,10 +1,5 @@
 import { Box, Text, useTheme } from "@colony/core-theme";
-import React, {
-  forwardRef,
-  ReactNode,
-  Ref,
-  useState
-} from "react";
+import React, { forwardRef, ReactNode, Ref, useState } from "react";
 import {
   Platform,
   TextInput,
@@ -22,6 +17,7 @@ export interface StyledInputProps extends TextInputProps {
   onPrefixIconPressed?: () => void;
   onSuffixIconPressed?: () => void;
   height?: number;
+  disabled?: boolean;
 }
 
 const StyledInput = forwardRef<TextInput, StyledInputProps>(
@@ -36,6 +32,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
       onPrefixIconPressed,
       onSuffixIconPressed,
       height = 50,
+      disabled = false,
       ...props
     },
     ref: Ref<TextInput>
@@ -45,7 +42,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
     const {
       colors: { hintColor, text, icon },
       spacing,
-    } = useTheme();
+    } = theme;
 
     const handleFocus = (e: any) => {
       setIsFocused(true);
@@ -62,7 +59,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
         {label && (
           <Text
             variant={"bodyMedium"}
-            color={"text"}
+            color={disabled ? "hintColor" : "text"}
             style={{ marginBottom: theme.spacing.s }}
           >
             {label}
@@ -71,7 +68,15 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
         <Box
           borderWidth={isFocused ? 2 : 1}
           borderRadius={"small"}
-          borderColor={error ? "error" : isFocused ? "primary" : "outline"}
+          borderColor={
+            error
+              ? "error"
+              : isFocused
+              ? "primary"
+              : disabled
+              ? "hintColor"
+              : "outline"
+          }
           flexDirection={"row"}
           alignItems={"center"}
           height={height} // Fixed height to prevent layout shifts
@@ -91,11 +96,13 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
           )}
           <TextInput
             ref={ref}
+            editable={!disabled && props.editable}
+            readOnly={disabled || props.readOnly}
             {...props}
             style={[
               {
                 flex: 1,
-                color: text,
+                color: disabled ? hintColor : text,
                 paddingVertical: spacing.s,
                 paddingHorizontal: spacing.m,
                 height: "100%",

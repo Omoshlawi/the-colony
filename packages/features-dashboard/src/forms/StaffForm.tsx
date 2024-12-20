@@ -4,10 +4,11 @@ import {
   InputSkeleton,
   ListTile,
   showSnackbar,
-  StyledButton
+  StyledButton,
+  StyledInput,
 } from "@colony/core-components";
 import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
-import { Box } from "@colony/core-theme";
+import { Box, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -29,6 +30,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
     useOrganizationMembershipApi();
   const { searchUser } = useUserApi();
   const { error, isLoading, roles } = useRoles();
+  const theme = useTheme();
   const form = useForm<OrganizationMembershipFormData>({
     defaultValues: {
       memberUserId: membership?.memberUserId ?? "",
@@ -81,43 +83,60 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
           fieldState: { error },
         }) => (
           <>
-            <SearchableDropdown
-              asyncSearchFunction={async (query: string) => {
-                const res = await searchUser(query);
-                return res.data.results;
-              }}
-              keyExtractor={(item) => item.id}
-              labelExtractor={(item) => item.username}
-              valueExtractor={(item) => item.id}
-              renderItem={({ item, selected }) => (
-                <Box backgroundColor={selected ? "disabledColor" : undefined}>
-                  <ListTile
-                    disabled
-                    title={item.username}
-                    subtitle={item?.person?.email}
-                    leading={
-                      <ExpoIconComponent
-                        family="FontAwesome6"
-                        name="user"
-                        size={24}
-                      />
-                    }
-                    trailing={
-                      <ExpoIconComponent
-                        family="FontAwesome6"
-                        name="chevron-right"
-                        size={15}
-                      />
-                    }
-                    borderBottom
+            {!!!membership ? (
+              <SearchableDropdown
+                asyncSearchFunction={async (query: string) => {
+                  const res = await searchUser(query);
+                  return res.data.results;
+                }}
+                keyExtractor={(item) => item.id}
+                labelExtractor={(item) => item.username}
+                valueExtractor={(item) => item.id}
+                renderItem={({ item, selected }) => (
+                  <Box backgroundColor={selected ? "disabledColor" : undefined}>
+                    <ListTile
+                      disabled
+                      title={item.username}
+                      subtitle={item?.person?.email}
+                      leading={
+                        <ExpoIconComponent
+                          family="FontAwesome6"
+                          name="user"
+                          size={24}
+                        />
+                      }
+                      trailing={
+                        <ExpoIconComponent
+                          family="FontAwesome6"
+                          name="chevron-right"
+                          size={15}
+                        />
+                      }
+                      borderBottom
+                    />
+                  </Box>
+                )}
+                placeholderText="search user"
+                onValueChange={onChange}
+                title="Select User"
+                inputProps={{ error: error?.message, label: "User" }}
+              />
+            ) : (
+              <StyledInput
+                error={error?.message}
+                label="User"
+                value={membership.memberUser?.username}
+                disabled
+                suffixIcon={
+                  <ExpoIconComponent
+                    family="Feather"
+                    name="chevron-down"
+                    size={24}
+                    color={theme.colors.hintColor}
                   />
-                </Box>
-              )}
-              placeholderText="search user"
-              onValueChange={onChange}
-              title="Select User"
-              inputProps={{ error: error?.message, label: "User" }}
-            />
+                }
+              />
+            )}
           </>
         )}
       />
