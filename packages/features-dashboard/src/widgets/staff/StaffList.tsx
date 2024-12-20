@@ -1,15 +1,17 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StaffForm } from "../../forms";
 import { OrganizationMembership } from "@/src/types";
+import { handleApiErrors } from "@colony/core-api";
 import {
+  ActionsBottomSheet,
   EmptyState,
   ErrorState,
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
 } from "@colony/core-components";
-import { handleApiErrors } from "@colony/core-api";
 import { Box } from "@colony/core-theme";
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
 
 type StaffListProps = {
   staffs?: OrganizationMembership[];
@@ -50,25 +52,33 @@ const StaffList: React.FC<StaffListProps> = ({
       onEndReached={onEndReached}
       onEndReachedThreshold={0.5}
       renderItem={({ item }) => (
-        <ListTile
-          title={item.memberUser.username}
-          subtitle={`${item.memberUser.person.email}`}
-          leading={
-            <ExpoIconComponent
-              family="FontAwesome6"
-              name="user"
-              color="orange"
-            />
-          }
-          trailing={
-            <ExpoIconComponent
-              family="FontAwesome6"
-              name="chevron-right"
-              size={20}
-            />
-          }
-          borderBottom
-        />
+        <ActionsBottomSheet
+          title={`${item.memberUser?.username} actions`}
+          renderForm={(dispose) => (
+            <StaffForm membership={item} onSuccess={dispose} />
+          )}
+        >
+          <ListTile
+            disabled
+            title={item.memberUser.username}
+            subtitle={`${item.memberUser.person.email}`}
+            leading={
+              <ExpoIconComponent
+                family="FontAwesome6"
+                name="user"
+                color="orange"
+              />
+            }
+            trailing={
+              <ExpoIconComponent
+                family="FontAwesome6"
+                name="chevron-right"
+                size={20}
+              />
+            }
+            borderBottom
+          />
+        </ActionsBottomSheet>
       )}
     />
   );

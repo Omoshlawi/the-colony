@@ -42,7 +42,11 @@ interface DropdownProps<T, S> {
   asyncSearchFunction?: (query: string) => Promise<T[]>;
 
   // Render props
-  renderItem?: (props: { item: T; index: number }) => React.ReactElement;
+  renderItem?: (props: {
+    item: T;
+    index: number;
+    selected?: boolean;
+  }) => React.ReactElement;
   renderLoading?: () => React.ReactElement;
   renderError?: (error: Error) => React.ReactElement;
 
@@ -215,26 +219,16 @@ function SearchableDropdown<T, S>({
   };
 
   // Default item renderer
-  const defaultRenderItem = ({ item, index }: { item: T; index: number }) => {
-    const isSelected = multiple
-      ? (selectedItems as T[]).some(
-          (selectedItem) => keyExtractor(selectedItem) === keyExtractor(item)
-        )
-      : selectedItems &&
-        keyExtractor(selectedItems as T) === keyExtractor(item);
-
+  const defaultRenderItem = ({
+    item,
+    isSelected,
+  }: {
+    item: T;
+    index: number;
+    isSelected?: boolean;
+  }) => {
     return (
-      <TouchableOpacity
-        style={[
-          styles.itemContainer,
-          {
-            padding: theme.spacing.m,
-            borderBottomColor: theme.colors.disabledColor,
-          },
-          isSelected && { backgroundColor: theme.colors.disabledColor },
-        ]}
-        onPress={() => handleSelectItem(item)}
-      >
+      <>
         {multiple && (
           <View
             style={[
@@ -258,6 +252,38 @@ function SearchableDropdown<T, S>({
         >
           {labelExtractor(item)}
         </Text>
+      </>
+    );
+  };
+  // Custom item renderer
+  const _renderItem = ({ item, index }: { item: T; index: number }) => {
+    const isSelected = multiple
+      ? (selectedItems as T[]).some(
+          (selectedItem) => keyExtractor(selectedItem) === keyExtractor(item)
+        )
+      : selectedItems &&
+        keyExtractor(selectedItems as T) === keyExtractor(item);
+
+    return (
+      <TouchableOpacity
+        style={[
+          typeof renderItem !== "function" && styles.itemContainer,
+          typeof renderItem !== "function" && {
+            padding: theme.spacing.m,
+            borderBottomColor: theme.colors.disabledColor,
+          },
+          typeof renderItem !== "function" &&
+            isSelected && { backgroundColor: theme.colors.disabledColor },
+        ]}
+        onPress={() => handleSelectItem(item)}
+      >
+        {typeof renderItem === "function"
+          ? renderItem({ item, index, selected: isSelected ?? undefined })
+          : defaultRenderItem({
+              item,
+              index,
+              isSelected: isSelected ?? undefined,
+            })}
       </TouchableOpacity>
     );
   };
@@ -350,7 +376,7 @@ function SearchableDropdown<T, S>({
               <FlatList<T>
                 data={itemsToRender}
                 keyExtractor={(item) => String(keyExtractor(item))}
-                renderItem={renderItem || defaultRenderItem}
+                renderItem={_renderItem}
                 ListEmptyComponent={() => (
                   <Text color={"outline"} p={"xl"} style={styles.emptyText}>
                     No items found

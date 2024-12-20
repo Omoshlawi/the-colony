@@ -28,6 +28,7 @@ const deleteUser = async (
 const searchUser = async (search: string) => {
   const url = constructUrl("/users", {
     search,
+    v: "custom:include(person)",
   });
   return await hiveFetch<{ results: Array<User> }>(url);
 };

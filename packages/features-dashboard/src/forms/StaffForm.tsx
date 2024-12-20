@@ -9,6 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { OrganizationMembershipSchema } from "../utils/validation";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
+  ExpoIconComponent,
+  InputSkeleton,
+  ListTile,
   showSnackbar,
   StyledButton,
   StyledInput,
@@ -88,6 +91,30 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
               keyExtractor={(item) => item.id}
               labelExtractor={(item) => item.username}
               valueExtractor={(item) => item.id}
+              renderItem={({ item, selected }) => (
+                <Box backgroundColor={selected ? "disabledColor" : undefined}>
+                  <ListTile
+                    disabled
+                    title={item.username}
+                    subtitle={item?.person?.email}
+                    leading={
+                      <ExpoIconComponent
+                        family="FontAwesome6"
+                        name="user"
+                        size={24}
+                      />
+                    }
+                    trailing={
+                      <ExpoIconComponent
+                        family="FontAwesome6"
+                        name="chevron-right"
+                        size={15}
+                      />
+                    }
+                    borderBottom
+                  />
+                </Box>
+              )}
               placeholderText="search user"
               onValueChange={onChange}
               title="Select User"
@@ -104,18 +131,22 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
           fieldState: { error },
         }) => (
           <>
-            <SearchableDropdown
-              label="Roles"
-              data={roles}
-              keyExtractor={(item) => item.id}
-              multiple
-              labelExtractor={(item) => item.name}
-              valueExtractor={(item) => item.id}
-              placeholderText="search Roles"
-              onValueChange={onChange}
-              title="Select roles"
-              inputProps={{ error: error?.message }}
-            />
+            {!isLoading ? (
+              <SearchableDropdown
+                label="Roles"
+                data={roles}
+                keyExtractor={(item) => item.id}
+                multiple
+                labelExtractor={(item) => item.name}
+                valueExtractor={(item) => item.id}
+                placeholderText="search Roles"
+                onValueChange={onChange}
+                title="Select roles"
+                inputProps={{ error: error?.message }}
+              />
+            ) : (
+              <InputSkeleton />
+            )}
           </>
         )}
       />
