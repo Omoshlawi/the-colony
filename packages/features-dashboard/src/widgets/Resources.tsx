@@ -1,17 +1,23 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { useResources } from "../hooks";
-import { Box } from "@colony/core-theme";
 import {
   EmptyState,
   ErrorState,
   ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
+  showDialog,
 } from "@colony/core-components";
+import { Box, Color, useTheme } from "@colony/core-theme";
+import React from "react";
+import { FlatList, StyleSheet, TouchableHighlight, View } from "react-native";
+import { useResources } from "../hooks";
+import { AppServices } from "./service-resources";
 
 const Resources = () => {
   const { error, isLoading, resources } = useResources();
+  const theme = useTheme();
+  const handleSync = () => {
+    const dispose = showDialog(<AppServices onDismiss={() => dispose()} />);
+  };
 
   if (isLoading) {
     return (
@@ -56,6 +62,25 @@ const Resources = () => {
           />
         )}
       />
+      <TouchableHighlight
+        onPress={handleSync}
+        underlayColor={Color(theme.colors.primary).darken(0.1).string()}
+        style={[
+          styles.fab,
+          {
+            backgroundColor: Color(theme.colors.primary).lighten(0.1).string(),
+            borderRadius: theme.borderRadii.large,
+            padding: 16,
+          },
+        ]}
+      >
+        <ExpoIconComponent
+          family="MaterialCommunityIcons"
+          name="sync"
+          size={24}
+          color="white"
+        />
+      </TouchableHighlight>
     </View>
   );
 };
@@ -65,5 +90,10 @@ export default Resources;
 const styles = StyleSheet.create({
   scrollable: {
     flex: 1,
+  },
+  fab: {
+    position: "absolute",
+    bottom: 16,
+    right: 16,
   },
 });

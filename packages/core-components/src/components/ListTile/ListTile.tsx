@@ -21,33 +21,26 @@ const ListTile: FC<ListTileProps> = ({
   trailing,
   disabled = false,
 }) => {
-  const { colors, spacing } = useTheme();
+  const theme = useTheme();
+  const { colors, spacing } = theme;
   return (
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={[
-        borderBottom
-          ? { ...styles.borderBottom, borderColor: colors.disabledColor }
-          : {},
-        styles.container,
-        { padding: spacing.m },
-      ]}
+      style={[styles.tile, { padding: theme.spacing.s, gap: theme.spacing.s }]}
     >
-      <Box borderRadius={"medium"} flex={1} flexDirection={"row"} gap={"m"}>
-        {leading}
-        <Box gap={"s"}>
-          {title && (
-            <Text color={"text"} variant={"bodyLarge"}>
-              {title}
-            </Text>
-          )}
-          {subtitle && (
-            <Text color={"outline"} variant={"bodyMedium"}>
-              {subtitle}
-            </Text>
-          )}
-        </Box>
+      {leading}
+      <Box width={"100%"} flex={1} gap={"s"} justifyContent={"center"}>
+        {title && (
+          <Text color={"text"} variant={"bodyLarge"}>
+            {title}
+          </Text>
+        )}
+        {subtitle && (
+          <Text color={"outline"} variant={"bodyMedium"}>
+            {subtitle}
+          </Text>
+        )}
       </Box>
       {trailing}
     </Pressable>
@@ -62,9 +55,9 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     paddingBottom: 16,
   },
-  container: {
-    display: "flex",
+  tile: {
+    width: "100%",
     flexDirection: "row",
-    justifyContent: "space-between",
+    display: "flex",
   },
 });

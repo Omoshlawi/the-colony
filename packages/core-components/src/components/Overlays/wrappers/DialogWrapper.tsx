@@ -18,6 +18,7 @@ const DialogWrapper: FC<Props> = ({ children }) => {
         borderRadius={"large"}
         backgroundColor={"background"}
         overflow={"hidden"}
+        maxHeight={"80%"}
       >
         {children}
       </Box>

@@ -192,6 +192,35 @@ export interface Person {
   name?: string;
 }
 
+export interface AppService {
+  name: string;
+  version: string;
+  port: number;
+  host: string;
+  timestamp: number;
+  instance: string;
+}
+
+export interface ServiceResourcesSchemas {
+  schemas: Schemas;
+}
+
+export interface Schemas {
+  [resource: string]: ResourceSchema;
+}
+
+export interface ResourceSchema {
+  columnNames: string[];
+  orderedColumns: OrderedColumn[];
+}
+
+export interface OrderedColumn {
+  name: string;
+  position: number;
+  type: string;
+  nullable: boolean;
+}
+
 export type AmenityFormData = z.infer<typeof AmenitySchema>;
 export type CategoryFormData = z.infer<typeof CategorySchema>;
 export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;

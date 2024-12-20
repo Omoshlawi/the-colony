@@ -7,3 +7,4 @@ export { default as Roles } from "./Roles";
 export { default as Privileges } from "./Privileges";
 export * from "./staff";
 export { default as Resources } from "./Resources";
+export * from "./service-resources";

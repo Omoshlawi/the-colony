@@ -14,3 +14,5 @@ export { default as usePrivilegesApi } from "./usePrivilegesApi";
 export * from "./useStaff";
 export * from "./useOrganizationMembershipApi";
 export * from "./useUserApi";
+export { default as useAppServices } from "./useAppServices";
+export * from "./useAppServicesResourceSchema";
