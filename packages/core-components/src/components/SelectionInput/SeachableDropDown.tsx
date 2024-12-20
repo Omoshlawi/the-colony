@@ -15,12 +15,13 @@ import {
   StyleSheet,
   ActivityIndicator,
 } from "react-native";
-import { StyledInput } from "../StyledInput";
+import { StyledInput, StyledInputProps } from "../StyledInput";
 import { ExpoIconComponent } from "../ExpoIcons";
 import { StyledButton } from "../StyledButton";
 
 // Configuration types
 interface DropdownProps<T, S> {
+  inputProps?: StyledInputProps;
   // Data and extraction props
   data?: T[];
   initialValue?: T | T[];
@@ -65,6 +66,7 @@ function SearchableDropdown<T, S>({
 
   placeholderText = "Select an item",
   searchPlaceholder = "Search...",
+  inputProps = {},
 
   asyncSearchFunction,
 
@@ -285,16 +287,16 @@ function SearchableDropdown<T, S>({
   return (
     <View style={styles.container}>
       {/* Dropdown Trigger */}
-
       <StyledInput
-        readOnly
-        value={renderSelectedText()}
-        onPress={() => setModalVisible(true)}
         suffixIcon={
           <ExpoIconComponent family="Feather" name="chevron-down" size={24} />
         }
         label={label}
         onSuffixIconPressed={() => setModalVisible(true)}
+        {...inputProps}
+        onPress={() => setModalVisible(true)}
+        readOnly
+        value={renderSelectedText()}
       />
 
       {/* Modal Dropdown */}

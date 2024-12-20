@@ -4,6 +4,7 @@ import {
   AmenitySchema,
   AttributeTypeSchema,
   CategorySchema,
+  OrganizationMembershipSchema,
   PrivilegeSchema,
   RelationshipTypeSchema,
   ResourceSchema,
@@ -151,6 +152,36 @@ export type MemberUser = {
   };
 };
 
+export interface User {
+  id: string;
+  username: string;
+  profileUpdated: boolean;
+  accountVerified: any;
+  voided: boolean;
+  isAdmin: boolean;
+  password: string;
+  lastLogin?: string;
+  createdAt: string;
+  updatedAt: string;
+  person: Person;
+}
+
+export interface Person {
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  surname?: string;
+  userId: string;
+  avatarUrl?: string;
+  phoneNumber: string;
+  email: string;
+  gender: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  name?: string;
+}
+
 export type AmenityFormData = z.infer<typeof AmenitySchema>;
 export type CategoryFormData = z.infer<typeof CategorySchema>;
 export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;
@@ -159,3 +190,7 @@ export type PrivilegeFormData = z.infer<typeof PrivilegeSchema>;
 export type RoleFormData = z.infer<typeof RoleSchema>;
 export type RolePrivilegeFormData = z.infer<typeof RolePrivilegeSchema>;
 export type ResourceFormData = z.infer<typeof ResourceSchema>;
+export type OrganizationMembershipFormData = z.infer<
+  typeof OrganizationMembershipSchema
+>;
+export type UserFormData = {};

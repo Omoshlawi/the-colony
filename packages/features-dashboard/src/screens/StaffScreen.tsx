@@ -3,21 +3,26 @@ import React from "react";
 import {
   AppBar,
   ExpoIconComponent,
+  showModal,
   StyledPageLayout,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { StaffSearch } from "../widgets/staff";
+import { StaffForm } from "../forms";
 
 const StaffScreen = () => {
+  const handleAddStaff = () => {
+    const dispose = showModal(<StaffForm onSuccess={() => dispose()} />, {
+      title: "Add Staff",
+    });
+  };
+
   return (
     <StyledPageLayout>
       <AppBar
         title="Staff"
         actions={
-          <TouchableOpacity
-            activeOpacity={0.5}
-            // onPress={handleAddRelationshipType}
-          >
+          <TouchableOpacity activeOpacity={0.5} onPress={handleAddStaff}>
             <ExpoIconComponent family="Entypo" name="add-to-list" />
           </TouchableOpacity>
         }

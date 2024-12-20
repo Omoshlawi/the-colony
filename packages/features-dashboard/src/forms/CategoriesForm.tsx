@@ -29,7 +29,6 @@ const CategoriesForm: FC<CategoriesFormProps> = ({ category, onSuccess }) => {
     defaultValues: {
       name: category?.name ?? "",
       icon: category?.icon,
-      organizationId: category?.organizationId ?? undefined,
     },
     resolver: zodResolver(CategorySchema),
   });

@@ -136,3 +136,8 @@ export const RoleSchema = z.object({
   description: z.string().min(1, "required"),
   privileges: z.array(z.string().uuid()),
 });
+
+export const OrganizationMembershipSchema = z.object({
+  memberUserId: z.string().uuid("invalid user"),
+  roleIds: z.array(z.string().uuid("invalid role")),
+});

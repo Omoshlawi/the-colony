@@ -1,12 +1,9 @@
 import { Box, Text, useTheme } from "@colony/core-theme";
-import Ionicons from "@expo/vector-icons/MaterialCommunityIcons";
-import { type IconProps } from "@expo/vector-icons/build/createIconSet";
 import React, {
   forwardRef,
   ReactNode,
   Ref,
-  useState,
-  type ComponentProps,
+  useState
 } from "react";
 import {
   Platform,
@@ -16,7 +13,7 @@ import {
   View,
 } from "react-native";
 
-interface Props extends TextInputProps {
+export interface StyledInputProps extends TextInputProps {
   label?: string;
   error?: string;
   helperText?: string;
@@ -27,7 +24,7 @@ interface Props extends TextInputProps {
   height?: number;
 }
 
-const StyledInput = forwardRef<TextInput, Props>(
+const StyledInput = forwardRef<TextInput, StyledInputProps>(
   (
     {
       label,
