@@ -1,12 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { FC } from "react";
-import { Category, CategoryFormData } from "../types";
-import { useCategoryApi } from "../hooks";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CategorySchema } from "../utils/validation";
 import { handleApiErrors, mutate } from "@colony/core-api";
-import { Box } from "@colony/core-theme";
 import {
   ClickableModalWrapper,
   ExpoIcon,
@@ -16,6 +8,14 @@ import {
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
+import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import { useCategoryApi } from "../hooks";
+import { Category, CategoryFormData } from "../types";
+import { CategorySchema } from "../utils/validation";
 
 type CategoriesFormProps = {
   category?: Category;

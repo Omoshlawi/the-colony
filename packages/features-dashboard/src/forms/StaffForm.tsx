@@ -1,24 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC, useEffect } from "react";
-import {
-  OrganizationMembership,
-  OrganizationMembershipFormData,
-} from "../types";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { OrganizationMembershipSchema } from "../utils/validation";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
   ExpoIconComponent,
   InputSkeleton,
   ListTile,
   showSnackbar,
-  StyledButton,
-  StyledInput,
+  StyledButton
 } from "@colony/core-components";
-import { useOrganizationMembershipApi, useRoles, useUserApi } from "../hooks";
-import { Box } from "@colony/core-theme";
 import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
+import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
+import { useOrganizationMembershipApi, useRoles, useUserApi } from "../hooks";
+import {
+  OrganizationMembership,
+  OrganizationMembershipFormData,
+} from "../types";
+import { OrganizationMembershipSchema } from "../utils/validation";
 
 type Props = {
   membership?: OrganizationMembership;
@@ -33,7 +32,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
   const form = useForm<OrganizationMembershipFormData>({
     defaultValues: {
       memberUserId: membership?.memberUserId ?? "",
-      roleIds: [],
+      roleIds: membership?.membershipRoles?.map((role) => role.roleId) ?? [],
     },
     resolver: zodResolver(OrganizationMembershipSchema),
   });
@@ -83,7 +82,6 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
         }) => (
           <>
             <SearchableDropdown
-              label="User"
               asyncSearchFunction={async (query: string) => {
                 const res = await searchUser(query);
                 return res.data.results;
@@ -118,7 +116,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
               placeholderText="search user"
               onValueChange={onChange}
               title="Select User"
-              inputProps={{ error: error?.message }}
+              inputProps={{ error: error?.message, label: "User" }}
             />
           </>
         )}
@@ -133,7 +131,6 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
           <>
             {!isLoading ? (
               <SearchableDropdown
-                label="Roles"
                 data={roles}
                 keyExtractor={(item) => item.id}
                 multiple
@@ -142,7 +139,8 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
                 placeholderText="search Roles"
                 onValueChange={onChange}
                 title="Select roles"
-                inputProps={{ error: error?.message }}
+                inputProps={{ error: error?.message, label: "Roles" }}
+                initialValue={roles.filter((role) => value.includes(role.id))}
               />
             ) : (
               <InputSkeleton />

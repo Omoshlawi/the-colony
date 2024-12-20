@@ -1,17 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
-import { RelationshipType, RelationshipTypeFormData } from "../types";
-import { useRelationshipTypeApi } from "../hooks";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { RelationshipTypeSchema } from "../utils/validation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { handleApiErrors, mutate } from "@colony/core-api";
-import { Box } from "@colony/core-theme";
 import {
   showSnackbar,
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
+import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
+import { useRelationshipTypeApi } from "../hooks";
+import { RelationshipType, RelationshipTypeFormData } from "../types";
+import { RelationshipTypeSchema } from "../utils/validation";
 
 type RelationshipTypesFormProps = {
   relationshipType?: RelationshipType;

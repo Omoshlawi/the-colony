@@ -116,7 +116,6 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
           }) => (
             <SeachableDropDown
               data={resources}
-              label="Resource"
               initialValue={resources.find((r) => r.id === value)}
               keyExtractor={({ id }) => id}
               labelExtractor={({ name }) => name}
@@ -124,6 +123,7 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
               placeholderText="Select resource"
               onValueChange={onChange}
               title="Select resource"
+              inputProps={{ error: error?.message, label: "Resource" }}
             />
           )}
         />
@@ -138,7 +138,6 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
           <SeachableDropDown
             data={selectedResourseDatapoints}
             multiple
-            label="Resource"
             initialValue={value}
             keyExtractor={(field) => field}
             labelExtractor={(field) => field}
@@ -146,6 +145,7 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
             placeholderText="Select resource datapoints"
             onValueChange={onChange}
             title="Select resource datapoints"
+            inputProps={{ error: error?.message, label: "Resource datapoints" }}
           />
         )}
       />
@@ -159,7 +159,6 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
           <SeachableDropDown
             data={["Create", "Read", "Update", "Delete"]}
             multiple
-            label="Operations"
             initialValue={value}
             keyExtractor={(field) => field}
             labelExtractor={(field) => field}
@@ -167,6 +166,7 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
             placeholderText="Select  operations"
             onValueChange={onChange}
             title="Select operations"
+            inputProps={{ error: error?.message, label: "Operations" }}
           />
         )}
       />

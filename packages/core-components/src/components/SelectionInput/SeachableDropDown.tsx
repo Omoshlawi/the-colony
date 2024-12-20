@@ -35,7 +35,6 @@ interface DropdownProps<T, S> {
   // Styling props
   placeholderText?: string;
   searchPlaceholder?: string;
-  label?: string;
   title?: string;
 
   // Async search function
@@ -61,7 +60,6 @@ interface DropdownProps<T, S> {
 function SearchableDropdown<T, S>({
   data = [],
   initialValue,
-  label,
   title,
   keyExtractor = (item: T) => JSON.stringify(item) as any,
   labelExtractor = (item: T) => JSON.stringify(item) as any,
@@ -206,16 +204,16 @@ function SearchableDropdown<T, S>({
 
   // Render selected items text
   const renderSelectedText = (): string => {
-    if (!selectedItems) return placeholderText;
+    if (!selectedItems) return "";
 
     if (multiple) {
       const multiSelectedItems = selectedItems as T[];
       return multiSelectedItems.length > 0
         ? multiSelectedItems.map((item) => labelExtractor(item)).join(", ")
-        : placeholderText;
+        : "";
     }
 
-    return selectedItems ? labelExtractor(selectedItems as T) : placeholderText;
+    return selectedItems ? labelExtractor(selectedItems as T) : "";
   };
 
   // Default item renderer
@@ -317,12 +315,12 @@ function SearchableDropdown<T, S>({
         suffixIcon={
           <ExpoIconComponent family="Feather" name="chevron-down" size={24} />
         }
-        label={label}
         onSuffixIconPressed={() => setModalVisible(true)}
         {...inputProps}
         onPress={() => setModalVisible(true)}
         readOnly
         value={renderSelectedText()}
+        placeholder={placeholderText}
       />
 
       {/* Modal Dropdown */}

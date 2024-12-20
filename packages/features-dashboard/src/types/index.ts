@@ -134,7 +134,17 @@ export interface OrganizationMembership {
   updatedAt: string;
   voided: boolean;
   organization: Organization;
-  membershipRoles: any[];
+  membershipRoles: Array<MembershipRole>;
+}
+
+export interface MembershipRole {
+  id: string;
+  membershipId: string;
+  roleId: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  role: Role;
 }
 
 export type MemberUser = {

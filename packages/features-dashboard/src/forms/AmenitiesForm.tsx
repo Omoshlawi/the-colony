@@ -8,11 +8,11 @@ import {
   StyledButton,
   StyledInput,
 } from "@colony/core-components";
-import { Box, Text } from "@colony/core-theme";
+import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { useAmenitiesApi } from "../hooks";
 import { Amenity, AmenityFormData } from "../types";
 import { AmenitySchema } from "../utils/validation";

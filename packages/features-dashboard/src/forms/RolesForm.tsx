@@ -1,10 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
-import { Role, RoleFormData } from "../types";
-import { usePrivileges, useRolesApi } from "../hooks";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { RoleSchema } from "../utils/validation";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { handleApiErrors, mutate } from "@colony/core-api";
 import {
   InputSkeleton,
@@ -14,6 +7,13 @@ import {
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
+import { usePrivileges, useRolesApi } from "../hooks";
+import { Role, RoleFormData } from "../types";
+import { RoleSchema } from "../utils/validation";
 
 type Props = {
   role?: Role;
@@ -105,7 +105,6 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
           }) => (
             <SeachableDropDown
               data={privileges}
-              label="Privileges"
               initialValue={value.map(
                 (id) => privileges.find((privilege) => privilege.id === id)!
               )}
@@ -116,6 +115,7 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
               placeholderText="Select privileges"
               onValueChange={onChange}
               title="Select privileges"
+              inputProps={{ error: error?.message, label: "Privileges" }}
             />
           )}
         />
