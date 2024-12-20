@@ -27,7 +27,15 @@ const ListTile: FC<ListTileProps> = ({
     <Pressable
       onPress={onPress}
       disabled={disabled}
-      style={[styles.tile, { padding: theme.spacing.s, gap: theme.spacing.s }]}
+      style={[
+        styles.tile,
+        {
+          padding: theme.spacing.s,
+          gap: theme.spacing.s,
+          borderColor: colors.disabledColor,
+        },
+        borderBottom ? styles.borderBottom : {},
+      ]}
     >
       {leading}
       <Box width={"100%"} flex={1} gap={"s"} justifyContent={"center"}>

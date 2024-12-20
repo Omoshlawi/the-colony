@@ -20,7 +20,7 @@ const ExpansionTile: FC<Props> = ({
   const [expanded, setExpanded] = useState(defaultExpanded);
   const theme = useTheme();
   return (
-    <Box backgroundColor={expanded ? "disabledColor" : undefined} pb={"s"}>
+    <Box backgroundColor={expanded ? "disabledColor" : undefined} pb={"m"}>
       <View
         style={[
           styles.tile,

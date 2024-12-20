@@ -1,4 +1,5 @@
 import {
+  ConfirmDialog,
   ExpoIconComponent,
   ListTile,
   SectionCard,
@@ -15,49 +16,19 @@ export const LogoutSection = () => {
   const { logoutUser } = useAuthAPi();
   const handleLogout = () => {
     const dispose = showDialog(
-      <Box
-        gap={"m"}
-        p={"m"}
-        flexDirection={"column"}
-        style={{ display: "flex", gap: 20 }}
-      >
-        <Box>
-          <Text variant={"titleSmall"} color={"text"}>
-            Logout
-          </Text>
-          <Text variant={"bodyMedium"} color={"text"} mt={"m"}>
-            Are you sure you want to logout
-          </Text>
-        </Box>
-        <Box
-          flex={1}
-          flexDirection={"row"}
-          justifyContent={"space-between"}
-          gap={"m"}
-          marginVertical={"l"}
-        >
-          <Box flex={1}>
-            <StyledButton
-              title="Yes"
-              onPress={() => {
-                dispose();
-                logoutUser();
-                showSnackbar({
-                  title: "success",
-                  subtitle: "Session ended succesfully",
-                });
-              }}
-            />
-          </Box>
-          <Box flex={1}>
-            <StyledButton
-              title="No"
-              variant="outline"
-              onPress={() => dispose()}
-            />
-          </Box>
-        </Box>
-      </Box>
+      <ConfirmDialog
+        title="Logout"
+        message="Are you sure you want to logout?"
+        onCancel={() => dispose()}
+        onConfirm={() => {
+          dispose();
+          logoutUser();
+          showSnackbar({
+            title: "success",
+            subtitle: "Session ended succesfully",
+          });
+        }}
+      />
     );
   };
   return (

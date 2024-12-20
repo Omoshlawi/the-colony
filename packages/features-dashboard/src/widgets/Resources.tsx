@@ -10,14 +10,13 @@ import { Box, Color, useTheme } from "@colony/core-theme";
 import React from "react";
 import { FlatList, StyleSheet, TouchableHighlight, View } from "react-native";
 import { useResources } from "../hooks";
-import { AppServices } from "./service-resources";
+import { useRouter } from "expo-router";
+import { RoutePaths } from "../utils";
 
 const Resources = () => {
   const { error, isLoading, resources } = useResources();
   const theme = useTheme();
-  const handleSync = () => {
-    const dispose = showDialog(<AppServices onDismiss={() => dispose()} />);
-  };
+  const router = useRouter();
 
   if (isLoading) {
     return (
@@ -63,7 +62,7 @@ const Resources = () => {
         )}
       />
       <TouchableHighlight
-        onPress={handleSync}
+        onPress={() => router.navigate(RoutePaths.APP_SERVICES_SCREEN)}
         underlayColor={Color(theme.colors.primary).darken(0.1).string()}
         style={[
           styles.fab,

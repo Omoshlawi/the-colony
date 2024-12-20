@@ -7,3 +7,4 @@ export { default as RolesScreen } from "./RolesScreen";
 export { default as PrivilegesScreen } from "./PrivilegesScreen";
 export { default as StaffScreen } from "./StaffScreen";
 export { default as ResourcesScreen } from "./ResourcesScreen";
+export { default as AppServicesScreen } from "./AppServicesScreen";

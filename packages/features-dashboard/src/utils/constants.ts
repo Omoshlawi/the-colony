@@ -8,6 +8,7 @@ export const RoutePaths = Object.freeze({
   ROLES_LISTING_SCREEN: "(dashboard)/roles",
   STAFF_ROLES_SCREEN: "(dashboard)/staff",
   RESOURCES_LIST_SCREEN: "(dashboard)/resources",
+  APP_SERVICES_SCREEN: "(dashboard)/app-services",
 });
 
 export const dashboardMenuitems: MenuItem[] = [

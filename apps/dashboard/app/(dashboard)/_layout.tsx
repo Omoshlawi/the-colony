@@ -10,6 +10,7 @@ const DashboardLayout = () => {
       <Stack.Screen name="relationship-types" />
       <Stack.Screen name="staff" />
       <Stack.Screen name="resources" />
+      <Stack.Screen name="app-services" />
     </Stack>
   );
 };

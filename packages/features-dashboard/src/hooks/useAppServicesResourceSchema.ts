@@ -12,9 +12,9 @@ export const useAppServicesResourceSchema = (serviceName: string) => {
   const path = "/resources-schema";
   const { data, error, isLoading, mutate } = useApi<
     HiveFetchResponse<ServiceResourcesSchemas>
-  >(path, fetcher);
+  >(path, fetcher, { refreshInterval: 1000 });
   return {
-    amenities: data?.data ?? {},
+    resourceSchemas: data?.data,
     isLoading,
     error,
     mutate,
@@ -28,6 +28,6 @@ const sourceServiceResourcesSchema = async (serviceName: string) => {
   });
 };
 
-export const useAppServicesResourceSchemaApi = async () => {
+export const useAppServicesResourceSchemaApi = () => {
   return { sourceServiceResourcesSchema };
 };

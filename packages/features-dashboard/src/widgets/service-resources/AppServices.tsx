@@ -1,57 +1,48 @@
-import { useAppServices } from "../../hooks";
 import {
   ErrorState,
   ExpansionTile,
   ExpoIconComponent,
-  LoadingState,
+  ListTileSkeleton,
   When,
 } from "@colony/core-components";
-import { Box, Text } from "@colony/core-theme";
 import React, { FC } from "react";
-import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
+import { FlatList, StyleSheet } from "react-native";
+import { useAppServices } from "../../hooks";
+import AppServiceResources from "./AppServiceResources";
 
-type Props = {
-  onDismiss: () => void;
-};
+type Props = {};
 
-const AppServices: FC<Props> = ({ onDismiss }) => {
+const AppServices: FC<Props> = ({}) => {
   const { mutate, ...state } = useAppServices();
 
   return (
-    <Box p={"m"} gap={"m"}>
-      <Text fontWeight={"700"} color={"text"} variant={"titleMedium"}>
-        AppServices
-      </Text>
-      <Box>
-        <When
-          asyncState={{ ...state, data: state.appServices }}
-          error={(error) => <ErrorState error={error} />}
-          loading={() => <LoadingState />}
-          success={(data) => (
-            <FlatList
-              data={data}
-              keyExtractor={({ name }) => name}
-              renderItem={({ item }) => (
-                <ExpansionTile
-                  leading={
-                    <ExpoIconComponent family="FontAwesome6" name="info" />
-                  }
-                  title={item.name}
-                  subtitle={`${item.version} | ${item.host}:${item.port}`}
-                >
-                  <Text>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Eius cumque animi iure, distinctio tempora at quod? Quae
-                    eius quas iusto. Enim inventore quo fuga deleniti nobis
-                    exercitationem labore est dignissimos!
-                  </Text>
-                </ExpansionTile>
-              )}
-            />
+    <When
+      asyncState={{ ...state, data: state.appServices }}
+      error={(error) => <ErrorState error={error} />}
+      loading={() => (
+        <>
+          {Array.from({ length: 5 }).map((_, idx) => (
+            <ListTileSkeleton key={idx} />
+          ))}
+        </>
+      )}
+      success={(data) => (
+        <FlatList
+          data={data}
+          keyExtractor={({ name }) => name}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <ExpansionTile
+              leading={<ExpoIconComponent family="Ionicons" name="cube" />}
+              title={item.name}
+              subtitle={`${item.version} | ${item.host}:${item.port}`}
+            >
+              <AppServiceResources service={item} />
+            </ExpansionTile>
           )}
         />
-      </Box>
-    </Box>
+      )}
+    />
   );
 };
 
