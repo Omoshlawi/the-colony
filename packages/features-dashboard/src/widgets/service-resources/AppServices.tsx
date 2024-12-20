@@ -9,6 +9,7 @@ import React, { FC } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useAppServices } from "../../hooks";
 import AppServiceResources from "./AppServiceResources";
+import { Box } from "@colony/core-theme";
 
 type Props = {};
 
@@ -20,11 +21,11 @@ const AppServices: FC<Props> = ({}) => {
       asyncState={{ ...state, data: state.appServices }}
       error={(error) => <ErrorState error={error} />}
       loading={() => (
-        <>
+        <Box gap={"m"}>
           {Array.from({ length: 5 }).map((_, idx) => (
             <ListTileSkeleton key={idx} />
           ))}
-        </>
+        </Box>
       )}
       success={(data) => (
         <FlatList

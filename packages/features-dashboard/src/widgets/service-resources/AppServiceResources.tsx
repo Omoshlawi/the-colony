@@ -15,6 +15,7 @@ import {
   When,
 } from "@colony/core-components";
 import { handleApiErrors } from "@colony/core-api";
+import { Box } from "@colony/core-theme";
 
 type Props = {
   service: AppService;
@@ -47,8 +48,7 @@ const AppServiceResources: FC<Props> = ({ service: { name } }) => {
               });
             });
         }}
-      />,
-      {}
+      />
     );
   };
   return (
@@ -56,11 +56,11 @@ const AppServiceResources: FC<Props> = ({ service: { name } }) => {
       asyncState={{ ...state, data: state.resourceSchemas }}
       error={(error) => <ErrorState error={error} />}
       loading={() => (
-        <>
+        <Box gap={"m"}>
           {Array.from({ length: 5 }).map((_, idx) => (
             <ListTileSkeleton key={idx} />
           ))}
-        </>
+        </Box>
       )}
       success={(data) => (
         <TouchableOpacity activeOpacity={0.5} onPress={handleConfirmSource}>
