@@ -141,3 +141,16 @@ export const OrganizationMembershipSchema = z.object({
   memberUserId: z.string().uuid("invalid user"),
   roleIds: z.array(z.string().uuid("invalid role")),
 });
+
+export const AddressSchema = z.object({
+  name: z.string().min(1, "Required"),
+  description: z.string().min(1, "Required").optional(),
+  county: z.string().min(1, "Required"),
+  subCounty: z.string().min(1, "Required"),
+  ward: z.string().min(1, "Required"),
+  village: z.string().min(1, "Required").optional(),
+  postalCode: z.string().min(1, "Required").optional(),
+  latitude: z.number({ coerce: true }).optional(),
+  longitude: z.number({ coerce: true }).optional(),
+  landmark: z.string(),
+});

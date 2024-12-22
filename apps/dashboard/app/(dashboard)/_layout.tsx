@@ -11,6 +11,7 @@ const DashboardLayout = () => {
       <Stack.Screen name="staff" />
       <Stack.Screen name="resources" />
       <Stack.Screen name="app-services" />
+      <Stack.Screen name="address-book" />
     </Stack>
   );
 };

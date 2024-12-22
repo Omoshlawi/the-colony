@@ -1,23 +1,22 @@
-import { useTheme, Text } from "@colony/core-theme";
+import { Text, useTheme } from "@colony/core-theme";
 import React, {
-  useState,
   useCallback,
-  useRef,
-  useMemo,
   useEffect,
+  useMemo,
+  useRef,
+  useState,
 } from "react";
 import {
-  View,
-  Modal,
-  TextInput,
-  TouchableOpacity,
-  FlatList,
-  StyleSheet,
   ActivityIndicator,
+  FlatList,
+  Modal,
+  StyleSheet,
+  TouchableOpacity,
+  View
 } from "react-native";
-import { StyledInput, StyledInputProps } from "../StyledInput";
 import { ExpoIconComponent } from "../ExpoIcons";
 import { StyledButton } from "../StyledButton";
+import { StyledInput, StyledInputProps } from "../StyledInput";
 
 // Configuration types
 interface DropdownProps<T, S> {

@@ -8,3 +8,4 @@ export { default as Privileges } from "./Privileges";
 export * from "./staff";
 export { default as Resources } from "./Resources";
 export * from "./service-resources";
+export { default as AddressBook } from "./AddressBook";

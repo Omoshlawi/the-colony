@@ -9,6 +9,7 @@ export const RoutePaths = Object.freeze({
   STAFF_ROLES_SCREEN: "(dashboard)/staff",
   RESOURCES_LIST_SCREEN: "(dashboard)/resources",
   APP_SERVICES_SCREEN: "(dashboard)/app-services",
+  ADDRESS_BOOK_SCREEN: "(dashboard)/address-book",
 });
 
 export const dashboardMenuitems: MenuItem[] = [
@@ -70,7 +71,7 @@ export const dashboardMenuitems: MenuItem[] = [
   {
     name: "Address book",
     icon: { family: "FontAwesome", name: "address-book" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    route: RoutePaths.ADDRESS_BOOK_SCREEN,
     color: "brown",
   },
   {

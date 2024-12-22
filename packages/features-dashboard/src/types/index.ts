@@ -1,6 +1,7 @@
 import { ExpoIcon } from "@colony/core-components";
 import { z } from "zod";
 import {
+  AddressSchema,
   AmenitySchema,
   AttributeTypeSchema,
   CategorySchema,
@@ -221,6 +222,63 @@ export interface OrderedColumn {
   nullable: boolean;
 }
 
+export interface Address {
+  id: string;
+  name: string;
+  description: string;
+  country: string;
+  county: string;
+  subCounty: string;
+  ward: string;
+  village: any;
+  landmark: string;
+  postalCode: any;
+  latitude: any;
+  longitude: any;
+  ownerUserId: string;
+  ownerUser: any;
+  organizationId: any;
+  organization: any;
+  metadata: any;
+  createdBy: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface County {
+  code: string;
+  name: string;
+  capital: string;
+  metadata: any;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  subCounties: SubCounty[];
+}
+
+export interface SubCounty {
+  code: string;
+  name: string;
+  countyCode: string;
+  metadata: any;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  wards: Ward[];
+}
+
+export interface Ward {
+  code: string;
+  name: string;
+  countyCode: string;
+  subCountyCode: string;
+  metadata: any;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export type AmenityFormData = z.infer<typeof AmenitySchema>;
 export type CategoryFormData = z.infer<typeof CategorySchema>;
 export type RelationshipTypeFormData = z.infer<typeof RelationshipTypeSchema>;
@@ -232,4 +290,5 @@ export type ResourceFormData = z.infer<typeof ResourceSchema>;
 export type OrganizationMembershipFormData = z.infer<
   typeof OrganizationMembershipSchema
 >;
+export type AddressFormData = z.infer<typeof AddressSchema>;
 export type UserFormData = {};
