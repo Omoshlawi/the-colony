@@ -1,8 +1,12 @@
 import { TokenPair, useSessionStore } from "@colony/core-global";
 import axios from "axios";
-import { HiveFetchResponse } from "../types";
+import { Platform } from "react-native";
 
-const httpClient = axios.create({ baseURL: "http://localhost:5000/api" });
+const httpClient = axios.create({
+  baseURL: `http://${
+    Platform.OS === "android" ? "192.168.20.81" : "localhost"
+  }:5000/api`,
+});
 
 httpClient.interceptors.request.use(
   // set access token if not set

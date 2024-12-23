@@ -1,19 +1,15 @@
 import {
-  EmptyState,
-  ErrorState,
   ExpoIcon,
+  FilePicker,
+  InputSkeleton,
   ListTileSkeleton,
-  SeachableDropDown,
-  Skeleton,
   StyledPageLayout,
-  StyledText,
 } from "@colony/core-components";
-import { InputSkeleton } from "@colony/core-components/src/components/StyledInput";
 import { useSession } from "@colony/core-global";
-import { useTheme } from "@colony/core-theme";
+import { Box, Text, useTheme } from "@colony/core-theme";
 import { Redirect } from "expo-router";
 import { useState } from "react";
-import { LogBox, StyleSheet, View } from "react-native";
+import { LogBox, StyleSheet, TouchableOpacity } from "react-native";
 
 LogBox.ignoreAllLogs();
 
@@ -27,38 +23,40 @@ export default function HomeScreen() {
 
   return (
     <StyledPageLayout>
-      {/* <StyledText style={styles.title}>Welcome to Micro</StyledText> */}
-      {/* <SeachableDropDown
-        // data={Array.from({ length: 100 }).map((_, i) => ({
-        //   label: i.toString(),
-        //   value: i.toString(),
-        // }))}
-        asyncSearchFunction={async () => {
-          return Array.from({ length: 100 }).map((_, i) => ({
-            label: i.toString(),
-            value: i.toString(),
-          }));
-        }}
-        label="Test"
-        initialValue={{ label: "1", value: "2" }}
-        keyExtractor={({ value }) => value}
-        multiple
-        labelExtractor={({ label }) => label}
-        maxSelections={2}
-        valueExtractor={({ value }) => value}
-        placeholderText="Seach..."
-        onValueChange={(value) => {
-          alert(JSON.stringify(value));
-        }}
-        onSelectItems={(value) => {
-          alert(JSON.stringify(value));
-        }}
-      /> */}
-      <InputSkeleton />
-      <ListTileSkeleton />
-
-      {/* <AccountWidget />
-      <UpcomingPaymentWidget /> */}
+      <Box gap={"m"} p={"m"}>
+        <InputSkeleton />
+        <ListTileSkeleton />
+        <FilePicker.ImageField
+          successCallback={(assets) => alert(JSON.stringify(assets, null, 2))}
+          multiple
+          maxSelection={2}
+          renderTrigger={(handleClick) => (
+            <TouchableOpacity onPress={handleClick}>
+              <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+                <Text>Pick image</Text>
+              </Box>
+            </TouchableOpacity>
+          )}
+        />
+        <FilePicker.DocumentField
+          renderTrigger={(handleClick) => (
+            <TouchableOpacity onPress={handleClick}>
+              <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+                <Text>Pick Document</Text>
+              </Box>
+            </TouchableOpacity>
+          )}
+        />
+        <FilePicker.VideoField
+          renderTrigger={(handleClick) => (
+            <TouchableOpacity onPress={handleClick}>
+              <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+                <Text>Pick Video</Text>
+              </Box>
+            </TouchableOpacity>
+          )}
+        />
+      </Box>
     </StyledPageLayout>
   );
 }

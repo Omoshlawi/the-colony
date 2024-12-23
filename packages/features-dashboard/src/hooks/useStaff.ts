@@ -4,6 +4,7 @@ import { OrganizationMembership } from "../types";
 export const useStaff = (filters: Record<string, any>) => {
   const path = constructUrl("/organization-membership", {
     v: "custom:include(organization,membershipRoles)",
+    context: "organization",
     ...filters,
   });
   const { data, error, isLoading, mutate } =

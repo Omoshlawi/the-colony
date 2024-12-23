@@ -4,6 +4,7 @@ import {
   ActionsBottomSheet,
   ErrorState,
   ExpansionTile,
+  ExpoIconComponent,
   ListTile,
   ListTileSkeleton,
   When,
@@ -37,7 +38,17 @@ const AddressBook = () => {
               )}
               formTitle="Update Address"
             >
-              <ExpansionTile title={item.name} subtitle={item.description}>
+              <ExpansionTile
+                title={item.name}
+                subtitle={item.description}
+                leading={
+                  <ExpoIconComponent
+                    family="FontAwesome"
+                    name="address-book"
+                    color="brown"
+                  />
+                }
+              >
                 <ListTile
                   title={item.county}
                   subtitle={item.subCounty}
