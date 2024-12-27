@@ -39,6 +39,7 @@ export default function HomeScreen() {
           )}
         />
         <FilePicker.DocumentField
+          successCallback={(assets) => alert(JSON.stringify(assets, null, 2))}
           renderTrigger={(handleClick) => (
             <TouchableOpacity onPress={handleClick}>
               <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
@@ -48,6 +49,7 @@ export default function HomeScreen() {
           )}
         />
         <FilePicker.VideoField
+          successCallback={(assets) => alert(JSON.stringify(assets, null, 2))}
           renderTrigger={(handleClick) => (
             <TouchableOpacity onPress={handleClick}>
               <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
