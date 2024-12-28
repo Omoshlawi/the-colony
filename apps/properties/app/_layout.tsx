@@ -16,7 +16,6 @@ export default function Layout() {
           <StatusBar style={theme == "dark" ? "light" : "dark"} />
 
           <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
             <Stack.Screen name="(properties)" />
           </Stack>
         </OverlayPortal>

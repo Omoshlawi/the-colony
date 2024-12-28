@@ -22,7 +22,7 @@ const ListTile: FC<ListTileProps> = ({
   disabled = false,
 }) => {
   const theme = useTheme();
-  const { colors, spacing } = theme;
+  const { colors } = theme;
   return (
     <Pressable
       onPress={onPress}
@@ -32,7 +32,7 @@ const ListTile: FC<ListTileProps> = ({
         {
           padding: theme.spacing.s,
           gap: theme.spacing.s,
-          borderColor: colors.disabledColor,
+          borderColor: colors.hintColor,
         },
         borderBottom ? styles.borderBottom : {},
       ]}

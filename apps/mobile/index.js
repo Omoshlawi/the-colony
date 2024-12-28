@@ -26,6 +26,10 @@ const contexts = [
     context: require.context("../dashboard/app/(dashboard)", true, /.*/),
     prefix: "(dashboard)",
   },
+  {
+    context: require.context("../properties/app/(properties)", true, /.*/),
+    prefix: "(properties)",
+  },
 ];
 
 // Must be exported or Fast Refresh won't update the context

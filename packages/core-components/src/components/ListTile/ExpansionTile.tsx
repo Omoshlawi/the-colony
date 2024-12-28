@@ -1,6 +1,12 @@
 import { Box, Text, useTheme } from "@colony/core-theme";
-import React, { FC, PropsWithChildren, useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
+import React, { FC, PropsWithChildren, useEffect, useState } from "react";
+import {
+  StyleProp,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
 
 type Props = PropsWithChildren<{
@@ -8,6 +14,10 @@ type Props = PropsWithChildren<{
   subtitle?: string;
   leading?: React.ReactElement;
   defaultExpanded?: boolean;
+  childContainerStyles?: StyleProp<ViewStyle>;
+  containerStyles?: StyleProp<ViewStyle>;
+  borderBottom?: boolean;
+  onToggleExpansion?: (expanded: boolean) => void;
 }>;
 
 const ExpansionTile: FC<Props> = ({
@@ -15,12 +25,29 @@ const ExpansionTile: FC<Props> = ({
   leading,
   subtitle,
   title,
-  defaultExpanded,
+  defaultExpanded = false,
+  childContainerStyles,
+  containerStyles,
+  borderBottom,
+  onToggleExpansion,
 }) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
   const theme = useTheme();
+
+  useEffect(() => {
+    onToggleExpansion?.(expanded);
+  }, [expanded]);
   return (
-    <Box backgroundColor={expanded ? "disabledColor" : undefined} pb={"m"}>
+    <Box
+      backgroundColor={expanded ? "disabledColor" : undefined}
+      pb={"m"}
+      style={[
+        { borderColor: theme.colors.hintColor },
+        borderBottom ? styles.borderBottom : {},
+        ,
+        containerStyles,
+      ]}
+    >
       <View
         style={[
           styles.tile,
@@ -52,7 +79,12 @@ const ExpansionTile: FC<Props> = ({
         </TouchableOpacity>
       </View>
       {expanded && (
-        <Box p={"m"} marginHorizontal={"m"} backgroundColor={"background"}>
+        <Box
+          p={"m"}
+          marginHorizontal={"m"}
+          backgroundColor={"background"}
+          style={childContainerStyles}
+        >
           {children}
         </Box>
       )}
@@ -67,5 +99,10 @@ const styles = StyleSheet.create({
     width: "100%",
     flexDirection: "row",
     display: "flex",
+  },
+  borderBottom: {
+    // borderColor: microColors.darkGrey,
+    borderBottomWidth: 1,
+    paddingBottom: 16,
   },
 });
