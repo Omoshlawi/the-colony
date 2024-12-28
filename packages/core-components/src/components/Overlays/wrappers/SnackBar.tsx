@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC, PropsWithChildren, useState } from "react";
-import { useTheme } from "@colony/core-theme";
 import { SnackBarOverlay } from "@colony/core-global";
+import { useTheme } from "@colony/core-theme";
+import React, { FC } from "react";
+import { View } from "react-native";
 
 type Props = {
   items?: Array<SnackBarOverlay>;

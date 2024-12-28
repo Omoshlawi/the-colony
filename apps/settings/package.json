@@ -41,12 +41,14 @@
     "react-native-screens": "~4.4.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "@colony/core-components": "*",
-    "@colony/core-theme": "*",
     "@colony/features-settings": "*",
     "@colony/core-global": "*",
-    "@colony/core-extensions": "*",
-    "@colony/core-api": "*"
+    "@colony/core-theme": "*",
+    "@colony/core-components": "*",
+    "@colony/core-api": "*",
+    "@colony/core-navigation": "*",
+    "@colony/core-storage": "*",
+    "@colony/core-extensions": "*"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -96,3 +96,11 @@ https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
 		"description": "react native use api hook"
 	}
 ```
+
+
+```json
+Host deps
+"@colony/core-global": "*",
+"@colony/core-theme": "*"
+
+```
