@@ -10,11 +10,6 @@
     "react-hook-form": "^7.53.2",
     "zod": "^3.23.8",
     "jwt-decode": "^4.0.0",
-    "@colony/core-api": "*",
-    "@colony/core-components": "*",
-    "@colony/core-extensions": "*",
-    "@colony/core-storage": "*",
-    "@colony/core-theme": "*",
     "@hookform/resolvers": "^3.9.1"
   },
   "peerDependencies": {
@@ -33,14 +28,19 @@
     "@colony/core-extensions": "*"
   },
   "devDependencies": {
+    "@colony/core-global": "*",
+    "@colony/core-theme": "*",
+    "@colony/core-components": "*",
+    "@colony/core-api": "*",
+    "@colony/core-navigation": "*",
+    "@colony/core-storage": "*",
+    "@colony/core-extensions": "*",
     "expo": "~52.0.20",
     "expo-router": "~4.0.15",
     "@expo/vector-icons": "^14.0.2",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.5",
-    "@colony/core-global": "*",
-    "@colony/core-theme": "*",
     "@babel/core": "^7.25.2",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
