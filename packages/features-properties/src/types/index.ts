@@ -1,3 +1,5 @@
+import { PropertyMediaSchema, PropertySchema } from "../utils";
+import z from "zod";
 export interface Property {
   id: string;
   name: string;
@@ -32,3 +34,6 @@ export interface Address {
   postalCode: string;
   description: string;
 }
+
+export type PropertyFormData = z.infer<typeof PropertySchema>;
+export type PropertyMediaFormData = z.infer<typeof PropertyMediaSchema>;
