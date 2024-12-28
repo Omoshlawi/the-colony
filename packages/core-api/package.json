@@ -7,15 +7,22 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@colony/core-global": "*",
     "axios": "^1.7.8",
+    "swr": "^2.2.5"
+  },
+  "peerDependencies": {
     "expo": "~52.0.20",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-native": "0.76.5",
-    "swr": "^2.2.5"
+    "@colony/core-global": "*"
   },
   "devDependencies": {
+    "@colony/core-global": "*",
+    "expo": "~52.0.20",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "react-native": "0.76.5",
     "@babel/core": "^7.25.2",
     "@types/jest": "^29.5.12",
     "@types/react": "~18.3.12",
