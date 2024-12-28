@@ -1,23 +1,39 @@
-import { toFormData } from "axios";
+import { HiveFileUpload } from "../types";
 import { constructUrl } from "./constructUrl";
 import { hiveFetch } from "./hiveFetch";
-import { HiveFileUpload } from "../types";
 
-export const uploadFile = async (
-  { path, ...imageFields }: { path: string; [fieldName: string]: string },
+export const uploadFiles = async (
+  {
+    path,
+    files,
+  }: {
+    path: string;
+    files: {
+      [fieldName: string]: {
+        uri: string;
+        name: string;
+        type: string; //Meme type
+      };
+    };
+  },
   params: {} = {}
 ) => {
-  const formdata = toFormData({
-    path,
+  const formData = new FormData();
+  // Add the path
+  formData.append("path", path);
+  // Add the file
+  Object.keys(files).forEach((fieldName) => {
+    formData.append(fieldName, files[fieldName] as any);
   });
-  Object.keys(imageFields).forEach((key) => {
-    const imageField = imageFields[key];
-    formdata.append(key, imageField)
-  });
+
   const url = constructUrl("/media/upload", params);
   const resp = await hiveFetch<HiveFileUpload>(url, {
     method: "POST",
-    data: formdata,
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+    data: formData,
   });
+
   return resp.data;
 };

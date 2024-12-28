@@ -1,3 +1,5 @@
+import httpClient from "./httpClient";
+
 /**
  * Constructs a URL with query parameters from a path and params object.
  *
@@ -29,3 +31,13 @@ export function constructUrl(
   const queryString = mergedParams.toString();
   return queryString ? `${basePath}?${queryString}` : basePath; // Combine base path and merged query string
 }
+
+/**
+ * Constructs a URL for streaming media files from the Hive system.
+ *
+ * @param path - The relative path to the media file in the Hive system.
+ * @returns A complete URL string pointing to the media file stream endpoint.
+ */
+export const getHiveFileUrl = (path: string) => {
+  return `${httpClient.defaults.baseURL}/media/files/stream/${path}`;
+};

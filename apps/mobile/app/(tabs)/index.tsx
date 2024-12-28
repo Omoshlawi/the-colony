@@ -1,23 +1,18 @@
 import {
-  ExpoIcon,
   FilePicker,
   InputSkeleton,
   ListTileSkeleton,
-  StyledPageLayout,
+  StyledPageLayout
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
-import { Box, Text, useTheme } from "@colony/core-theme";
+import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
-import { useState } from "react";
 import { LogBox, StyleSheet, TouchableOpacity } from "react-native";
 
 LogBox.ignoreAllLogs();
 
 export default function HomeScreen() {
   const { currentOrganization } = useSession();
-  const them = useTheme();
-  const [iconFamily, seticonFamily] = useState<string>();
-  const [icon, setIcon] = useState<ExpoIcon>();
 
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
