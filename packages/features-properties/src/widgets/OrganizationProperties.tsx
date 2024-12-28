@@ -1,16 +1,15 @@
-import { FlatList, StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { Box } from "@colony/core-theme";
-import { useProperties } from "../hooks";
+import { getHiveFileUrl } from "@colony/core-api";
 import {
   ErrorState,
   ExpansionTile,
   ImageViewer,
-  ListTile,
   ListTileSkeleton,
-  When,
+  When
 } from "@colony/core-components";
-import { getHiveFileUrl } from "@colony/core-api";
+import { Box } from "@colony/core-theme";
+import React from "react";
+import { FlatList, StyleSheet } from "react-native";
+import { useProperties } from "../hooks";
 
 const OrganizationPropertiesScreen = () => {
   const propertiesAsync = useProperties();
