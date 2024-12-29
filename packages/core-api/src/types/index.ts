@@ -21,3 +21,16 @@ export interface HiveFile {
   updatedAt: string;
   voided: boolean;
 }
+
+export interface UploadableFile {
+  uri: string;
+  name: string;
+  /**
+   * Meme type
+   */
+  type: string;
+  /**
+   * Web only
+   */
+  file?: File;
+}

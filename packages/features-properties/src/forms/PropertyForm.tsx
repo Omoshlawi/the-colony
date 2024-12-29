@@ -31,6 +31,7 @@ import {
 import { Property, PropertyFormData } from "../types";
 import { PropertySchema } from "../utils";
 import PropertyFormAttributeField from "./PropertyFormAttributeField";
+import PropertyFormThumbnailForm from "./PropertyFormThumbnailForm";
 
 type Props = {
   property?: Property;
@@ -69,7 +70,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
         subtitle: `property ${property ? "updated" : "created"} succesfull`,
         kind: "success",
       });
-      mutate("/relationship-types");
+      mutate("/properties");
     } catch (error) {
       const e = handleApiErrors<PropertyFormData>(error);
       if (e.detail) {
@@ -235,6 +236,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               />
             )}
           />
+          <PropertyFormThumbnailForm />
           <PropertyFormAttributeField />
 
           <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
