@@ -22,12 +22,15 @@ export const PropertySchema = z.object({
   attributes: z
     .array(
       z.object({
-        attributeId: z.string().uuid(),
+        attributeId: z
+          .string()
+          .min(1, "Required")
+          .uuid("Invalid attribute type"),
         value: z.string().min(1, "Required"),
       })
     )
     .optional(),
-  addressId: z.string().uuid("invalid address"),
+  addressId: z.string().min(1, "Required").uuid("invalid address"),
   media: z.array(PropertyMediaSchema.omit({ propertyId: true })).optional(),
   amenities: z.array(z.string().uuid()).optional(),
   categories: z.array(z.string().uuid()).optional(),

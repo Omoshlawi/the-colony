@@ -25,15 +25,49 @@ export interface Address {
   name: string;
   ward: string;
   county: string;
-  village: any;
+  village?: string;
   landmark: string;
-  latitude: any;
-  metadata: any;
-  longitude: any;
+  latitude?: string;
+  metadata?: Record<string, any>;
+  longitude?: string;
   subCounty: string;
   postalCode: string;
   description: string;
 }
 
+export interface Amenity {
+  id: string;
+  name: string;
+  organizationId: any;
+  icon: Icon;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface AttributeType {
+  id: string;
+  name: string;
+  organizationId: any;
+  icon: Icon;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Icon {
+  name: string;
+  family: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  organizationId: any;
+  icon: Icon;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export type PropertyFormData = z.infer<typeof PropertySchema>;
 export type PropertyMediaFormData = z.infer<typeof PropertyMediaSchema>;

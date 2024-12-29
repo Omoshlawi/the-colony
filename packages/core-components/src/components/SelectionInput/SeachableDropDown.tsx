@@ -12,7 +12,7 @@ import {
   Modal,
   StyleSheet,
   TouchableOpacity,
-  View
+  View,
 } from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
 import { StyledButton } from "../StyledButton";
@@ -56,7 +56,7 @@ interface DropdownProps<T, S> {
   maxSelections?: number;
 }
 
-function SearchableDropdown<T, S>({
+function SeachableDropDown<T, S>({
   data = [],
   initialValue,
   title,
@@ -459,4 +459,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SearchableDropdown;
+export default SeachableDropDown;
