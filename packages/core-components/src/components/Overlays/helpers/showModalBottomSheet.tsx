@@ -1,13 +1,18 @@
 import { useOverlayStore } from "@colony/core-global";
-import { ReactNode } from "react";
+import uniqueId from "lodash/uniqueId";
+import React, { ReactNode } from "react";
+import { DimensionValue } from "react-native";
 import { ModalOptions } from "../types";
 import { BottomSheetModalWrapper } from "../wrappers";
-import { DimensionValue } from "react-native";
-import uniqueId from "lodash/uniqueId";
 
 export const showModalBottomSheet = (
   component?: ReactNode,
-  options: ModalOptions & { title?: string; height?: DimensionValue } = {}
+  {
+    dismissable = true,
+    transparent,
+    height,
+    title,
+  }: ModalOptions & { title?: string; height?: DimensionValue } = {}
 ) => {
   const state = useOverlayStore.getState();
   const id = uniqueId(`${Date.now()}`);
@@ -19,14 +24,15 @@ export const showModalBottomSheet = (
       id,
       type: "modal",
       modalOptions: {
-        transparent: options.transparent ?? true,
-        dismissable: options.dismissable ?? true,
+        transparent: transparent ?? true,
+        dismissable: dismissable ?? true,
       },
       component: (
         <BottomSheetModalWrapper
-          onClose={dismiss}
-          height={options?.height}
-          title={options?.title}
+          height={height}
+          title={title}
+          dismissible={dismissable}
+          onDismiss={dismiss}
         >
           {component}
         </BottomSheetModalWrapper>

@@ -1,28 +1,32 @@
+import { useOverlayStore } from "@colony/core-global";
+import uniqueId from "lodash/uniqueId";
 import { ReactNode } from "react";
 import { ModalOptions } from "../types";
-import { useOverlayStore } from "@colony/core-global";
 import { DialogWrapper } from "../wrappers";
-import uniqueId from "lodash/uniqueId";
 
 export const showDialog = (
   component?: ReactNode,
-  options: ModalOptions = {}
+  { dismissable = true, transparent }: ModalOptions = {}
 ) => {
   const state = useOverlayStore.getState();
   const id = uniqueId(`${Date.now()}`);
-
+  const dismiss = () => state.dismiss(id);
   state.updateOverlays([
     ...state.overlays,
     {
-      component: <DialogWrapper>{component}</DialogWrapper>,
+      component: (
+        <DialogWrapper dismissible={dismissable} onDismiss={dismiss}>
+          {component}
+        </DialogWrapper>
+      ),
       modalOptions: {
-        transparent: options.transparent ?? true,
-        dismissable: options.dismissable ?? true,
+        transparent: transparent ?? true,
+        dismissable: dismissable ?? true,
       },
       id,
       type: "modal",
     },
   ]);
 
-  return () => state.dismiss(id);
+  return dismiss;
 };

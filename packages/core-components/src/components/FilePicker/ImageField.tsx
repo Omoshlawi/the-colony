@@ -326,7 +326,7 @@ const ImageField: FC<ImageFieldProps> = ({
       <BottomSheetModalWrapper
         title={modalTitle}
         height={modalHeight}
-        onClose={handleToggleLaunchBottomSheet}
+        onDismiss={handleToggleLaunchBottomSheet}
       >
         <Box
           flex={1}
@@ -369,17 +369,15 @@ const ImageField: FC<ImageFieldProps> = ({
   return (
     <>
       {renderTrigger(() => setShowOptionsBottomSheet(true))}
-      {showOptionsBottomSheet && (
-        <Modal
-          visible={showOptionsBottomSheet}
-          onRequestClose={handleToggleLaunchBottomSheet}
-          animationType="slide"
-          transparent
-          style={[styles.modal, customStyles.modal]}
-        >
-          {mode === "camera" ? renderCamera() : renderGalleryPicker()}
-        </Modal>
-      )}
+      <Modal
+        visible={showOptionsBottomSheet}
+        onRequestClose={handleToggleLaunchBottomSheet}
+        animationType="slide"
+        transparent
+        style={[styles.modal, customStyles.modal]}
+      >
+        {mode === "camera" ? renderCamera() : renderGalleryPicker()}
+      </Modal>
     </>
   );
 };

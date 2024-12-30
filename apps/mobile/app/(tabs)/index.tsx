@@ -2,11 +2,15 @@ import {
   FilePicker,
   InputSkeleton,
   ListTileSkeleton,
-  StyledPageLayout
+  showDialog,
+  showModal,
+  showModalBottomSheet,
+  StyledPageLayout,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
+import React from "react";
 import { LogBox, StyleSheet, TouchableOpacity } from "react-native";
 
 LogBox.ignoreAllLogs();
@@ -16,11 +20,40 @@ export default function HomeScreen() {
 
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
+  const handleShowBottomsheet = (number: number) => {
+    showModalBottomSheet(
+      <React.Fragment>
+        <Text>Bottomsheet - {number}</Text>
+        <TouchableOpacity onPress={() => handleShowBottomsheet(number + 1)}>
+          <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+            <Text>Bottomsheet</Text>
+          </Box>
+        </TouchableOpacity>
+      </React.Fragment>,
+      {}
+    );
+  };
+
   return (
     <StyledPageLayout>
       <Box gap={"m"} p={"m"}>
         <InputSkeleton />
         <ListTileSkeleton />
+        <TouchableOpacity onPress={() => showDialog(<Text>Dialog</Text>)}>
+          <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+            <Text>Dialog</Text>
+          </Box>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => showModal(<Text>Modal</Text>)}>
+          <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+            <Text>Modal</Text>
+          </Box>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => handleShowBottomsheet(1)}>
+          <Box p={"m"} backgroundColor={"primary"} borderRadius={"small"}>
+            <Text>Bottomsheet</Text>
+          </Box>
+        </TouchableOpacity>
         <FilePicker.ImageField
           successCallback={(assets) => alert(JSON.stringify(assets, null, 2))}
           multiple

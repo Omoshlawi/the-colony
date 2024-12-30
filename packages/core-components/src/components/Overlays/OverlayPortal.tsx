@@ -1,6 +1,12 @@
-import { useOverlays, useOverlayStore } from "@colony/core-global";
-import React, { FC, PropsWithChildren, useMemo } from "react";
-import { Modal, StyleSheet, View } from "react-native";
+import { useOverlays } from "@colony/core-global";
+import React, {
+  FC,
+  PropsWithChildren,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
+import Overlay from "./Overlay";
 import { SnackBar } from "./wrappers";
 
 type Props = PropsWithChildren<{}>;
@@ -15,63 +21,39 @@ const OverlayPortal: FC<Props> = ({ children }) => {
     () => overlays.filter((o) => o.type === "modal"),
     [overlays]
   );
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShow((state) => !state);
+    }, 3000);
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <>
       {children}
-
       {modals.map((modal) => (
-        <Modal
+        <Overlay
           key={modal.id}
-          visible
+          animation={modal.modalOptions?.animation ?? "slide"}
           transparent={modal.modalOptions?.transparent}
-          animationType="slide"
-          onRequestClose={() => {
+          onRequestDismiss={() => {
             if (modal.modalOptions?.dismissable) {
               dismiss(modal.id);
             }
           }}
         >
-          <View style={styles.modalContentContainer}>{modal.component}</View>
-          <SnackBar items={snackItems} />
-        </Modal>
+          <>
+            {modal.component}
+            <SnackBar items={snackItems} />
+          </>
+        </Overlay>
       ))}
-      {/* {visible && (
-        <View
-          // visible={show}
-          // transparent={false}
-          // animationType="slide"
-          // onRequestClose={() => {
-          //   if (dismissable) {
-          //     // Todo, handle dismiss
-          //   }
-          // }}
-          style={{
-            display: "flex",
-            width: "100%",
-            height: "100%",
-            // backgroundColor: Color("black").alpha(0.5).toString(),
-            position: "absolute",
-          }}
-        >
-          <StyledPageLayout backgroundColor="transparent">
-            <View style={styles.modalContentContainer}>{component}</View>
-          </StyledPageLayout>
-          <SnackBar items={snackItems} />
-        </View>
-      )} */}
-
       <SnackBar items={snackItems} />
     </>
   );
 };
 
 export default OverlayPortal;
-
-const styles = StyleSheet.create({
-  modalContentContainer: {
-    width: "100%",
-    height: "100%",
-    // backgroundColor: "red",
-  },
-});

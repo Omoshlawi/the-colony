@@ -1,15 +1,13 @@
-import {
-  StatusBar,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { FC, PropsWithChildren } from "react";
 import Constants from "expo-constants";
-import { StyledPageLayout } from "../../StyledLayout";
+import React, { FC, PropsWithChildren } from "react";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from "react-native";
 import AppBar from "../../AppBar";
 import { ExpoIconComponent } from "../../ExpoIcons";
+import { StyledPageLayout } from "../../StyledLayout";
 type Props = PropsWithChildren<{
   title?: string;
   onClose?: () => void;
