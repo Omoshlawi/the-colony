@@ -1,10 +1,10 @@
-import { SnackBarOverlay } from "@colony/core-global";
+import { Overlay } from "@colony/core-global";
 import { useTheme } from "@colony/core-theme";
 import React, { FC } from "react";
 import { View } from "react-native";
 
 type Props = {
-  items?: Array<SnackBarOverlay>;
+  items?: Array<Overlay>;
 };
 
 const SnackBar: FC<Props> = ({ items = [] }) => {

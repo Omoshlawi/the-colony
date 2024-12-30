@@ -7,11 +7,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 interface Props extends PropsWithChildren {
   withSafeArea?: boolean;
+  backgroundColor?: string;
 }
 
 export const StyledPageLayout: FC<Props> = ({
   children,
   withSafeArea = true,
+  backgroundColor,
 }) => {
   const {
     userPreferences: { theme },
@@ -24,9 +26,10 @@ export const StyledPageLayout: FC<Props> = ({
       height={"100%"}
       flexGrow={1}
       flexDirection={"column"}
+      style={[backgroundColor && { backgroundColor }]}
     >
       {withSafeArea && (
-        <SafeAreaView style={{ flex: 1 }} >{children}</SafeAreaView>
+        <SafeAreaView style={{ flex: 1 }}>{children}</SafeAreaView>
       )}
       {!withSafeArea && children}
       <Switch

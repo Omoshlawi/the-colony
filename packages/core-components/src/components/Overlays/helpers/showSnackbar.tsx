@@ -1,4 +1,4 @@
-import { useModalOverlayStore, useSnackBarOverlay } from "@colony/core-global";
+import { useOverlayStore } from "@colony/core-global";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import uniqueId from "lodash/uniqueId";
 import React, { FC, useEffect } from "react";
@@ -17,12 +17,12 @@ export const showSnackbar = ({
   options?: { timeout?: number; dismissible?: boolean };
 } = {}) => {
   const timeout = options?.timeout;
-  const state = useModalOverlayStore.getState();
+  const state = useOverlayStore.getState();
 
   const id = uniqueId(`${Date.now()}`);
 
-  state.updateSnackbarOverlay([
-    ...state.snackbarOverlay,
+  state.updateOverlays([
+    ...state.overlays,
     {
       component: (
         <Snackbaritem
@@ -31,17 +31,11 @@ export const showSnackbar = ({
           dismissible={options?.dismissible}
           subtitle={subtitle}
           kind={kind}
-          onRemove={() => {
-            useModalOverlayStore.setState((state) => ({
-              ...state,
-              snackbarOverlay: state.snackbarOverlay.filter(
-                (over) => over.id !== id
-              ),
-            }));
-          }}
+          onRemove={() => state.dismiss(id)}
         />
       ),
       id: id,
+      type: "snackbar",
     },
   ]);
 };

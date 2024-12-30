@@ -1,33 +1,33 @@
 import { ReactNode } from "react";
 
 export interface User {
-  id: string
-  username: string
-  profileUpdated: boolean
-  accountVerified?: string
-  voided: boolean
-  isAdmin: boolean
-  password: string
-  lastLogin?: string
-  createdAt: string
-  updatedAt: string
-  person: Person
+  id: string;
+  username: string;
+  profileUpdated: boolean;
+  accountVerified?: string;
+  voided: boolean;
+  isAdmin: boolean;
+  password: string;
+  lastLogin?: string;
+  createdAt: string;
+  updatedAt: string;
+  person: Person;
 }
 
 export interface Person {
-  id: string
-  firstName?: string
-  lastName?: string
-  surname?: string
-  userId: string
-  avatarUrl?: string
-  phoneNumber: string
-  email: string
-  gender: string
-  createdAt: string
-  updatedAt: string
-  voided: boolean
-  name?: string
+  id: string;
+  firstName?: string;
+  lastName?: string;
+  surname?: string;
+  userId: string;
+  avatarUrl?: string;
+  phoneNumber: string;
+  email: string;
+  gender: string;
+  createdAt: string;
+  updatedAt: string;
+  voided: boolean;
+  name?: string;
 }
 
 export interface TokenPair {
@@ -50,14 +50,12 @@ export type UserPreference = {
 
 export type Appconfig = {};
 
-export type ModalOverlay = {
-  visible: boolean; // Modal visibility
-  component?: ReactNode;
-  transparent: boolean;
-  dismissable: boolean;
-};
-
-export type SnackBarOverlay = {
+export type Overlay = {
   id: string;
-  component?: ReactNode;
+  component?: React.ReactElement;
+  type: "snackbar" | "modal";
+  modalOptions?:{
+    transparent?: boolean
+    dismissable?: boolean
+  }
 };
