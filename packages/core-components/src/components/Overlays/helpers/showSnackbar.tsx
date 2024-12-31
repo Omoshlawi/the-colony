@@ -1,5 +1,5 @@
 import { useOverlayStore } from "@colony/core-global";
-import { Box, Text, useTheme } from "@colony/core-theme";
+import { Box, Color, Text, useTheme } from "@colony/core-theme";
 import uniqueId from "lodash/uniqueId";
 import React, { FC, useEffect } from "react";
 import { ExpoIconComponent } from "../../ExpoIcons";
@@ -67,6 +67,15 @@ const Snackbaritem: FC<Props> = ({
     return () => clearTimeout(timer);
   }, [timeout, onRemove]);
 
+  const backgroundColor =
+    kind === "info"
+      ? "black"
+      : kind === "error"
+      ? theme.colors.errorContainer
+      : kind === "warning"
+      ? theme.colors.warningContainer
+      : theme.colors.successContainer;
+
   return (
     <Box
       style={{ backgroundColor: "white" }}
@@ -78,15 +87,9 @@ const Snackbaritem: FC<Props> = ({
         p={"s"}
         gap={"m"}
         flexDirection={"row"}
-        backgroundColor={
-          kind === "info"
-            ? "text"
-            : kind === "error"
-            ? "errorContainer"
-            : kind === "warning"
-            ? "warningContainer"
-            : "successContainer"
-        }
+        style={{
+          backgroundColor: Color(backgroundColor).alpha(0.2).toString(),
+        }}
       >
         {leading ?? (
           <ExpoIconComponent
@@ -95,13 +98,14 @@ const Snackbaritem: FC<Props> = ({
             name={
               kind === "info" || kind === "success" ? "infocirlceo" : "warning"
             }
+            color={Color(backgroundColor).alpha(1).toString()}
           />
         )}
         <Box flex={1} flexDirection={"column"}>
           {title && (
             <Text
               style={{
-                color: kind === "info" ? theme.colors.background : "black",
+                color: "black",
                 flex: 1,
               }}
               variant={"bodySmall"}
@@ -113,7 +117,7 @@ const Snackbaritem: FC<Props> = ({
           {subtitle && (
             <Text
               style={{
-                color: kind === "info" ? theme.colors.background : "black",
+                color: Color(backgroundColor).alpha(1).toString(),
               }}
               variant={"bodySmall"}
             >

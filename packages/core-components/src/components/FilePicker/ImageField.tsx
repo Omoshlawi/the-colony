@@ -93,8 +93,6 @@ const ImageField: FC<ImageFieldProps> = ({
   customButtons,
   customStyles = {},
 }) => {
-  const [mode, setMode] = useState<"camera" | "gallery" | null>(null);
-
   const requestMediaLibPermissions = useCallback(async () => {
     if (Platform.OS !== "web") {
       const { status } =

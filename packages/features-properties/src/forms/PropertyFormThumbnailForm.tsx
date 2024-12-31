@@ -57,7 +57,7 @@ const PropertyFormThumbnailForm = () => {
             setFile(undefined);
           } catch (e) {
             showSnackbar({
-              kind: "error",
+              kind: "success",
               title: "File upload error",
               subtitle: JSON.stringify(handleApiErrors(e), null, 2),
             });
