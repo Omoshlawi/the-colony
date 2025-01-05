@@ -1,15 +1,9 @@
 import Constants from "expo-constants";
 import React, { FC, PropsWithChildren, ReactNode, useState } from "react";
-import {
-  Modal,
-  StatusBar,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Modal, StyleSheet, TouchableOpacity } from "react-native";
 import AppBar from "../../AppBar";
 import { ExpoIconComponent } from "../../ExpoIcons";
-import { StyledPageLayout } from "../../StyledLayout";
+import { Box } from "@colony/core-theme";
 
 interface ClickableModalWrapperProps extends PropsWithChildren {
   renderContent: (dismiss?: () => void) => ReactNode;
@@ -43,29 +37,27 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
         accessibilityLabel="Close modal"
         accessibilityRole="button"
       >
-        <StyledPageLayout withSafeArea={false}>
-          <View
-            style={[styles.safeArea, { marginTop: StatusBar.currentHeight }]}
-          >
-            <AppBar
-              title={title}
-              actions={renderActions?.(handleDismiss)}
-              leading={
-                <TouchableOpacity
-                  activeOpacity={0.5}
-                  onPress={() => setShowModal(false)}
-                >
-                  <ExpoIconComponent
-                    family="Ionicons"
-                    name="arrow-back"
-                    size={28}
-                  />
-                </TouchableOpacity>
-              }
-            />
+        <Box flex={1} backgroundColor={"background"}>
+          <AppBar
+            title={title}
+            actions={renderActions?.(handleDismiss)}
+            leading={
+              <TouchableOpacity
+                activeOpacity={0.5}
+                onPress={() => setShowModal(false)}
+              >
+                <ExpoIconComponent
+                  family="Ionicons"
+                  name="arrow-back"
+                  size={28}
+                />
+              </TouchableOpacity>
+            }
+          />
+          <Box flex={1} backgroundColor={"background"}>
             {renderContent(handleDismiss)}
-          </View>
-        </StyledPageLayout>
+          </Box>
+        </Box>
       </Modal>
     </>
   );
