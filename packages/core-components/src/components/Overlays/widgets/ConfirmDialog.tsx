@@ -1,6 +1,6 @@
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import React, { FC } from "react";
 import { Box, Text } from "@colony/core-theme";
+import React, { FC } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
 
 type Props = {
   title: string;

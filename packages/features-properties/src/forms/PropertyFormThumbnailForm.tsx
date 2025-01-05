@@ -1,35 +1,27 @@
 import {
-  ErrorState,
-  ExpoIcon,
-  ExpoIconComponent,
-  FilePicker,
-  ImageViewer,
-  InputSkeleton,
-  ListTile,
-  SeachableDropDown,
-  showSnackbar,
-  StyledInput,
-  When,
-} from "@colony/core-components";
-import { Box, Color, Text, useTheme } from "@colony/core-theme";
-import React, { useCallback, useState } from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import {
-  ActivityIndicator,
-  ImageBackground,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { useAttributeTypes } from "../hooks";
-import { PropertyFormData } from "../types";
-import {
+  cleanFiles,
   getHiveFileUrl,
   handleApiErrors,
   UploadableFile,
   uploadFiles,
 } from "@colony/core-api";
+import {
+  ExpoIconComponent,
+  FilePicker,
+  ImageViewer,
+  showSnackbar,
+} from "@colony/core-components";
+import { Box, Color, Text, useTheme } from "@colony/core-theme";
+import React, { useEffect, useState } from "react";
+import { Controller, useFormContext } from "react-hook-form";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { PropertyFormData } from "../types";
 
 const PropertyFormThumbnailForm = () => {
   const form = useFormContext<PropertyFormData>();
@@ -37,6 +29,26 @@ const PropertyFormThumbnailForm = () => {
   const gray = Color(theme.colors.hintColor);
   const [file, setFile] = useState<UploadableFile>();
   const [loading, setLoading] = useState(false);
+  const thumbnail = form.watch("thumbnail");
+  useEffect(() => {
+    return () => {
+      if (thumbnail)
+        cleanFiles([thumbnail])
+          .then(({ count }) =>
+            showSnackbar({
+              kind: "success",
+              subtitle: `Deleted uploaded thumbnail files (${count}) succesfully`,
+            })
+          )
+          .catch((err) =>
+            showSnackbar({
+              kind: "error",
+              title: "error",
+              subtitle: `Error cleaning file: ${JSON.stringify(err, null, 2)}`,
+            })
+          );
+    };
+  }, [thumbnail]);
 
   return (
     <Controller
@@ -55,9 +67,14 @@ const PropertyFormThumbnailForm = () => {
             const thumbnail = uploaded["thumbnail"][0];
             onChange(thumbnail.path);
             setFile(undefined);
-          } catch (e) {
             showSnackbar({
               kind: "success",
+              title: "success",
+              subtitle: "File upploaded succesfully",
+            });
+          } catch (e) {
+            showSnackbar({
+              kind: "error",
               title: "File upload error",
               subtitle: JSON.stringify(handleApiErrors(e), null, 2),
             });
@@ -79,7 +96,7 @@ const PropertyFormThumbnailForm = () => {
               }
               renderTrigger={(onTrigger) => (
                 <TouchableHighlight
-                  onPress={onTrigger}
+                  onPress={!value ? onTrigger : undefined}
                   underlayColor={gray.darken(0.1).toString()}
                   disabled={loading}
                   style={[
@@ -144,13 +161,16 @@ const PropertyFormThumbnailForm = () => {
                         </TouchableOpacity>
                       </View>
                     )}
-
-                    <ExpoIconComponent
-                      family="Feather"
-                      name="upload"
-                      color={"white"}
-                    />
-                    <Text style={{ color: "white" }}>Upload thumbnail</Text>
+                    {!value && (
+                      <>
+                        <ExpoIconComponent
+                          family="Feather"
+                          name="upload"
+                          color={"white"}
+                        />
+                        <Text style={{ color: "white" }}>Upload thumbnail</Text>
+                      </>
+                    )}
                     {/* Loading indicator when uploading */}
                     {loading && (
                       <View style={[styles.loading]}>

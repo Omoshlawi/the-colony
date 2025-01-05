@@ -2,6 +2,7 @@ import { Platform } from "react-native";
 import { HiveFileUpload, UploadableFile } from "../types";
 import { constructUrl } from "./constructUrl";
 import { hiveFetch } from "./hiveFetch";
+import handleAPIErrors from "./handleApiErrors";
 
 export const uploadFiles = async (
   {
@@ -35,16 +36,19 @@ export const uploadFiles = async (
           name: file.name || `file-${Date.now()}`, // Fallback for missing name
         };
 
-        formData.append(fieldName, fileToUpload as any);
+        formData.append(
+          fieldName,
+          Platform.OS === "web"
+            ? (fileToUpload.file as Blob)
+            : (fileToUpload as any),
+          fileToUpload.name
+        );
       });
     });
 
-    const url = constructUrl("/media/upload", params);
+    const url = constructUrl("/media/files/upload", params);
     const resp = await hiveFetch<HiveFileUpload>(url, {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       data: formData,
       transformRequest: (data) => data,
       onUploadProgress: onProgress
@@ -55,12 +59,25 @@ export const uploadFiles = async (
             onProgress(percentCompleted);
           }
         : undefined,
-      // timeout: 30000, // 30 second timeout
+      timeout: 30000, // 30 second timeout
     });
 
     return resp.data;
+  } catch (error: any) {
+    console.error("Upload error:", handleAPIErrors(error));
+    throw error;
+  }
+};
+
+export const cleanFiles = async (paths: Array<string>) => {
+  try {
+    const resp = await hiveFetch<{ count: number }>("/media/clean", {
+      method: "DELETE",
+      data: { paths },
+    });
+    return resp.data;
   } catch (error) {
-    console.error("Upload error:", error);
+    console.error("Clean files error", handleAPIErrors(error));
     throw error;
   }
 };
