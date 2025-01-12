@@ -1,21 +1,33 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
 import {
+  ActionsBottomSheet,
   AppBar,
+  EmptyState,
+  ErrorState,
   ExpoIconComponent,
+  ListTile,
+  ListTileSkeleton,
   showModal,
   StyledPageLayout,
+  When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
-import { Privileges } from "../widgets";
+import React from "react";
+import {
+  FlatList,
+  StyleSheet,
+  TouchableOpacity
+} from "react-native";
 import { PrivilegeForm } from "../forms";
+import { usePrivileges } from "../hooks";
 
 const PrivilegesScreen = () => {
+  const privilegesAsync = usePrivileges();
   const handleAdd = () => {
     const dispose = showModal(<PrivilegeForm onSuccess={() => dispose()} />, {
       title: "Add Privilege",
     });
   };
+
   return (
     <StyledPageLayout>
       <AppBar
@@ -27,7 +39,63 @@ const PrivilegesScreen = () => {
         }
       />
       <Box flex={1}>
-        <Privileges />
+        <When
+          asyncState={{ ...privilegesAsync, data: privilegesAsync.privileges }}
+          loading={() => (
+            <Box gap={"m"}>
+              {Array.from({ length: 6 }).map((_, index) => (
+                <ListTileSkeleton key={index} />
+              ))}
+            </Box>
+          )}
+          error={(error) => <ErrorState error={error} />}
+          success={(privileges) => {
+            if (!privileges.length)
+              return <EmptyState message="No privileges" />;
+
+            return (
+              <FlatList
+                style={styles.scrollable}
+                data={privileges}
+                keyExtractor={(amenity) => amenity.id}
+                renderItem={({ item }) => (
+                  <ActionsBottomSheet
+                    title={`${item.name} Actions`}
+                    formTitle="Update Privilege"
+                    renderForm={(dispose) => (
+                      <PrivilegeForm privilege={item} onSuccess={dispose} />
+                    )}
+                  >
+                    <ListTile
+                      disabled
+                      title={item.name}
+                      subtitle={item.description}
+                      leading={
+                        <ExpoIconComponent
+                          {...{
+                            family: "MaterialCommunityIcons",
+                            name: "security",
+                          }}
+                          size={24}
+                          color="#09b9e8"
+                        />
+                      }
+                      trailing={
+                        <ExpoIconComponent
+                          family="MaterialCommunityIcons"
+                          name="chevron-right"
+                          size={24}
+                        />
+                      }
+                      borderBottom
+                    />
+                  </ActionsBottomSheet>
+                )}
+                ListEmptyComponent={EmptyState}
+              />
+            );
+          }}
+        />
       </Box>
     </StyledPageLayout>
   );
@@ -35,4 +103,8 @@ const PrivilegesScreen = () => {
 
 export default PrivilegesScreen;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  scrollable: {
+    flex: 1,
+  },
+});
