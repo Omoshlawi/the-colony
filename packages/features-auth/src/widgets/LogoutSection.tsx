@@ -4,13 +4,10 @@ import {
   ListTile,
   SectionCard,
   showDialog,
-  showSnackbar,
-  StyledButton,
+  showSnackbar
 } from "@colony/core-components";
 import React from "react";
 import { useAuthAPi } from "../hooks";
-import { Box, Text } from "@colony/core-theme";
-import { View } from "react-native";
 
 export const LogoutSection = () => {
   const { logoutUser } = useAuthAPi();

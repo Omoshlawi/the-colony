@@ -184,6 +184,7 @@ const PropertyFormThumbnailForm = () => {
                 </TouchableHighlight>
               )}
             />
+            {error?.message && <Text color={"error"}>{error?.message}</Text>}
           </Box>
         );
       }}

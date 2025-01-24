@@ -1,10 +1,11 @@
 import { getHiveFileUrl } from "@colony/core-api";
 import {
+  EmptyState,
   ErrorState,
   ExpansionTile,
   ImageViewer,
   ListTileSkeleton,
-  When
+  When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import React from "react";
@@ -27,30 +28,34 @@ const OrganizationPropertiesScreen = () => {
         </Box>
       )}
       error={(error) => <ErrorState error={error} />}
-      success={(properties) => (
-        <FlatList
-          data={properties}
-          keyExtractor={(property) => property.id}
-          renderItem={({ item }) => (
-            <ExpansionTile
-              title={item.name}
-              subtitle={item.organization?.name}
-              childContainerStyles={{
-                padding: 0,
-                marginHorizontal: 0,
-              }}
-              borderBottom
-            >
-              <ImageViewer
-                // source="https://picsum.photos/seed/696/3000/2000"
-                source={getHiveFileUrl(item.thumbnail)}
-                style={styles.img}
-                contentFit="contain"
-              />
-            </ExpansionTile>
-          )}
-        />
-      )}
+      success={(properties) => {
+        if (!properties?.length)
+          return <EmptyState message="No properties for this organization" />;
+        return (
+          <FlatList
+            data={properties}
+            keyExtractor={(property) => property.id}
+            renderItem={({ item }) => (
+              <ExpansionTile
+                title={item.name}
+                subtitle={item.organization?.name}
+                childContainerStyles={{
+                  padding: 0,
+                  marginHorizontal: 0,
+                }}
+                borderBottom
+              >
+                <ImageViewer
+                  // source="https://picsum.photos/seed/696/3000/2000"
+                  source={getHiveFileUrl(item.thumbnail)}
+                  style={styles.img}
+                  contentFit="cover"
+                />
+              </ExpansionTile>
+            )}
+          />
+        );
+      }}
     />
   );
 };

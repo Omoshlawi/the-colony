@@ -79,7 +79,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
           }
           flexDirection={"row"}
           alignItems={"center"}
-          height={height} // Fixed height to prevent layout shifts
+          height={height * (props.numberOfLines ?? 1)} // Fixed height to prevent layout shifts
           width={"100%"}
         >
           {prefixIcon && (
