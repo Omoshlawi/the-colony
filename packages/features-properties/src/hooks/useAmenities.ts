@@ -13,4 +13,15 @@ const useAmenities = () => {
   };
 };
 
+export const useAmenity = (id: string) => {
+  const path = `/amenities/${id}`;
+  const { data, error, isLoading, mutate } =
+    useApi<HiveFetchResponse<Amenity>>(path);
+  return {
+    amenity: data?.data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
 export default useAmenities;

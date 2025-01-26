@@ -13,4 +13,16 @@ const useAttributeTypes = () => {
   };
 };
 
+export const useAttributeType = (id: string) => {
+  const path = `/attribute-types/${id}`;
+  const { data, error, isLoading, mutate } =
+    useApi<HiveFetchResponse<AttributeType>>(path);
+  return {
+    attributeType: data?.data,
+    isLoading,
+    error,
+    mutate,
+  };
+}
+
 export default useAttributeTypes;

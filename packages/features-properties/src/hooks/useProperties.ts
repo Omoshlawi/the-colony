@@ -1,4 +1,4 @@
-import { HiveFetchResponse, useApi } from "@colony/core-api";
+import { constructUrl, HiveFetchResponse, useApi } from "@colony/core-api";
 import { Property } from "../types";
 
 const useProperties = () => {
@@ -14,7 +14,10 @@ const useProperties = () => {
 };
 
 export const useProperty = (id: string) => {
-  const path = `/properties/${id}`;
+  const path = constructUrl(`/properties/${id}`, {
+    v: "custom:include(categories:include(category),amenities:include(amenity),attributes:include(attribute))",
+  });
+
   const { data, error, isLoading, mutate } =
     useApi<HiveFetchResponse<Property>>(path);
   return {

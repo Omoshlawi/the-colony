@@ -3,16 +3,50 @@ import z from "zod";
 export interface Property {
   id: string;
   name: string;
-  description?: string;
+  description: any;
   thumbnail: string;
   organizationId: string;
-  organization: Organization;
+  organization?: Organization;
   addressId: string;
-  address: Address;
+  address?: Address;
   createdBy: string;
   voided: boolean;
   createdAt: string;
   updatedAt: string;
+  categories?: PropertyCategory[];
+  amenities?: PropertyAmenity[];
+  attributes?: Attribute[];
+}
+
+export interface PropertyAmenity {
+  id: string;
+  propertyId: string;
+  amenityId: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  amenity?: Amenity;
+}
+
+export interface PropertyCategory {
+  id: string;
+  propertyId: string;
+  categoryId: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  category?: Category;
+}
+
+export interface Attribute {
+  id: string;
+  propertyId: string;
+  attributeId: string;
+  value: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  attribute?: AttributeType;
 }
 
 export interface Organization {

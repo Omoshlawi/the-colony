@@ -13,4 +13,15 @@ const useCategories = () => {
   };
 };
 
+export const useCategory = (id: string) => {
+  const path = `/categories/${id}`;
+  const { data, error, isLoading, mutate } =
+    useApi<HiveFetchResponse<Category>>(path);
+  return {
+    category: data?.data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
 export default useCategories;

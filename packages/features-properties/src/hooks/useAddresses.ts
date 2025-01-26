@@ -12,3 +12,16 @@ export const useAddresses = (filters: Record<string, any>) => {
     mutate,
   };
 };
+
+
+export const useAddress = (id: string) => {
+  const path = `/addresses/${id}`;
+  const { data, error, isLoading, mutate } =
+    useApi<HiveFetchResponse<Address>>(path);
+  return {
+    address: data?.data,
+    isLoading,
+    error,
+    mutate,
+  };
+}
