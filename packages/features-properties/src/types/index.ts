@@ -3,6 +3,7 @@ import z from "zod";
 export interface Property {
   id: string;
   name: string;
+  description?: string;
   thumbnail: string;
   organizationId: string;
   organization: Organization;

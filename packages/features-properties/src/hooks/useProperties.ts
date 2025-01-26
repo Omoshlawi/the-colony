@@ -13,4 +13,16 @@ const useProperties = () => {
   };
 };
 
+export const useProperty = (id: string) => {
+  const path = `/properties/${id}`;
+  const { data, error, isLoading, mutate } =
+    useApi<HiveFetchResponse<Property>>(path);
+  return {
+    property: data?.data,
+    isLoading,
+    error,
+    mutate,
+  };
+};
+
 export default useProperties;

@@ -5,15 +5,19 @@ import {
   ExpansionTile,
   ImageViewer,
   ListTileSkeleton,
+  showModal,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useProperties } from "../hooks";
+import { Link, useRouter } from "expo-router";
+import { RoutePaths } from "../utils";
 
 const OrganizationPropertiesScreen = () => {
   const propertiesAsync = useProperties();
+
   return (
     <When
       asyncState={{
@@ -36,23 +40,29 @@ const OrganizationPropertiesScreen = () => {
             data={properties}
             keyExtractor={(property) => property.id}
             renderItem={({ item }) => (
-              <ExpansionTile
-                title={item.name}
-                
-                subtitle={item.organization?.name}
-                childContainerStyles={{
-                  padding: 0,
-                  marginHorizontal: 0,
+              <Link
+                href={{
+                  pathname: RoutePaths.PROPERTY_DETAIL,
+                  params: { propertyId: item.id },
                 }}
-                borderBottom
               >
-                <ImageViewer
-                  // source="https://picsum.photos/seed/696/3000/2000"
-                  source={getHiveFileUrl(item.thumbnail)}
-                  style={styles.img}
-                  contentFit="cover"
-                />
-              </ExpansionTile>
+                <ExpansionTile
+                  title={item.name}
+                  subtitle={item.organization?.name}
+                  childContainerStyles={{
+                    padding: 0,
+                    marginHorizontal: 0,
+                  }}
+                  borderBottom
+                >
+                  <ImageViewer
+                    // source="https://picsum.photos/seed/696/3000/2000"
+                    source={getHiveFileUrl(item.thumbnail)}
+                    style={styles.img}
+                    contentFit="cover"
+                  />
+                </ExpansionTile>
+              </Link>
             )}
           />
         );

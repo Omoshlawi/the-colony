@@ -10,7 +10,7 @@ export const RoutePaths = Object.freeze({
   RESOURCES_LIST_SCREEN: "(dashboard)/resources",
   APP_SERVICES_SCREEN: "(dashboard)/app-services",
   ADDRESS_BOOK_SCREEN: "(dashboard)/address-book",
-  ORGANIZATION_PROPERTIES_SCREEN: "properties",
+  ORGANIZATION_PROPERTIES_SCREEN: "(properties)/properties",
 });
 
 export const dashboardMenuitems: MenuItem[] = [
