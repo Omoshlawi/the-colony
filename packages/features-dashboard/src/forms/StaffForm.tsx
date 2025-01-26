@@ -95,7 +95,6 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
                 renderItem={({ item, selected }) => (
                   <Box backgroundColor={selected ? "disabledColor" : undefined}>
                     <ListTile
-                      disabled
                       title={item.username}
                       subtitle={item?.person?.email}
                       leading={

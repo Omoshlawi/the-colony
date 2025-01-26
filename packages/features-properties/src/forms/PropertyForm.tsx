@@ -175,7 +175,6 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
                       >
                         <ListTile
                           title={item?.name}
-                          disabled
                           trailing={
                             <ExpoIconComponent {...(item!.icon as ExpoIcon)} />
                           }
@@ -224,7 +223,6 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
                       >
                         <ListTile
                           title={item?.name}
-                          disabled
                           trailing={
                             <ExpoIconComponent {...(item!.icon as ExpoIcon)} />
                           }

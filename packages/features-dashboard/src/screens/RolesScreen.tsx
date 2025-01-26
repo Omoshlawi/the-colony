@@ -65,7 +65,6 @@ const RolesScreen = () => {
                     <ListTile
                       // onPress={() => handleLaunchBottomsheet(item)}
                       title={item.name}
-                      disabled
                       subtitle={item.description}
                       leading={
                         <ExpoIconComponent

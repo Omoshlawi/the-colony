@@ -68,7 +68,6 @@ const AppServiceResources: FC<Props> = ({ service: { name } }) => {
             const resourceData = data.schemas[resource];
             return (
               <ListTile
-                disabled
                 key={`${resource}-${idx}`}
                 title={resource}
                 subtitle={resourceData.columnNames.join(", ")}

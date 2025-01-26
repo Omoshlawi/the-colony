@@ -38,6 +38,7 @@ const OrganizationPropertiesScreen = () => {
             renderItem={({ item }) => (
               <ExpansionTile
                 title={item.name}
+                
                 subtitle={item.organization?.name}
                 childContainerStyles={{
                   padding: 0,

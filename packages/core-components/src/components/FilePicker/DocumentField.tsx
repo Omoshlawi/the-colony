@@ -247,7 +247,7 @@ const DocumentField: FC<DocumentFieldProps> = ({
         <BottomSheetModalWrapper
           title={modalTitle}
           height={modalHeight}
-          onClose={handleToggleLaunchBottomSheet}
+          onDismiss={handleToggleLaunchBottomSheet}
         >
           <Box
             flex={1}

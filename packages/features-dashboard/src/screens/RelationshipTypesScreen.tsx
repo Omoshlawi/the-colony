@@ -16,7 +16,7 @@ import {
   FlatList,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { RelationshipTypesForm } from "../forms";
 import { useRelationshipTypes } from "../hooks";
@@ -28,7 +28,10 @@ const RelationshipTypesScreen = () => {
   const handleUpdateRelationshipType = (relationshipType: RelationshipType) => {
     const dispose = showModal(
       <RelationshipTypesForm
-        onSuccess={() => dispose()}
+        onSuccess={() => {
+          dispose();
+          relationshipTypesAsync.mutate();
+        }}
         relationshipType={relationshipType}
       />,
       {
@@ -105,8 +108,8 @@ const RelationshipTypesScreen = () => {
                 renderItem={({ item }) => (
                   <ListTile
                     onPress={() => handleLaunchBottomsheet(item)}
-                    title={item.aIsToB}
-                    subtitle={item.bIsToA}
+                    title={`A ${item.aIsToB} B`}
+                    subtitle={`B ${item.bIsToA} A`}
                     leading={
                       <ExpoIconComponent
                         family="MaterialIcons"

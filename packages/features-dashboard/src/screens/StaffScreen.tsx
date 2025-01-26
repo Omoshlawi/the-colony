@@ -80,7 +80,6 @@ const StaffScreen = () => {
                     )}
                   >
                     <ListTile
-                      disabled
                       title={item.memberUser.username}
                       subtitle={`${item.memberUser.person.email}`}
                       leading={

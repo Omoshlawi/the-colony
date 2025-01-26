@@ -18,6 +18,7 @@ type Props = PropsWithChildren<{
   containerStyles?: StyleProp<ViewStyle>;
   borderBottom?: boolean;
   onToggleExpansion?: (expanded: boolean) => void;
+  onPress?: () => void;
 }>;
 
 const ExpansionTile: FC<Props> = ({
@@ -30,6 +31,7 @@ const ExpansionTile: FC<Props> = ({
   containerStyles,
   borderBottom,
   onToggleExpansion,
+  onPress,
 }) => {
   const [expanded, setExpanded] = useState(defaultExpanded);
   const theme = useTheme();
@@ -38,11 +40,15 @@ const ExpansionTile: FC<Props> = ({
     onToggleExpansion?.(expanded);
   }, [expanded]);
   return (
-    <Box
-      backgroundColor={expanded ? "disabledColor" : undefined}
-      pb={"m"}
+    <TouchableOpacity
+      disabled={typeof onPress === "function" ? false : true}
+      activeOpacity={0.5}
       style={[
-        { borderColor: theme.colors.hintColor },
+        {
+          borderColor: theme.colors.hintColor,
+          paddingBottom: theme.spacing.m,
+          backgroundColor: expanded ? theme.colors.disabledColor : undefined,
+        },
         borderBottom ? styles.borderBottom : {},
         ,
         containerStyles,
@@ -88,7 +94,7 @@ const ExpansionTile: FC<Props> = ({
           {children}
         </Box>
       )}
-    </Box>
+    </TouchableOpacity>
   );
 };
 

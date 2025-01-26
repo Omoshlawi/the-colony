@@ -96,7 +96,6 @@ const PropertyFormAttributeField = () => {
                         renderItem={({ item }) => (
                           <ListTile
                             title={item.name}
-                            disabled
                             trailing={
                               <ExpoIconComponent {...(item.icon as ExpoIcon)} />
                             }

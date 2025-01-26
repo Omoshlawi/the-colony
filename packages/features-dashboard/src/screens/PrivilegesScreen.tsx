@@ -67,7 +67,6 @@ const PrivilegesScreen = () => {
                     )}
                   >
                     <ListTile
-                      disabled
                       title={item.name}
                       subtitle={item.description}
                       leading={
