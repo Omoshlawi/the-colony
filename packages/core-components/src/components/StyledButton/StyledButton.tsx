@@ -1,59 +1,90 @@
-import { Box, Text } from "@colony/core-theme";
-import React, { FC } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-
+import { Box, Color, Text, Theme, theme } from "@colony/core-theme";
+import React, { FC, useCallback, useMemo } from "react";
+import { StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
+type Variant = "primary" | "secondary" | "tertiary" | "ghost";
 interface StyledButtonProps {
   title: string;
-  variant?: "filled" | "outline";
+  variant?: Variant;
   onPress?: () => void;
+  borderRadius?: keyof Theme["borderRadii"];
+  renderIcon?: (color: string, size: number) => React.ReactNode;
+  iconLeading?: boolean;
 }
 
 const StyledButton: FC<StyledButtonProps> = ({
   title,
-  variant = "filled",
+  variant = "primary",
   onPress,
+  borderRadius = "small",
+  renderIcon,
+  iconLeading = true,
 }) => {
+  const colors = useMemo(() => {
+    if (variant === "primary")
+      return {
+        backgroundColor: theme.colors.primary,
+        underlayColor: Color(theme.colors.primary).darken(0.1).toString(),
+        color: "white",
+      };
+    else if (variant === "secondary")
+      return {
+        backgroundColor: theme.colors.hintColor,
+        underlayColor: Color(theme.colors.hintColor).darken(0.1).toString(),
+        color: "white",
+      };
+    else if (variant === "tertiary")
+      return {
+        backgroundColor: "transparent",
+        underlayColor: Color(theme.colors.primary).alpha(0.1).toString(),
+        color: theme.colors.primary,
+      };
+    else
+      return {
+        backgroundColor: "transparent",
+        underlayColor: Color(theme.colors.primary).alpha(0.1).toString(),
+        color: theme.colors.primary,
+      };
+  }, [variant]);
   return (
-    <TouchableOpacity
+    <TouchableHighlight
       onPress={onPress}
-      style={styles.presable}
-      activeOpacity={0.5}
+      style={[
+        styles.btn,
+        {
+          padding: theme.spacing.m,
+          borderRadius: borderRadius && theme.borderRadii[borderRadius],
+          backgroundColor: colors.backgroundColor,
+          gap: theme.spacing.s,
+          flexDirection: iconLeading ? "row" : "row-reverse",
+        },
+        variant === "tertiary" && {
+          borderWidth: 1,
+          borderColor: theme.colors.primary,
+        },
+      ]}
+      underlayColor={colors.underlayColor}
     >
-      <Box
-        backgroundColor={variant === "filled" ? "primary" : undefined}
-        p={"m"}
-        borderRadius={"small"}
-        width={"100%"}
-        borderWidth={variant === "outline" ? 1 : undefined}
-        borderColor={"outline"}
-        elevation={1}
-        shadowColor={"shadow"}
-        shadowOffset={{ height: 10, width: 10 }}
-      >
+      <>
+        {typeof renderIcon === "function" && renderIcon(colors.color, 18)}
         <Text
-          variant={"bodyMedium"}
-          color={"outline"}
-          fontWeight={"700"}
-          style={(styles as any)[variant]}
           textAlign={"center"}
+          style={{ color: colors.color }}
+          fontWeight={"700"}
+          variant={"bodyLarge"}
         >
           {title}
         </Text>
-      </Box>
-    </TouchableOpacity>
+      </>
+    </TouchableHighlight>
   );
 };
 
 export default StyledButton;
 
 const styles = StyleSheet.create({
-  filled: {
-    color: "white",
-  },
-  presable: {
+  btn: {
     display: "flex",
-    flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
   },
 });

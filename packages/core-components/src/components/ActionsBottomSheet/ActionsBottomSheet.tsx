@@ -32,7 +32,7 @@ const ActionsBottomSheet: React.FC<Props> = ({
           {typeof renderForm === "function" && (
             <StyledButton
               title="Update"
-              variant="outline"
+              variant="tertiary"
               onPress={() => {
                 dispose();
                 handleUpdate?.();
@@ -42,7 +42,7 @@ const ActionsBottomSheet: React.FC<Props> = ({
           {typeof onDelete === "function" && (
             <StyledButton
               title="Delete"
-              variant="outline"
+              variant="tertiary"
               onPress={() => {
                 dispose();
                 onDelete?.();

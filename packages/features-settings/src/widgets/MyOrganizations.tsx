@@ -82,7 +82,7 @@ export const MyOrganizations = () => {
         <Box gap={"s"} p={"m"}>
           <StyledButton
             title="Set to current context"
-            variant="filled"
+            variant="primary"
             onPress={async () => {
               dispose();
               await handleSwitch(org);
@@ -91,7 +91,7 @@ export const MyOrganizations = () => {
           {org.id === currentOrganization && (
             <StyledButton
               title="Quite organization context"
-              variant="filled"
+              variant="primary"
               onPress={async () => {
                 dispose();
                 await handleQuite(org);
@@ -100,7 +100,7 @@ export const MyOrganizations = () => {
           )}
           <StyledButton
             title="Update"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               dispose();
               handleUpdate(org);
@@ -109,7 +109,7 @@ export const MyOrganizations = () => {
 
           <StyledButton
             title="Delete"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               dispose();
               handleUpdate;

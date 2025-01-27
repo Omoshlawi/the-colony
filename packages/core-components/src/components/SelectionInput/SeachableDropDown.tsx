@@ -389,14 +389,14 @@ function SeachableDropDown<T, S>({
                 title={`Confirm Selection (${
                   (selectedItems as T[])?.length || 0
                 })`}
-                variant="filled"
+                variant="primary"
               />
             )}
 
             {/* Close Button */}
 
             <StyledButton
-              variant="outline"
+              variant="tertiary"
               onPress={() => setModalVisible(false)}
               title="Close"
             />

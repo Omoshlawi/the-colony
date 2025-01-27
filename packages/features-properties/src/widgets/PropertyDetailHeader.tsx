@@ -1,17 +1,30 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  StyleSheet,
+  Text,
+  TouchableHighlight,
+  View,
+} from "react-native";
 import React, { FC } from "react";
 import { Property } from "../types";
-import { ImageViewer } from "@colony/core-components";
-import { Color } from "@colony/core-theme";
+import {
+  AppBar,
+  ExpoConstants,
+  ExpoIconComponent,
+  ImageViewer,
+} from "@colony/core-components";
+import { Box, Color, useTheme } from "@colony/core-theme";
 import { useUserPreferedTheme } from "@colony/core-global";
 import { getHiveFileUrl } from "@colony/core-api";
-
+import { useRouter } from "expo-router";
 type PropertyDetailHeaderProps = {
   property: Property;
 };
 
 const PropertyDetailHeader: FC<PropertyDetailHeaderProps> = ({ property }) => {
-  const theme = useUserPreferedTheme();
+  const cuurThem = useUserPreferedTheme();
+  const theme = useTheme();
+  const router = useRouter();
   return (
     <View style={[styles.header]}>
       <ImageViewer
@@ -22,11 +35,43 @@ const PropertyDetailHeader: FC<PropertyDetailHeaderProps> = ({ property }) => {
         style={[
           styles.bg,
           {
-            backgroundColor: Color(theme === "dark" ? "black" : "white")
+            backgroundColor: Color(cuurThem === "dark" ? "black" : "white")
               .alpha(0.5)
               .toString(),
           },
         ]}
+      />
+      <ExpoConstants
+        renderComponent={(constants) => (
+          <Box
+            flexDirection={"row"}
+            position={"absolute"}
+            top={constants.statusBarHeight}
+            width={"100%"}
+            flex={1}
+            paddingHorizontal={"m"}
+          >
+            <TouchableHighlight
+              style={{
+                backgroundColor: Color(cuurThem === "dark" ? "white" : "black")
+                  .alpha(0.3)
+                  .toString(),
+                padding: theme.spacing.s,
+                borderRadius: "50%",
+              }}
+              underlayColor={Color(cuurThem === "dark" ? "white" : "black")
+                .alpha(0.5)
+                .toString()}
+              onPress={router.back}
+            >
+              <ExpoIconComponent
+                family="MaterialCommunityIcons"
+                name="keyboard-backspace"
+                color="white"
+              />
+            </TouchableHighlight>
+          </Box>
+        )}
       />
     </View>
   );

@@ -1,10 +1,12 @@
 import {
+  ExpoIconComponent,
   FilePicker,
   InputSkeleton,
   ListTileSkeleton,
   showDialog,
   showModal,
   showModalBottomSheet,
+  StyledButton,
   StyledPageLayout,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
@@ -37,6 +39,26 @@ export default function HomeScreen() {
   return (
     <StyledPageLayout>
       <Box gap={"m"} p={"m"}>
+        <StyledButton
+          title="primary"
+          variant="primary"
+          onPress={() => {}}
+          renderIcon={(_, size) => (
+            <ExpoIconComponent
+              family="AntDesign"
+              name="star"
+              size={size}
+              color={_}
+            />
+          )}
+        />
+        <StyledButton title="tertiary" variant="tertiary" onPress={() => {}} />
+        <StyledButton
+          title="secondary"
+          variant="secondary"
+          onPress={() => {}}
+        />
+        <StyledButton title="ghost" variant="ghost" onPress={() => {}} />
         <InputSkeleton />
         <ListTileSkeleton />
         <TouchableOpacity onPress={() => showDialog(<Text>Dialog</Text>)}>

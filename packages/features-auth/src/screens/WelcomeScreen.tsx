@@ -26,12 +26,12 @@ const WelcomeScreen = () => {
               </Text>
               <StyledButton
                 title="Login"
-                variant="filled"
+                variant="primary"
                 onPress={() => router.navigate(RoutePaths.LOGIN_SCREEN)}
               />
               <StyledButton
                 title="Register"
-                variant="outline"
+                variant="tertiary"
                 onPress={() => router.navigate(RoutePaths.REGISTER_SCREEN)}
               />
             </Box>

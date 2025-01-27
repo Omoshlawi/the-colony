@@ -46,14 +46,14 @@ const RelationshipTypesScreen = () => {
         <Box gap={"s"} p={"m"}>
           <StyledButton
             title="Update"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               handleUpdateRelationshipType(relationshipType);
             }}
           />
           <StyledButton
             title="Delete"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               dispose();
             }}

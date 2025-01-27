@@ -37,14 +37,14 @@ const AttributeTypesScreen = () => {
         <Box gap={"s"} p={"m"}>
           <StyledButton
             title="Update"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               handleUpdateAttributeType(attributeType);
             }}
           />
           <StyledButton
             title="Delete"
-            variant="outline"
+            variant="tertiary"
             onPress={() => {
               dispose();
             }}
