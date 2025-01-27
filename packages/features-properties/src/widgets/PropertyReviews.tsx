@@ -1,7 +1,11 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import React, { FC } from "react";
+import { Property } from "../types";
+type PropertyReviewsProps = {
+  property: Property;
+};
 
-const PropertyReviews = () => {
+const PropertyReviews:FC<PropertyReviewsProps> = ({property}) => {
   return (
     <View>
       <Text>PropertyReviews</Text>

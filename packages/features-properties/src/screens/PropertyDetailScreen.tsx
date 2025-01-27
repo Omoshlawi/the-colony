@@ -1,31 +1,25 @@
-import { getHiveFileUrl } from "@colony/core-api";
 import {
   ErrorState,
   ExpoIconComponent,
-  ImageViewer,
   TabView,
   When,
 } from "@colony/core-components";
-import { useUserPreferedTheme } from "@colony/core-global";
-import { Box, Color, Text } from "@colony/core-theme";
+import { Box, Text } from "@colony/core-theme";
 import { useLocalSearchParams } from "expo-router";
-import React, { useState } from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Touchable,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import React from "react";
+import { StyleSheet } from "react-native";
 import { useProperty } from "../hooks/useProperties";
-import { PropertyAbout, PropertyCategories, PropertyReviews } from "../widgets";
+import {
+  PropertyAbout,
+  PropertyCategories,
+  PropertyDetailHeader,
+  PropertyReviews,
+} from "../widgets";
 import PropertyFeedbackSummary from "../widgets/PropertyFeedbackSummary";
 
 const PropertyDetailScreen = () => {
   const { propertyId } = useLocalSearchParams();
   const propertydetailAsync = useProperty(propertyId as string);
-  const theme = useUserPreferedTheme();
-  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <Box backgroundColor={"background"} flex={1}>
       <When
@@ -38,24 +32,7 @@ const PropertyDetailScreen = () => {
         success={(property) => {
           return (
             <Box flex={1} flexDirection={"column"} height={"100%"}>
-              <View style={[styles.header]}>
-                <ImageViewer
-                  source={getHiveFileUrl(property.thumbnail)}
-                  style={styles.bg}
-                />
-                <View
-                  style={[
-                    styles.bg,
-                    {
-                      backgroundColor: Color(
-                        theme === "dark" ? "black" : "white"
-                      )
-                        .alpha(0.5)
-                        .toString(),
-                    },
-                  ]}
-                />
-              </View>
+              <PropertyDetailHeader property={property} />
               <Box padding={"m"} gap={"m"} flex={1}>
                 <Box
                   flexDirection={"row"}
@@ -116,9 +93,9 @@ const PropertyDetailScreen = () => {
                     },
                   ]}
                   scenes={{
-                    about: PropertyAbout,
-                    reviews: PropertyReviews,
-                    media: PropertyReviews,
+                    about: () => <PropertyAbout property={property} />,
+                    reviews: () => <PropertyReviews property={property} />,
+                    media: () => <PropertyReviews property={property} />,
                   }}
                   renderBadge={(route) => <Text>{route.title}</Text>}
                 />
@@ -133,15 +110,4 @@ const PropertyDetailScreen = () => {
 
 export default PropertyDetailScreen;
 
-const styles = StyleSheet.create({
-  header: {
-    height: Dimensions.get("window").height / 3,
-  },
-  bg: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-  },
-});
+const styles = StyleSheet.create({});
