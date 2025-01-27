@@ -1,7 +1,7 @@
 import {
   ExpoIconComponent,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -160,7 +160,7 @@ const RegisterForm = () => {
           />
         )}
       />
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

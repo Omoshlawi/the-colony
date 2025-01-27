@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import React, { FC, PropsWithChildren } from "react";
 import { showModal, showModalBottomSheet } from "../Overlays";
-import { StyledButton } from "../StyledButton";
+import { Button } from "../Button";
 import { Box } from "@colony/core-theme";
 
 type Props = PropsWithChildren<{
@@ -30,7 +30,7 @@ const ActionsBottomSheet: React.FC<Props> = ({
       <ScrollView>
         <Box gap={"s"} p={"m"}>
           {typeof renderForm === "function" && (
-            <StyledButton
+            <Button
               title="Update"
               variant="tertiary"
               onPress={() => {
@@ -40,7 +40,7 @@ const ActionsBottomSheet: React.FC<Props> = ({
             />
           )}
           {typeof onDelete === "function" && (
-            <StyledButton
+            <Button
               title="Delete"
               variant="tertiary"
               onPress={() => {

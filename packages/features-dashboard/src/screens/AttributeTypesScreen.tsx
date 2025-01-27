@@ -7,13 +7,18 @@ import {
   ListTileSkeleton,
   showModal,
   showModalBottomSheet,
-  StyledButton,
+  Button,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import React from "react";
-import { FlatList, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  FlatList,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+} from "react-native";
 import { AttributeTypesForm } from "../forms";
 import { useAttributeTypes } from "../hooks";
 import { AttributeType } from "../types";
@@ -35,14 +40,14 @@ const AttributeTypesScreen = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
+          <Button
             title="Update"
             variant="tertiary"
             onPress={() => {
               handleUpdateAttributeType(attributeType);
             }}
           />
-          <StyledButton
+          <Button
             title="Delete"
             variant="tertiary"
             onPress={() => {

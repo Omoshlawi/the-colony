@@ -6,7 +6,7 @@ import {
   ListTileSkeleton,
   showModal,
   showModalBottomSheet,
-  StyledButton,
+  Button,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
@@ -16,7 +16,7 @@ import {
   FlatList,
   ScrollView,
   StyleSheet,
-  TouchableOpacity
+  TouchableOpacity,
 } from "react-native";
 import { CategoriesForm } from "../forms";
 import { useCategories } from "../hooks";
@@ -38,14 +38,14 @@ const CategoriesScreen = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
+          <Button
             title="Update"
             variant="tertiary"
             onPress={() => {
               handleUpdateCategory(category);
             }}
           />
-          <StyledButton
+          <Button
             title="Delete"
             variant="tertiary"
             onPress={() => {

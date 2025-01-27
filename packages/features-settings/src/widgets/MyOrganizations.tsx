@@ -17,7 +17,7 @@ import {
   showModal,
   showModalBottomSheet,
   showSnackbar,
-  StyledButton,
+  Button,
 } from "@colony/core-components";
 import { Organization } from "../types";
 import { useSession } from "@colony/core-global";
@@ -80,7 +80,7 @@ export const MyOrganizations = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
+          <Button
             title="Set to current context"
             variant="primary"
             onPress={async () => {
@@ -89,7 +89,7 @@ export const MyOrganizations = () => {
             }}
           />
           {org.id === currentOrganization && (
-            <StyledButton
+            <Button
               title="Quite organization context"
               variant="primary"
               onPress={async () => {
@@ -98,7 +98,7 @@ export const MyOrganizations = () => {
               }}
             />
           )}
-          <StyledButton
+          <Button
             title="Update"
             variant="tertiary"
             onPress={() => {
@@ -107,7 +107,7 @@ export const MyOrganizations = () => {
             }}
           />
 
-          <StyledButton
+          <Button
             title="Delete"
             variant="tertiary"
             onPress={() => {

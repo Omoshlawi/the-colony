@@ -6,7 +6,7 @@ import {
   InputSkeleton,
   ListTile,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
   When,
   SeachableDropDown,
@@ -237,7 +237,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
           <PropertyFormThumbnailForm />
           <PropertyFormAttributeField />
 
-          <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+          <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
         </Box>
       </FormProvider>
     </ScrollView>

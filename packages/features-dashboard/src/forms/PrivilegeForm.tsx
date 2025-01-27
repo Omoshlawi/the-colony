@@ -3,7 +3,7 @@ import {
   InputSkeleton,
   SeachableDropDown,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -170,7 +170,7 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
           />
         )}
       />
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

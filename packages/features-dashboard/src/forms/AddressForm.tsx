@@ -10,7 +10,7 @@ import {
   ErrorState,
   InputSkeleton,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
   When,
 } from "@colony/core-components";
@@ -237,7 +237,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
         )}
       />
 
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

@@ -3,7 +3,7 @@ import {
   InputSkeleton,
   SeachableDropDown,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -121,7 +121,7 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
         />
       )}
 
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

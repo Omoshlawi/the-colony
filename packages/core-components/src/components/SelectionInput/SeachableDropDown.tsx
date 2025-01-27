@@ -15,7 +15,7 @@ import {
   View,
 } from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
-import { StyledButton } from "../StyledButton";
+import { Button } from "../Button";
 import { StyledInput, StyledInputProps } from "../StyledInput";
 
 // Configuration types
@@ -384,7 +384,7 @@ function SeachableDropDown<T, S>({
 
             {/* Confirm Button for Multi-Select */}
             {multiple && (
-              <StyledButton
+              <Button
                 onPress={() => setModalVisible(false)}
                 title={`Confirm Selection (${
                   (selectedItems as T[])?.length || 0
@@ -395,7 +395,7 @@ function SeachableDropDown<T, S>({
 
             {/* Close Button */}
 
-            <StyledButton
+            <Button
               variant="tertiary"
               onPress={() => setModalVisible(false)}
               title="Close"

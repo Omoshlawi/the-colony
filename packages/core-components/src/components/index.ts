@@ -6,7 +6,7 @@ export { StyledTabBarIcon } from "./StyledTabIcon";
 export { StyledText } from "./StyledText";
 export { Widget } from "./Widget";
 export { default as Logo } from "./Logo";
-export { StyledButton } from "./StyledButton";
+export { Button } from "./Button";
 export { default as AppBar } from "./AppBar";
 export * from "./ExpoIcons";
 export * from "./SkeletonLoader";

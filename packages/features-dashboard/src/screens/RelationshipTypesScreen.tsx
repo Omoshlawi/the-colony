@@ -6,7 +6,7 @@ import {
   ListTileSkeleton,
   showModal,
   showModalBottomSheet,
-  StyledButton,
+  Button,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
@@ -44,14 +44,14 @@ const RelationshipTypesScreen = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
+          <Button
             title="Update"
             variant="tertiary"
             onPress={() => {
               handleUpdateRelationshipType(relationshipType);
             }}
           />
-          <StyledButton
+          <Button
             title="Delete"
             variant="tertiary"
             onPress={() => {

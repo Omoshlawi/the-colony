@@ -4,7 +4,7 @@ import {
   InputSkeleton,
   ListTile,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
 } from "@colony/core-components";
 import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
@@ -166,7 +166,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
           </>
         )}
       />
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

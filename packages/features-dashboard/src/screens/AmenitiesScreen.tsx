@@ -7,7 +7,7 @@ import {
   ListTileSkeleton,
   showModal,
   showModalBottomSheet,
-  StyledButton,
+  Button,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
@@ -36,14 +36,14 @@ const AmenitiesScreen = () => {
     const dispose = showModalBottomSheet(
       <ScrollView>
         <Box gap={"s"} p={"m"}>
-          <StyledButton
+          <Button
             title="Update"
             variant="tertiary"
             onPress={() => {
               handleUpdate(amenity);
             }}
           />
-          <StyledButton
+          <Button
             title="Delete"
             variant="tertiary"
             onPress={() => {

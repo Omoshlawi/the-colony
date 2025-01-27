@@ -5,7 +5,7 @@ import {
   ExpoIconComponent,
   LocalExpoIconPicker,
   showSnackbar,
-  StyledButton,
+  Button,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -115,7 +115,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
           />
         )}
       />
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

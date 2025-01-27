@@ -6,7 +6,7 @@ import {
   showDialog,
   showModal,
   showModalBottomSheet,
-  StyledButton,
+  Button,
   StyledPageLayout,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
@@ -39,7 +39,7 @@ export default function HomeScreen() {
   return (
     <StyledPageLayout>
       <Box gap={"m"} p={"m"}>
-        <StyledButton
+        <Button
           title="primary"
           variant="primary"
           onPress={() => {}}
@@ -52,13 +52,9 @@ export default function HomeScreen() {
             />
           )}
         />
-        <StyledButton title="tertiary" variant="tertiary" onPress={() => {}} />
-        <StyledButton
-          title="secondary"
-          variant="secondary"
-          onPress={() => {}}
-        />
-        <StyledButton title="ghost" variant="ghost" onPress={() => {}} />
+        <Button title="tertiary" variant="tertiary" onPress={() => {}} />
+        <Button title="secondary" variant="secondary" onPress={() => {}} />
+        <Button title="ghost" variant="ghost" onPress={() => {}} />
         <InputSkeleton />
         <ListTileSkeleton />
         <TouchableOpacity onPress={() => showDialog(<Text>Dialog</Text>)}>

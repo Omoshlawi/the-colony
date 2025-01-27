@@ -1,4 +1,4 @@
-import { Logo, StyledButton, StyledPageLayout } from "@colony/core-components";
+import { Logo, Button, StyledPageLayout } from "@colony/core-components";
 import { Box, Text } from "@colony/core-theme";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -24,12 +24,12 @@ const WelcomeScreen = () => {
               >
                 Get started
               </Text>
-              <StyledButton
+              <Button
                 title="Login"
                 variant="primary"
                 onPress={() => router.navigate(RoutePaths.LOGIN_SCREEN)}
               />
-              <StyledButton
+              <Button
                 title="Register"
                 variant="tertiary"
                 onPress={() => router.navigate(RoutePaths.REGISTER_SCREEN)}

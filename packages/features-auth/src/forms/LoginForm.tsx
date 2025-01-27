@@ -1,18 +1,17 @@
-import { Button, StyleSheet, Text, View } from "react-native";
-import React, { useState } from "react";
-import { Controller, Form, SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginFormData } from "../types";
-import { LoginShema } from "../utils";
+import { handleApiErrors } from "@colony/core-api";
 import {
+  Button,
   ExpoIconComponent,
   showSnackbar,
-  StyledButton,
   StyledInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useAuthAPi } from "../hooks";
-import { handleApiErrors } from "@colony/core-api";
+import { LoginFormData } from "../types";
+import { LoginShema } from "../utils";
 const LoginForm = () => {
   const { loginUser } = useAuthAPi();
   const form = useForm<LoginFormData>({
@@ -93,7 +92,7 @@ const LoginForm = () => {
           />
         )}
       />
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

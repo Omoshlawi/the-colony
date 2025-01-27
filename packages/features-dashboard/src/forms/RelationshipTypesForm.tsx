@@ -1,9 +1,5 @@
 import { handleApiErrors, mutate } from "@colony/core-api";
-import {
-  showSnackbar,
-  StyledButton,
-  StyledInput,
-} from "@colony/core-components";
+import { showSnackbar, Button, StyledInput } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
@@ -116,7 +112,7 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
         )}
       />
 
-      <StyledButton title="Submit" onPress={form.handleSubmit(onSubmit)} />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

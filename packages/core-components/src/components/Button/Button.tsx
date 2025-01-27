@@ -1,6 +1,6 @@
-import { Box, Color, Text, Theme, theme } from "@colony/core-theme";
-import React, { FC, useCallback, useMemo } from "react";
-import { StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
+import { Color, Text, Theme, theme } from "@colony/core-theme";
+import React, { FC, useMemo } from "react";
+import { StyleSheet, TouchableHighlight } from "react-native";
 type Variant = "primary" | "secondary" | "tertiary" | "ghost";
 interface StyledButtonProps {
   title: string;
@@ -11,7 +11,7 @@ interface StyledButtonProps {
   iconLeading?: boolean;
 }
 
-const StyledButton: FC<StyledButtonProps> = ({
+const Button: FC<StyledButtonProps> = ({
   title,
   variant = "primary",
   onPress,
@@ -79,7 +79,7 @@ const StyledButton: FC<StyledButtonProps> = ({
   );
 };
 
-export default StyledButton;
+export default Button;
 
 const styles = StyleSheet.create({
   btn: {
