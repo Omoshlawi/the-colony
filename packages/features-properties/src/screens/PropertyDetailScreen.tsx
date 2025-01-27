@@ -1,18 +1,31 @@
 import { getHiveFileUrl } from "@colony/core-api";
-import { ErrorState, ImageViewer, When } from "@colony/core-components";
+import {
+  ErrorState,
+  ExpoIconComponent,
+  ImageViewer,
+  TabView,
+  When,
+} from "@colony/core-components";
 import { useUserPreferedTheme } from "@colony/core-global";
 import { Box, Color, Text } from "@colony/core-theme";
 import { useLocalSearchParams } from "expo-router";
-import React from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import React, { useState } from "react";
+import {
+  Dimensions,
+  StyleSheet,
+  Touchable,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { useProperty } from "../hooks/useProperties";
-import { PropertyCategories } from "../widgets";
+import { PropertyAbout, PropertyCategories, PropertyReviews } from "../widgets";
 import PropertyFeedbackSummary from "../widgets/PropertyFeedbackSummary";
 
 const PropertyDetailScreen = () => {
   const { propertyId } = useLocalSearchParams();
   const propertydetailAsync = useProperty(propertyId as string);
   const theme = useUserPreferedTheme();
+  const [activeIndex, setActiveIndex] = useState(0);
   return (
     <Box backgroundColor={"background"} flex={1}>
       <When
@@ -43,7 +56,7 @@ const PropertyDetailScreen = () => {
                   ]}
                 />
               </View>
-              <Box padding={"m"} gap={"m"}>
+              <Box padding={"m"} gap={"m"} flex={1}>
                 <Box
                   flexDirection={"row"}
                   justifyContent={"space-between"}
@@ -56,7 +69,7 @@ const PropertyDetailScreen = () => {
                   <PropertyFeedbackSummary />
                 </Box>
                 <Box>
-                  <Text color={"text"} variant={"headlineMedium"}>
+                  <Text color={"text"} variant={"titleLarge"}>
                     {property?.name}
                   </Text>
                   <Text color={"hintColor"}>{`${
@@ -65,6 +78,50 @@ const PropertyDetailScreen = () => {
                     property?.address?.county ?? ""
                   }`}</Text>
                 </Box>
+                <TabView
+                  routes={[
+                    {
+                      key: "about",
+                      title: "About",
+                      icon: (
+                        <ExpoIconComponent
+                          family="FontAwesome"
+                          name="star"
+                          color="red"
+                        />
+                      ),
+                    },
+                    {
+                      key: "reviews",
+                      title: "Reviews",
+                      icon: (
+                        <ExpoIconComponent
+                          family="FontAwesome"
+                          name="star"
+                          color="red"
+                        />
+                      ),
+                    },
+                    {
+                      key: "media",
+                      title: "Media",
+                      icon: (
+                        <ExpoIconComponent
+                          family="FontAwesome"
+                          name="star"
+                          color="red"
+                          size={16}
+                        />
+                      ),
+                    },
+                  ]}
+                  scenes={{
+                    about: PropertyAbout,
+                    reviews: PropertyReviews,
+                    media: PropertyReviews,
+                  }}
+                  renderBadge={(route) => <Text>{route.title}</Text>}
+                />
               </Box>
             </Box>
           );
