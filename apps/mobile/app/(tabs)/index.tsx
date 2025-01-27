@@ -9,6 +9,7 @@ import {
   Button,
   StyledPageLayout,
 } from "@colony/core-components";
+import { IconButton } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
@@ -55,6 +56,24 @@ export default function HomeScreen() {
         <Button title="tertiary" variant="tertiary" onPress={() => {}} />
         <Button title="secondary" variant="secondary" onPress={() => {}} />
         <Button title="ghost" variant="ghost" onPress={() => {}} />
+        <IconButton
+          onPress={() => {}}
+          variant="filled"
+          icon={{ family: "FontAwesome", name: "star" }}
+          color="red"
+        />
+        <IconButton
+          onPress={() => {}}
+          variant="outline"
+          icon={{ family: "FontAwesome", name: "star" }}
+          color="red"
+        />
+        <IconButton
+          onPress={() => {}}
+          variant="tonal"
+          icon={{ family: "FontAwesome", name: "star" }}
+          color="red"
+        />
         <InputSkeleton />
         <ListTileSkeleton />
         <TouchableOpacity onPress={() => showDialog(<Text>Dialog</Text>)}>
