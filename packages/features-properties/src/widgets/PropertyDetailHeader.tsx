@@ -11,6 +11,7 @@ import {
   AppBar,
   ExpoConstants,
   ExpoIconComponent,
+  IconButton,
   ImageViewer,
 } from "@colony/core-components";
 import { Box, Color, useTheme } from "@colony/core-theme";
@@ -50,26 +51,34 @@ const PropertyDetailHeader: FC<PropertyDetailHeaderProps> = ({ property }) => {
             width={"100%"}
             flex={1}
             paddingHorizontal={"m"}
+            gap={"m"}
+            alignItems={"center"}
           >
-            <TouchableHighlight
-              style={{
-                backgroundColor: Color(cuurThem === "dark" ? "white" : "black")
-                  .alpha(0.3)
-                  .toString(),
-                padding: theme.spacing.s,
-                borderRadius: "50%",
+            <IconButton
+              icon={{
+                family: "MaterialCommunityIcons",
+                name: "keyboard-backspace",
               }}
-              underlayColor={Color(cuurThem === "dark" ? "white" : "black")
-                .alpha(0.5)
-                .toString()}
               onPress={router.back}
-            >
-              <ExpoIconComponent
-                family="MaterialCommunityIcons"
-                name="keyboard-backspace"
-                color="white"
-              />
-            </TouchableHighlight>
+              variant="tonal"
+            />
+            <View style={{ flex: 1 }} />
+            <IconButton
+              icon={{
+                family: "MaterialCommunityIcons",
+                name: "share-variant",
+              }}
+              onPress={router.back}
+              variant="tonal"
+            />
+            <IconButton
+              icon={{
+                family: "MaterialIcons",
+                name: "favorite-outline",
+              }}
+              onPress={router.back}
+              variant="tonal"
+            />
           </Box>
         )}
       />

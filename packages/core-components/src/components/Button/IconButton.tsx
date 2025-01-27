@@ -3,8 +3,10 @@ import { Color, useTheme } from "@colony/core-theme";
 import React, { FC, useMemo } from "react";
 import {
   AnimatableNumericValue,
+  StyleProp,
   StyleSheet,
   TouchableHighlight,
+  ViewStyle,
 } from "react-native";
 import { ExpoIcon, ExpoIconComponent } from "../ExpoIcons";
 
@@ -17,6 +19,7 @@ type Props = {
   borderRadius?: string | AnimatableNumericValue;
   color?: string;
   size?: number;
+  containerStyle?: StyleProp<ViewStyle>;
 };
 
 const IconButton: FC<Props> = ({
@@ -25,10 +28,10 @@ const IconButton: FC<Props> = ({
   variant = "filled",
   borderRadius = "50%",
   color,
-  size = 20,
+  size = 28,
+  containerStyle,
 }) => {
   const theme = useTheme();
-  const cuurThem = useUserPreferedTheme();
 
   const colors = useMemo(() => {
     if (variant === "filled")
@@ -72,6 +75,7 @@ const IconButton: FC<Props> = ({
           borderWidth: 1,
           borderColor: color ?? theme.colors.outline,
         },
+        containerStyle,
       ]}
       underlayColor={colors.underlayColor}
       onPress={onPress}
