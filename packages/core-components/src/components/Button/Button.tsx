@@ -1,14 +1,22 @@
 import { Color, Text, Theme, theme } from "@colony/core-theme";
 import React, { FC, useMemo } from "react";
-import { StyleSheet, TouchableHighlight } from "react-native";
+import {
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  TouchableHighlight,
+  ViewStyle,
+} from "react-native";
 type Variant = "primary" | "secondary" | "tertiary" | "ghost";
 interface StyledButtonProps {
   title: string;
   variant?: Variant;
   onPress?: () => void;
   borderRadius?: keyof Theme["borderRadii"];
-  renderIcon?: (color: string, size: number) => React.ReactNode;
+  renderIcon?: (props: { color: string; size: number }) => React.ReactNode;
   iconLeading?: boolean;
+  style?: StyleProp<ViewStyle>;
+  labelStyle?: StyleProp<TextStyle>;
 }
 
 const Button: FC<StyledButtonProps> = ({
@@ -18,6 +26,8 @@ const Button: FC<StyledButtonProps> = ({
   borderRadius = "small",
   renderIcon,
   iconLeading = true,
+  labelStyle,
+  style,
 }) => {
   const colors = useMemo(() => {
     if (variant === "primary")
@@ -61,14 +71,16 @@ const Button: FC<StyledButtonProps> = ({
           borderWidth: 1,
           borderColor: theme.colors.primary,
         },
+        style,
       ]}
       underlayColor={colors.underlayColor}
     >
       <>
-        {typeof renderIcon === "function" && renderIcon(colors.color, 18)}
+        {typeof renderIcon === "function" &&
+          renderIcon({ color: colors.color, size: 18 })}
         <Text
           textAlign={"center"}
-          style={{ color: colors.color }}
+          style={[{ color: colors.color }, labelStyle]}
           fontWeight={"700"}
           variant={"bodyLarge"}
         >
@@ -86,5 +98,6 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
   },
 });

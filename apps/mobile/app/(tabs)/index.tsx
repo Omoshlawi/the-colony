@@ -44,12 +44,12 @@ export default function HomeScreen() {
           title="primary"
           variant="primary"
           onPress={() => {}}
-          renderIcon={(_, size) => (
+          renderIcon={({ size, color }) => (
             <ExpoIconComponent
               family="AntDesign"
               name="star"
               size={size}
-              color={_}
+              color={color}
             />
           )}
         />

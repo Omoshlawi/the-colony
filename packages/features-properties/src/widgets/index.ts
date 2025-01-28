@@ -5,3 +5,4 @@ export { default as PropertyCategories } from "./PropertyCategories";
 export { default as PropertyAbout } from "./PropertyAbout";
 export { default as PropertyReviews } from "./PropertyReviews";
 export { default as PropertyDetailHeader } from "./PropertyDetailHeader";
+export { default as PropertyActions } from "./PropertyActions";
