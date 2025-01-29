@@ -70,6 +70,9 @@ const IconButton: FC<Props> = ({
           padding: theme.spacing.s,
           borderRadius: borderRadius,
           alignSelf: "flex-start",
+          aspectRatio: 1,
+          justifyContent: "center",
+          alignItems: "center",
         },
         variant === "outline" && {
           borderWidth: 1,

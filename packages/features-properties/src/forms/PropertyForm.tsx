@@ -1,4 +1,4 @@
-import { handleApiErrors, mutate } from "@colony/core-api";
+import { cleanFiles, handleApiErrors, mutate } from "@colony/core-api";
 import {
   ErrorState,
   ExpoIcon,
@@ -11,9 +11,9 @@ import {
   When,
   SeachableDropDown,
 } from "@colony/core-components";
-import { Box, useTheme } from "@colony/core-theme";
+import { Box, useTheme, Text } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import {
   Controller,
   FormProvider,
@@ -46,13 +46,18 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
 
   const form = useForm<PropertyFormData>({
     defaultValues: {
-      categories: [],
-      addressId: "",
-      amenities: [],
-      attributes: [],
+      categories: property?.categories?.map((c) => c.categoryId) ?? [],
+      addressId: property?.addressId ?? "",
+      amenities: property?.amenities?.map((a) => a.amenityId) ?? [],
+      attributes:
+        property?.attributes?.map((a) => ({
+          attributeId: a.attributeId,
+          value: a.value,
+        })) ?? [],
       media: [],
-      name: "",
-      thumbnail: "",
+      name: property?.name ?? "",
+      thumbnail: property?.thumbnail ?? "",
+      description: property?.description ?? "",
     },
     resolver: zodResolver(PropertySchema),
   });
@@ -99,6 +104,26 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
                 readOnly={disabled}
                 onChangeText={onChange}
                 placeholder="Enter property name"
+                error={error?.message}
+              />
+            )}
+          />
+          <PropertyFormThumbnailForm />
+          <Controller
+            control={form.control}
+            name="description"
+            render={({
+              field: { onChange, value, disabled },
+              fieldState: { error },
+            }) => (
+              <StyledInput
+                multiline
+                numberOfLines={2}
+                value={value}
+                label="description"
+                readOnly={disabled}
+                onChangeText={onChange}
+                placeholder="Enter property description"
                 error={error?.message}
               />
             )}
@@ -234,7 +259,6 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               />
             )}
           />
-          <PropertyFormThumbnailForm />
           <PropertyFormAttributeField />
 
           <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />

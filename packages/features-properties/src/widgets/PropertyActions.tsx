@@ -1,13 +1,27 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import { Box } from "@colony/core-theme";
-import { Button, ExpoIconComponent } from "@colony/core-components";
+import { Button, ExpoIconComponent, showModal } from "@colony/core-components";
+import { PropertyForm } from "../forms";
+import { Property } from "../types";
 
 type PropertyActionsProps = {
   onAction?: () => void;
+  property: Property;
 };
 
-const PropertyActions: FC<PropertyActionsProps> = ({ onAction }) => {
+const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
+  const handleEdit = () => {
+    const dispose = showModal(
+      <PropertyForm
+        property={property}
+        onSuccess={() => {
+          onAction?.();
+          dispose();
+        }}
+      />
+    );
+  };
   return (
     <Box
       flexDirection={"row"}
@@ -59,7 +73,10 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction }) => {
             color={color}
           />
         )}
-        onPress={onAction}
+        onPress={() => {
+          onAction?.();
+          handleEdit();
+        }}
       />
       <Button
         borderRadius="medium"

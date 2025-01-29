@@ -6,13 +6,16 @@ import {
   uploadFiles,
 } from "@colony/core-api";
 import {
+  AlertDialog,
   ExpoIconComponent,
   FilePicker,
+  IconButton,
   ImageViewer,
+  showDialog,
   showSnackbar,
 } from "@colony/core-components";
 import { Box, Color, Text, useTheme } from "@colony/core-theme";
-import React, { useEffect, useState } from "react";
+import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import {
   ActivityIndicator,
@@ -23,32 +26,76 @@ import {
 } from "react-native";
 import { PropertyFormData } from "../types";
 
-const PropertyFormThumbnailForm = () => {
+type Props = {};
+const PropertyFormThumbnailForm: FC<Props> = () => {
   const form = useFormContext<PropertyFormData>();
   const theme = useTheme();
   const gray = Color(theme.colors.hintColor);
   const [file, setFile] = useState<UploadableFile>();
   const [loading, setLoading] = useState(false);
   const thumbnail = form.watch("thumbnail");
+
+  const handleDeleteUploadedFile = useCallback(() => {
+    const dispose = showDialog(
+      <AlertDialog
+        message={
+          "Are you sure you want to delete this file?.This action is irriversible"
+        }
+        title="Delete File"
+        actions={[
+          {
+            title: "Delete",
+            onPress: () => {
+              dispose();
+              handleClean(thumbnail);
+            },
+            color: theme.colors.error,
+          },
+          { title: "Cancel", onPress: () => dispose() },
+        ]}
+      />
+    );
+  }, [theme, thumbnail]);
+
+  const handleClean = useCallback(async (file: string) => {
+    try {
+      const { count } = await cleanFiles([file]);
+      form?.setValue("thumbnail", "");
+      if (count)
+        showSnackbar({
+          kind: "success",
+          subtitle: `Deleted uploaded thumbnail files (${count}) succesfully`,
+        });
+    } catch (error) {
+      showSnackbar({
+        kind: "error",
+        title: "error",
+        subtitle: `Error cleaning file: ${JSON.stringify(error, null, 2)}`,
+      });
+    }
+  }, []);
+
+  const initialThumbnail = useMemo(
+    () => form.formState.defaultValues?.thumbnail?.trim(),
+    []
+  );
+
   useEffect(() => {
+    // Cleanup function to delete the file when:
+    // 1. file has been uploaded (thumbnail field is truthy)
+    // 2. the file (thumbnail value) isn't the same as the initial value and form is not launched in
+    // 3. When the form aitn submited succesfully
     return () => {
-      if (thumbnail)
-        cleanFiles([thumbnail])
-          .then(({ count }) =>
-            showSnackbar({
-              kind: "success",
-              subtitle: `Deleted uploaded thumbnail files (${count}) succesfully`,
-            })
-          )
-          .catch((err) =>
-            showSnackbar({
-              kind: "error",
-              title: "error",
-              subtitle: `Error cleaning file: ${JSON.stringify(err, null, 2)}`,
-            })
-          );
+      if (
+        thumbnail &&
+        initialThumbnail !== thumbnail &&
+        !initialThumbnail &&
+        form.formState.isSubmitSuccessful
+      ) {
+        handleClean(thumbnail);
+      }
     };
-  }, [thumbnail]);
+  }, [thumbnail, handleClean, form, initialThumbnail]);
 
   return (
     <Controller
@@ -83,7 +130,8 @@ const PropertyFormThumbnailForm = () => {
           }
         };
         return (
-          <Box>
+          <Box gap={"s"}>
+            <Text color={"text"}>Thumbnail</Text>
             <FilePicker.ImageField
               multiple={false}
               onImageChange={([{ uri, mimeType, fileName, file }]) =>
@@ -161,6 +209,7 @@ const PropertyFormThumbnailForm = () => {
                         </TouchableOpacity>
                       </View>
                     )}
+                    {/* Default upload */}
                     {!value && (
                       <>
                         <ExpoIconComponent
@@ -179,6 +228,21 @@ const PropertyFormThumbnailForm = () => {
                           Uploading ...
                         </Text>
                       </View>
+                    )}
+                    {/* Delete Uploaded File */}
+
+                    {thumbnail && (
+                      <IconButton
+                        color="red"
+                        icon={{ family: "FontAwesome", name: "trash" }}
+                        variant="tonal"
+                        onPress={handleDeleteUploadedFile}
+                        size={30}
+                        containerStyle={{
+                          padding: theme.spacing.m,
+                          alignSelf: "center",
+                        }}
+                      />
                     )}
                   </>
                 </TouchableHighlight>

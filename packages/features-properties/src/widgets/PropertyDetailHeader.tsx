@@ -33,7 +33,7 @@ const PropertyDetailHeader: FC<PropertyDetailHeaderProps> = ({ property }) => {
 
   const launchActionsBottomSheet = useCallback(() => {
     const dispose = showModalBottomSheet(
-      <PropertyActions onAction={() => dispose()} />,
+      <PropertyActions onAction={() => dispose()} property={property} />,
       {
         title: "Actions",
         height: "auto",
