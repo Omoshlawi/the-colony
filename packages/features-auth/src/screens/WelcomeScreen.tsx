@@ -12,9 +12,14 @@ const WelcomeScreen = () => {
     <StyledPageLayout withSafeArea={true}>
       <Box flex={1} flexDirection={"column"} justifyContent={"center"}>
         <ScrollView style={{ flexGrow: 0 }}>
-          <Box flexDirection={"column"} alignItems={"center"} gap={"xl"}>
+          <Box
+            flexDirection={"column"}
+            alignItems={"center"}
+            gap={"xl"}
+            width={"100%"}
+          >
             <Logo size={200} />
-            <Box gap={"l"} p={"m"}>
+            <Box gap={"l"} p={"m"} width={"100%"}>
               <Text
                 variant={"titleLarge"}
                 color={"text"}

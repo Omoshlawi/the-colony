@@ -39,6 +39,8 @@ const PropertyDetailScreen = () => {
                   justifyContent={"space-between"}
                   gap={"m"}
                   alignItems={"center"}
+                  width={"100%"}
+                  height={"auto"}
                 >
                   <PropertyCategories
                     propertyCategories={property.categories}

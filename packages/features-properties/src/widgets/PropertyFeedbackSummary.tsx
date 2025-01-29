@@ -6,14 +6,14 @@ import { ExpoIconComponent } from "@colony/core-components";
 const PropertyFeedbackSummary = () => {
   const theme = useTheme();
   return (
-    <Box flex={0} flexDirection={"row"} gap={"s"} alignItems={"center"}>
+    <Box flex={1} flexDirection={"row"} gap={"s"} alignItems={"center"}>
       <ExpoIconComponent
         family="FontAwesome"
         name="star"
         color={theme.colors.primary}
         size={20}
       />
-      <Text color={"hintColor"} variant={"bodySmall"}>
+      <Text color={"hintColor"} variant={"bodySmall"} numberOfLines={1}>
         4.5 (712 Reviews)
       </Text>
     </Box>
