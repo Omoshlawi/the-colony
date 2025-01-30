@@ -102,14 +102,13 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
               fieldState: { error },
             }) => (
               <TextInput
-                // multiline
-                // numberOfLines={2}
+                multiline
                 value={value}
                 readOnly={disabled}
                 onChangeText={onChange}
                 placeholder="Enter caption ..."
                 error={error?.message}
-                style={{ borderRadius: theme.borderRadii.large }}
+                inputDecorationStyle={{ borderRadius: theme.borderRadii.large }}
               />
             )}
           />
@@ -117,6 +116,7 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
         <IconButton
           icon={{ family: "Entypo", name: "upload" }}
           onPress={form.handleSubmit(onSubmit)}
+          containerStyle={{ alignSelf: "center" }}
         />
       </Box>
     </Box>

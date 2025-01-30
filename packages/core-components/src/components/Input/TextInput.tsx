@@ -3,11 +3,17 @@ import React, { forwardRef, ReactNode, Ref } from "react";
 import {
   Platform,
   TextInput as RNTextInput,
+  StyleProp,
+  ViewProps,
+  ViewStyle,
   type TextInputProps as RNTextInputProps,
 } from "react-native";
 import InputDecoration, { InputDecorationProps } from "./InputDecoration";
 
-export type TextInputProps = RNTextInputProps & InputDecorationProps;
+export type TextInputProps = RNTextInputProps &
+  InputDecorationProps & {
+    inputDecorationStyle?: StyleProp<ViewStyle>;
+  };
 
 const TextInput = forwardRef<RNTextInput, TextInputProps>(
   (
@@ -21,6 +27,7 @@ const TextInput = forwardRef<RNTextInput, TextInputProps>(
       onPrefixIconPressed,
       onSuffixIconPressed,
       disabled = false,
+      inputDecorationStyle,
       ...props
     },
     ref: Ref<RNTextInput>
@@ -41,6 +48,7 @@ const TextInput = forwardRef<RNTextInput, TextInputProps>(
         onSuffixIconPressed={onSuffixIconPressed}
         prefixIcon={prefixIcon}
         suffixIcon={suffixIcon}
+        style={inputDecorationStyle}
         renderInput={({ onBlur, onFocus }) => (
           <RNTextInput
             ref={ref}

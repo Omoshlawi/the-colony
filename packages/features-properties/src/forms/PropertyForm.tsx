@@ -122,7 +122,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
                 multiline
                 numberOfLines={2}
                 value={value}
-                label="description"
+                label="Description"
                 readOnly={disabled}
                 onChangeText={onChange}
                 placeholder="Enter property description"
