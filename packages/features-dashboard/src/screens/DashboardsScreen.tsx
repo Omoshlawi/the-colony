@@ -3,7 +3,7 @@ import React from "react";
 import {
   AppBar,
   ExpoIconComponent,
-  Textinput,
+  TextInput,
   StyledPageLayout,
 } from "@colony/core-components";
 import { dashboardMenuitems } from "../utils/constants";
@@ -16,7 +16,7 @@ const DashboardsScreen = () => {
       <Box p={"m"} flex={1}>
         <AppBar title="App Menu" leading={false} />
         <Box p={"s"} mb={"m"}>
-          <Textinput
+          <TextInput
             placeholder="search ..."
             suffixIcon={<ExpoIconComponent family="EvilIcons" name="search" />}
           />

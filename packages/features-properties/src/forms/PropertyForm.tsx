@@ -8,7 +8,7 @@ import {
   ListTile,
   SeachableDropDown,
   showSnackbar,
-  Textinput,
+  TextInput,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -97,7 +97,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               field: { onChange, value, disabled },
               fieldState: { error },
             }) => (
-              <Textinput
+              <TextInput
                 value={value}
                 label="Name"
                 readOnly={disabled}
@@ -115,7 +115,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               field: { onChange, value, disabled },
               fieldState: { error },
             }) => (
-              <Textinput
+              <TextInput
                 multiline
                 numberOfLines={2}
                 value={value}

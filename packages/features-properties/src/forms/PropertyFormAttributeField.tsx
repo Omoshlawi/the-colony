@@ -5,7 +5,7 @@ import {
   InputSkeleton,
   ListTile,
   SeachableDropDown,
-  Textinput,
+  TextInput,
   When,
 } from "@colony/core-components";
 import { Box, Color, Text, useTheme } from "@colony/core-theme";
@@ -110,7 +110,7 @@ const PropertyFormAttributeField = () => {
                     control={form.control}
                     name={`attributes.${index}.value`}
                     render={({ field, fieldState: { error } }) => (
-                      <Textinput
+                      <TextInput
                         label="Attribute Value"
                         placeholder="Attribute value"
                         value={field.value}

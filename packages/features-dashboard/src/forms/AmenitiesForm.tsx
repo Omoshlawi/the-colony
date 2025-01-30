@@ -6,7 +6,7 @@ import {
   LocalExpoIconPicker,
   showSnackbar,
   Button,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -65,7 +65,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Amenity"
             readOnly={disabled}
@@ -82,7 +82,7 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             prefixIcon={value && <ExpoIconComponent {...(value as ExpoIcon)} />}
             value={value && `${value.family} / ${value.name}`}
             placeholder="Select icon"

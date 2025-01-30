@@ -3,7 +3,7 @@ import {
   Button,
   ExpoIconComponent,
   showSnackbar,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -50,7 +50,7 @@ const LoginForm = () => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Username"
             readOnly={disabled}
@@ -70,7 +70,7 @@ const LoginForm = () => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             label="Password"
             suffixIcon={
               <ExpoIconComponent

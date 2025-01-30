@@ -4,7 +4,7 @@ import {
   SeachableDropDown,
   showSnackbar,
   Button,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -66,7 +66,7 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Privilege"
             readOnly={disabled}
@@ -83,7 +83,7 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             readOnly={disabled}
             onChangeText={onChange}

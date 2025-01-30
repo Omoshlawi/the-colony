@@ -3,11 +3,11 @@ import React, { forwardRef, ReactNode, Ref, useState } from "react";
 import {
   Platform,
   TextInput as RNTextInput,
-  TextInputProps,
+  TextInputProps as RNTextInputProps,
   TouchableOpacity,
 } from "react-native";
 
-export interface TextinputProps extends TextInputProps {
+export interface TextInputProps extends RNTextInputProps {
   label?: string;
   error?: string;
   helperText?: string;
@@ -19,7 +19,7 @@ export interface TextinputProps extends TextInputProps {
   disabled?: boolean;
 }
 
-const Textinput = forwardRef<RNTextInput, TextinputProps>(
+const TextInput = forwardRef<RNTextInput, TextInputProps>(
   (
     {
       label,
@@ -137,4 +137,4 @@ const Textinput = forwardRef<RNTextInput, TextinputProps>(
   }
 );
 
-export default Textinput;
+export default TextInput;

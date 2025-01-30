@@ -5,7 +5,7 @@ import {
   ImagePickerAsset,
   SeachableDropDown,
   showSnackbar,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import { Box, Text, theme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -101,7 +101,7 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
               field: { onChange, value, disabled },
               fieldState: { error },
             }) => (
-              <Textinput
+              <TextInput
                 // multiline
                 // numberOfLines={2}
                 value={value}

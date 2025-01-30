@@ -5,7 +5,7 @@ import {
   ListTile,
   showSnackbar,
   Button,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
 import { Box, useTheme } from "@colony/core-theme";
@@ -121,7 +121,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
                 inputProps={{ error: error?.message, label: "User" }}
               />
             ) : (
-              <Textinput
+              <TextInput
                 error={error?.message}
                 label="User"
                 value={membership.memberUser?.username}

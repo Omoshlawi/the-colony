@@ -1,16 +1,14 @@
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-import React, { FC, useRef, useState } from "react";
 import { Box, useTheme } from "@colony/core-theme";
 import { debounce } from "lodash";
-import { Textinput } from "../Textinput";
+import React, { useRef, useState } from "react";
+import {
+  FlatList,
+  Text,
+  TextInput as RNTextInput,
+  TouchableOpacity,
+} from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
+import { TextInput } from "../Input";
 
 type SelectionInputProps<T> = {
   onSelect?: (selected?: T) => void;
@@ -31,7 +29,7 @@ const SelectionInput = <T,>({
   renderError,
   keyExtractor,
 }: SelectionInputProps<T>) => {
-  const ref = useRef<TextInput>(null);
+  const ref = useRef<RNTextInput>(null);
   const theme = useTheme();
 
   const [searchText, setSearchText] = useState<string>("");
@@ -65,7 +63,7 @@ const SelectionInput = <T,>({
   };
   return (
     <Box width={"100%"} flex={1} padding={"m"}>
-      <Textinput
+      <TextInput
         ref={ref}
         value={searchText}
         onChangeText={handleTextChange}

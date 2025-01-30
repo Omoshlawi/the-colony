@@ -2,7 +2,7 @@ import {
   ExpoIconComponent,
   showSnackbar,
   Button,
-  Textinput,
+  TextInput,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -56,7 +56,7 @@ const RegisterForm = () => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Username"
             readOnly={disabled}
@@ -75,7 +75,7 @@ const RegisterForm = () => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Email"
             readOnly={disabled}
@@ -95,7 +95,7 @@ const RegisterForm = () => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             value={value}
             label="Phone number"
             readOnly={disabled}
@@ -113,7 +113,7 @@ const RegisterForm = () => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             label="Password"
             suffixIcon={
               <ExpoIconComponent
@@ -140,7 +140,7 @@ const RegisterForm = () => {
           field: { onChange, value, disabled, onBlur, ref },
           fieldState: { error },
         }) => (
-          <Textinput
+          <TextInput
             label="Confirm password"
             suffixIcon={
               <ExpoIconComponent

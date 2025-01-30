@@ -2,12 +2,12 @@ import React, { FC, useRef, useState } from "react";
 import {
   FlatList,
   ScrollView,
-  TextInput,
+  TextInput as RNTextInput,
   TouchableOpacity,
 } from "react-native";
 import useSWR from "swr";
 import { ExpoIcon, ExpoIconComponent } from "./helpers";
-import { Textinput } from "../Textinput";
+import { TextInput } from "../Input";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import debounce from "lodash/debounce";
 
@@ -31,7 +31,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
   getIconFamilies,
   onSelectIconFamily,
 }) => {
-  const ref = useRef<TextInput>(null);
+  const ref = useRef<RNTextInput>(null);
   const {
     data: iconsFamiliesNames,
     error: familyError,
@@ -79,7 +79,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
   return (
     <Box flex={1} gap={"m"} flexDirection={"column"} p={"m"}>
       {/* Search Input */}
-      <Textinput
+      <TextInput
         placeholder="Search icons..."
         onChangeText={handleSearchIcon}
         ref={ref}
