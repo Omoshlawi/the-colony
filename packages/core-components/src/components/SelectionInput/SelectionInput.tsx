@@ -9,7 +9,7 @@ import {
 import React, { FC, useRef, useState } from "react";
 import { Box, useTheme } from "@colony/core-theme";
 import { debounce } from "lodash";
-import { StyledInput } from "../StyledInput";
+import { Textinput } from "../Textinput";
 import { ExpoIconComponent } from "../ExpoIcons";
 
 type SelectionInputProps<T> = {
@@ -65,7 +65,7 @@ const SelectionInput = <T,>({
   };
   return (
     <Box width={"100%"} flex={1} padding={"m"}>
-      <StyledInput
+      <Textinput
         ref={ref}
         value={searchText}
         onChangeText={handleTextChange}

@@ -15,7 +15,7 @@ export * from "./Overlays";
 export * from "./SectionCard";
 export * from "./ActionsBottomSheet";
 export * from "./SelectionInput";
-export * from "./StyledInput";
+export * from "./Input";
 export * from "./StateWidgets";
 export * from "./When";
 export * from "./FilePicker";

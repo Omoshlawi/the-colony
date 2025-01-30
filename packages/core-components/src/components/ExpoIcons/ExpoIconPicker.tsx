@@ -7,7 +7,7 @@ import {
 } from "react-native";
 import useSWR from "swr";
 import { ExpoIcon, ExpoIconComponent } from "./helpers";
-import { StyledInput } from "../StyledInput";
+import { Textinput } from "../Textinput";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import debounce from "lodash/debounce";
 
@@ -79,7 +79,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
   return (
     <Box flex={1} gap={"m"} flexDirection={"column"} p={"m"}>
       {/* Search Input */}
-      <StyledInput
+      <Textinput
         placeholder="Search icons..."
         onChangeText={handleSearchIcon}
         ref={ref}

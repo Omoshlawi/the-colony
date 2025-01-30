@@ -1,5 +1,5 @@
 import { handleApiErrors, mutate } from "@colony/core-api";
-import { showSnackbar, Button, StyledInput } from "@colony/core-components";
+import { showSnackbar, Button, Textinput } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
@@ -65,7 +65,7 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="A is to B"
             readOnly={disabled}
@@ -82,7 +82,7 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="B is to A"
             readOnly={disabled}
@@ -99,7 +99,7 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Description"
             readOnly={disabled}

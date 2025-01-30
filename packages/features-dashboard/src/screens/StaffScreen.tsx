@@ -7,7 +7,7 @@ import {
   ListTile,
   ListTileSkeleton,
   showModal,
-  StyledInput,
+  Textinput,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
@@ -46,7 +46,7 @@ const StaffScreen = () => {
         }
       />
       <Box flex={1} p={"m"}>
-        <StyledInput
+        <Textinput
           placeholder="Search staff..."
           onChangeText={handleSearch}
           helperText="Search by name,email or phone number"

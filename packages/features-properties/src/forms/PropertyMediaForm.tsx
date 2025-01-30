@@ -5,7 +5,7 @@ import {
   ImagePickerAsset,
   SeachableDropDown,
   showSnackbar,
-  StyledInput,
+  Textinput,
 } from "@colony/core-components";
 import { Box, Text, theme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -101,7 +101,7 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
               field: { onChange, value, disabled },
               fieldState: { error },
             }) => (
-              <StyledInput
+              <Textinput
                 // multiline
                 // numberOfLines={2}
                 value={value}
@@ -110,7 +110,6 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
                 placeholder="Enter caption ..."
                 error={error?.message}
                 style={{ borderRadius: theme.borderRadii.large }}
-                
               />
             )}
           />

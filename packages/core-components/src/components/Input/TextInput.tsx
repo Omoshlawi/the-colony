@@ -2,13 +2,12 @@ import { Box, Text, useTheme } from "@colony/core-theme";
 import React, { forwardRef, ReactNode, Ref, useState } from "react";
 import {
   Platform,
-  TextInput,
+  TextInput as RNTextInput,
   TextInputProps,
   TouchableOpacity,
-  View,
 } from "react-native";
 
-export interface StyledInputProps extends TextInputProps {
+export interface TextinputProps extends TextInputProps {
   label?: string;
   error?: string;
   helperText?: string;
@@ -20,7 +19,7 @@ export interface StyledInputProps extends TextInputProps {
   disabled?: boolean;
 }
 
-const StyledInput = forwardRef<TextInput, StyledInputProps>(
+const Textinput = forwardRef<RNTextInput, TextinputProps>(
   (
     {
       label,
@@ -35,7 +34,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
       disabled = false,
       ...props
     },
-    ref: Ref<TextInput>
+    ref: Ref<RNTextInput>
   ) => {
     const [isFocused, setIsFocused] = useState(false);
     const theme = useTheme();
@@ -90,7 +89,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
               {prefixIcon}
             </TouchableOpacity>
           )}
-          <TextInput
+          <RNTextInput
             ref={ref}
             editable={!disabled && props.editable}
             readOnly={disabled || props.readOnly}
@@ -138,4 +137,4 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
   }
 );
 
-export default StyledInput;
+export default Textinput;

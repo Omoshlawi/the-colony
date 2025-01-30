@@ -11,7 +11,7 @@ import {
   InputSkeleton,
   showSnackbar,
   Button,
-  StyledInput,
+  Textinput,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -85,7 +85,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Address"
             readOnly={disabled}
@@ -102,7 +102,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Description"
             readOnly={disabled}
@@ -209,7 +209,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Landmark"
             readOnly={disabled}
@@ -226,7 +226,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Postal code"
             readOnly={disabled}

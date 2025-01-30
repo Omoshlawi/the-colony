@@ -16,11 +16,11 @@ import {
 } from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
 import { Button } from "../Button";
-import { StyledInput, StyledInputProps } from "../StyledInput";
+import { Textinput, TextinputProps } from "../Textinput";
 
 // Configuration types
 interface DropdownProps<T, S> {
-  inputProps?: StyledInputProps;
+  inputProps?: TextinputProps;
   // Data and extraction props
   data?: T[];
   initialValue?: T | T[];
@@ -310,7 +310,7 @@ function SeachableDropDown<T, S>({
   return (
     <View style={styles.container}>
       {/* Dropdown Trigger */}
-      <StyledInput
+      <Textinput
         suffixIcon={
           <ExpoIconComponent family="Feather" name="chevron-down" size={24} />
         }
@@ -349,7 +349,7 @@ function SeachableDropDown<T, S>({
               </Text>
             )}
             {/* Search Input */}
-            <StyledInput
+            <Textinput
               placeholder={searchPlaceholder}
               value={searchText}
               onChangeText={handleSearch}

@@ -1,5 +1,5 @@
 import { handleApiErrors, mutate } from "@colony/core-api";
-import { showSnackbar, Button, StyledInput } from "@colony/core-components";
+import { showSnackbar, Button, Textinput } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
@@ -59,7 +59,7 @@ export const OrganizationForm: FC<Props> = ({ onSuccess, organization }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Organization"
             readOnly={disabled}
@@ -77,7 +77,7 @@ export const OrganizationForm: FC<Props> = ({ onSuccess, organization }) => {
           field: { onChange, value, disabled },
           fieldState: { error },
         }) => (
-          <StyledInput
+          <Textinput
             value={value}
             label="Description"
             readOnly={disabled}
