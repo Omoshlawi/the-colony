@@ -8,13 +8,14 @@ import {
   showModalBottomSheet,
   Button,
   StyledPageLayout,
+  InputDecoration,
 } from "@colony/core-components";
 import { IconButton } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
 import React from "react";
-import { LogBox, StyleSheet, TouchableOpacity } from "react-native";
+import { LogBox, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 
 LogBox.ignoreAllLogs();
 
@@ -40,6 +41,16 @@ export default function HomeScreen() {
   return (
     <StyledPageLayout>
       <Box gap={"m"} p={"m"}>
+        <TextInput
+          label="Hae"
+          helperText="some helpers"
+          prefixIcon={
+            <ExpoIconComponent family="FontAwesome" name="star" size={10} />
+          }
+          suffixIcon={
+            <ExpoIconComponent family="FontAwesome" name="star" size={10} />
+          }
+        />
         <Button
           title="primary"
           variant="primary"

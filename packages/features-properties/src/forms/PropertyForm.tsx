@@ -98,6 +98,9 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               fieldState: { error },
             }) => (
               <TextInput
+                prefixIcon={
+                  <ExpoIconComponent name="star" family="FontAwesome" />
+                }
                 value={value}
                 label="Name"
                 readOnly={disabled}
