@@ -55,13 +55,9 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
     };
 
     return (
-      <View style={{ width: "100%" }}>
+      <Box style={{ width: "100%" }} gap={"s"}>
         {label && (
-          <Text
-            variant={"bodyMedium"}
-            color={disabled ? "hintColor" : "text"}
-            style={{ marginBottom: theme.spacing.s }}
-          >
+          <Text variant={"bodyMedium"} color={disabled ? "hintColor" : "text"}>
             {label}
           </Text>
         )}
@@ -137,7 +133,7 @@ const StyledInput = forwardRef<TextInput, StyledInputProps>(
             {error || helperText}
           </Text>
         )}
-      </View>
+      </Box>
     );
   }
 );

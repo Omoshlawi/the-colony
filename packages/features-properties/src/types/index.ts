@@ -18,6 +18,9 @@ export interface Property {
   attributes?: Attribute[];
 }
 
+export interface PropertyMedia {
+  id:string
+}
 export interface PropertyAmenity {
   id: string;
   propertyId: string;

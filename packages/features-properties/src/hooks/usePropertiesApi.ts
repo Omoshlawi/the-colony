@@ -1,5 +1,10 @@
 import { hiveFetch } from "@colony/core-api";
-import { Property, PropertyFormData } from "../types";
+import {
+  Property,
+  PropertyFormData,
+  PropertyMedia,
+  PropertyMediaFormData,
+} from "../types";
 
 const addProperty = async (data: PropertyFormData) => {
   return await hiveFetch<Property>("/properties", {
@@ -28,11 +33,30 @@ const deleteProperty = async (
   });
 };
 
+const addPropertyMedia = (propertyId: string, data: PropertyMediaFormData) =>
+  hiveFetch(`properties/${propertyId}/media`, { method: "POST", data });
+
+const updatePropertyMedia = (
+  propertyId: string,
+  mediaId: string,
+  data: PropertyMediaFormData,
+  method: "PUT" | "PATCH" = "PATCH"
+) => hiveFetch(`properties/${propertyId}/media/${mediaId}`, { method, data });
+
+const deletePropertyMedia = (
+  propertyId: string,
+  mediaId: string,
+  method: "DELETE" | "PURGE" = "DELETE"
+) => hiveFetch(`properties/${propertyId}/media/${mediaId}`, { method });
+
 const usePropertiesApi = () => {
   return {
     addProperty,
     updateProperty,
     deleteProperty,
+    addPropertyMedia,
+    updatePropertyMedia,
+    deletePropertyMedia,
   };
 };
 

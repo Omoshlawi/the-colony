@@ -2,12 +2,11 @@ import z from "zod";
 
 // Property Media
 export const PropertyMediaSchema = z.object({
-  propertyId: z.string().uuid(),
   type: z.enum(["Image", "Video", "Document", "Tour_3D"]),
   url: z.string().min(1, "Required"),
   title: z.string().min(1, "Required").optional(),
   description: z.string().min(1, "Required").optional(),
-  order: z.number({ coerce: true }).int().nonnegative(),
+  order: z.number({ coerce: true }).int().nonnegative().optional(),
   metadata: z.object({
     size: z.number({
       coerce: true,
@@ -32,7 +31,7 @@ export const PropertySchema = z.object({
     )
     .optional(),
   addressId: z.string().min(1, "Required").uuid("invalid address"),
-  media: z.array(PropertyMediaSchema.omit({ propertyId: true })).optional(),
+  media: z.array(PropertyMediaSchema).optional(),
   amenities: z.array(z.string().uuid()).optional(),
   categories: z.array(z.string().uuid()).optional(),
 });

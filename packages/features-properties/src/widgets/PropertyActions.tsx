@@ -1,8 +1,16 @@
 import { StyleSheet, Text, View } from "react-native";
 import React, { FC } from "react";
 import { Box } from "@colony/core-theme";
-import { Button, ExpoIconComponent, showModal } from "@colony/core-components";
-import { PropertyForm } from "../forms";
+import {
+  Button,
+  ExpoIconComponent,
+  FilePicker,
+  ImagePickerAsset,
+  ImageViewer,
+  showModal,
+  showModalBottomSheet,
+} from "@colony/core-components";
+import { PropertyForm, PropertyMediaForm } from "../forms";
 import { Property } from "../types";
 
 type PropertyActionsProps = {
@@ -22,6 +30,30 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
       />
     );
   };
+
+  const handleAddMedia = (assets: ImagePickerAsset[]) => {
+    const dispose = showModal(
+      <PropertyMediaForm
+        onSuccess={() => dispose()}
+        mediaFiles={assets}
+        mediaType="Image"
+        propertyId={property.id}
+        renderMediaFilePreview={([{ uri, mimeType, fileName, file }]) => (
+          <Box position={"absolute"} top={0} right={0} bottom={0} left={0}>
+            <ImageViewer
+              source={uri}
+              style={{ width: "100%", height: "100%" }}
+              contentFit="contain"
+            />
+          </Box>
+        )}
+      />,
+      {
+        title: "Add Property Media",
+      }
+    );
+  };
+
   return (
     <Box
       flexDirection={"row"}
@@ -31,20 +63,28 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
       flexWrap={"wrap"}
       pb={"l"}
     >
-      <Button
-        title="Add Photo"
-        borderRadius="medium"
-        variant="tertiary"
-        style={{ width: "48%" }}
-        renderIcon={({ size, color }) => (
-          <ExpoIconComponent
-            size={size}
-            family="FontAwesome"
-            name="camera"
-            color={color}
+      <FilePicker.ImageField
+        renderTrigger={(onTrigger) => (
+          <Button
+            title="Add Photo"
+            borderRadius="medium"
+            variant="tertiary"
+            style={{ width: "48%" }}
+            renderIcon={({ size, color }) => (
+              <ExpoIconComponent
+                size={size}
+                family="FontAwesome"
+                name="camera"
+                color={color}
+              />
+            )}
+            onPress={() => {
+              onAction?.();
+              onTrigger();
+            }}
           />
         )}
-        onPress={onAction}
+        onImageChange={handleAddMedia}
       />
       <Button
         title="Add Video"

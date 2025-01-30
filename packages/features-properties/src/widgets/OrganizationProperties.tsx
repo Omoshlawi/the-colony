@@ -3,12 +3,14 @@ import {
   EmptyState,
   ErrorState,
   ExpansionTile,
+  ExpoIconComponent,
   ImageViewer,
+  ListTile,
   ListTileSkeleton,
   showModal,
   When,
 } from "@colony/core-components";
-import { Box } from "@colony/core-theme";
+import { Box, theme } from "@colony/core-theme";
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useProperties } from "../hooks";
@@ -46,22 +48,26 @@ const OrganizationPropertiesScreen = () => {
                   params: { propertyId: item.id },
                 }}
               >
-                <ExpansionTile
+                <ListTile
                   title={item.name}
-                  subtitle={item.organization?.name}
-                  childContainerStyles={{
-                    padding: 0,
-                    marginHorizontal: 0,
-                  }}
+                  subtitle={new Date(item.createdAt).toLocaleString()}
                   borderBottom
-                >
-                  <ImageViewer
-                    // source="https://picsum.photos/seed/696/3000/2000"
-                    source={getHiveFileUrl(item.thumbnail)}
-                    style={styles.img}
-                    contentFit="cover"
-                  />
-                </ExpansionTile>
+                  leading={
+                    <ImageViewer
+                      source={getHiveFileUrl(item.thumbnail)}
+                      style={[
+                        styles.img,
+                        { borderRadius: theme.borderRadii.medium },
+                      ]}
+                    />
+                  }
+                  trailing={
+                    <ExpoIconComponent
+                      family="Entypo"
+                      name="chevron-small-right"
+                    />
+                  }
+                />
               </Link>
             )}
           />
@@ -75,6 +81,7 @@ export default OrganizationPropertiesScreen;
 
 const styles = StyleSheet.create({
   img: {
-    height: 200,
+    height: 50,
+    aspectRatio: 1,
   },
 });

@@ -51,7 +51,11 @@ const PropertyFormThumbnailForm: FC<Props> = () => {
             },
             color: theme.colors.error,
           },
-          { title: "Cancel", onPress: () => dispose() },
+          {
+            title: "Cancel",
+            onPress: () => dispose(),
+            color: theme.colors.text,
+          },
         ]}
       />
     );

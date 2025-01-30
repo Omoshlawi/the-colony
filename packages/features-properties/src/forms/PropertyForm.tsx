@@ -1,19 +1,19 @@
-import { cleanFiles, handleApiErrors, mutate } from "@colony/core-api";
+import { handleApiErrors, mutate } from "@colony/core-api";
 import {
+  Button,
   ErrorState,
   ExpoIcon,
   ExpoIconComponent,
   InputSkeleton,
   ListTile,
+  SeachableDropDown,
   showSnackbar,
-  Button,
   StyledInput,
   When,
-  SeachableDropDown,
 } from "@colony/core-components";
-import { Box, useTheme, Text } from "@colony/core-theme";
+import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
+import React, { FC } from "react";
 import {
   Controller,
   FormProvider,
@@ -24,9 +24,8 @@ import { ScrollView, StyleSheet } from "react-native";
 import {
   useAddresses,
   useAmenities,
-  useAttributeTypes,
   useCategories,
-  usePropertiesApi,
+  usePropertiesApi
 } from "../hooks";
 import { Property, PropertyFormData } from "../types";
 import { PropertySchema } from "../utils";
