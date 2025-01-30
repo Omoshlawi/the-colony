@@ -165,7 +165,6 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
                 error={error?.message}
                 inputDecorationStyle={{
                   borderRadius: theme.borderRadii.large,
-                  backgroundColor: theme.colors.background,
                 }}
               />
             )}

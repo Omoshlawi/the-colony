@@ -31,12 +31,10 @@ const PropertyMediaWidget: FC<PropertyMediaProps> = ({ property }) => {
           variant={"bodyMedium"}
           color={"text"}
           textAlign={"center"}
-          numberOfLines={3}
           style={[
             {
               position: "absolute",
               bottom: theme.spacing.xl,
-              textOverflow: "...",
               flex: 1,
               width: "100%",
             },
