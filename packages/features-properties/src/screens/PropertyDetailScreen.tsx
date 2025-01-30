@@ -13,6 +13,7 @@ import {
   PropertyAbout,
   PropertyCategories,
   PropertyDetailHeader,
+  PropertyMediaWidget,
   PropertyReviews,
 } from "../widgets";
 import PropertyFeedbackSummary from "../widgets/PropertyFeedbackSummary";
@@ -97,7 +98,7 @@ const PropertyDetailScreen = () => {
                   scenes={{
                     about: () => <PropertyAbout property={property} />,
                     reviews: () => <PropertyReviews property={property} />,
-                    media: () => <PropertyReviews property={property} />,
+                    media: () => <PropertyMediaWidget property={property} />,
                   }}
                   renderBadge={(route) => <Text>{route.title}</Text>}
                 />

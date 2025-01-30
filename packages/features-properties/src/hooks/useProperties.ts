@@ -32,9 +32,9 @@ export const usePropertyMedia = (propertyId: string) => {
   const path = constructUrl(`/properties/${propertyId}/media`, {});
 
   const { data, error, isLoading, mutate } =
-    useApi<HiveFetchResponse<PropertyMedia>>(path);
+    useApi<HiveFetchResponse<{ results: PropertyMedia[] }>>(path);
   return {
-    propertyMedia: data?.data,
+    propertyMedia: data?.data?.results ?? [],
     isLoading,
     error,
     mutate,

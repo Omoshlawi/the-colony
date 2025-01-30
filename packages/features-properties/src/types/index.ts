@@ -19,8 +19,24 @@ export interface Property {
 }
 
 export interface PropertyMedia {
-  id:string
+  id: string;
+  propertyId: string;
+  type: string;
+  url: string;
+  title: any;
+  description: string;
+  metadata: Metadata;
+  order: number;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
+
+export interface Metadata {
+  size: number;
+  memeType: string;
+}
+
 export interface PropertyAmenity {
   id: string;
   propertyId: string;
