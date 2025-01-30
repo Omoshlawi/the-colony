@@ -24,11 +24,11 @@ export interface HiveFile {
 
 export interface UploadableFile {
   uri: string;
-  name: string;
+  name?: string | null;
   /**
    * Meme type
    */
-  type: string;
+  type?: string | null;
   /**
    * Web only
    */

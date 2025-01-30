@@ -39,7 +39,14 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
         mediaType="Image"
         propertyId={property.id}
         renderMediaFilePreview={([{ uri, mimeType, fileName, file }]) => (
-          <Box position={"absolute"} top={0} right={0} bottom={0} left={0}>
+          <Box
+            position={"absolute"}
+            top={0}
+            right={0}
+            bottom={0}
+            left={0}
+            pb={"xl"}
+          >
             <ImageViewer
               source={uri}
               style={{ width: "100%", height: "100%" }}

@@ -1,17 +1,20 @@
-import { handleApiErrors, mutate } from "@colony/core-api";
 import {
-  Button,
+  handleApiErrors,
+  HiveFetchResponse,
+  mutate,
+  uploadFiles,
+} from "@colony/core-api";
+import {
   IconButton,
   ImagePickerAsset,
-  SeachableDropDown,
   showSnackbar,
   TextInput,
 } from "@colony/core-components";
-import { Box, Text, theme } from "@colony/core-theme";
+import { Box, theme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC, useEffect, useMemo } from "react";
+import React, { FC, useEffect } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { ScrollView, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { usePropertiesApi } from "../hooks";
 import { PropertyMedia, PropertyMediaFormData } from "../types";
 import { PropertyMediaSchema } from "../utils";
@@ -44,15 +47,66 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
 
   const onSubmit: SubmitHandler<PropertyMediaFormData> = async (data) => {
     try {
+      const uploaded = await uploadFiles({
+        files: {
+          images: mediaFiles.map((asset) => ({
+            name: asset.fileName,
+            type: asset.mimeType,
+            uri: asset.uri,
+            file: asset.file,
+          })),
+        },
+        path: "images",
+      });
+
+      let tasks: Promise<HiveFetchResponse<any, any>>[];
       if (propertyMedia) {
-        await updatePropertyMedia(propertyId, propertyMedia.id, data);
+        tasks = Object.keys(uploaded).reduce<
+          Array<Promise<HiveFetchResponse<any, any>>>
+        >(
+          (prev, field) => [
+            ...prev,
+            ...uploaded[field].map((f) =>
+              updatePropertyMedia(propertyId, propertyMedia.id, {
+                ...data,
+                url: f.path,
+                metadata: {
+                  memeType: f.memeType,
+                  size: Number(f.bytesSize),
+                },
+              })
+            ),
+          ],
+          []
+        );
+        // await updatePropertyMedia(propertyId, propertyMedia.id, data);
       } else {
-        await addPropertyMedia(propertyId, data);
+        tasks = Object.keys(uploaded).reduce<
+          Array<Promise<HiveFetchResponse<any, any>>>
+        >(
+          (prev, field) => [
+            ...prev,
+            ...uploaded[field].map((f) =>
+              addPropertyMedia(propertyId, {
+                ...data,
+                url: f.path,
+                metadata: {
+                  memeType: f.memeType,
+                  size: Number(f.bytesSize),
+                },
+              })
+            ),
+          ],
+          []
+        );
+        // await addPropertyMedia(propertyId, data);
       }
+
+      await Promise.all(tasks);
       onSuccess?.();
       showSnackbar({
         title: "succes",
-        subtitle: `property ${
+        subtitle: `property media ${
           propertyMedia ? "updated" : "created"
         } succesfull`,
         kind: "success",
@@ -70,13 +124,14 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
   };
 
   useEffect(() => {
-    const fields: (keyof PropertyMediaFormData)[] = ["metadata", "order"];
-    fields.forEach((field) => {
+    Object.keys(form.formState.errors).forEach((field) => {
       if (field in form.formState.errors) {
         showSnackbar({
           kind: "error",
           title: field,
-          subtitle: form.formState.errors[field]?.message,
+          subtitle:
+            form.formState.errors[field as keyof PropertyMediaFormData]
+              ?.message,
         });
       }
     });
@@ -108,7 +163,10 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
                 onChangeText={onChange}
                 placeholder="Enter caption ..."
                 error={error?.message}
-                inputDecorationStyle={{ borderRadius: theme.borderRadii.large }}
+                inputDecorationStyle={{
+                  borderRadius: theme.borderRadii.large,
+                  backgroundColor: theme.colors.background,
+                }}
               />
             )}
           />

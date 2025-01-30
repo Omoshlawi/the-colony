@@ -3,16 +3,18 @@ import z from "zod";
 // Property Media
 export const PropertyMediaSchema = z.object({
   type: z.enum(["Image", "Video", "Document", "Tour_3D"]),
-  url: z.string().min(1, "Required"),
+  url: z.string().optional(),
   title: z.string().min(1, "Required").optional(),
   description: z.string().min(1, "Required").optional(),
   order: z.number({ coerce: true }).int().nonnegative().optional(),
-  metadata: z.object({
-    size: z.number({
-      coerce: true,
-    }),
-    memeType: z.string().min(1, "Required").optional(),
-  }),
+  metadata: z
+    .object({
+      size: z.number({
+        coerce: true,
+      }),
+      memeType: z.string().min(1, "Required").optional(),
+    })
+    .optional(),
 });
 
 export const PropertySchema = z.object({
