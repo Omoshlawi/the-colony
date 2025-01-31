@@ -34,8 +34,17 @@ export interface Relationship {
   updatedAt: string;
   propertyA?: Property;
   propertyB?: Property;
+  type?: RelationshipType;
 }
-
+export interface RelationshipType {
+  id: string;
+  description: any;
+  aIsToB: string;
+  bIsToA: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface RelationshipType {
   id: string;
   description: any;

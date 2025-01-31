@@ -7,3 +7,4 @@ export { default as PropertyReviews } from "./PropertyReviews";
 export { default as PropertyDetailHeader } from "./PropertyDetailHeader";
 export { default as PropertyActions } from "./PropertyActions";
 export { default as PropertyMediaWidget } from "./PropertyMedia";
+export { default as PropertyRelationships } from "./PropertyRelationships";

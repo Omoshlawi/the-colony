@@ -14,6 +14,7 @@ import {
   PropertyCategories,
   PropertyDetailHeader,
   PropertyMediaWidget,
+  PropertyRelationships,
   PropertyReviews,
 } from "../widgets";
 import PropertyFeedbackSummary from "../widgets/PropertyFeedbackSummary";
@@ -99,11 +100,26 @@ const PropertyDetailScreen = () => {
                         />
                       ),
                     },
+                    {
+                      key: "relationships",
+                      title: "Relatives",
+                      icon: (
+                        <ExpoIconComponent
+                          family="FontAwesome"
+                          name="star"
+                          color="red"
+                          size={16}
+                        />
+                      ),
+                    },
                   ]}
                   scenes={{
                     about: () => <PropertyAbout property={property} />,
                     reviews: () => <PropertyReviews property={property} />,
                     media: () => <PropertyMediaWidget property={property} />,
+                    relationships: () => (
+                      <PropertyRelationships property={property} />
+                    ),
                   }}
                   renderBadge={(route) => <Text>{route.title}</Text>}
                 />

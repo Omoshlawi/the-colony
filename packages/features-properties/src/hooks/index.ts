@@ -5,3 +5,4 @@ export { default as useCategories } from "./useCategories";
 export { default as useAttributeTypes } from "./useAttributeTypes";
 export * from "./useAddresses";
 export { default as useRelationshipTypes } from "./useRelationshipTypes";
+export { default as useRelationships } from "./useRelationships";

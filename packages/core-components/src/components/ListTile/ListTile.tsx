@@ -1,4 +1,10 @@
-import { Pressable, StyleSheet, View } from "react-native";
+import {
+  Pressable,
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+} from "react-native";
 import React, { FC, ReactNode } from "react";
 import { Box, Text, useTheme } from "@colony/core-theme";
 
@@ -9,6 +15,7 @@ type ListTileProps = {
   leading?: ReactNode;
   borderBottom?: boolean;
   onPress?: () => void;
+  containerStyles?: StyleProp<ViewStyle>;
 };
 
 const ListTile: FC<ListTileProps> = ({
@@ -18,6 +25,7 @@ const ListTile: FC<ListTileProps> = ({
   onPress,
   subtitle,
   trailing,
+  containerStyles,
 }) => {
   const theme = useTheme();
   const { colors } = theme;
@@ -33,6 +41,7 @@ const ListTile: FC<ListTileProps> = ({
           borderColor: colors.hintColor,
         },
         borderBottom ? styles.borderBottom : {},
+        containerStyles,
       ]}
     >
       {leading}
