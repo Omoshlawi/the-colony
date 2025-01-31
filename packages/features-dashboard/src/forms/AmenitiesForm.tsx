@@ -19,7 +19,7 @@ import { AmenitySchema } from "../utils/validation";
 
 type AmenitiesFormProps = {
   amenity?: Amenity;
-  onSuccess?: () => void;
+  onSuccess?: (amenity: Amenity) => void;
 };
 
 const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
@@ -34,12 +34,10 @@ const AmenitiesForm: FC<AmenitiesFormProps> = ({ amenity, onSuccess }) => {
 
   const onSubmit: SubmitHandler<AmenityFormData> = async (data) => {
     try {
-      if (amenity) {
-        await updateAmenity(amenity?.id, data);
-      } else {
-        await addAmenity(data);
-      }
-      onSuccess?.();
+      const res = amenity
+        ? await updateAmenity(amenity?.id, data)
+        : await addAmenity(data);
+      onSuccess?.(res.data);
       mutate("/amenities");
       showSnackbar({
         title: "succes",

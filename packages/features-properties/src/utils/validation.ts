@@ -37,3 +37,12 @@ export const PropertySchema = z.object({
   amenities: z.array(z.string().uuid()).optional(),
   categories: z.array(z.string().uuid()).optional(),
 });
+
+// Relationship
+export const RelationshipSchema = z.object({
+  propertyAId: z.string().uuid(),
+  propertyBId: z.string().uuid(),
+  startDate: z.date({ coerce: true }),
+  endDate: z.date({ coerce: true }).optional(),
+  typeId: z.string().uuid(),
+});

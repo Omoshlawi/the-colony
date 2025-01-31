@@ -11,7 +11,7 @@ import { RelationshipTypeSchema } from "../utils/validation";
 
 type RelationshipTypesFormProps = {
   relationshipType?: RelationshipType;
-  onSuccess?: () => void;
+  onSuccess?: (rtype: RelationshipType) => void;
 };
 
 const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
@@ -31,12 +31,11 @@ const RelationshipTypesForm: FC<RelationshipTypesFormProps> = ({
 
   const onSubmit: SubmitHandler<RelationshipTypeFormData> = async (data) => {
     try {
-      if (relationshipType) {
-        await updateRelationshipType(relationshipType?.id, data);
-      } else {
-        await addRelationshipType(data);
-      }
-      onSuccess?.();
+      const res = relationshipType
+        ? await updateRelationshipType(relationshipType?.id, data)
+        : await addRelationshipType(data);
+
+      onSuccess?.(res.data);
       showSnackbar({
         title: "succes",
         subtitle: `relationship type ${

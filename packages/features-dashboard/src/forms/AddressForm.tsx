@@ -19,7 +19,7 @@ import SearchableDropdown from "@colony/core-components/src/components/Selection
 
 type Props = {
   address?: Address;
-  onSuccess?: () => void;
+  onSuccess?: (address: Address) => void;
 };
 
 const AddressForm: FC<Props> = ({ address, onSuccess }) => {
@@ -43,12 +43,10 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
 
   const onSubmit: SubmitHandler<AddressFormData> = async (data) => {
     try {
-      if (address) {
-        await updateAddress(address?.id, data);
-      } else {
-        await addAddress(data);
-      }
-      onSuccess?.();
+      const res = address
+        ? await updateAddress(address?.id, data)
+        : await addAddress(data);
+      onSuccess?.(res.data);
       mutate("/addresses");
       showSnackbar({
         title: "succes",

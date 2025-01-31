@@ -19,7 +19,7 @@ import { AttributeTypeSchema } from "../utils/validation";
 
 type AttributeTypesFormProps = {
   attributeType?: AttributeType;
-  onSuccess?: () => void;
+  onSuccess?: (attrType: AttributeType) => void;
 };
 
 const AttributeTypesForm: FC<AttributeTypesFormProps> = ({
@@ -38,11 +38,9 @@ const AttributeTypesForm: FC<AttributeTypesFormProps> = ({
 
   const onSubmit: SubmitHandler<AttributeTypeFormData> = async (data) => {
     try {
-      if (attributeType) {
-        await updateAttributeType(attributeType?.id, data);
-      } else {
-        await addAttributeType(data);
-      }
+      const res = attributeType
+        ? await updateAttributeType(attributeType?.id, data)
+        : await addAttributeType(data);
       showSnackbar({
         title: "succes",
         subtitle: `attribute ${
@@ -50,7 +48,7 @@ const AttributeTypesForm: FC<AttributeTypesFormProps> = ({
         } succesfull`,
         kind: "success",
       });
-      onSuccess?.();
+      onSuccess?.(res.data);
       mutate("/attribute-types");
     } catch (error) {
       const e = handleApiErrors<AttributeTypeFormData>(error);

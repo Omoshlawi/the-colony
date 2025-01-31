@@ -19,7 +19,7 @@ import { CategorySchema } from "../utils/validation";
 
 type CategoriesFormProps = {
   category?: Category;
-  onSuccess?: () => void;
+  onSuccess?: (category: Category) => void;
 };
 
 const CategoriesForm: FC<CategoriesFormProps> = ({ category, onSuccess }) => {
@@ -35,12 +35,11 @@ const CategoriesForm: FC<CategoriesFormProps> = ({ category, onSuccess }) => {
 
   const onSubmit: SubmitHandler<CategoryFormData> = async (data) => {
     try {
-      if (category) {
-        await updateCategory(category?.id, data);
-      } else {
-        await addCategory(data);
-      }
-      onSuccess?.();
+      const res = category
+        ? await updateCategory(category?.id, data)
+        : await addCategory(data);
+
+      onSuccess?.(res.data);
       mutate("/categories");
       showSnackbar({
         title: "succes",

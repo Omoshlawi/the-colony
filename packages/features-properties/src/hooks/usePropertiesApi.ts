@@ -34,14 +34,21 @@ const deleteProperty = async (
 };
 
 const addPropertyMedia = (propertyId: string, data: PropertyMediaFormData) =>
-  hiveFetch(`properties/${propertyId}/media`, { method: "POST", data });
+  hiveFetch<PropertyMedia>(`properties/${propertyId}/media`, {
+    method: "POST",
+    data,
+  });
 
 const updatePropertyMedia = (
   propertyId: string,
   mediaId: string,
   data: PropertyMediaFormData,
   method: "PUT" | "PATCH" = "PATCH"
-) => hiveFetch(`properties/${propertyId}/media/${mediaId}`, { method, data });
+) =>
+  hiveFetch<PropertyMedia>(`properties/${propertyId}/media/${mediaId}`, {
+    method,
+    data,
+  });
 
 const deletePropertyMedia = (
   propertyId: string,

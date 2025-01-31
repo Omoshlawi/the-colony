@@ -20,7 +20,7 @@ import { PropertyMedia, PropertyMediaFormData } from "../types";
 import { PropertyMediaSchema } from "../utils";
 
 type PropertyMediaFormProps = {
-  onSuccess?: () => void;
+  onSuccess?: (media: PropertyMedia[]) => void;
   propertyMedia?: PropertyMedia;
   propertyId: string;
   mediaType: PropertyMediaFormData["type"];
@@ -59,10 +59,10 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
         path: "images",
       });
 
-      let tasks: Promise<HiveFetchResponse<any, any>>[];
+      let tasks: Promise<HiveFetchResponse<PropertyMedia, any>>[];
       if (propertyMedia) {
         tasks = Object.keys(uploaded).reduce<
-          Array<Promise<HiveFetchResponse<any, any>>>
+          Array<Promise<HiveFetchResponse<PropertyMedia, any>>>
         >(
           (prev, field) => [
             ...prev,
@@ -82,7 +82,7 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
         // await updatePropertyMedia(propertyId, propertyMedia.id, data);
       } else {
         tasks = Object.keys(uploaded).reduce<
-          Array<Promise<HiveFetchResponse<any, any>>>
+          Array<Promise<HiveFetchResponse<PropertyMedia, any>>>
         >(
           (prev, field) => [
             ...prev,
@@ -102,8 +102,8 @@ const PropertyMediaForm: FC<PropertyMediaFormProps> = ({
         // await addPropertyMedia(propertyId, data);
       }
 
-      await Promise.all(tasks);
-      onSuccess?.();
+      const res = await Promise.all(tasks);
+      onSuccess?.(res.map((r) => r.data));
       showSnackbar({
         title: "succes",
         subtitle: `property media ${

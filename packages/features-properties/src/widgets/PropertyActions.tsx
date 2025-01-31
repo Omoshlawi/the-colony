@@ -10,7 +10,11 @@ import {
   showModal,
   showModalBottomSheet,
 } from "@colony/core-components";
-import { PropertyForm, PropertyMediaForm } from "../forms";
+import {
+  PropertyForm,
+  PropertyMediaForm,
+  PropertyRelationshipsForm,
+} from "../forms";
 import { Property } from "../types";
 
 type PropertyActionsProps = {
@@ -61,6 +65,17 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
     );
   };
 
+  const handleaddRelationships = () => {
+    const dispose = showModal(
+      <PropertyRelationshipsForm
+        property={property}
+        onSuccess={() => dispose()}
+      />,
+      {
+        title: "add Relationship",
+      }
+    );
+  };
   return (
     <Box
       flexDirection={"row"}
@@ -137,7 +152,10 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
             color={color}
           />
         )}
-        onPress={onAction}
+        onPress={() => {
+          onAction?.();
+          handleaddRelationships();
+        }}
       />
     </Box>
   );

@@ -1,4 +1,8 @@
-import { PropertyMediaSchema, PropertySchema } from "../utils";
+import {
+  PropertyMediaSchema,
+  PropertySchema,
+  RelationshipSchema,
+} from "../utils";
 import z from "zod";
 export interface Property {
   id: string;
@@ -18,6 +22,15 @@ export interface Property {
   attributes?: Attribute[];
 }
 
+export interface RelationshipType {
+  id: string;
+  description: any;
+  aIsToB: string;
+  bIsToA: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
 export interface PropertyMedia {
   id: string;
   propertyId: string;
@@ -125,3 +138,4 @@ export interface Category {
 }
 export type PropertyFormData = z.infer<typeof PropertySchema>;
 export type PropertyMediaFormData = z.infer<typeof PropertyMediaSchema>;
+export type PropertyRelationshipFormData = z.infer<typeof RelationshipSchema>;

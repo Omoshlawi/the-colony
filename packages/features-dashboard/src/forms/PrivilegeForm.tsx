@@ -18,7 +18,7 @@ import { PrivilegeSchema } from "../utils/validation";
 
 type Props = {
   privilege?: Privilege;
-  onSuccess?: () => void;
+  onSuccess?: (privilege: Privilege) => void;
 };
 const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
   const { addPrivilege, updatePrivilege } = usePrivilegeApi();
@@ -36,12 +36,11 @@ const PrivilegeForm: FC<Props> = ({ privilege, onSuccess }) => {
 
   const onSubmit: SubmitHandler<PrivilegeFormData> = async (data) => {
     try {
-      if (privilege) {
-        await updatePrivilege(privilege?.id, data);
-      } else {
-        await addPrivilege(data);
-      }
-      onSuccess?.();
+      const res = privilege
+        ? await updatePrivilege(privilege?.id, data)
+        : await addPrivilege(data);
+
+      onSuccess?.(res.data);
       mutate("/privileges");
       showSnackbar({
         title: "succes",

@@ -1,7 +1,6 @@
 import {
   cleanFiles,
   handleApiErrors,
-  HiveFileUpload,
   mutate,
   UploadableFile,
   uploadFiles,
@@ -20,7 +19,7 @@ import {
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useState } from "react";
 import {
   Controller,
   FormProvider,
@@ -41,7 +40,7 @@ import PropertyFormThumbnailForm from "./PropertyFormThumbnailForm";
 
 type Props = {
   property?: Property;
-  onSuccess?: () => void;
+  onSuccess?: (property: Property) => void;
 };
 
 const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
@@ -71,6 +70,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
   const onSubmit: SubmitHandler<PropertyFormData> = async (data) => {
     try {
       let thumbnail: string | undefined;
+      let _property: Property;
       if (file) {
         // Upload file if changes
         const uploaded = await uploadFiles({
@@ -87,10 +87,11 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
       }
       // Save property
       if (property) {
-        await updateProperty(property?.id, {
+        const res = await updateProperty(property?.id, {
           ...data,
           thumbnail: thumbnail ?? data?.thumbnail,
         });
+        _property = res.data;
         // success clean previous value asyncronousely
         if (thumbnail) {
           const { count } = await cleanFiles([property.thumbnail]);
@@ -100,10 +101,14 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
             });
         }
       } else {
-        await addProperty({ ...data, thumbnail: thumbnail ?? data?.thumbnail });
+        const res = await addProperty({
+          ...data,
+          thumbnail: thumbnail ?? data?.thumbnail,
+        });
+        _property = res.data;
       }
 
-      onSuccess?.();
+      onSuccess?.(_property);
       showSnackbar({
         title: "success",
         subtitle: `Property ${property ? "updated" : "created"} successfully`,

@@ -22,7 +22,7 @@ import { OrganizationMembershipSchema } from "../utils/validation";
 
 type Props = {
   membership?: OrganizationMembership;
-  onSuccess?: () => void;
+  onSuccess?: (membershi: OrganizationMembership) => void;
 };
 
 const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
@@ -43,12 +43,11 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
     data
   ) => {
     try {
-      if (membership) {
-        await updateOrganizationMembership(membership?.id, data);
-      } else {
-        await addOrganizationMembership(data);
-      }
-      onSuccess?.();
+      const res = membership
+        ? await updateOrganizationMembership(membership?.id, data)
+        : await addOrganizationMembership(data);
+
+      onSuccess?.(res.data);
       mutate("/organization-membership");
       showSnackbar({
         title: "succes",

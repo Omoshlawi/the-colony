@@ -9,7 +9,7 @@ import { Organization, OrganizationFormData } from "../types";
 import { OrganizationSchema } from "../utils";
 
 type Props = {
-  onSuccess?: () => void;
+  onSuccess?: (organization: Organization) => void;
   organization?: Organization;
 };
 
@@ -25,13 +25,11 @@ export const OrganizationForm: FC<Props> = ({ onSuccess, organization }) => {
 
   const onSubmit: SubmitHandler<OrganizationFormData> = async (data) => {
     try {
-      if (organization) {
-        await updateMyOrganization(organization?.id, data);
-      } else {
-        await addMyOrganization(data);
-      }
+      const res = organization
+        ? await updateMyOrganization(organization?.id, data)
+        : await addMyOrganization(data);
 
-      onSuccess?.();
+      onSuccess?.(res.data);
       mutate("/organization-membership");
       showSnackbar({
         title: "succes",

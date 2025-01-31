@@ -17,7 +17,7 @@ import { RoleSchema } from "../utils/validation";
 
 type Props = {
   role?: Role;
-  onSuccess?: () => void;
+  onSuccess?: (role: Role) => void;
 };
 
 const RolesForm: FC<Props> = ({ onSuccess, role }) => {
@@ -34,12 +34,8 @@ const RolesForm: FC<Props> = ({ onSuccess, role }) => {
 
   const onSubmit: SubmitHandler<RoleFormData> = async (data) => {
     try {
-      if (role) {
-        await updateRole(role?.id, data);
-      } else {
-        await addRole(data);
-      }
-      onSuccess?.();
+      const res = role ? await updateRole(role?.id, data) : await addRole(data);
+      onSuccess?.(res.data);
       mutate("/roles");
       showSnackbar({
         title: "succes",
