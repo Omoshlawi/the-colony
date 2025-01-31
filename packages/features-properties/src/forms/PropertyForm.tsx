@@ -1,4 +1,11 @@
-import { handleApiErrors, mutate } from "@colony/core-api";
+import {
+  cleanFiles,
+  handleApiErrors,
+  HiveFileUpload,
+  mutate,
+  UploadableFile,
+  uploadFiles,
+} from "@colony/core-api";
 import {
   Button,
   ErrorState,
@@ -13,7 +20,7 @@ import {
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC } from "react";
+import React, { FC, useCallback, useState } from "react";
 import {
   Controller,
   FormProvider,
@@ -42,7 +49,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
   const addressesAsync = useAddresses({});
   const amenitiesAsync = useAmenities();
   const categoriesAsync = useCategories();
-
+  const [file, setFile] = useState<UploadableFile>();
   const form = useForm<PropertyFormData>({
     defaultValues: {
       categories: property?.categories?.map((c) => c.categoryId) ?? [],
@@ -63,15 +70,43 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
 
   const onSubmit: SubmitHandler<PropertyFormData> = async (data) => {
     try {
-      if (property) {
-        await updateProperty(property?.id, data);
-      } else {
-        await addProperty(data);
+      let thumbnail: string | undefined;
+      if (file) {
+        // Upload file if changes
+        const uploaded = await uploadFiles({
+          path: "properties",
+          files: { thumbnail: [file] },
+          onProgress: (progress) => console.log("Progress ", progress, "%"),
+        });
+        showSnackbar({
+          title: "success",
+          subtitle: `Property thumbnail uploaded successfully`,
+          kind: "success",
+        });
+        thumbnail = uploaded["thumbnail"][0].path;
       }
+      // Save property
+      if (property) {
+        await updateProperty(property?.id, {
+          ...data,
+          thumbnail: thumbnail ?? data?.thumbnail,
+        });
+        // success clean previous value asyncronousely
+        if (thumbnail) {
+          const { count } = await cleanFiles([property.thumbnail]);
+          if (count > 0)
+            showSnackbar({
+              subtitle: `Initial thumbnail deleted successfully`,
+            });
+        }
+      } else {
+        await addProperty({ ...data, thumbnail: thumbnail ?? data?.thumbnail });
+      }
+
       onSuccess?.();
       showSnackbar({
-        title: "succes",
-        subtitle: `property ${property ? "updated" : "created"} succesfull`,
+        title: "success",
+        subtitle: `Property ${property ? "updated" : "created"} successfully`,
         kind: "success",
       });
       mutate("/properties");
@@ -98,9 +133,6 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               fieldState: { error },
             }) => (
               <TextInput
-                prefixIcon={
-                  <ExpoIconComponent name="star" family="FontAwesome" />
-                }
                 value={value}
                 label="Name"
                 readOnly={disabled}
@@ -110,7 +142,7 @@ const PropertyForm: FC<Props> = ({ onSuccess, property }) => {
               />
             )}
           />
-          <PropertyFormThumbnailForm />
+          <PropertyFormThumbnailForm image={file} onImageChange={setFile} />
           <Controller
             control={form.control}
             name="description"

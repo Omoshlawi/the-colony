@@ -20,7 +20,7 @@ export const PropertyMediaSchema = z.object({
 export const PropertySchema = z.object({
   name: z.string(),
   description: z.string().optional(),
-  thumbnail: z.string().min(1, "Required"),
+  thumbnail: z.string().optional(),
   attributes: z
     .array(
       z.object({
