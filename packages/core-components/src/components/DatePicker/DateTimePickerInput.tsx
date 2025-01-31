@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import { default as React, useState } from "react";
+import { default as React, useState, useCallback } from "react";
 import {
   default as CommunityDateTimePicker,
   DateTimePickerEvent,
@@ -22,16 +22,17 @@ type DateTimePickerProps = Pick<
 > & {
   date: Date;
   onDateChanged: (date: Date) => void;
-  formater?: (date: Date) => string;
+  formatter?: (date: Date) => string;
   mode?: "date" | "time" | "datetime" | "countdown";
   display?: "spinner" | "compact" | "default";
   error?: string;
   helpText?: string;
 };
+
 const DateTimePicker: React.FC<DateTimePickerProps> = ({
   date,
   onDateChanged,
-  formater,
+  formatter,
   mode = "date",
   display = "default",
   ...props
@@ -47,21 +48,124 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     currentMode: "date",
   });
 
-  const onChange = (event: DateTimePickerEvent, date?: Date) => {
-    if (date) onDateChanged(date);
-    setIsPickerShow(false);
-    setAndroidDateTime({ date: date!, time: date!, currentMode: "date" });
-  };
+  const [iosDateTime, setIosDateTime] = useState<Date>(date);
 
-  const toggleShowPicker = () => {
-    setIsPickerShow(!isPickerShow);
-  };
+  const handleAndroidChange = useCallback(
+    (event: DateTimePickerEvent, selectedDate?: Date) => {
+      // Handle Android cancel/dismiss scenarios
+      if (event.type === "dismissed") {
+        setIsPickerShow(false);
+        // Reset to initial state for datetime mode
+        if (mode === "datetime") {
+          setAndroidDateTime({
+            date: date,
+            time: date,
+            currentMode: "date",
+          });
+        }
+        return;
+      }
+
+      if (mode === "datetime") {
+        if (androidDateTime.currentMode === "date" && selectedDate) {
+          setAndroidDateTime((prev) => ({
+            ...prev,
+            date: selectedDate,
+            currentMode: "time",
+          }));
+        } else if (androidDateTime.currentMode === "time" && selectedDate) {
+          const finalDate = new Date(
+            androidDateTime.date.getFullYear(),
+            androidDateTime.date.getMonth(),
+            androidDateTime.date.getDate(),
+            selectedDate.getHours(),
+            selectedDate.getMinutes(),
+            selectedDate.getSeconds(),
+            selectedDate.getMilliseconds()
+          );
+          onDateChanged(finalDate);
+          setIsPickerShow(false);
+          setAndroidDateTime((prev) => ({
+            date: date,
+            time: date,
+            currentMode: "date",
+          }));
+        }
+      } else {
+        if (selectedDate) onDateChanged(selectedDate);
+        setIsPickerShow(false);
+      }
+    },
+    [mode, androidDateTime, onDateChanged, date]
+  );
+
+  const handleIosChange = useCallback(
+    (event: DateTimePickerEvent, selectedDate?: Date) => {
+      if (event.type === "dismissed") {
+        setIsPickerShow(false);
+        return;
+      }
+
+      if (selectedDate) {
+        if (mode === "datetime") {
+          setIosDateTime(selectedDate);
+          onDateChanged(selectedDate);
+        } else {
+          onDateChanged(selectedDate);
+          setIsPickerShow(false);
+        }
+      }
+    },
+    [mode, onDateChanged]
+  );
+
+  const toggleShowPicker = useCallback(() => {
+    setIsPickerShow((prev) => !prev);
+  }, []);
+
+  const renderAndroidPicker = () => (
+    <CommunityDateTimePicker
+      display={display as any}
+      mode={mode === "datetime" ? androidDateTime.currentMode : mode}
+      value={
+        mode === "datetime" && androidDateTime.currentMode === "time"
+          ? androidDateTime.time
+          : date
+      }
+      onChange={handleAndroidChange}
+    />
+  );
+
+  const renderIosPicker = () => (
+    <CommunityDateTimePicker
+      display={display as any}
+      mode={mode}
+      value={mode === "datetime" ? iosDateTime : date}
+      onChange={handleIosChange}
+    />
+  );
+
+  const formatDate = useCallback(
+    (dateToFormat: Date) => {
+      if (formatter) return formatter(dateToFormat);
+
+      switch (mode) {
+        case "time":
+          return dateToFormat.toLocaleTimeString();
+        case "datetime":
+          return dateToFormat.toLocaleString();
+        default:
+          return dateToFormat.toLocaleDateString();
+      }
+    },
+    [formatter, mode]
+  );
 
   return (
     <Box width={"100%"} gap={"s"}>
       <TextInput
         {...props}
-        value={formater ? formater(date) : date.toLocaleString()}
+        value={formatDate(date)}
         onPress={toggleShowPicker}
         editable={false}
         readOnly={true}
@@ -71,58 +175,10 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         onSuffixIconPressed={toggleShowPicker}
       />
 
-      {Platform.OS === "android" && isPickerShow && (
-        <CommunityDateTimePicker
-          display={display as any}
-          mode={mode === "datetime" ? androidDateTime.currentMode : mode}
-          value={date}
-          onChange={(event: DateTimePickerEvent, date?: Date) => {
-            if (mode === "datetime") {
-              if (androidDateTime.currentMode === "date") {
-                setAndroidDateTime((initialValue) => ({
-                  ...initialValue,
-                  date: date || new Date(),
-                  currentMode: "time",
-                }));
-              }
-              if (androidDateTime.currentMode === "time") {
-                setAndroidDateTime((initialValue) => ({
-                  ...initialValue,
-                  time: date || new Date(),
-                }));
-              }
-              if (androidDateTime.currentMode === "time") {
-                onChange(
-                  event,
-                  new Date(
-                    androidDateTime.date.getFullYear(),
-                    androidDateTime.date.getMonth(),
-                    androidDateTime.date.getDate(),
-                    androidDateTime.time.getHours(),
-                    androidDateTime.time.getMinutes(),
-                    androidDateTime.time.getSeconds(),
-                    androidDateTime.time.getMilliseconds()
-                  )
-                );
-              }
-            } else {
-              onChange(event, date);
-            }
-          }}
-        />
-      )}
-      {Platform.OS === "ios" && isPickerShow && (
-        <CommunityDateTimePicker
-          display={display as any}
-          mode={mode}
-          value={date}
-          onChange={onChange}
-        />
-      )}
+      {isPickerShow &&
+        (Platform.OS === "android" ? renderAndroidPicker() : renderIosPicker())}
     </Box>
   );
 };
 
 export default DateTimePicker;
-
-const styles = StyleSheet.create({});
