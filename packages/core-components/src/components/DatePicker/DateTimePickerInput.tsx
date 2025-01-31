@@ -1,27 +1,20 @@
-import {
-  StyleSheet,
-  View,
-  Platform,
-  Button,
-  TouchableHighlight,
-  TouchableOpacity,
-} from "react-native";
+import { Platform } from "react-native";
 
-import { default as React, useState, useCallback } from "react";
+import { Box } from "@colony/core-theme";
 import {
   default as CommunityDateTimePicker,
   DateTimePickerEvent,
 } from "@react-native-community/datetimepicker";
-import { TextInput, TextInputProps } from "../Input";
-import { Box } from "@colony/core-theme";
+import { default as React, useCallback, useState } from "react";
 import { ExpoIconComponent } from "../ExpoIcons";
+import { TextInput, TextInputProps } from "../Input";
 
 type DateTimePickerProps = Pick<
   TextInputProps,
   "prefixIcon" | "label" | "onPrefixIconPressed" | "placeholder"
 > & {
-  date: Date;
-  onDateChanged: (date: Date) => void;
+  date?: Date;
+  onDateChanged?: (date: Date) => void;
   formatter?: (date: Date) => string;
   mode?: "date" | "time" | "datetime" | "countdown";
   display?: "spinner" | "compact" | "default";
@@ -29,7 +22,7 @@ type DateTimePickerProps = Pick<
   helpText?: string;
 };
 
-const DateTimePicker: React.FC<DateTimePickerProps> = ({
+const DateTimePickerInput: React.FC<DateTimePickerProps> = ({
   date,
   onDateChanged,
   formatter,
@@ -38,17 +31,18 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   ...props
 }) => {
   const [isPickerShow, setIsPickerShow] = useState<boolean>(false);
+  const now = new Date();
   const [androidDateTime, setAndroidDateTime] = useState<{
     date: Date;
     time: Date;
     currentMode: "date" | "time";
   }>({
-    date: date,
-    time: date,
+    date: now,
+    time: now,
     currentMode: "date",
   });
 
-  const [iosDateTime, setIosDateTime] = useState<Date>(date);
+  const [iosDateTime, setIosDateTime] = useState<Date>(now);
 
   const handleAndroidChange = useCallback(
     (event: DateTimePickerEvent, selectedDate?: Date) => {
@@ -58,8 +52,8 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
         // Reset to initial state for datetime mode
         if (mode === "datetime") {
           setAndroidDateTime({
-            date: date,
-            time: date,
+            date: date ?? now,
+            time: date ?? now,
             currentMode: "date",
           });
         }
@@ -83,16 +77,16 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
             selectedDate.getSeconds(),
             selectedDate.getMilliseconds()
           );
-          onDateChanged(finalDate);
+          onDateChanged?.(finalDate);
           setIsPickerShow(false);
           setAndroidDateTime((prev) => ({
-            date: date,
-            time: date,
+            date: date ?? now,
+            time: date ?? now,
             currentMode: "date",
           }));
         }
       } else {
-        if (selectedDate) onDateChanged(selectedDate);
+        if (selectedDate) onDateChanged?.(selectedDate);
         setIsPickerShow(false);
       }
     },
@@ -109,9 +103,9 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       if (selectedDate) {
         if (mode === "datetime") {
           setIosDateTime(selectedDate);
-          onDateChanged(selectedDate);
+          onDateChanged?.(selectedDate);
         } else {
-          onDateChanged(selectedDate);
+          onDateChanged?.(selectedDate);
           setIsPickerShow(false);
         }
       }
@@ -130,7 +124,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
       value={
         mode === "datetime" && androidDateTime.currentMode === "time"
           ? androidDateTime.time
-          : date
+          : date ?? now
       }
       onChange={handleAndroidChange}
     />
@@ -140,13 +134,14 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
     <CommunityDateTimePicker
       display={display as any}
       mode={mode}
-      value={mode === "datetime" ? iosDateTime : date}
+      value={mode === "datetime" ? iosDateTime : date ?? now}
       onChange={handleIosChange}
     />
   );
 
   const formatDate = useCallback(
-    (dateToFormat: Date) => {
+    (dateToFormat?: Date) => {
+      if (!dateToFormat) return;
       if (formatter) return formatter(dateToFormat);
 
       switch (mode) {
@@ -181,4 +176,4 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
   );
 };
 
-export default DateTimePicker;
+export default DateTimePickerInput;

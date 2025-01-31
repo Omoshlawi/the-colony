@@ -136,6 +136,21 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
             label="Start Date"
             placeholder={"dd/mm/yyyy"}
             mode="datetime"
+            error={error?.message}
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="endDate"
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
+          <DateTimePickerInput
+            date={value}
+            onDateChanged={onChange}
+            label="End Date"
+            placeholder={"dd/mm/yyyy"}
+            mode="datetime"
+            error={error?.message}
           />
         )}
       />
