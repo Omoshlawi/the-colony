@@ -23,7 +23,17 @@ export interface Property {
 }
 
 export interface Relationship {
-  id:string
+  id: string;
+  propertyAId: string;
+  propertyBId: string;
+  startDate: string;
+  endDate?: string;
+  typeId: string;
+  voided: boolean;
+  createdAt: string;
+  updatedAt: string;
+  propertyA?: Property;
+  propertyB?: Property;
 }
 
 export interface RelationshipType {

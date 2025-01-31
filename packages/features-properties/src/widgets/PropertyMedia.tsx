@@ -1,8 +1,10 @@
 import { getHiveFileUrl } from "@colony/core-api";
 import {
+  EmptyState,
   ErrorState,
   ImageViewer,
   showModal,
+  Skeleton,
   When,
 } from "@colony/core-components";
 import { Box, Text, useTheme } from "@colony/core-theme";
@@ -53,31 +55,48 @@ const PropertyMediaWidget: FC<PropertyMediaProps> = ({ property }) => {
           ...propertyMediaAsync,
           data: propertyMediaAsync.propertyMedia,
         }}
-        loading={() => <Text>Loading</Text>}
-        error={(err) => <ErrorState error={err} />}
-        success={(medias) => (
+        loading={() => (
           <FlatList
+            data={Array.from({ length: 6 }).map((_, i) => `${i}`)}
             style={{ flex: 1 }}
             contentContainerStyle={{
               alignItems: "center",
             }}
-            data={medias}
+            keyExtractor={(i) => i}
             numColumns={3}
-            keyExtractor={(m) => m.id}
             renderItem={({ item }) => (
-              <TouchableOpacity
-                style={[styles.img, { margin: theme.spacing.s }]}
-                activeOpacity={0.5}
-                onPress={() => handleShowImage(item)}
-              >
-                <ImageViewer
-                  source={getHiveFileUrl(item.url)}
-                  style={{ width: "100%", height: "100%" }}
-                />
-              </TouchableOpacity>
+              <Skeleton style={[styles.img, { margin: theme.spacing.s }]} />
             )}
           />
         )}
+        error={(err) => <ErrorState error={err} />}
+        success={(medias) => {
+          if (medias.length === 0)
+            return <EmptyState message="No media for this propety" />;
+          return (
+            <FlatList
+              style={{ flex: 1 }}
+              contentContainerStyle={{
+                alignItems: "center",
+              }}
+              data={medias}
+              numColumns={3}
+              keyExtractor={(m) => m.id}
+              renderItem={({ item }) => (
+                <TouchableOpacity
+                  style={[styles.img, { margin: theme.spacing.s }]}
+                  activeOpacity={0.5}
+                  onPress={() => handleShowImage(item)}
+                >
+                  <ImageViewer
+                    source={getHiveFileUrl(item.url)}
+                    style={{ width: "100%", height: "100%" }}
+                  />
+                </TouchableOpacity>
+              )}
+            />
+          );
+        }}
       />
     </Box>
   );

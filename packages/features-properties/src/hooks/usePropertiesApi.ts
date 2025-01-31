@@ -5,6 +5,7 @@ import {
   PropertyMedia,
   PropertyMediaFormData,
   PropertyRelationshipFormData,
+  Relationship,
 } from "../types";
 
 const addProperty = async (data: PropertyFormData) => {
@@ -63,12 +64,13 @@ const searchProperty = (filters: Record<string, any>) => {
 };
 
 const addPropertiesRelationship = (data: PropertyRelationshipFormData) =>
-  hiveFetch(`/relationships`, { method: "POST", data });
+  hiveFetch<Relationship>(`/relationships`, { method: "POST", data });
 const updatePropertiesRelationship = (
   relationshipId: string,
   data: PropertyRelationshipFormData,
   method: "PUT" | "PATCH" = "PATCH"
-) => hiveFetch(`/relationships/${relationshipId}`, { method, data });
+) =>
+  hiveFetch<Relationship>(`/relationships/${relationshipId}`, { method, data });
 
 const usePropertiesApi = () => {
   return {

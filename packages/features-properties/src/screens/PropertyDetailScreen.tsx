@@ -4,10 +4,10 @@ import {
   TabView,
   When,
 } from "@colony/core-components";
-import { Box, Text } from "@colony/core-theme";
+import { Box, Text, useTheme } from "@colony/core-theme";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { ActivityIndicator, StyleSheet } from "react-native";
 import { useProperty } from "../hooks/useProperties";
 import {
   PropertyAbout,
@@ -21,6 +21,7 @@ import PropertyFeedbackSummary from "../widgets/PropertyFeedbackSummary";
 const PropertyDetailScreen = () => {
   const { propertyId } = useLocalSearchParams();
   const propertydetailAsync = useProperty(propertyId as string);
+  const theme = useTheme();
   return (
     <Box backgroundColor={"background"} flex={1}>
       <When
@@ -28,7 +29,11 @@ const PropertyDetailScreen = () => {
           ...propertydetailAsync,
           data: propertydetailAsync.property,
         }}
-        loading={() => <Text>Loading...</Text>}
+        loading={() => (
+          <Box flex={1} justifyContent={"center"} alignItems={"center"}>
+            <ActivityIndicator color={theme.colors.primary} size={100} />
+          </Box>
+        )}
         error={(error) => <ErrorState error={error} />}
         success={(property) => {
           return (

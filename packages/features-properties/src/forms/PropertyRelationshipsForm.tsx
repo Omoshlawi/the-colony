@@ -3,21 +3,24 @@ import {
   Button,
   DateTimePickerInput,
   ErrorState,
+  ExpoIconComponent,
   ImageViewer,
   InputSkeleton,
   ListTile,
   SeachableDropDown,
+  showModal,
   showSnackbar,
   When,
 } from "@colony/core-components";
-import { Box, Color, useTheme } from "@colony/core-theme";
+import { Box, Color, Text, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC } from "react";
+import React, { FC, useCallback, useState } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import { usePropertiesApi, useRelationshipTypes } from "../hooks";
 import { Property, PropertyRelationshipFormData, Relationship } from "../types";
 import { RelationshipSchema } from "../utils";
+import PropertyForm from "./PropertyForm";
 
 type Props = {
   property: Property;
@@ -37,13 +40,34 @@ const PropertyRelationshipsForm: FC<Props> = ({
     updatePropertiesRelationship,
   } = usePropertiesApi();
   const theme = useTheme();
+  const [newProperty, setNewProperty] = useState<Property>();
   const form = useForm<PropertyRelationshipFormData>({
     defaultValues: {
       propertyAId: property.id,
-      startDate: new Date(),
+      startDate: relationship?.startDate
+        ? new Date(relationship.startDate)
+        : new Date(),
+      endDate: relationship?.endDate
+        ? new Date(relationship.endDate)
+        : undefined,
+      propertyBId: relationship?.propertyBId,
+      typeId: relationship?.typeId,
     },
     resolver: zodResolver(RelationshipSchema),
   });
+
+  const handleAddProperty = useCallback(() => {
+    const dispose = showModal(
+      <PropertyForm
+        onSuccess={(other) => {
+          form.setValue("propertyBId", other.id);
+          setNewProperty(other);
+          dispose();
+        }}
+      />,
+      { title: "Add other property" }
+    );
+  }, [form, setNewProperty]);
 
   const onSubmit: SubmitHandler<PropertyRelationshipFormData> = async (
     data
@@ -64,6 +88,8 @@ const PropertyRelationshipsForm: FC<Props> = ({
       mutate("/relationships");
     } catch (error) {
       const e = handleApiErrors<PropertyRelationshipFormData>(error);
+      console.log("Error->", e);
+
       if (e.detail) {
         showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
       } else
@@ -74,24 +100,38 @@ const PropertyRelationshipsForm: FC<Props> = ({
         );
     }
   };
+
   return (
     <Box flex={1} p={"m"} gap={"s"}>
-      <Box
-        style={{
-          backgroundColor: Color(theme.colors.hintColor).alpha(0.2).toString(),
-        }}
-      >
-        <ListTile
-          title={property.name}
-          subtitle={new Date(property.createdAt).toLocaleDateString()}
-          leading={
-            <ImageViewer
-              source={getHiveFileUrl(property.thumbnail)}
-              style={styles.propertythumbnail}
+      <Controller
+        control={form.control}
+        name="propertyAId"
+        render={({ fieldState: { error } }) => (
+          <Box
+            style={{
+              backgroundColor: Color(theme.colors.hintColor)
+                .alpha(0.2)
+                .toString(),
+            }}
+          >
+            <ListTile
+              title={property.name}
+              subtitle={new Date(property.createdAt).toLocaleDateString()}
+              leading={
+                <ImageViewer
+                  source={getHiveFileUrl(property.thumbnail)}
+                  style={styles.propertythumbnail}
+                />
+              }
             />
-          }
-        />
-      </Box>
+            {error?.message && (
+              <Text color={"error"} p={"m"}>
+                {error?.message}
+              </Text>
+            )}
+          </Box>
+        )}
+      />
       <Controller
         control={form.control}
         name="typeId"
@@ -135,12 +175,16 @@ const PropertyRelationshipsForm: FC<Props> = ({
           fieldState: { error },
         }) => (
           <SeachableDropDown
-          
             inputProps={{
               label: `Other Property`,
               placeholder: "search Property",
               error: error?.message,
+              prefixIcon: (
+                <ExpoIconComponent family="MaterialIcons" name="add-business" />
+              ),
+              onPrefixIconPressed: handleAddProperty,
             }}
+            initialValue={newProperty ?? relationship?.propertyB}
             asyncSearchFunction={async (query) => {
               const res = await searchProperty({ search: query });
               return (res.data.results ?? []).filter(
