@@ -1,6 +1,8 @@
 import { getHiveFileUrl } from "@colony/core-api";
 import {
+  DateTimePickerInput,
   ErrorState,
+  ExpoIconComponent,
   ImageViewer,
   InputSkeleton,
   ListTile,
@@ -121,6 +123,19 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
                 }
               />
             )}
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="startDate"
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
+          <DateTimePickerInput
+            date={value}
+            onDateChanged={onChange}
+            label="Start Date"
+            placeholder={"dd/mm/yyyy"}
+            mode="datetime"
           />
         )}
       />

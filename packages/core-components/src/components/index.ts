@@ -22,3 +22,4 @@ export * from "./FilePicker";
 export * from "./ImageViewer";
 export * from "./Tabs";
 export * from "./ExpoConstants";
+export * from "./DatePicker";
