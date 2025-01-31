@@ -22,6 +22,10 @@ export interface Property {
   attributes?: Attribute[];
 }
 
+export interface Relationship {
+  id:string
+}
+
 export interface RelationshipType {
   id: string;
   description: any;

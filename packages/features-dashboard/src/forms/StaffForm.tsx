@@ -6,8 +6,8 @@ import {
   showSnackbar,
   Button,
   TextInput,
+  SeachableDropDown,
 } from "@colony/core-components";
-import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
 import { Box, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
@@ -83,7 +83,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
         }) => (
           <>
             {!!!membership ? (
-              <SearchableDropdown
+              <SeachableDropDown
                 asyncSearchFunction={async (query: string) => {
                   const res = await searchUser(query);
                   return res.data.results;
@@ -147,7 +147,7 @@ const StaffForm: FC<Props> = ({ membership, onSuccess }) => {
         }) => (
           <>
             {!isLoading ? (
-              <SearchableDropdown
+              <SeachableDropDown
                 data={roles}
                 keyExtractor={(item) => item.id}
                 multiple

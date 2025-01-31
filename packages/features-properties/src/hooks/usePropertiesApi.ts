@@ -4,6 +4,7 @@ import {
   PropertyFormData,
   PropertyMedia,
   PropertyMediaFormData,
+  PropertyRelationshipFormData,
 } from "../types";
 
 const addProperty = async (data: PropertyFormData) => {
@@ -61,6 +62,14 @@ const searchProperty = (filters: Record<string, any>) => {
   return hiveFetch<{ results: Array<Property> }>(url);
 };
 
+const addPropertiesRelationship = (data: PropertyRelationshipFormData) =>
+  hiveFetch(`/relationships`, { method: "POST", data });
+const updatePropertiesRelationship = (
+  relationshipId: string,
+  data: PropertyRelationshipFormData,
+  method: "PUT" | "PATCH" = "PATCH"
+) => hiveFetch(`/relationships/${relationshipId}`, { method, data });
+
 const usePropertiesApi = () => {
   return {
     addProperty,
@@ -70,6 +79,8 @@ const usePropertiesApi = () => {
     updatePropertyMedia,
     deletePropertyMedia,
     searchProperty,
+    addPropertiesRelationship,
+    updatePropertiesRelationship,
   };
 };
 

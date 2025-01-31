@@ -1,31 +1,41 @@
-import { getHiveFileUrl } from "@colony/core-api";
+import { getHiveFileUrl, handleApiErrors, mutate } from "@colony/core-api";
 import {
+  Button,
   DateTimePickerInput,
   ErrorState,
-  ExpoIconComponent,
   ImageViewer,
   InputSkeleton,
   ListTile,
   SeachableDropDown,
+  showSnackbar,
   When,
 } from "@colony/core-components";
 import { Box, Color, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { FC } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import { usePropertiesApi, useRelationshipTypes } from "../hooks";
-import { Property, PropertyRelationshipFormData } from "../types";
+import { Property, PropertyRelationshipFormData, Relationship } from "../types";
 import { RelationshipSchema } from "../utils";
 
 type Props = {
   property: Property;
-  onSuccess?: () => void;
+  onSuccess?: (relationship: Relationship) => void;
+  relationship?: Relationship;
 };
 
-const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
+const PropertyRelationshipsForm: FC<Props> = ({
+  property,
+  onSuccess,
+  relationship,
+}) => {
   const relationShipTypesAsync = useRelationshipTypes();
-  const { searchProperty } = usePropertiesApi();
+  const {
+    searchProperty,
+    addPropertiesRelationship,
+    updatePropertiesRelationship,
+  } = usePropertiesApi();
   const theme = useTheme();
   const form = useForm<PropertyRelationshipFormData>({
     defaultValues: {
@@ -34,6 +44,36 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
     },
     resolver: zodResolver(RelationshipSchema),
   });
+
+  const onSubmit: SubmitHandler<PropertyRelationshipFormData> = async (
+    data
+  ) => {
+    try {
+      const res = relationship
+        ? await updatePropertiesRelationship(relationship?.id, data)
+        : await addPropertiesRelationship(data);
+
+      onSuccess?.(res.data);
+      showSnackbar({
+        title: "succes",
+        subtitle: `relationship ${
+          relationship ? "updated" : "created"
+        } succesfull`,
+        kind: "success",
+      });
+      mutate("/relationships");
+    } catch (error) {
+      const e = handleApiErrors<PropertyRelationshipFormData>(error);
+      if (e.detail) {
+        showSnackbar({ title: "error", subtitle: e.detail, kind: "error" });
+      } else
+        Object.entries(e).forEach(([key, val]) =>
+          form.setError(key as keyof PropertyRelationshipFormData, {
+            message: val,
+          })
+        );
+    }
+  };
   return (
     <Box flex={1} p={"m"} gap={"s"}>
       <Box
@@ -95,6 +135,7 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
           fieldState: { error },
         }) => (
           <SeachableDropDown
+          
             inputProps={{
               label: `Other Property`,
               placeholder: "search Property",
@@ -154,6 +195,7 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
           />
         )}
       />
+      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
     </Box>
   );
 };

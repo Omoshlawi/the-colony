@@ -13,9 +13,9 @@ import {
   Button,
   TextInput,
   When,
+  SeachableDropDown,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
-import SearchableDropdown from "@colony/core-components/src/components/SelectionInput/SeachableDropDown";
 
 type Props = {
   address?: Address;
@@ -121,7 +121,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
               fieldState: { error },
             }) => {
               return (
-                <SearchableDropdown
+                <SeachableDropDown
                   data={data}
                   initialValue={data.find(({ name }) => name === value)}
                   keyExtractor={({ name }) => name}
@@ -151,7 +151,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
                 field: { onChange, value, disabled },
                 fieldState: { error },
               }) => (
-                <SearchableDropdown
+                <SeachableDropDown
                   data={subcounties}
                   valueExtractor={({ name }) => name}
                   initialValue={subcounties.find(({ name }) => name === value)}
@@ -184,7 +184,7 @@ const AddressForm: FC<Props> = ({ address, onSuccess }) => {
                 field: { onChange, value, disabled },
                 fieldState: { error },
               }) => (
-                <SearchableDropdown
+                <SeachableDropDown
                   data={wards}
                   valueExtractor={({ name }) => name}
                   initialValue={wards.find(({ name }) => name === value)}
