@@ -1,8 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
-import { Property, PropertyRelationshipFormData } from "../types";
-import { useRelationshipTypes } from "../hooks";
-import { Box, Color, useTheme } from "@colony/core-theme";
+import { getHiveFileUrl } from "@colony/core-api";
 import {
   ErrorState,
   ImageViewer,
@@ -11,10 +7,14 @@ import {
   SeachableDropDown,
   When,
 } from "@colony/core-components";
-import { getHiveFileUrl } from "@colony/core-api";
-import { Controller, useForm } from "react-hook-form";
-import { RelationshipSchema } from "../utils";
+import { Box, Color, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
+import React, { FC } from "react";
+import { Controller, useForm } from "react-hook-form";
+import { StyleSheet } from "react-native";
+import { usePropertiesApi, useRelationshipTypes } from "../hooks";
+import { Property, PropertyRelationshipFormData } from "../types";
+import { RelationshipSchema } from "../utils";
 
 type Props = {
   property: Property;
@@ -23,12 +23,12 @@ type Props = {
 
 const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
   const relationShipTypesAsync = useRelationshipTypes();
+  const { searchProperty } = usePropertiesApi();
   const theme = useTheme();
   const form = useForm<PropertyRelationshipFormData>({
     defaultValues: {
       propertyAId: property.id,
       startDate: new Date(),
-      
     },
     resolver: zodResolver(RelationshipSchema),
   });
@@ -80,6 +80,45 @@ const PropertyRelationshipsForm: FC<Props> = ({ property, onSuccess }) => {
                 initialValue={relationshipTypes.find(
                   (relationshiptype) => relationshiptype.id === value
                 )}
+              />
+            )}
+          />
+        )}
+      />
+      <Controller
+        control={form.control}
+        name="propertyBId"
+        render={({
+          field: { onChange, value, disabled },
+          fieldState: { error },
+        }) => (
+          <SeachableDropDown
+            inputProps={{
+              label: `Other Property`,
+              placeholder: "search Property",
+              error: error?.message,
+            }}
+            asyncSearchFunction={async (query) => {
+              const res = await searchProperty({ search: query });
+              return (res.data.results ?? []).filter(
+                (i) => i.id !== property.id
+              );
+            }}
+            keyExtractor={(relationshiptype) => relationshiptype.id}
+            labelExtractor={(relationshiptype) => relationshiptype.name}
+            valueExtractor={(relationshiptype) => relationshiptype.id}
+            onValueChange={onChange}
+            title="Search other property"
+            renderItem={({ item, selected }) => (
+              <ListTile
+                title={item.name}
+                subtitle={item.address?.landmark}
+                leading={
+                  <ImageViewer
+                    source={getHiveFileUrl(item.thumbnail)}
+                    style={styles.propertythumbnail}
+                  />
+                }
               />
             )}
           />

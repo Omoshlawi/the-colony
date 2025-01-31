@@ -1,7 +1,7 @@
 import { constructUrl, HiveFetchResponse, useApi } from "@colony/core-api";
 import { Property, PropertyMedia } from "../types";
 
-const useProperties = () => {
+const useProperties = (params?:Record<string, any>) => {
   const path = "/properties";
   const { data, error, isLoading, mutate } =
     useApi<HiveFetchResponse<{ results: Property[] }>>(path);

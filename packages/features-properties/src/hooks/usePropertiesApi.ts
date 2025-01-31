@@ -1,4 +1,4 @@
-import { hiveFetch } from "@colony/core-api";
+import { constructUrl, hiveFetch } from "@colony/core-api";
 import {
   Property,
   PropertyFormData,
@@ -56,6 +56,11 @@ const deletePropertyMedia = (
   method: "DELETE" | "PURGE" = "DELETE"
 ) => hiveFetch(`properties/${propertyId}/media/${mediaId}`, { method });
 
+const searchProperty = (filters: Record<string, any>) => {
+  const url = constructUrl(`/properties`, filters);
+  return hiveFetch<{ results: Array<Property> }>(url);
+};
+
 const usePropertiesApi = () => {
   return {
     addProperty,
@@ -64,6 +69,7 @@ const usePropertiesApi = () => {
     addPropertyMedia,
     updatePropertyMedia,
     deletePropertyMedia,
+    searchProperty,
   };
 };
 
