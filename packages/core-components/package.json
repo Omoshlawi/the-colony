@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-native": "0.76.5",
+    "react-native": "0.76.6",
     "react-native-element-dropdown": "^2.12.2",
     "react-native-media-query": "^2.0.1",
     "react-native-pager-view": "6.5.1",
