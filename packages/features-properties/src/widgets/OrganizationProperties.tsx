@@ -2,19 +2,17 @@ import { getHiveFileUrl } from "@colony/core-api";
 import {
   EmptyState,
   ErrorState,
-  ExpansionTile,
   ExpoIconComponent,
   ImageViewer,
   ListTile,
   ListTileSkeleton,
-  showModal,
   When,
 } from "@colony/core-components";
 import { Box, theme } from "@colony/core-theme";
+import { Link } from "expo-router";
 import React from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { useProperties } from "../hooks";
-import { Link, useRouter } from "expo-router";
 import { RoutePaths } from "../utils";
 
 const OrganizationPropertiesScreen = () => {

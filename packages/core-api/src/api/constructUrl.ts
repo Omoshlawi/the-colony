@@ -9,7 +9,7 @@ import httpClient from "./httpClient";
  */
 export function constructUrl(
   path: string,
-  params: Record<string, string | number | boolean | undefined>
+  params: Record<string, string | number | boolean | undefined> = {}
 ): string {
   const [basePath, existingQuery] = path.split("?"); // Split the path into base path and existing query
   const existingParams = new URLSearchParams(existingQuery || ""); // Parse existing query parameters
