@@ -15,8 +15,8 @@ const contexts = [
     prefix: "(support)",
   },
   {
-    context: require.context("../auth/app/(auth)", true, /.*/),
-    prefix: "(auth)",
+    context: require.context("../authentication/app/(authentication)", true, /.*/),
+    prefix: "(authentication)",
   },
   {
     context: require.context("../settings/app/(settings)", true, /.*/),
