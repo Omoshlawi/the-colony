@@ -1332,7 +1332,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
     react-native-safe-area-context: "npm:4.12.0"
-    react-native-screens: "npm:~4.1.0"
+    react-native-screens: "npm:~4.4.0"
     react-native-web: "npm:~0.19.13"
     react-native-webview: "npm:13.12.4"
     react-test-renderer: "npm:18.3.1"
@@ -1374,51 +1374,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
     react-native-safe-area-context: "npm:4.12.0"
-    react-native-screens: "npm:~4.1.0"
-    react-native-web: "npm:~0.19.13"
-    react-native-webview: "npm:13.12.5"
-    react-test-renderer: "npm:18.3.1"
-    typescript: "npm:^5.3.3"
-  languageName: unknown
-  linkType: soft
-
-"@colony/app-settings@workspace:apps/settings":
-  version: 0.0.0-use.local
-  resolution: "@colony/app-settings@workspace:apps/settings"
-  dependencies:
-    "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "workspace:*"
-    "@colony/core-components": "workspace:*"
-    "@colony/core-extensions": "workspace:*"
-    "@colony/core-global": "workspace:*"
-    "@colony/core-theme": "workspace:*"
-    "@colony/features-settings": "workspace:*"
-    "@expo/vector-icons": "npm:^14.0.2"
-    "@react-navigation/native": "npm:^7.0.0"
-    "@types/jest": "npm:^29.5.12"
-    "@types/react": "npm:~18.3.12"
-    "@types/react-test-renderer": "npm:^18.3.0"
-    expo: "npm:~52.0.28"
-    expo-blur: "npm:~14.0.3"
-    expo-constants: "npm:~17.0.5"
-    expo-font: "npm:~13.0.3"
-    expo-haptics: "npm:~14.0.1"
-    expo-linking: "npm:~7.0.5"
-    expo-router: "npm:~4.0.17"
-    expo-splash-screen: "npm:~0.29.21"
-    expo-status-bar: "npm:~2.0.1"
-    expo-symbols: "npm:~0.2.2"
-    expo-system-ui: "npm:~4.0.7"
-    expo-web-browser: "npm:~14.0.2"
-    jest: "npm:^29.2.1"
-    jest-expo: "npm:~52.0.3"
-    react: "npm:18.3.1"
-    react-dom: "npm:18.3.1"
-    react-native: "npm:0.76.6"
-    react-native-gesture-handler: "npm:~2.20.2"
-    react-native-reanimated: "npm:~3.16.1"
-    react-native-safe-area-context: "npm:4.12.0"
-    react-native-screens: "npm:~4.1.0"
+    react-native-screens: "npm:~4.4.0"
     react-native-web: "npm:~0.19.13"
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
@@ -1461,7 +1417,7 @@ __metadata:
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
     react-native-safe-area-context: "npm:4.12.0"
-    react-native-screens: "npm:~4.1.0"
+    react-native-screens: "npm:~4.4.0"
     react-native-web: "npm:~0.19.13"
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
@@ -1831,6 +1787,50 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-native: "npm:0.76.6"
+    react-test-renderer: "npm:18.3.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
+"@colony/settings@workspace:apps/settings":
+  version: 0.0.0-use.local
+  resolution: "@colony/settings@workspace:apps/settings"
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-theme": "workspace:*"
+    "@colony/features-settings": "workspace:*"
+    "@expo/vector-icons": "npm:^14.0.2"
+    "@react-navigation/native": "npm:^7.0.0"
+    "@types/jest": "npm:^29.5.12"
+    "@types/react": "npm:~18.3.12"
+    "@types/react-test-renderer": "npm:^18.3.0"
+    expo: "npm:~52.0.28"
+    expo-blur: "npm:~14.0.3"
+    expo-constants: "npm:~17.0.5"
+    expo-font: "npm:~13.0.3"
+    expo-haptics: "npm:~14.0.1"
+    expo-linking: "npm:~7.0.5"
+    expo-router: "npm:~4.0.17"
+    expo-splash-screen: "npm:~0.29.21"
+    expo-status-bar: "npm:~2.0.1"
+    expo-symbols: "npm:~0.2.2"
+    expo-system-ui: "npm:~4.0.7"
+    expo-web-browser: "npm:~14.0.2"
+    jest: "npm:^29.2.1"
+    jest-expo: "npm:~52.0.3"
+    react: "npm:18.3.1"
+    react-dom: "npm:18.3.1"
+    react-native: "npm:0.76.6"
+    react-native-gesture-handler: "npm:~2.20.2"
+    react-native-reanimated: "npm:~3.16.1"
+    react-native-safe-area-context: "npm:4.12.0"
+    react-native-screens: "npm:~4.4.0"
+    react-native-web: "npm:~0.19.13"
+    react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
   languageName: unknown
@@ -9322,19 +9322,6 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10c0/122e7e24de39371b107fcac7ecd6b62d41301a46c945c7a6b3a07c8b65d4cb9ebf58bf163bfecfd430b1bd8fdf61d4f319dac1812edd7986c00b7d2cc16da24c
-  languageName: node
-  linkType: hard
-
-"react-native-screens@npm:~4.1.0":
-  version: 4.1.0
-  resolution: "react-native-screens@npm:4.1.0"
-  dependencies:
-    react-freeze: "npm:^1.0.0"
-    warn-once: "npm:^0.1.0"
-  peerDependencies:
-    react: "*"
-    react-native: "*"
-  checksum: 10c0/e88ac6534efc46c7ca11cb38f42df7e7a46bac97901670e85e13cba29a181f0a7529c9ac77040ce1355a8cebed160469aa6b42f6cbe58a8f0753be7d38d17f5f
   languageName: node
   linkType: hard
 

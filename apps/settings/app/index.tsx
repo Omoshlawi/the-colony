@@ -1,6 +1,6 @@
 import { SettingsScreen } from "@colony/features-settings";
 
-
-export default function Settings() {
+export default function Index() {
   return <SettingsScreen />;
+
 }
