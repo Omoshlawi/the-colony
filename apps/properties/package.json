@@ -15,7 +15,9 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@colony/core-api": "workspace:*",
     "@colony/core-components": "workspace:*",
+    "@colony/core-global": "workspace:*",
     "@colony/core-theme": "workspace:*",
     "@colony/features-dashboard": "workspace:*",
     "@colony/features-properties": "workspace:*",
