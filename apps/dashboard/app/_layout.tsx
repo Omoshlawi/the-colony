@@ -2,10 +2,10 @@ import { ApiConfigProvider } from "@colony/core-api";
 import { OverlayPortal } from "@colony/core-components";
 import { useUserPreferences } from "@colony/core-global";
 import { ThemeProvider } from "@colony/core-theme";
-import { Stack } from "expo-router/stack";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 
-export default function Layout() {
+export default function RootLayout() {
   const {
     userPreferences: { theme },
   } = useUserPreferences();

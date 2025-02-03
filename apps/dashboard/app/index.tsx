@@ -1,6 +1,6 @@
-// import React from "react";
 import { DashboardsScreen } from "@colony/features-dashboard";
 
-export default function Dashboard() {
+export default function Index() {
   return <DashboardsScreen />;
+
 }

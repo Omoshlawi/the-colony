@@ -154,7 +154,7 @@ const TabView: React.FC<TabViewProps> = ({
 const styles = StyleSheet.create({
   tabBar: {
     elevation: 0,
-    shadowOpacity: 0,
+    boxShadow: "none",
   },
   label: {
     textTransform: "none",
