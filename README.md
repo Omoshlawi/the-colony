@@ -46,6 +46,12 @@ If you have created a new micro app above, go and add it to the main apps index.
 
 In the new micro app, create a file in `new-app/app/(new-app)`. Everything you want to export to the main app should be located in the folder with parenthisis. Any other navigation that should be part of the micro app but not the main app can be put directly in the app folder.
 
+# Creating new app
+
+To Create new app run 
+```shell
+yarn create expo apps/newoapp
+```
 ## Code snippets
 
 1. react native useApi
@@ -104,7 +110,4 @@ Host deps
 
 ```
 
-# VSCODE FIND AND REPLACE
 
-- Find: `("@colony\/[^"]+":\s*)"(\*)"`
-- Replace: `$1"workspace:*"`
