@@ -1,5 +1,5 @@
-import React, { Component, ReactNode, Suspense, lazy, useMemo } from "react";
-import { View, Text } from "react-native";
+import React, { Suspense, lazy, useMemo } from "react";
+import { Text, View } from "react-native";
 import { extensionRegistry } from "./ExtensionRegistry";
 
 export function ExtensionSlot<S = any>({
