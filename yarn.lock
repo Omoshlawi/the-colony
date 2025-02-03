@@ -5394,14 +5394,14 @@ __metadata:
   linkType: hard
 
 "expo-file-system@npm:~18.0.7":
-  version: 18.0.8
-  resolution: "expo-file-system@npm:18.0.8"
+  version: 18.0.9
+  resolution: "expo-file-system@npm:18.0.9"
   dependencies:
     web-streams-polyfill: "npm:^3.3.2"
   peerDependencies:
     expo: "*"
     react-native: "*"
-  checksum: 10c0/38ce8338a2c11f54407d5db1ed35241e3aea9ad00028a15f5d16f05dcf59c7ebbdbf061776eb29881b3f7d02d59ded02114b4e9e2aa0ab5cf6678f7b3a4d7aae
+  checksum: 10c0/d0f7bfd9a1a6a590b75585bb4d6494cddf2ae79f4c61605351a0ebe4c076a949613f59d17cf131b84977a27a50e6a9ec36059cbd59ecc58a82c82823c96ee38c
   languageName: node
   linkType: hard
 
