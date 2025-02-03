@@ -7,7 +7,7 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@colony/core-extensions": "*",
+    "@colony/core-extensions": "workspace:*",
     "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.28",
     "react": "18.3.1",

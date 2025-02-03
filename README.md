@@ -97,10 +97,14 @@ https://snippet-generator.app/?description=&tabtrigger=&snippet=&mode=vscode
 	}
 ```
 
-
 ```json
 Host deps
-"@colony/core-global": "*",
-"@colony/core-theme": "*"
+"@colony/core-global": "workspace:*",
+"@colony/core-theme": "workspace:*"
 
 ```
+
+# VSCODE FIND AND REPLACE
+
+- Find: `("@colony\/[^"]+":\s*)"(\*)"`
+- Replace: `$1"workspace:*"`

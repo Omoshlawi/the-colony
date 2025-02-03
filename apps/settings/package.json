@@ -15,12 +15,12 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@colony/core-api": "*",
-    "@colony/core-components": "*",
-    "@colony/core-extensions": "*",
-    "@colony/core-global": "*",
-    "@colony/core-theme": "*",
-    "@colony/features-settings": "*",
+    "@colony/core-api": "workspace:*",
+    "@colony/core-components": "workspace:*",
+    "@colony/core-extensions": "workspace:*",
+    "@colony/core-global": "workspace:*",
+    "@colony/core-theme": "workspace:*",
+    "@colony/features-settings": "workspace:*",
     "@expo/vector-icons": "^14.0.2",
     "@react-navigation/native": "^7.0.0",
     "expo": "~52.0.28",
