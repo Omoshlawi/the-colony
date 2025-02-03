@@ -1211,16 +1211,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/app-dashboard-1@workspace:apps/dashboard_1":
+"@colony/app-authentication@workspace:apps/authentication":
   version: 0.0.0-use.local
-  resolution: "@colony/app-dashboard-1@workspace:apps/dashboard_1"
+  resolution: "@colony/app-authentication@workspace:apps/authentication"
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@colony/core-api": "workspace:*"
     "@colony/core-components": "workspace:*"
     "@colony/core-global": "workspace:*"
     "@colony/core-theme": "workspace:*"
-    "@colony/features-dashboard": "workspace:*"
+    "@colony/features-auth": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
