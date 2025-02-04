@@ -69,7 +69,7 @@ echo "Current directory: $(pwd)"
 echo
 
 # Create array of directories and files to clean
-directories=("dist" "node_modules" ".turbo" ".cache" ".next" "build" ".yarn")
+directories=("dist" "node_modules" ".turbo" ".cache" ".next" "build" ".yarn" ".expo")
 files=(".DS_Store" "package-lock.json" "yarn.lock" "pnpm-lock.yaml" "tsconfig.tsbuildinfo")
 
 # Clean directories
