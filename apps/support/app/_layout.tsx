@@ -5,6 +5,7 @@ import { ThemeProvider } from "@colony/core-theme";
 import { Stack } from "expo-router/stack";
 import { StatusBar } from "expo-status-bar";
 import React from "react";
+import 'react-native-reanimated';
 
 export default function Layout() {
   const {

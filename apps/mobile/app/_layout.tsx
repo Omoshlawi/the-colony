@@ -12,6 +12,7 @@ import { ApiConfigProvider } from "@colony/core-api";
 import { OverlayPortal } from "@colony/core-components";
 import { StatusBar } from "expo-status-bar";
 import { useUserPreferences } from "@colony/core-global";
+import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset and auth state loading is complete.
 SplashScreen.preventAutoHideAsync();

@@ -4,6 +4,8 @@ import { OverlayPortal } from "@colony/core-components";
 import { useUserPreferences } from "@colony/core-global";
 import { ThemeProvider } from "@colony/core-theme";
 import { StatusBar } from "expo-status-bar";
+import 'react-native-reanimated';
+
 export default function RootLayout() {
   const {
     userPreferences: { theme },

@@ -48,10 +48,14 @@ In the new micro app, create a file in `new-app/app/(new-app)`. Everything you w
 
 # Creating new app
 
-To Create new app run 
+To Create new app run
+
 ```shell
 yarn create expo apps/newoapp
 ```
+
+Remember to add `import 'react-native-reanimated';` to root `_layout.tsx` to make anomation available to app
+
 ## Code snippets
 
 1. react native useApi
@@ -109,5 +113,3 @@ Host deps
 "@colony/core-theme": "workspace:*"
 
 ```
-
-
