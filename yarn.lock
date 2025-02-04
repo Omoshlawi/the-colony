@@ -1672,7 +1672,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-listings@workspace:packages/features-listings":
+"@colony/features-listings@workspace:*, @colony/features-listings@workspace:packages/features-listings":
   version: 0.0.0-use.local
   resolution: "@colony/features-listings@workspace:packages/features-listings"
   dependencies:
@@ -5519,7 +5519,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo-symbols@npm:~0.2.2":
+"expo-symbols@npm:~0.2.1, expo-symbols@npm:~0.2.2":
   version: 0.2.2
   resolution: "expo-symbols@npm:0.2.2"
   dependencies:
@@ -7599,6 +7599,50 @@ __metadata:
   checksum: 10c0/3da6ee62d4cd9f03f5dc90b4df2540fb85b352081bee77fe4bbcd12c9000ead7f35e0a38b8d09a9bb99b13223446dd8689ff3c4959807620726d788701a83d2d
   languageName: node
   linkType: hard
+
+"listings@workspace:apps/listings":
+  version: 0.0.0-use.local
+  resolution: "listings@workspace:apps/listings"
+  dependencies:
+    "@babel/core": "npm:^7.25.2"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-theme": "workspace:*"
+    "@colony/features-listings": "workspace:*"
+    "@expo/vector-icons": "npm:^14.0.2"
+    "@react-navigation/bottom-tabs": "npm:^7.2.0"
+    "@react-navigation/native": "npm:^7.0.14"
+    "@types/jest": "npm:^29.5.12"
+    "@types/react": "npm:~18.3.12"
+    "@types/react-test-renderer": "npm:^18.3.0"
+    expo: "npm:~52.0.28"
+    expo-blur: "npm:~14.0.3"
+    expo-constants: "npm:~17.0.5"
+    expo-font: "npm:~13.0.3"
+    expo-haptics: "npm:~14.0.1"
+    expo-linking: "npm:~7.0.5"
+    expo-router: "npm:~4.0.17"
+    expo-splash-screen: "npm:~0.29.21"
+    expo-status-bar: "npm:~2.0.1"
+    expo-symbols: "npm:~0.2.1"
+    expo-system-ui: "npm:~4.0.7"
+    expo-web-browser: "npm:~14.0.2"
+    jest: "npm:^29.2.1"
+    jest-expo: "npm:~52.0.3"
+    react: "npm:18.3.1"
+    react-dom: "npm:18.3.1"
+    react-native: "npm:0.76.6"
+    react-native-gesture-handler: "npm:~2.20.2"
+    react-native-reanimated: "npm:~3.16.1"
+    react-native-safe-area-context: "npm:4.12.0"
+    react-native-screens: "npm:~4.4.0"
+    react-native-web: "npm:~0.19.13"
+    react-native-webview: "npm:13.12.5"
+    react-test-renderer: "npm:18.3.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
 
 "locate-path@npm:^3.0.0":
   version: 3.0.0
