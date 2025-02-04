@@ -1179,6 +1179,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@colony/features-auth": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1199,6 +1200,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1208,6 +1210,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1222,6 +1225,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@colony/features-dashboard": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1242,6 +1246,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1251,6 +1256,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1265,6 +1271,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@colony/features-payments": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1285,6 +1292,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1294,6 +1302,7 @@ __metadata:
     react-native-webview: "npm:13.12.4"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1309,6 +1318,7 @@ __metadata:
     "@colony/features-dashboard": "workspace:*"
     "@colony/features-properties": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1329,6 +1339,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1338,6 +1349,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1353,6 +1365,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@colony/features-settings": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1373,6 +1386,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1382,6 +1396,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1396,6 +1411,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@colony/features-support": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
@@ -1416,6 +1432,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -1425,6 +1442,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -1642,10 +1660,13 @@ __metadata:
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
   peerDependencies:
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.20
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1676,10 +1697,13 @@ __metadata:
     "@colony/core-components": "workspace:*"
     "@colony/core-global": "workspace:*"
     "@colony/core-theme": "workspace:*"
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1707,10 +1731,13 @@ __metadata:
     "@colony/core-components": "workspace:*"
     "@colony/core-global": "workspace:*"
     "@colony/core-theme": "workspace:*"
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1719,6 +1746,7 @@ __metadata:
   resolution: "@colony/features-listings@workspace:packages/features-listings"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1726,12 +1754,17 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
     "@colony/core-extensions": "workspace:*"
+    "@hookform/resolvers": ^3.9.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1740,6 +1773,7 @@ __metadata:
   resolution: "@colony/features-payments@workspace:packages/features-payments"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1747,14 +1781,19 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1763,6 +1802,7 @@ __metadata:
   resolution: "@colony/features-properties@workspace:packages/features-properties"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1770,14 +1810,19 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1787,6 +1832,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@colony/core-extensions": "workspace:*"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1794,15 +1840,20 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
     "@colony/core-extensions": "workspace:*"
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1812,6 +1863,7 @@ __metadata:
   dependencies:
     "@babel/core": "npm:^7.25.2"
     "@colony/core-extensions": "workspace:*"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1819,15 +1871,20 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
     "@colony/core-extensions": "workspace:*"
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -1836,6 +1893,7 @@ __metadata:
   resolution: "@colony/features-support@workspace:packages/features-support"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1843,14 +1901,19 @@ __metadata:
     jest: "npm:^29.2.1"
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   peerDependencies:
+    "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
+    react-hook-form: ^7.53.2
     react-native: 0.76.6
+    zod: ^3.23.8
   languageName: unknown
   linkType: soft
 
@@ -7676,10 +7739,12 @@ __metadata:
     "@babel/core": "npm:^7.25.2"
     "@colony/core-api": "workspace:*"
     "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
     "@colony/core-global": "workspace:*"
     "@colony/core-theme": "workspace:*"
     "@colony/features-listings": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/bottom-tabs": "npm:^7.2.0"
     "@react-navigation/native": "npm:^7.0.14"
     "@types/jest": "npm:^29.5.12"
@@ -7701,6 +7766,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -7710,6 +7776,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
@@ -8361,6 +8428,7 @@ __metadata:
     "@colony/features-settings": "workspace:*"
     "@colony/features-support": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
+    "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/bottom-tabs": "npm:^7.0.0"
     "@react-navigation/native": "npm:^7.0.0"
     "@types/jest": "npm:^29.5.12"
@@ -8382,6 +8450,7 @@ __metadata:
     jest-expo: "npm:~52.0.3"
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
+    react-hook-form: "npm:^7.53.2"
     react-native: "npm:0.76.6"
     react-native-gesture-handler: "npm:~2.20.2"
     react-native-reanimated: "npm:~3.16.1"
@@ -8391,6 +8460,7 @@ __metadata:
     react-native-webview: "npm:13.12.5"
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
+    zod: "npm:^3.23.8"
   languageName: unknown
   linkType: soft
 
