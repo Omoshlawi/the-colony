@@ -1446,7 +1446,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-api@workspace:*, @colony/core-api@workspace:packages/core-api":
+"@colony/core-api@npm:*, @colony/core-api@workspace:*, @colony/core-api@workspace:packages/core-api":
   version: 0.0.0-use.local
   resolution: "@colony/core-api@workspace:packages/core-api"
   dependencies:
@@ -1469,7 +1469,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-components@workspace:*, @colony/core-components@workspace:packages/core-components":
+"@colony/core-components@npm:*, @colony/core-components@workspace:*, @colony/core-components@workspace:packages/core-components":
   version: 0.0.0-use.local
   resolution: "@colony/core-components@workspace:packages/core-components"
   dependencies:
@@ -1538,7 +1538,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-global@workspace:*, @colony/core-global@workspace:packages/core-global":
+"@colony/core-global@npm:*, @colony/core-global@workspace:*, @colony/core-global@workspace:packages/core-global":
   version: 0.0.0-use.local
   resolution: "@colony/core-global@workspace:packages/core-global"
   dependencies:
@@ -1563,7 +1563,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-navigation@workspace:*, @colony/core-navigation@workspace:packages/core-navigation":
+"@colony/core-navigation@npm:*, @colony/core-navigation@workspace:packages/core-navigation":
   version: 0.0.0-use.local
   resolution: "@colony/core-navigation@workspace:packages/core-navigation"
   dependencies:
@@ -1588,7 +1588,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-storage@workspace:*, @colony/core-storage@workspace:packages/core-storage":
+"@colony/core-storage@npm:*, @colony/core-storage@workspace:*, @colony/core-storage@workspace:packages/core-storage":
   version: 0.0.0-use.local
   resolution: "@colony/core-storage@workspace:packages/core-storage"
   dependencies:
@@ -1613,7 +1613,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-theme@workspace:*, @colony/core-theme@workspace:packages/core-theme":
+"@colony/core-theme@npm:*, @colony/core-theme@workspace:*, @colony/core-theme@workspace:packages/core-theme":
   version: 0.0.0-use.local
   resolution: "@colony/core-theme@workspace:packages/core-theme"
   dependencies:
@@ -1670,7 +1670,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-auth@workspace:*, @colony/features-auth@workspace:packages/features-auth":
+"@colony/features-auth@npm:*, @colony/features-auth@workspace:*, @colony/features-auth@workspace:packages/features-auth":
   version: 0.0.0-use.local
   resolution: "@colony/features-auth@workspace:packages/features-auth"
   dependencies:
@@ -1707,7 +1707,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-dashboard@workspace:*, @colony/features-dashboard@workspace:packages/features-dashboard":
+"@colony/features-dashboard@npm:*, @colony/features-dashboard@workspace:*, @colony/features-dashboard@workspace:packages/features-dashboard":
   version: 0.0.0-use.local
   resolution: "@colony/features-dashboard@workspace:packages/features-dashboard"
   dependencies:
@@ -1768,7 +1768,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-payments@workspace:*, @colony/features-payments@workspace:packages/features-payments":
+"@colony/features-payments@npm:*, @colony/features-payments@workspace:*, @colony/features-payments@workspace:packages/features-payments":
   version: 0.0.0-use.local
   resolution: "@colony/features-payments@workspace:packages/features-payments"
   dependencies:
@@ -1826,7 +1826,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-settings@workspace:*, @colony/features-settings@workspace:packages/features-settings":
+"@colony/features-settings@npm:*, @colony/features-settings@workspace:*, @colony/features-settings@workspace:packages/features-settings":
   version: 0.0.0-use.local
   resolution: "@colony/features-settings@workspace:packages/features-settings"
   dependencies:
@@ -1888,7 +1888,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-support@workspace:*, @colony/features-support@workspace:packages/features-support":
+"@colony/features-support@npm:*, @colony/features-support@workspace:*, @colony/features-support@workspace:packages/features-support":
   version: 0.0.0-use.local
   resolution: "@colony/features-support@workspace:packages/features-support"
   dependencies:
@@ -8416,17 +8416,17 @@ __metadata:
   resolution: "mobile@workspace:apps/mobile"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "workspace:*"
-    "@colony/core-components": "workspace:*"
-    "@colony/core-global": "workspace:*"
-    "@colony/core-navigation": "workspace:*"
-    "@colony/core-storage": "workspace:*"
-    "@colony/core-theme": "workspace:*"
-    "@colony/features-auth": "workspace:*"
-    "@colony/features-dashboard": "workspace:*"
-    "@colony/features-payments": "workspace:*"
-    "@colony/features-settings": "workspace:*"
-    "@colony/features-support": "workspace:*"
+    "@colony/core-api": "npm:*"
+    "@colony/core-components": "npm:*"
+    "@colony/core-global": "npm:*"
+    "@colony/core-navigation": "npm:*"
+    "@colony/core-storage": "npm:*"
+    "@colony/core-theme": "npm:*"
+    "@colony/features-auth": "npm:*"
+    "@colony/features-dashboard": "npm:*"
+    "@colony/features-payments": "npm:*"
+    "@colony/features-settings": "npm:*"
+    "@colony/features-support": "npm:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/bottom-tabs": "npm:^7.0.0"
