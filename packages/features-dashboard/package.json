@@ -7,10 +7,13 @@
     "preset": "jest-expo"
   },
   "peerDependencies": {
-    "@colony/core-api": "workspace:*",
-    "@colony/core-components": "workspace:*",
-    "@colony/core-global": "workspace:*",
-    "@colony/core-theme": "workspace:*",
+    "@colony/core-api": "*",
+    "@colony/core-components": "*",
+    "@colony/core-extensions": "*",
+    "@colony/core-global": "*",
+    "@colony/core-navigation": "*",
+    "@colony/core-storage": "*",
+    "@colony/core-theme": "*",
     "@hookform/resolvers": "^3.9.1",
     "expo": "~52.0.28",
     "react": "18.3.1",

@@ -17,6 +17,7 @@
   "dependencies": {
     "@colony/core-api": "*",
     "@colony/core-components": "*",
+    "@colony/core-extensions": "*",
     "@colony/core-global": "*",
     "@colony/core-navigation": "*",
     "@colony/core-storage": "*",
