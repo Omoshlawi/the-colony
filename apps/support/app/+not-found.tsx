@@ -1,7 +1,6 @@
 import { Link, Stack } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
-import { StyledText } from "@colony/core-components";
 import React from "react";
 
 export default function NotFoundScreen() {
@@ -9,9 +8,9 @@ export default function NotFoundScreen() {
     <React.Fragment>
       <Stack.Screen options={{ title: "Oops!" }} />
       <View style={styles.container}>
-        <StyledText type="bold">This screen doesn't exist.</StyledText>
+        <Text>This screen doesn't exist.</Text>
         <Link href="/" style={styles.link}>
-          <StyledText>Go to home screen!</StyledText>
+          <Text>Go to home screen!</Text>
         </Link>
       </View>
     </React.Fragment>

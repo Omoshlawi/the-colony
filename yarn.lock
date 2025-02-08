@@ -1790,6 +1790,7 @@ __metadata:
   peerDependencies:
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.20
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -1830,6 +1831,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -1867,6 +1869,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -1902,6 +1905,7 @@ __metadata:
     "@colony/core-storage": "workspace:*"
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
+    expo-router: ~4.0.17
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
     zod: ^3.23.8
@@ -1936,6 +1940,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -1972,6 +1977,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -2009,6 +2015,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -2046,6 +2053,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -2082,6 +2090,7 @@ __metadata:
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
+    expo-router: ~4.0.17
     react: 18.3.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -2117,6 +2126,7 @@ __metadata:
     "@colony/core-storage": "workspace:*"
     "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
+    expo-router: ~4.0.17
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
     zod: ^3.23.8

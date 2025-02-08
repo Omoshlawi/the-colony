@@ -1,7 +1,7 @@
 import { useNavigation } from "expo-router";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
-import { StyledPageLayout, StyledText } from "@colony/core-components";
+import { StyledPageLayout } from "@colony/core-components";
 import { useEffect } from "react";
 
 export const AccountVerificationScreen = () => {
@@ -17,7 +17,7 @@ export const AccountVerificationScreen = () => {
 
   return (
     <StyledPageLayout>
-      <StyledText style={styles.title}>Account verifications screen</StyledText>
+      <Text style={styles.title}>Account verifications screen</Text>
     </StyledPageLayout>
   );
 };

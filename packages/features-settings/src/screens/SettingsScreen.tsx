@@ -5,16 +5,13 @@ import {
   ExpoIconComponent,
   ListTile,
   SectionCard,
-  showSnackbar,
-  StyledPageLayout,
-  StyledText,
+  StyledPageLayout
 } from "@colony/core-components";
-import { Box } from "@colony/core-theme";
-import { OrganizationContextTile, ThemeTogglerSection } from "../widgets";
 import { ExtensionSlot } from "@colony/core-extensions";
+import { useSession } from "@colony/core-global";
+import { Box } from "@colony/core-theme";
 import { useRouter } from "expo-router";
-import { RoutePaths } from "../utils";
-import { User, useSession } from "@colony/core-global";
+import { OrganizationContextTile, ThemeTogglerSection } from "../widgets";
 
 export const SettingsScreen = () => {
   const { user } = useSession();

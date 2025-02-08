@@ -57,7 +57,7 @@ yarn create expo apps/newoapp
 ### Note:
 
 - Remember to add `import 'react-native-reanimated';` to root `_layout.tsx` to make anomation available to app
-- Ensure you install the following libs required by all packages (peer deps in packages)
+- Ensure you install the following libs required by all packages (peer deps in packages and used)
 - Hive applicationCore packages
   - `"@colony/core-api": "workspace:*"`
   - `"@colony/core-components": "workspace:*"`
@@ -78,6 +78,9 @@ yarn create expo apps/newoapp
   - `"react-native": "0.76.6"`
   - `"react-dom": "18.3.1"`
   - `"react-native-reanimated": "~3.16.1"`
+  - `"expo-router": "~4.0.17"` Required by components and feature packages
+- Themed status bar
+  - `"expo-status-bar": "~2.0.1"`
 
 ## Code snippets
 

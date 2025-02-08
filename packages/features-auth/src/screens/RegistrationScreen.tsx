@@ -3,7 +3,6 @@ import { ScrollView, StyleSheet } from "react-native";
 
 import { Box, Text } from "@colony/core-theme";
 import { RegisterForm } from "../forms";
-import { createRef } from "react";
 
 export const RegistrationScreen = () => {
   return (
