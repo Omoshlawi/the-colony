@@ -1,5 +1,5 @@
 {
-  "name": "@colony/app-listings",
+  "name": "@colony/app-template",
   "main": "index.js",
   "version": "1.0.0",
   "scripts": {
@@ -22,7 +22,7 @@
     "@colony/core-navigation": "*",
     "@colony/core-storage": "*",
     "@colony/core-theme": "*",
-    "@colony/features-listings": "workspace:*",
+    "@colony/features-template": "workspace:*",
     "@expo/vector-icons": "^14.0.2",
     "@hookform/resolvers": "^3.9.1",
     "@react-navigation/bottom-tabs": "^7.2.0",
