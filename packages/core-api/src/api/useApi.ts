@@ -1,7 +1,7 @@
 import useSWR, { SWRConfiguration } from "swr";
 
 const useApi = <T>(
-  resource: string,
+  resource: string | null,
   fetcher?: (url: string) => Promise<T>,
   options?: SWRConfiguration
 ) => {

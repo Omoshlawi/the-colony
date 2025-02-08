@@ -7,7 +7,6 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@expo/vector-icons": "^14.0.2",
     "@shopify/restyle": "^2.4.4",
     "color": "^4.2.3"
   },

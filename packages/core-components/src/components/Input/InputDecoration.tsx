@@ -1,12 +1,11 @@
+import { Box, Text } from "@colony/core-theme";
+import React, { FC, ReactNode, useState } from "react";
 import {
   StyleProp,
   StyleSheet,
   TouchableOpacity,
-  View,
-  ViewProps,
+  ViewProps
 } from "react-native";
-import React, { FC, PropsWithChildren, ReactNode, useState } from "react";
-import { Box, Text } from "@colony/core-theme";
 
 type RenderProps = {
   onFocus?: () => void;

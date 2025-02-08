@@ -1,6 +1,6 @@
 import { Box } from "@colony/core-theme";
 import * as ImagePicker from "expo-image-picker";
-import React, { FC, useCallback, useState } from "react";
+import React, { FC, useCallback } from "react";
 import { Alert, DimensionValue, Platform, StyleSheet } from "react-native";
 import { ExpoIconComponent, ExpoIconFamily } from "../ExpoIcons";
 import { ListTile } from "../ListTile";

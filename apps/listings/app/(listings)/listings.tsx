@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { ListingsScreen } from "@colony/features-listings";
+import React from "react";
+import { StyleSheet } from "react-native";
 const Listings = () => {
   return <ListingsScreen />;
 };

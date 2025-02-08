@@ -5,11 +5,11 @@ import {
   TextInput as RNTextInput,
   TouchableOpacity,
 } from "react-native";
-import useSWR from "swr";
 import { ExpoIcon, ExpoIconComponent } from "./helpers";
 import { TextInput } from "../Input";
 import { Box, Text, useTheme } from "@colony/core-theme";
 import debounce from "lodash/debounce";
+import { useApi } from "@colony/core-api";
 
 type ExpoIconPickerProps = {
   onSelectIcon?: (selected?: ExpoIcon) => void;
@@ -37,7 +37,7 @@ const ExpoIconPicker: FC<ExpoIconPickerProps> = ({
     error: familyError,
     isLoading: familyLoading,
     mutate: mutateFamily,
-  } = useSWR(
+  } = useApi(
     typeof getIconFamilies === "function" ? "__getIconFamilyNames__" : null,
     async () => {
       return getIconFamilies!();

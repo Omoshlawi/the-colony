@@ -1,8 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React, { FC } from "react";
-import { Box } from "@colony/core-theme";
-import { Image } from "expo-image";
 import { useUserPreferences } from "@colony/core-global";
+import React, { FC } from "react";
+import { StyleSheet } from "react-native";
+import { ImageViewer } from "./ImageViewer";
 
 type LogoProps = {
   size?: number;
@@ -14,14 +13,14 @@ const Logo: FC<LogoProps> = ({ size = 100 }) => {
 
   if (theme === "light")
     return (
-      <Image
+      <ImageViewer
         source={require("../../assets/logo-light.png")}
         style={[styles.logo, { width: size, height: size }]}
       />
     );
 
   return (
-    <Image
+    <ImageViewer
       source={require("../../assets/logo-dark.png")}
       style={[styles.logo, { width: size, height: size }]}
     />

@@ -1,15 +1,8 @@
-import {
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { FC, PropsWithChildren } from "react";
-import { showModal, showModalBottomSheet } from "../Overlays";
-import { Button } from "../Button";
 import { Box } from "@colony/core-theme";
+import React, { PropsWithChildren } from "react";
+import { ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+import { Button } from "../Button";
+import { showModal, showModalBottomSheet } from "../Overlays";
 
 type Props = PropsWithChildren<{
   onDelete?: () => void;

@@ -1,12 +1,11 @@
+import { Box, Text, useTheme } from "@colony/core-theme";
+import React, { FC, ReactNode } from "react";
 import {
   Pressable,
   StyleProp,
   StyleSheet,
-  View,
-  ViewStyle,
+  ViewStyle
 } from "react-native";
-import React, { FC, ReactNode } from "react";
-import { Box, Text, useTheme } from "@colony/core-theme";
 
 type ListTileProps = {
   title?: string;

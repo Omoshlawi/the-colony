@@ -1,21 +1,19 @@
+import { useTheme } from "@colony/core-theme";
+import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 import {
-  View,
-  ViewProps,
   StyleSheet,
-  StyleProp,
-  ViewStyle,
+  View,
+  ViewProps
 } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
 import Animated, {
-  useSharedValue,
+  interpolate,
   useAnimatedStyle,
+  useSharedValue,
   withRepeat,
   withTiming,
-  interpolate,
 } from "react-native-reanimated";
 import { DefaultStyle } from "react-native-reanimated/lib/typescript/hook/commonTypes";
-import { useTheme } from "@colony/core-theme";
 
 interface SkeletonProps extends ViewProps {
   // Skeleton-specific props

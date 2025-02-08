@@ -1,13 +1,12 @@
-import React, { FC, useState, useCallback, useRef, useEffect } from "react";
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  Platform,
-  Alert,
-} from "react-native";
-import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
 import { Box, Text } from "@colony/core-theme";
+import { CameraType, CameraView, useCameraPermissions } from "expo-camera";
+import React, { FC, useCallback, useEffect, useRef, useState } from "react";
+import {
+  Alert,
+  StyleSheet,
+  TouchableOpacity,
+  View
+} from "react-native";
 import { ExpoIconComponent } from "../ExpoIcons";
 
 export interface CameraVideoProps {

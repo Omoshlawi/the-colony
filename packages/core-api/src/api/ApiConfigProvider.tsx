@@ -1,5 +1,4 @@
 import React, { FC, PropsWithChildren } from "react";
-import { StyleSheet } from "react-native";
 import { SWRConfig } from "swr";
 import { hiveFetch } from "./hiveFetch";
 

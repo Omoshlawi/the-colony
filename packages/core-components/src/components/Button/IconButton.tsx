@@ -1,4 +1,3 @@
-import { useUserPreferedTheme } from "@colony/core-global";
 import { Color, useTheme } from "@colony/core-theme";
 import React, { FC, useMemo } from "react";
 import {

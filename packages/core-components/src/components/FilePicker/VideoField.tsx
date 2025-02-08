@@ -1,5 +1,4 @@
 import { Box } from "@colony/core-theme";
-import { useCameraPermissions } from "expo-camera";
 import * as ImagePicker from "expo-image-picker";
 import React, { FC, useCallback } from "react";
 import { Alert, DimensionValue, Platform, StyleSheet } from "react-native";

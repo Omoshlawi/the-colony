@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useMemo } from "react";
-import { Text, View } from "react-native";
+import { ActivityIndicator, Text, View } from "react-native";
 import { extensionRegistry } from "./ExtensionRegistry";
 
 export function ExtensionSlot<S = any>({
@@ -26,7 +26,7 @@ export function ExtensionSlot<S = any>({
         return (
           <Suspense
             key={extension.name}
-            fallback={fallback || <Text>Loading...</Text>}
+            fallback={fallback || <ActivityIndicator size={100} />}
           >
             <LazyComponent
               context={{

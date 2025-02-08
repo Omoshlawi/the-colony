@@ -1,12 +1,11 @@
 import { useTheme } from "@colony/core-theme";
-import React, { forwardRef, ReactNode, Ref } from "react";
+import React, { forwardRef, Ref } from "react";
 import {
   Platform,
   TextInput as RNTextInput,
   StyleProp,
-  ViewProps,
   ViewStyle,
-  type TextInputProps as RNTextInputProps,
+  type TextInputProps as RNTextInputProps
 } from "react-native";
 import InputDecoration, { InputDecorationProps } from "./InputDecoration";
 

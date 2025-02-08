@@ -1,18 +1,17 @@
-import React, { FC, useState, useCallback } from "react";
+import { Box } from "@colony/core-theme";
+import * as DocumentPicker from "expo-document-picker";
+import React, { FC, useCallback, useState } from "react";
 import {
+  Alert,
+  DimensionValue,
   Modal,
   StyleSheet,
   TouchableWithoutFeedback,
-  View,
-  Alert,
-  DimensionValue,
-  Platform,
+  View
 } from "react-native";
-import * as DocumentPicker from "expo-document-picker";
-import { BottomSheetModalWrapper } from "../Overlays/wrappers";
-import { ListTile } from "../ListTile";
 import { ExpoIconComponent, ExpoIconFamily } from "../ExpoIcons";
-import { Box } from "@colony/core-theme";
+import { ListTile } from "../ListTile";
+import { BottomSheetModalWrapper } from "../Overlays/wrappers";
 import { FilePickerBaseInputProps } from "./types";
 
 export interface DocumentOption {

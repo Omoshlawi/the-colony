@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { useTheme } from "@colony/core-theme";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 import { Skeleton } from "../SkeletonLoader";
 
 const ListTileSkeleton = () => {

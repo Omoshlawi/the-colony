@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 import { Box, useTheme } from "@colony/core-theme";
-import { Skeleton, SkeletonLoader } from "../SkeletonLoader";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Skeleton } from "../SkeletonLoader";
 
 const InputSkeleton = () => {
   const { borderRadii } = useTheme();
