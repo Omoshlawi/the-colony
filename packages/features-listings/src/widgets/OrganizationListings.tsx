@@ -18,20 +18,18 @@ import { useListings } from "../hooks";
 import { RoutePaths } from "../utils";
 import { getHiveFileUrl } from "@colony/core-api";
 import { ListingForm } from "../forms";
+import { Property } from "../types";
 
 const OrganizationListings = () => {
   const listingsAsync = useListings();
   const theme = useTheme();
 
-  const handleAdd = useCallback(() => {
-    const dispose = showModal(<ListingForm onSuccess={() => dispose()} />);
-  }, []);
   return (
     <StyledPageLayout>
       <AppBar
         title="Listings"
         actions={
-          <TouchableOpacity activeOpacity={0.5} onPress={handleAdd}>
+          <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
             <ExpoIconComponent family="Entypo" name="add-to-list" />
           </TouchableOpacity>
         }

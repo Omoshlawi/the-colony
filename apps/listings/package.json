@@ -23,7 +23,6 @@
     "@colony/core-storage": "*",
     "@colony/core-theme": "*",
     "@colony/features-listings": "workspace:*",
-    "@colony/features-properties": "*",
     "@expo/vector-icons": "^14.0.2",
     "@hookform/resolvers": "^3.9.1",
     "@react-navigation/bottom-tabs": "^7.2.0",

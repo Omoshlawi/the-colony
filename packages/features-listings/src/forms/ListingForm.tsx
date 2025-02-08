@@ -2,33 +2,28 @@ import { getHiveFileUrl, handleApiErrors, mutate } from "@colony/core-api";
 import {
   Button,
   DateTimePickerInput,
-  ExpoIconComponent,
   ImageViewer,
   ListTile,
-  SeachableDropDown,
-  showModal,
   showSnackbar,
-  TextInput,
+  TextInput
 } from "@colony/core-components";
-import { Box } from "@colony/core-theme";
-import { Property, PropertyForm } from "@colony/features-properties";
+import { Box, Color, Text, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC, useCallback, useState } from "react";
+import React, { FC } from "react";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import { useListingApi } from "../hooks";
-import { Listing, ListingFormData } from "../types";
+import { Listing, ListingFormData, Property } from "../types";
 import { ListingSchema } from "../utils";
 
 type Props = {
   listing?: Listing;
   onSuccess?: (listing: Listing) => void;
-  property?: Property;
+  property: Property;
 };
 const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
   const { addListing, updateListing, searchProperty } = useListingApi();
-  const [newProperty, setNewProperty] = useState<Property>();
-
+  const theme = useTheme();
   const form = useForm<ListingFormData>({
     defaultValues: {
       title: listing?.title,
@@ -37,24 +32,11 @@ const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
       featured: listing?.featured,
       tags: listing?.tags ?? [],
       price: listing?.price ? Number(listing.price) : undefined,
-      propertyId: property?.id ?? listing?.propertyId,
+      propertyId: property.id,
     },
     resolver: zodResolver(ListingSchema),
   });
-  const handleAddProperty = useCallback(() => {
-    const dispose = showModal(
-      <PropertyForm
-        onSuccess={(other) => {
-          form.setValue("propertyId", other.id);
-          setNewProperty(other);
-          dispose();
-        }}
-      />,
-      {
-        title: "Add listing property",
-      }
-    );
-  }, [form, setNewProperty]);
+
   const onSubmit: SubmitHandler<ListingFormData> = async (data) => {
     try {
       const res = listing
@@ -79,6 +61,35 @@ const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
   };
   return (
     <Box width={"100%"} gap={"l"} p={"m"}>
+      <Controller
+        control={form.control}
+        name="propertyId"
+        render={({ fieldState: { error } }) => (
+          <Box
+            style={{
+              backgroundColor: Color(theme.colors.hintColor)
+                .alpha(0.2)
+                .toString(),
+            }}
+          >
+            <ListTile
+              title={property.name}
+              subtitle={property.address?.landmark}
+              leading={
+                <ImageViewer
+                  source={getHiveFileUrl(property.thumbnail)}
+                  style={styles.propertythumbnail}
+                />
+              }
+            />
+            {error?.message && (
+              <Text color={"error"} p={"m"}>
+                {error?.message}
+              </Text>
+            )}
+          </Box>
+        )}
+      />
       <Controller
         control={form.control}
         name="title"
@@ -134,48 +145,6 @@ const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
         )}
       />
 
-      <Controller
-        control={form.control}
-        name="propertyId"
-        render={({
-          field: { onChange, value, disabled },
-          fieldState: { error },
-        }) => (
-          <SeachableDropDown
-            inputProps={{
-              label: `Listing Property`,
-              placeholder: "Search Property",
-              error: error?.message,
-              prefixIcon: (
-                <ExpoIconComponent family="MaterialIcons" name="add-business" />
-              ),
-              onPrefixIconPressed: handleAddProperty,
-            }}
-            initialValue={newProperty ?? listing?.property ?? property}
-            asyncSearchFunction={async (query) => {
-              const res = await searchProperty({ search: query });
-              return res.data.results ?? [];
-            }}
-            keyExtractor={(relationshiptype) => relationshiptype.id}
-            labelExtractor={(relationshiptype) => relationshiptype.name}
-            valueExtractor={(relationshiptype) => relationshiptype.id}
-            onValueChange={onChange}
-            title="Search other property"
-            renderItem={({ item, selected }) => (
-              <ListTile
-                title={item.name}
-                subtitle={item.address?.landmark}
-                leading={
-                  <ImageViewer
-                    source={getHiveFileUrl(item.thumbnail)}
-                    style={styles.propertythumbnail}
-                  />
-                }
-              />
-            )}
-          />
-        )}
-      />
       <Controller
         control={form.control}
         name="expiryDate"
