@@ -1,10 +1,4 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React, { FC } from "react";
-import { AppService } from "@/src/types";
-import {
-  useAppServicesResourceSchema,
-  useAppServicesResourceSchemaApi,
-} from "../../hooks";
+import { handleApiErrors } from "@colony/core-api";
 import {
   ConfirmDialog,
   ErrorState,
@@ -14,8 +8,14 @@ import {
   showSnackbar,
   When,
 } from "@colony/core-components";
-import { handleApiErrors } from "@colony/core-api";
 import { Box } from "@colony/core-theme";
+import React, { FC } from "react";
+import { StyleSheet, TouchableOpacity } from "react-native";
+import {
+  useAppServicesResourceSchema,
+  useAppServicesResourceSchemaApi,
+} from "../../hooks";
+import { AppService } from "../../types";
 
 type Props = {
   service: AppService;
