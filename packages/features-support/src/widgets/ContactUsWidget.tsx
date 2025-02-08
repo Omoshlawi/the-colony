@@ -1,31 +1,24 @@
-import {
-  StyledIcon,
-  StyledListItem,
-  Widget,
-  microColors,
-} from "@colony/core-components";
+import { ExpoIconComponent, ListTile } from "@colony/core-components";
+import { Box } from "@colony/core-theme";
 import { useRouter } from "expo-router";
 import { StyleSheet } from "react-native";
 
 export const ContactUsWidget = () => {
   const router = useRouter();
   return (
-    <Widget style={{ marginTop: 16 }}>
-      <StyledListItem
+    <Box style={{ marginTop: 16 }}>
+      <ListTile
         title="Call us"
         borderBottom
-        showChevron
-        icon={<StyledIcon name="call" color={microColors.blue} />}
+        leading={<ExpoIconComponent family="Ionicons" name="call" />}
         onPress={() => router.navigate("/(support)/call-us")}
       />
-      <StyledListItem
+      <ListTile
         title="Chat with us"
-        icon={<StyledIcon name="chat" color={microColors.blue} />}
-        showChevron
-        style={{ marginTop: 16 }}
+        leading={<ExpoIconComponent family="Ionicons" name="chat" />}
         onPress={() => router.navigate("/(support)/chat-with-us")}
       />
-    </Widget>
+    </Box>
   );
 };
 

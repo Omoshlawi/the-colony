@@ -1173,13 +1173,13 @@ __metadata:
   resolution: "@colony/app-authentication@workspace:apps/authentication"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-auth": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1223,13 +1223,13 @@ __metadata:
   resolution: "@colony/app-dashboard@workspace:apps/dashboard"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-dashboard": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1273,13 +1273,13 @@ __metadata:
   resolution: "@colony/app-listings@workspace:apps/listings"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-listings": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1324,13 +1324,13 @@ __metadata:
   resolution: "@colony/app-payments@workspace:apps/payments"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-payments": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1374,13 +1374,13 @@ __metadata:
   resolution: "@colony/app-properties@workspace:apps/properties"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-dashboard": "workspace:*"
     "@colony/features-properties": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
@@ -1425,13 +1425,13 @@ __metadata:
   resolution: "@colony/app-settings@workspace:apps/settings"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-settings": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1475,13 +1475,13 @@ __metadata:
   resolution: "@colony/app-support@workspace:apps/support"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-support": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1525,13 +1525,13 @@ __metadata:
   resolution: "@colony/app-template@workspace:apps/template"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@colony/features-template": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
@@ -1571,7 +1571,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-api@npm:*, @colony/core-api@workspace:packages/core-api":
+"@colony/core-api@workspace:*, @colony/core-api@workspace:packages/core-api":
   version: 0.0.0-use.local
   resolution: "@colony/core-api@workspace:packages/core-api"
   dependencies:
@@ -1594,7 +1594,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-components@npm:*, @colony/core-components@workspace:packages/core-components":
+"@colony/core-components@workspace:*, @colony/core-components@workspace:packages/core-components":
   version: 0.0.0-use.local
   resolution: "@colony/core-components@workspace:packages/core-components"
   dependencies:
@@ -1642,7 +1642,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-extensions@npm:*, @colony/core-extensions@workspace:*, @colony/core-extensions@workspace:packages/core-extensions":
+"@colony/core-extensions@workspace:*, @colony/core-extensions@workspace:packages/core-extensions":
   version: 0.0.0-use.local
   resolution: "@colony/core-extensions@workspace:packages/core-extensions"
   dependencies:
@@ -1666,7 +1666,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-global@npm:*, @colony/core-global@workspace:*, @colony/core-global@workspace:packages/core-global":
+"@colony/core-global@workspace:*, @colony/core-global@workspace:packages/core-global":
   version: 0.0.0-use.local
   resolution: "@colony/core-global@workspace:packages/core-global"
   dependencies:
@@ -1691,7 +1691,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-navigation@npm:*, @colony/core-navigation@workspace:packages/core-navigation":
+"@colony/core-navigation@workspace:*, @colony/core-navigation@workspace:packages/core-navigation":
   version: 0.0.0-use.local
   resolution: "@colony/core-navigation@workspace:packages/core-navigation"
   dependencies:
@@ -1717,7 +1717,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-storage@npm:*, @colony/core-storage@workspace:*, @colony/core-storage@workspace:packages/core-storage":
+"@colony/core-storage@workspace:*, @colony/core-storage@workspace:packages/core-storage":
   version: 0.0.0-use.local
   resolution: "@colony/core-storage@workspace:packages/core-storage"
   dependencies:
@@ -1742,7 +1742,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/core-theme@npm:*, @colony/core-theme@workspace:packages/core-theme":
+"@colony/core-theme@workspace:*, @colony/core-theme@workspace:packages/core-theme":
   version: 0.0.0-use.local
   resolution: "@colony/core-theme@workspace:packages/core-theme"
   dependencies:
@@ -1798,7 +1798,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-auth@npm:*, @colony/features-auth@workspace:*, @colony/features-auth@workspace:packages/features-auth":
+"@colony/features-auth@workspace:*, @colony/features-auth@workspace:packages/features-auth":
   version: 0.0.0-use.local
   resolution: "@colony/features-auth@workspace:packages/features-auth"
   dependencies:
@@ -1821,13 +1821,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -1838,7 +1838,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-dashboard@npm:*, @colony/features-dashboard@workspace:*, @colony/features-dashboard@workspace:packages/features-dashboard":
+"@colony/features-dashboard@workspace:*, @colony/features-dashboard@workspace:packages/features-dashboard":
   version: 0.0.0-use.local
   resolution: "@colony/features-dashboard@workspace:packages/features-dashboard"
   dependencies:
@@ -1858,13 +1858,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -1894,13 +1894,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -1908,7 +1908,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-payments@npm:*, @colony/features-payments@workspace:*, @colony/features-payments@workspace:packages/features-payments":
+"@colony/features-payments@workspace:*, @colony/features-payments@workspace:packages/features-payments":
   version: 0.0.0-use.local
   resolution: "@colony/features-payments@workspace:packages/features-payments"
   dependencies:
@@ -1927,13 +1927,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -1963,13 +1963,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -1980,7 +1980,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-settings@npm:*, @colony/features-settings@workspace:*, @colony/features-settings@workspace:packages/features-settings":
+"@colony/features-settings@workspace:*, @colony/features-settings@workspace:packages/features-settings":
   version: 0.0.0-use.local
   resolution: "@colony/features-settings@workspace:packages/features-settings"
   dependencies:
@@ -2000,13 +2000,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -2037,13 +2037,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -2054,7 +2054,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@colony/features-support@npm:*, @colony/features-support@workspace:*, @colony/features-support@workspace:packages/features-support":
+"@colony/features-support@workspace:*, @colony/features-support@workspace:packages/features-support":
   version: 0.0.0-use.local
   resolution: "@colony/features-support@workspace:packages/features-support"
   dependencies:
@@ -2073,13 +2073,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     expo: ~52.0.28
     react: 18.3.1
@@ -2109,13 +2109,13 @@ __metadata:
     typescript: "npm:^5.3.3"
     zod: "npm:^3.23.8"
   peerDependencies:
-    "@colony/core-api": "*"
-    "@colony/core-components": "*"
-    "@colony/core-extensions": "*"
-    "@colony/core-global": "*"
-    "@colony/core-navigation": "*"
-    "@colony/core-storage": "*"
-    "@colony/core-theme": "*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@hookform/resolvers": ^3.9.1
     react-dom: 18.3.1
     react-hook-form: ^7.53.2
@@ -8574,18 +8574,18 @@ __metadata:
   resolution: "mobile@workspace:apps/mobile"
   dependencies:
     "@babel/core": "npm:^7.25.2"
-    "@colony/core-api": "npm:*"
-    "@colony/core-components": "npm:*"
-    "@colony/core-extensions": "npm:*"
-    "@colony/core-global": "npm:*"
-    "@colony/core-navigation": "npm:*"
-    "@colony/core-storage": "npm:*"
-    "@colony/core-theme": "npm:*"
-    "@colony/features-auth": "npm:*"
-    "@colony/features-dashboard": "npm:*"
-    "@colony/features-payments": "npm:*"
-    "@colony/features-settings": "npm:*"
-    "@colony/features-support": "npm:*"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-components": "workspace:*"
+    "@colony/core-extensions": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-navigation": "workspace:*"
+    "@colony/core-storage": "workspace:*"
+    "@colony/core-theme": "workspace:*"
+    "@colony/features-auth": "workspace:*"
+    "@colony/features-dashboard": "workspace:*"
+    "@colony/features-payments": "workspace:*"
+    "@colony/features-settings": "workspace:*"
+    "@colony/features-support": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@hookform/resolvers": "npm:^3.9.1"
     "@react-navigation/bottom-tabs": "npm:^7.0.0"

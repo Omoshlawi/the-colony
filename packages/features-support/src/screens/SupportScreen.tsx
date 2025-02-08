@@ -1,12 +1,13 @@
-import { StyledPageLayout, StyledText } from "@colony/core-components";
+import { StyledPageLayout } from "@colony/core-components";
 import { StyleSheet } from "react-native";
 
 import { ContactUsWidget } from "../widgets";
+import { Text } from "@colony/core-theme";
 
 export const SupportScreen = () => {
   return (
     <StyledPageLayout>
-      <StyledText style={styles.title}>Support</StyledText>
+      <Text style={styles.title}>Support</Text>
       <ContactUsWidget />
     </StyledPageLayout>
   );

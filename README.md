@@ -54,7 +54,30 @@ To Create new app run
 yarn create expo apps/newoapp
 ```
 
-Remember to add `import 'react-native-reanimated';` to root `_layout.tsx` to make anomation available to app
+### Note:
+
+- Remember to add `import 'react-native-reanimated';` to root `_layout.tsx` to make anomation available to app
+- Ensure you install the following libs required by all packages (peer deps in packages)
+- Hive applicationCore packages
+  - `"@colony/core-api": "workspace:*"`
+  - `"@colony/core-components": "workspace:*"`
+  - `"@colony/core-extensions": "workspace:*"`
+  - `"@colony/core-global": "workspace:*"`
+  - `"@colony/core-navigation": "workspace:*"`
+  - `"@colony/core-storage": "workspace:*"`
+  - `"@colony/core-theme": "workspace:*"`
+- Form handling packages
+  - `"@hookform/resolvers": "^3.9.1"`
+  - `"zod": "^3.23.8"`
+  - `"react-hook-form": "^7.53.2"`
+- Utilities packages
+  - `"lodash": "^4.17.21"`
+- react native app core packages
+  - `"react": "18.3.1"`
+  - ` "expo": "~52.0.28"`
+  - `"react-native": "0.76.6"`
+  - `"react-dom": "18.3.1"`
+  - `"react-native-reanimated": "~3.16.1"`
 
 ## Code snippets
 

@@ -1,11 +1,11 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 
-import { StyledPageLayout, StyledText } from "@colony/core-components";
+import { StyledPageLayout } from "@colony/core-components";
 import { PayWidget } from "../widgets";
 
 export const PaymentScreen = () => (
   <StyledPageLayout>
-    <StyledText style={styles.title}>Payments</StyledText>
+    <Text style={styles.title}>Payments</Text>
     <PayWidget />
   </StyledPageLayout>
 );
