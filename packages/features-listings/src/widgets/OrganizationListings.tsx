@@ -6,26 +6,32 @@ import {
   ImageViewer,
   ListTile,
   ListTileSkeleton,
+  showModal,
   StyledPageLayout,
   When,
 } from "@colony/core-components";
 import { Box, useTheme } from "@colony/core-theme";
 import { Link } from "expo-router";
-import React from "react";
+import React, { useCallback } from "react";
 import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { useListings } from "../hooks";
 import { RoutePaths } from "../utils";
 import { getHiveFileUrl } from "@colony/core-api";
+import { ListingForm } from "../forms";
 
 const OrganizationListings = () => {
   const listingsAsync = useListings();
   const theme = useTheme();
+
+  const handleAdd = useCallback(() => {
+    const dispose = showModal(<ListingForm onSuccess={() => dispose()} />);
+  }, []);
   return (
     <StyledPageLayout>
       <AppBar
         title="Listings"
         actions={
-          <TouchableOpacity activeOpacity={0.5}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleAdd}>
             <ExpoIconComponent family="Entypo" name="add-to-list" />
           </TouchableOpacity>
         }

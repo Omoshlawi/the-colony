@@ -1,4 +1,6 @@
 import { z } from "zod";
+import { ListingSchema } from "../utils";
+import { Property } from "@colony/features-properties";
 
 export interface Listing {
   id: string;
@@ -24,14 +26,6 @@ export interface Listing {
   createdAt: string;
   updatedAt: string;
   saleDetails?: SaleDetails;
-}
-
-export interface Property {
-  id: string;
-  name: string;
-  address?: Address;
-  thumbnail: string;
-  addressId: string;
 }
 
 export interface Address {
@@ -76,3 +70,5 @@ export interface SaleDetails {
   createdAt: string;
   updatedAt: string;
 }
+
+export type ListingFormData = z.infer<typeof ListingSchema>;
