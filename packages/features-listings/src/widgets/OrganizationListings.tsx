@@ -1,4 +1,5 @@
 import {
+  AlertDialog,
   AppBar,
   EmptyState,
   ErrorState,
@@ -6,15 +7,18 @@ import {
   ImageViewer,
   ListTile,
   ListTileSkeleton,
+  SeachableDropDown,
+  showDialog,
   showModal,
   StyledPageLayout,
+  TextInput,
   When,
 } from "@colony/core-components";
 import { Box, useTheme } from "@colony/core-theme";
 import { Link } from "expo-router";
 import React, { useCallback } from "react";
 import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
-import { useListings } from "../hooks";
+import { useListingApi, useListings } from "../hooks";
 import { RoutePaths } from "../utils";
 import { getHiveFileUrl } from "@colony/core-api";
 import { ListingForm } from "../forms";
@@ -22,14 +26,39 @@ import { Property } from "../types";
 
 const OrganizationListings = () => {
   const listingsAsync = useListings();
+  const { searchProperty } = useListingApi();
   const theme = useTheme();
-
+  const handleAddListing = useCallback(() => {
+    const dispose = showDialog(
+      <AlertDialog
+        title="Search property to list"
+        message={() => (
+          <TextInput
+            prefixIcon={<ExpoIconComponent family="Feather" name="search" />}
+            placeholder="Search property ..."
+          />
+        )}
+        // actions={[
+        //   {
+        //     title: "Cancel",
+        //     onPress: () => dispose(),
+        //     color: theme.colors.error,
+        //   },
+        //   {
+        //     title: "Continue",
+        //     onPress: () => dispose(),
+        //     color: theme.colors.primary,
+        //   },
+        // ]}
+      />
+    );
+  }, []);
   return (
     <StyledPageLayout>
       <AppBar
         title="Listings"
         actions={
-          <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+          <TouchableOpacity activeOpacity={0.5} onPress={handleAddListing}>
             <ExpoIconComponent family="Entypo" name="add-to-list" />
           </TouchableOpacity>
         }
@@ -100,6 +129,10 @@ const styles = StyleSheet.create({
   },
   img: {
     height: 50,
+    aspectRatio: 1,
+  },
+  propertythumbnail: {
+    width: 50,
     aspectRatio: 1,
   },
 });
