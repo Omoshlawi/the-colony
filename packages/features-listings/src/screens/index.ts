@@ -1,2 +1,2 @@
-export { default as OrganizationListingsScreen } from "./OrganizationListingsScreen";
+export { default as OrganizationListingsScreen } from "../widgets/OrganizationListings";
 export { default as ListingsScreen } from "./ListingsScreen";

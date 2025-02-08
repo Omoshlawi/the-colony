@@ -9,8 +9,8 @@ const useListings = () => {
   return {
     listings: data?.data?.results ?? [],
     isLoading,
-    data,
     error,
+    mutate
   };
 };
 

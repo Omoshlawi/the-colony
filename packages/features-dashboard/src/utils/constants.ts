@@ -97,7 +97,7 @@ export const dashboardMenuitems: MenuItem[] = [
   {
     name: "Listings",
     icon: { family: "FontAwesome6", name: "building-circle-check" },
-    route: "", // RoutePaths.AMENITIES_LISTING_SCREEN,
+    route: "(listings)/listings", // RoutePaths.AMENITIES_LISTING_SCREEN,
     color: "aqua",
   },
   {

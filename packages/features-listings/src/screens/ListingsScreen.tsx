@@ -1,14 +1,15 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import { AppBar, StyledPageLayout } from "@colony/core-components";
+import React from "react";
+import { StyleSheet } from "react-native";
+import { Listings, OrganizationListings } from "../widgets";
+import { useSession } from "@colony/core-global";
 
 const ListingsScreen = () => {
-  return (
-    <View>
-      <Text>ListingsScreen</Text>
-    </View>
-  )
-}
+  const { currentOrganization } = useSession();
+  if (currentOrganization) return <OrganizationListings />;
+  return <Listings />;
+};
 
-export default ListingsScreen
+export default ListingsScreen;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});

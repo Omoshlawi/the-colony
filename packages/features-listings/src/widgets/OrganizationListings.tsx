@@ -6,6 +6,7 @@ import {
   ImageViewer,
   ListTile,
   ListTileSkeleton,
+  StyledPageLayout,
   When,
 } from "@colony/core-components";
 import { Box, useTheme } from "@colony/core-theme";
@@ -16,11 +17,11 @@ import { useListings } from "../hooks";
 import { RoutePaths } from "../utils";
 import { getHiveFileUrl } from "@colony/core-api";
 
-const OrganizationListingsScreen = () => {
+const OrganizationListings = () => {
   const listingsAsync = useListings();
   const theme = useTheme();
   return (
-    <Box flex={1}>
+    <StyledPageLayout>
       <AppBar
         title="Listings"
         actions={
@@ -83,11 +84,11 @@ const OrganizationListingsScreen = () => {
           }}
         />
       </Box>
-    </Box>
+    </StyledPageLayout>
   );
 };
 
-export default OrganizationListingsScreen;
+export default OrganizationListings;
 
 const styles = StyleSheet.create({
   scrollable: {

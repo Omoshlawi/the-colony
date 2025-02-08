@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-const ListingsScreen = () => {
+const Screen = () => {
   return (
     <View>
-      <Text>ListingsScreen</Text>
+      <Text>Screen</Text>
     </View>
   )
 }
 
-export default ListingsScreen
+export default Screen
 
 const styles = StyleSheet.create({})

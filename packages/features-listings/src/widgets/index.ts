@@ -1,3 +1,2 @@
-export { ThemeTogglerSection } from "./ThemeToglerSection";
-export * from "./MyOrganizations";
-export { default as OrganizationContextTile } from "./OrganizationContextTile";
+export { default as OrganizationListings } from "./OrganizationListings";
+export { default as Listings } from "./Listings";
