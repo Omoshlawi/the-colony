@@ -1576,6 +1576,7 @@ __metadata:
   resolution: "@colony/core-api@workspace:packages/core-api"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@colony/core-global": "workspace:*"
     "@types/jest": "npm:^29.5.12"
     "@types/react": "npm:~18.3.12"
     "@types/react-test-renderer": "npm:^18.3.0"
@@ -1589,7 +1590,6 @@ __metadata:
     swr: "npm:^2.2.5"
     typescript: "npm:^5.3.3"
   peerDependencies:
-    "@colony/core-global": "workspace:*"
     react-dom: 18.3.1
   languageName: unknown
   linkType: soft
@@ -1599,6 +1599,9 @@ __metadata:
   resolution: "@colony/core-components@workspace:packages/core-components"
   dependencies:
     "@babel/core": "npm:^7.25.2"
+    "@colony/core-api": "workspace:*"
+    "@colony/core-global": "workspace:*"
+    "@colony/core-theme": "workspace:*"
     "@expo/vector-icons": "npm:^14.0.2"
     "@react-native-community/datetimepicker": "npm:8.2.0"
     "@react-navigation/native": "npm:^7.0.0"
@@ -1629,9 +1632,6 @@ __metadata:
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
   peerDependencies:
-    "@colony/core-api": "workspace:*"
-    "@colony/core-global": "workspace:*"
-    "@colony/core-theme": "workspace:*"
     expo: ~52.0.28
     expo-router: ~4.0.17
     lodash: ^4.17.21
@@ -1763,7 +1763,6 @@ __metadata:
     react-test-renderer: "npm:18.3.1"
     typescript: "npm:^5.3.3"
   peerDependencies:
-    "@colony/core-global": "workspace:*"
     expo: ~52.0.28
     react: 18.3.1
     react-dom: 18.3.1
