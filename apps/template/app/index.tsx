@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 
 export default function Index() {
   return (
-    <View>
+    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Temlate app</Text>
     </View>
   );
