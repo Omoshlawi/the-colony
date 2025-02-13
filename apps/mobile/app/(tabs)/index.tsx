@@ -5,6 +5,7 @@ import {
   IconButton,
   InputSkeleton,
   ListTileSkeleton,
+  SelectionInput,
   showDialog,
   showModal,
   showModalBottomSheet,
@@ -14,14 +15,15 @@ import {
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
-import React from "react";
+import React, { useState } from "react";
 import { LogBox, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 
 LogBox.ignoreAllLogs();
 
 export default function HomeScreen() {
   const { currentOrganization } = useSession();
-
+  const [search, setSearch] = useState("");
+  const [item, setItem] = useState<string>();
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
   const handleShowBottomsheet = (number: number) => {
@@ -42,6 +44,14 @@ export default function HomeScreen() {
     <StyledPageLayout>
       <ScrollView>
         <Box gap={"m"} p={"m"}>
+          <SelectionInput
+            data={Array.from({ length: 20 }).map((_, index) => `${index}`)}
+            searchText={search}
+            onSearchTextChange={setSearch}
+            initialValue={item}
+            onItemSelected={setItem}
+            mode="dropdown"
+          />
           <Button
             title="primary"
             variant="primary"
