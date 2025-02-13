@@ -16,7 +16,7 @@ import {
   PropertyRelationshipsForm,
 } from "../forms";
 import { Property } from "../types";
-
+import { ListingForm } from "@colony/features-listings";
 type PropertyActionsProps = {
   onAction?: () => void;
   property: Property;
@@ -73,6 +73,14 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
       />,
       {
         title: "add Relationship",
+      }
+    );
+  };
+  const handleListProperty = () => {
+    const dispose = showModal(
+      <ListingForm property={property} onSuccess={() => dispose()} />,
+      {
+        title: "List property",
       }
     );
   };
@@ -155,6 +163,23 @@ const PropertyActions: FC<PropertyActionsProps> = ({ onAction, property }) => {
         onPress={() => {
           onAction?.();
           handleaddRelationships();
+        }}
+      />
+      <Button
+        borderRadius="medium"
+        variant="tertiary"
+        title="List Property"
+        renderIcon={({ size, color }) => (
+          <ExpoIconComponent
+            size={size}
+            family="MaterialCommunityIcons"
+            name="publish"
+            color={color}
+          />
+        )}
+        onPress={() => {
+          onAction?.();
+          handleListProperty();
         }}
       />
     </Box>

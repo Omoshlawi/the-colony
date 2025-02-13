@@ -14,6 +14,7 @@
     "@colony/core-navigation": "workspace:*",
     "@colony/core-storage": "workspace:*",
     "@colony/core-theme": "workspace:*",
+    "@colony/features-listings": "workspace:*",
     "@hookform/resolvers": "^3.9.1",
     "expo": "~52.0.28",
     "expo-router": "~4.0.17",

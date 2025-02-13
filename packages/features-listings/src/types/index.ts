@@ -43,7 +43,7 @@ export interface Address {
   village?: string;
   landmark: string;
   latitude?: string;
-  metadata?: string;
+  metadata?: Record<string, any>;
   longitude?: string;
   subCounty: string;
   postalCode: string;

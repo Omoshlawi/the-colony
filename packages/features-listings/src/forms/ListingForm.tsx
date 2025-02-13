@@ -4,17 +4,27 @@ import {
   DateTimePickerInput,
   ImageViewer,
   ListTile,
+  SeachableDropDown,
   showSnackbar,
-  TextInput
+  TextInput,
 } from "@colony/core-components";
 import { Box, Color, Text, useTheme } from "@colony/core-theme";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { FC } from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { StyleSheet } from "react-native";
+import React, { FC, useMemo } from "react";
+import {
+  Controller,
+  FormProvider,
+  SubmitHandler,
+  useForm,
+} from "react-hook-form";
+import { ScrollView, StyleSheet } from "react-native";
 import { useListingApi } from "../hooks";
 import { Listing, ListingFormData, Property } from "../types";
 import { ListingSchema } from "../utils";
+import RentalListingFormSection from "./RentalListingFormSection";
+import SaleslistingFormSection from "./SaleslistingFormSection";
+import LeaseListingFormSection from "./LeaseListingFormSection";
+import AuctionlistingFormSection from "./AuctionlistingFormSection";
 
 type Props = {
   listing?: Listing;
@@ -33,9 +43,20 @@ const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
       tags: listing?.tags ?? [],
       price: listing?.price ? Number(listing.price) : undefined,
       propertyId: property.id,
+      types: [],
     },
     resolver: zodResolver(ListingSchema),
   });
+  const ltypesObservable = form.watch("types");
+  const listingType = useMemo(
+    () => [
+      { value: "rent", label: "Rental" },
+      { value: "sale", label: "Sales" },
+      { value: "lease", label: "Lease" },
+      { value: "auction", label: "Auction" },
+    ],
+    []
+  );
 
   const onSubmit: SubmitHandler<ListingFormData> = async (data) => {
     try {
@@ -60,106 +81,149 @@ const ListingForm: FC<Props> = ({ listing, onSuccess, property }) => {
     }
   };
   return (
-    <Box width={"100%"} gap={"l"} p={"m"}>
-      <Controller
-        control={form.control}
-        name="propertyId"
-        render={({ fieldState: { error } }) => (
-          <Box
-            style={{
-              backgroundColor: Color(theme.colors.hintColor)
-                .alpha(0.2)
-                .toString(),
-            }}
-          >
-            <ListTile
-              title={property.name}
-              subtitle={property.address?.landmark}
-              leading={
-                <ImageViewer
-                  source={getHiveFileUrl(property.thumbnail)}
-                  style={styles.propertythumbnail}
-                />
-              }
+    <Box width={"100%"}>
+      <ScrollView>
+        <FormProvider {...form}>
+          <Box gap={"l"} p={"m"}>
+            <Controller
+              control={form.control}
+              name="propertyId"
+              render={({ fieldState: { error } }) => (
+                <Box
+                  style={{
+                    backgroundColor: Color(theme.colors.hintColor)
+                      .alpha(0.2)
+                      .toString(),
+                  }}
+                >
+                  <ListTile
+                    title={property.name}
+                    subtitle={property.address?.landmark}
+                    leading={
+                      <ImageViewer
+                        source={getHiveFileUrl(property.thumbnail)}
+                        style={styles.propertythumbnail}
+                      />
+                    }
+                  />
+                  {error?.message && (
+                    <Text color={"error"} p={"m"}>
+                      {error?.message}
+                    </Text>
+                  )}
+                </Box>
+              )}
             />
-            {error?.message && (
-              <Text color={"error"} p={"m"}>
-                {error?.message}
-              </Text>
-            )}
-          </Box>
-        )}
-      />
-      <Controller
-        control={form.control}
-        name="title"
-        render={({
-          field: { onChange, value, disabled },
-          fieldState: { error },
-        }) => (
-          <TextInput
-            value={value}
-            label="Listing title"
-            readOnly={disabled}
-            onChangeText={onChange}
-            placeholder="Enter amenity name"
-            error={error?.message}
-          />
-        )}
-      />
-      <Controller
-        control={form.control}
-        name="description"
-        render={({
-          field: { onChange, value, disabled },
-          fieldState: { error },
-        }) => (
-          <TextInput
-            multiline
-            numberOfLines={2}
-            value={value}
-            label="Description"
-            readOnly={disabled}
-            onChangeText={onChange}
-            placeholder="Enter property description"
-            error={error?.message}
-          />
-        )}
-      />
-      <Controller
-        control={form.control}
-        name="price"
-        render={({
-          field: { onChange, value, disabled },
-          fieldState: { error },
-        }) => (
-          <TextInput
-            value={`${value ?? 0}`}
-            label="Price"
-            readOnly={disabled}
-            onChangeText={onChange}
-            placeholder="Enter amenity name"
-            error={error?.message}
-            helperText={`Price in Ksh`}
-          />
-        )}
-      />
+            <Controller
+              control={form.control}
+              name="types"
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <SeachableDropDown
+                  inputProps={{
+                    label: "Listing types",
+                    placeholder: "Select listing type",
+                    error: error?.message,
+                  }}
+                  data={listingType}
+                  multiple
+                  keyExtractor={(lType) => lType.value}
+                  labelExtractor={(lType) => lType.label}
+                  valueExtractor={(lType) => lType.value}
+                  onValueChange={onChange}
+                  title="Listing types"
+                  initialValue={listingType.filter((lType) =>
+                    value.includes(lType.value as any)
+                  )}
+                />
+              )}
+            />
+            <Controller
+              control={form.control}
+              name="title"
+              render={({
+                field: { onChange, value, disabled },
+                fieldState: { error },
+              }) => (
+                <TextInput
+                  value={value}
+                  label="Listing title"
+                  readOnly={disabled}
+                  onChangeText={onChange}
+                  placeholder="Enter amenity name"
+                  error={error?.message}
+                />
+              )}
+            />
+            <Controller
+              control={form.control}
+              name="description"
+              render={({
+                field: { onChange, value, disabled },
+                fieldState: { error },
+              }) => (
+                <TextInput
+                  multiline
+                  numberOfLines={2}
+                  value={value}
+                  label="Description"
+                  readOnly={disabled}
+                  onChangeText={onChange}
+                  placeholder="Enter property description"
+                  error={error?.message}
+                />
+              )}
+            />
+            <Controller
+              control={form.control}
+              name="price"
+              render={({
+                field: { onChange, value, disabled },
+                fieldState: { error },
+              }) => (
+                <TextInput
+                  value={`${value ?? 0}`}
+                  label="Price"
+                  readOnly={disabled}
+                  onChangeText={onChange}
+                  placeholder="Enter amenity name"
+                  error={error?.message}
+                  helperText={`Price in Ksh`}
+                />
+              )}
+            />
 
-      <Controller
-        control={form.control}
-        name="expiryDate"
-        render={({ field: { value, onChange }, fieldState: { error } }) => (
-          <DateTimePickerInput
-            date={value}
-            onDateChanged={onChange}
-            label="Expiry Date"
-            placeholder={"dd/mm/yyyy"}
-            mode="datetime"
-            error={error?.message}
-          />
-        )}
-      />
-      <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
+            <Controller
+              control={form.control}
+              name="expiryDate"
+              render={({
+                field: { value, onChange },
+                fieldState: { error },
+              }) => (
+                <DateTimePickerInput
+                  date={value}
+                  onDateChanged={onChange}
+                  label="Expiry Date"
+                  placeholder={"dd/mm/yyyy"}
+                  mode="datetime"
+                  error={error?.message}
+                />
+              )}
+            />
+
+            {ltypesObservable.includes("rent") && <RentalListingFormSection />}
+            {ltypesObservable.includes("sale") && <SaleslistingFormSection />}
+            {ltypesObservable.includes("lease") && <LeaseListingFormSection />}
+            {ltypesObservable.includes("auction") && (
+              <AuctionlistingFormSection />
+            )}
+
+            <Button title="Submit" onPress={form.handleSubmit(onSubmit)} />
+          </Box>
+        </FormProvider>
+      </ScrollView>
     </Box>
   );
 };

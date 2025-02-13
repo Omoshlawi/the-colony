@@ -79,6 +79,10 @@ export const ListingSchema = z.object({
       "EXPIRED",
     ])
     .optional(),
+  types: z
+    .enum(["rent", "sale", "lease", "auction"])
+    .array()
+    .nonempty("you must select atleast one option"),
   title: z.string().min(4),
   description: z.string().optional(),
   price: z.number({ coerce: true }).nonnegative(),
