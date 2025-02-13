@@ -17,13 +17,17 @@ import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
 import React, { useState } from "react";
 import { LogBox, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
+/*
 
+
+  
+  */
 LogBox.ignoreAllLogs();
 
 export default function HomeScreen() {
   const { currentOrganization } = useSession();
   const [search, setSearch] = useState("");
-  const [item, setItem] = useState<string>();
+  const [item, setItem] = useState<string[]>([]);
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
   const handleShowBottomsheet = (number: number) => {
@@ -49,8 +53,9 @@ export default function HomeScreen() {
             searchText={search}
             onSearchTextChange={setSearch}
             initialValue={item}
-            onItemSelected={setItem}
-            mode="search"
+            onItemSelected={(items) => setItem(Array.from(items))}
+            mode="dropdown"
+            valueExtractor={(v) => v}
           />
           <Button
             title="primary"
