@@ -81,6 +81,11 @@ yarn create expo apps/newoapp
   - `"expo-router": "~4.0.17"` Required by components and feature packages
 - Themed status bar
   - `"expo-status-bar": "~2.0.1"`
+- Required by expo-router
+  - `"react-native-safe-area-context": "4.12.0"`
+  - `"react-native-screens": "~4.4.0"`
+  - `"expo-constants": "~17.0.5"`
+  - `"expo-linking": "~7.0.5"`
 
 ## Code snippets
 
