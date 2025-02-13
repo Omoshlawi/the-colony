@@ -1,36 +1,57 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import React from "react";
-import { useTheme, Text } from "@colony/core-theme";
+import { useTheme, Text, Box } from "@colony/core-theme";
 
 type Props = {
   label?: string;
   value?: boolean;
   onValueChange?: (changed: boolean) => void;
+  error?: string;
+  helperText?: string;
 };
 
-const Checkbox: React.FC<Props> = ({ label, onValueChange, value }) => {
+const Checkbox: React.FC<Props> = ({
+  label,
+  onValueChange,
+  value,
+  error,
+  helperText,
+}) => {
   const theme = useTheme();
   return (
-    <View style={[styles.container]}>
-      <View
-        style={[
-          styles.checkboxOuter,
-          value && { borderColor: theme.colors.outline },
-        ]}
+    <Box gap={"s"}>
+      <TouchableOpacity
+        style={[styles.container]}
+        activeOpacity={0.5}
+        onPress={() => onValueChange?.(!value)}
       >
-        {value && (
-          <View
-            style={[
-              styles.checkboxInner,
-              { backgroundColor: theme.colors.primary },
-            ]}
-          />
+        <View
+          style={[
+            styles.checkboxOuter,
+            value && { borderColor: theme.colors.outline },
+          ]}
+        >
+          {value && (
+            <View
+              style={[
+                styles.checkboxInner,
+                { backgroundColor: theme.colors.primary },
+              ]}
+            />
+          )}
+        </View>
+        {label && (
+          <Text color={"text"} style={[styles.itemText]}>
+            {label}
+          </Text>
         )}
-      </View>
-      <Text color={"outline"} style={[styles.itemText]}>
-        {label}
-      </Text>
-    </View>
+      </TouchableOpacity>
+      {(error || helperText) && (
+        <Text variant={"bodySmall"} color={error ? "error" : "hintColor"}>
+          {error || helperText}
+        </Text>
+      )}
+    </Box>
   );
 };
 
