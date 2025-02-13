@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { TextInput } from "@colony/core-components";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
+import { StyleSheet } from "react-native";
 import { ListingFormData } from "../types";
-import { TextInput } from "@colony/core-components";
 
 const RentalListingFormSection = () => {
   const form = useFormContext<Pick<ListingFormData, "rentalDetails">>();

@@ -19,3 +19,4 @@ export * from "./Tabs";
 export * from "./ExpoConstants";
 export * from "./DatePicker";
 export * from "./ContentSwitcher";
+export * from "./Checkbox";
