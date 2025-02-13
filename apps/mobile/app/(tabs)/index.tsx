@@ -50,7 +50,7 @@ export default function HomeScreen() {
             onSearchTextChange={setSearch}
             initialValue={item}
             onItemSelected={setItem}
-            mode="dropdown"
+            mode="search"
           />
           <Button
             title="primary"
