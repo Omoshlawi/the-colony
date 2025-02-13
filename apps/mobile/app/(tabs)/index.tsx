@@ -52,9 +52,11 @@ export default function HomeScreen() {
             data={Array.from({ length: 20 }).map((_, index) => `${index}`)}
             searchText={search}
             onSearchTextChange={setSearch}
-            initialValue={item}
-            onItemSelected={(items) => setItem(Array.from(items))}
-            mode="dropdown"
+            multiple
+            item={item}
+            onItemChange={(items) => setItem(Array.from(items))}
+            // onValueChange={setItem}
+            mode="search"
             valueExtractor={(v) => v}
           />
           <Button

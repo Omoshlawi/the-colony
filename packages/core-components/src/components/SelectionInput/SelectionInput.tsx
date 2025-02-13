@@ -1,19 +1,27 @@
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { Box, Text, useTheme } from "@colony/core-theme";
-import React, { FC, useCallback, useEffect, useMemo, useState } from "react";
-import { TextInput } from "../Input";
-import { DimensionValue, FlatList, TouchableOpacity } from "react-native";
-import { ExpoIconComponent } from "../ExpoIcons";
+import { TextInput, ExpoIconComponent } from "@colony/core-components";
+import {
+  DimensionValue,
+  FlatList,
+  TouchableOpacity,
+  ListRenderItem,
+  StyleSheet,
+  Platform,
+} from "react-native";
 
+// Improved type definitions
 export interface SelectionInputProps<TData, TValue> {
   data?: TData[];
-  initialValue?: TData | TData[];
+  item?: TData | TData[];
+  onItemChange?: (item: TData | TData[]) => void;
   keyExtractor?: (item: TData, index: number) => string;
   labelExtractor?: (item: TData) => string;
   valueExtractor: (item: TData) => TValue;
   renderItem?: (props: {
     item: TData;
-    itemClicked: () => void;
-    selected: boolean;
+    onSelect: () => void;
+    isSelected: boolean;
   }) => React.ReactNode;
   height?: DimensionValue;
   maxHeight?: DimensionValue;
@@ -21,173 +29,209 @@ export interface SelectionInputProps<TData, TValue> {
   searchText?: string;
   onSearchTextChange?: (value: string) => void;
   onValueChange?: (value: TValue | TValue[]) => void;
-  searchTextThreshold?: number;
-  onItemSelected?: (item: TData | TData[]) => void;
+  searchThreshold?: number;
+  multiple?: boolean;
   mode?: "dropdown" | "search";
   placeholder?: string;
+  disabled?: boolean;
 }
-// TODO Implement to allow accept form input externally as in Image pickers that trigers the dialog
+
 const SelectionInput = <TData, TValue>({
   data = [],
-  keyExtractor = (item, ind) => `${ind}`,
-  renderItem,
+  item,
+  keyExtractor = (_, index) => index.toString(),
   labelExtractor = (item) => JSON.stringify(item),
+  valueExtractor,
+  renderItem,
   height = "auto",
   maxHeight = 300,
   minHeight,
   searchText = "",
   onSearchTextChange,
-  searchTextThreshold = 3,
-  initialValue,
-  onItemSelected,
-  mode = "search",
-  placeholder = "PLACEHOLDER TEXT HERE ...",
-  valueExtractor,
+  searchThreshold = 3,
   onValueChange,
+  multiple = false,
+  mode = "search",
+  placeholder = "Select an option...",
+  disabled = false,
+  onItemChange,
 }: SelectionInputProps<TData, TValue>) => {
   const theme = useTheme();
+  const [isExpanded, setIsExpanded] = useState(false);
   const placeHolderValue = useMemo(() => {
-    if (Array.isArray(initialValue) || !initialValue) {
+    if (multiple || !item) {
       return placeholder;
     }
-    return labelExtractor(initialValue);
-  }, [initialValue, labelExtractor, placeholder]);
-  const [dropDownExpanded, setDropDownExpanded] = useState(false);
-  const value = useMemo(() => {
-    if (!initialValue || mode === "search") {
+    return labelExtractor(item as TData);
+  }, [item, labelExtractor, placeholder]);
+  // Memoized computations
+
+  const displayValue = useMemo(() => {
+    if (!item || mode === "search") {
       return searchText;
     }
-    if (Array.isArray(initialValue)) {
-      return initialValue?.map(labelExtractor).join(", ");
+    if (multiple) {
+      return (item as TData[])?.map(labelExtractor).join(", ");
     }
-    return labelExtractor(initialValue);
+    return labelExtractor(item as TData);
   }, [searchText, labelExtractor]);
+  const showOptions = useMemo(() => {
+    if (disabled) return false;
+    if (mode === "search") {
+      return searchText.length >= searchThreshold;
+    }
+    return isExpanded;
+  }, [searchText, mode, isExpanded, disabled, searchThreshold]);
 
-  const showoptions = useMemo(() => {
-    if (
-      mode === "search" &&
-      searchText?.length &&
-      searchText.length >= searchTextThreshold
-    ) {
-      return true;
-    }
-    if (mode === "dropdown" && dropDownExpanded) {
-      return true;
-    }
-    return false;
-  }, [searchText, mode, dropDownExpanded]);
-  const handleItemClicked = useCallback(
-    (item: TData, selected: boolean) => {
-      if (Array.isArray(initialValue)) {
-        let curr = [...initialValue];
-        if (!selected) curr.push(item);
-        else
-          curr = curr.filter((c) => valueExtractor(c) !== valueExtractor(item));
-        onItemSelected?.(curr);
-        onValueChange?.(curr.map(valueExtractor));
+  // Handlers
+  const handleSelect = useCallback(
+    (_item: TData) => {
+      if (multiple) {
+        const currentValue = (item as TData[]) || [];
+        const isSelected = currentValue.some(
+          (v) => valueExtractor(v) === valueExtractor(_item)
+        );
+
+        const newValue = isSelected
+          ? currentValue.filter(
+              (v) => valueExtractor(v) !== valueExtractor(_item)
+            )
+          : [...currentValue, _item];
+        onItemChange?.(newValue);
+        onValueChange?.(newValue.map(valueExtractor));
       } else {
-        onItemSelected?.(item);
-        onValueChange?.(valueExtractor(item));
+        onItemChange?.(_item);
+        onValueChange?.(valueExtractor(_item));
+        setIsExpanded(false);
+        if (onSearchTextChange) onSearchTextChange("");
       }
-      onSearchTextChange?.("");
-      setDropDownExpanded(false);
     },
-    [
-      initialValue,
-      valueExtractor,
-      onValueChange,
-      onItemSelected,
-      onSearchTextChange,
-      setDropDownExpanded,
-    ]
+    [item, multiple, valueExtractor, onValueChange, onSearchTextChange]
   );
-  const defaultRenderItem = useCallback(
-    (item: TData, selected: boolean) => (
-      <TouchableOpacity
-        activeOpacity={0.4}
-        onPress={() => handleItemClicked(item, selected)}
-        style={{
-          padding: theme.spacing.s,
-          borderBottomWidth: 1,
-          borderBottomColor: theme.colors.outline,
-        }}
-      >
-        <Text color={"outline"} style={[selected && { fontWeight: "bold" }]}>
-          {labelExtractor(item)}
-        </Text>
-      </TouchableOpacity>
-    ),
-    [handleItemClicked, labelExtractor, theme]
+
+  const renderOptionItem: ListRenderItem<TData> = useCallback(
+    ({ item: _item }) => {
+      const isSelected = multiple
+        ? ((item as TData[]) || []).some(
+            (v) => valueExtractor(v) === valueExtractor(_item)
+          )
+        : item
+        ? valueExtractor(item as TData) === valueExtractor(_item)
+        : false;
+
+      if (renderItem) {
+        return (
+          <>
+            {renderItem({
+              item: _item,
+              onSelect: () => handleSelect(_item),
+              isSelected,
+            })}
+          </>
+        );
+      }
+
+      return (
+        <TouchableOpacity
+          style={styles.option}
+          activeOpacity={0.7}
+          onPress={() => handleSelect(_item)}
+        >
+          <Text
+            style={[styles.optionText, isSelected && styles.selectedOptionText]}
+          >
+            {labelExtractor(_item)}
+          </Text>
+        </TouchableOpacity>
+      );
+    },
+    [item, multiple, valueExtractor, labelExtractor, handleSelect, renderItem]
   );
+
   return (
     <Box>
       <TextInput
-        label="Dropdown"
-        value={value}
+        value={mode === "search" ? searchText : displayValue}
         onChangeText={onSearchTextChange}
         placeholder={placeHolderValue}
         autoCapitalize="none"
         autoCorrect={false}
-        readOnly={mode === "dropdown"}
-        helperText={`${showoptions}-${dropDownExpanded}`}
+        editable={!disabled && mode === "search"}
         suffixIcon={
           mode === "dropdown" && (
-            <ExpoIconComponent
-              family="MaterialCommunityIcons"
-              name="chevron-down"
-            />
+            <TouchableOpacity
+              onPress={() => setIsExpanded(!isExpanded)}
+              disabled={disabled}
+            >
+              <ExpoIconComponent
+                family="MaterialCommunityIcons"
+                name={isExpanded ? "chevron-up" : "chevron-down"}
+              />
+            </TouchableOpacity>
           )
         }
-        onSuffixIconPressed={() => setDropDownExpanded((exp) => !exp)}
       />
-      {showoptions && (
-        <Box width={"100%"}>
-          <Box
-            height={height}
-            minHeight={minHeight}
-            maxHeight={maxHeight}
-            position={"absolute"}
-            zIndex={"low"}
-            width={"100%"}
-            backgroundColor={"background"}
-            p={"s"}
-            // borderWidth={1}
-            // borderColor={"outline"}
-            shadowColor={"outline"}
-            shadowOffset={{ width: 0, height: 2 }}
-            shadowOpacity={0.25}
-            shadowRadius={3.84}
-            elevation={5}
-          >
-            <FlatList
-              data={data}
-              keyExtractor={keyExtractor}
-              renderItem={({ item }) => {
-                const isSelected = Array.isArray(initialValue)
-                  ? initialValue.findIndex(
-                      (v) => valueExtractor(v) === valueExtractor(item)
-                    ) !== -1
-                  : initialValue
-                  ? valueExtractor(initialValue) === valueExtractor(item)
-                  : false;
-                if (typeof renderItem === "function")
-                  return (
-                    <>
-                      {renderItem({
-                        item,
-                        itemClicked: () => handleItemClicked(item, isSelected),
-                        selected: isSelected,
-                      })}
-                    </>
-                  );
-                return <>{defaultRenderItem(item, isSelected)}</>;
-              }}
-            />
-          </Box>
+      {showOptions && (
+        <Box style={styles.dropdownContainer}>
+          <FlatList
+            data={data}
+            keyExtractor={keyExtractor}
+            renderItem={renderOptionItem}
+            style={[
+              styles.list,
+              {
+                height,
+                maxHeight,
+                minHeight,
+              },
+            ]}
+            keyboardShouldPersistTaps="handled"
+            initialNumToRender={10}
+            maxToRenderPerBatch={10}
+            windowSize={5}
+          />
         </Box>
       )}
     </Box>
   );
 };
+
+const styles = StyleSheet.create({
+  dropdownContainer: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    zIndex: 1000,
+    backgroundColor: "white",
+    ...Platform.select({
+      ios: {
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+      },
+      android: {
+        elevation: 5,
+      },
+    }),
+  },
+  list: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 4,
+  },
+  option: {
+    padding: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: "#ccc",
+  },
+  optionText: {
+    fontSize: 16,
+  },
+  selectedOptionText: {
+    fontWeight: "bold",
+  },
+});
 
 export default SelectionInput;
