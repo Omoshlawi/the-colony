@@ -6,12 +6,10 @@ import {
   IconButton,
   InputSkeleton,
   ListTileSkeleton,
-  SelectionInput,
   showDialog,
   showModal,
   showModalBottomSheet,
   StyledPageLayout,
-  TextInput,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
@@ -81,6 +79,9 @@ export default function HomeScreen() {
             valueAccessorKey={"id"}
             labelAccessorKey="name"
             searchable
+            onAsyncSearch={async (txt) => {
+              console.log(txt);
+            }}
             // label="Label"
             // helperText="Hello their"
             // onSelectedItemChange={({}) => {}}

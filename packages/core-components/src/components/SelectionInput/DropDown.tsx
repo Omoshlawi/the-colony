@@ -1,9 +1,10 @@
 import { type Path } from "@/src/utils";
 import { Box, Color, Text, useTheme } from "@colony/core-theme";
-import React from "react";
+import React, { useState } from "react";
 import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { TextInputProps } from "../Input";
+import { debounce } from "lodash";
 
 type Props<TData extends Record<string, any>> = Pick<
   TextInputProps,
@@ -25,12 +26,7 @@ type Props<TData extends Record<string, any>> = Pick<
   searchAccessorKey?: Path<TData>;
   onSelectedItemChange?: (item: TData & { _index: number }) => void | undefined;
   selectedItem?: TData;
-  testPath?: Path<{
-    test1: 1;
-    test2: 2;
-    test3: 3;
-    test4: Array<{ nana: 21; mama: "87" }>;
-  }>;
+  onAsyncSearch?: (search: string) => Promise<void>;
 };
 
 const DropDown = <TData extends Record<string, any>>({
@@ -51,9 +47,17 @@ const DropDown = <TData extends Record<string, any>>({
   onSelectedItemChange,
   selectedItem,
   searchAccessorKey,
-  testPath = "test4.0.mama",
+  onAsyncSearch,
 }: Props<TData>) => {
   const theme = useTheme();
+  const [isFocus, setIsFocus] = useState(false);
+
+  const handleSearch = debounce(async (search: string) => {
+    if (typeof onAsyncSearch === "function") {
+      await onAsyncSearch(search);
+    }
+  }, 300); // 300ms delay to reduce unnecessary API calls
+
   return (
     <Box width={"100%"} gap={"s"}>
       {label && (
@@ -80,6 +84,8 @@ const DropDown = <TData extends Record<string, any>>({
             },
           }),
         }}
+        onFocus={() => setIsFocus(true)}
+        onBlur={() => setIsFocus(false)}
         itemTextStyle={{
           ...theme.textVariants.bodyMedium,
           fontWeight: theme.textVariants.bodyMedium.fontWeight as any,
@@ -90,7 +96,7 @@ const DropDown = <TData extends Record<string, any>>({
         style={[
           styles.dropdown,
           {
-            borderColor: theme.colors.outline,
+            borderColor: isFocus ? theme.colors.primary : theme.colors.outline,
             borderRadius: theme.borderRadii.small,
             padding: theme.spacing.s,
             gap: theme.spacing.s,
@@ -125,11 +131,19 @@ const DropDown = <TData extends Record<string, any>>({
         labelField={labelAccessorKey as string | number | symbol}
         valueField={valueAccessorKey as string | number | symbol}
         searchField={searchAccessorKey as string | number | symbol | undefined}
-        placeholder="Select item"
+        placeholder={!isFocus ? "Select item" : "..."}
         searchPlaceholder="Search..."
         value={selectedItem}
         onChange={(item: TData & { _index: number }) => {
           onSelectedItemChange?.(item);
+        }}
+        onChangeText={handleSearch}
+        searchQuery={(keyword, label) => {
+          // Prevent local search when async search is defined
+          if (typeof onAsyncSearch === "function") {
+            return true;
+          }
+          return label.toLowerCase().includes(keyword.toLowerCase());
         }}
         renderLeftIcon={
           prefixIcon
