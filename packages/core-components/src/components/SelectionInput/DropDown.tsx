@@ -1,33 +1,11 @@
-import { Box, Text, useTheme } from "@colony/core-theme";
-import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { type Path } from "@/src/utils";
+import { Box, Color, Text, useTheme } from "@colony/core-theme";
+import React from "react";
+import { Platform, StyleSheet, TouchableOpacity } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import { TextInputProps } from "../Input";
 
-// TODO Move to core utils
-// Type utilities for deep path access
-type PathImpl<T, K extends keyof T> = K extends string
-  ? T[K] extends Record<string, any>
-    ? T[K] extends ArrayLike<any>
-      ? K | `${K}.${PathImpl<T[K], Exclude<keyof T[K], keyof any[]>>}`
-      : K | `${K}.${PathImpl<T[K], keyof T[K]>}`
-    : K
-  : never;
-
-type Path<T> = PathImpl<T, keyof T> | keyof T;
-
-// Get the type of a value at a given path
-type PathValue<T, P extends Path<T>> = P extends `${infer K}.${infer Rest}`
-  ? K extends keyof T
-    ? Rest extends Path<T[K]>
-      ? PathValue<T[K], Rest>
-      : never
-    : never
-  : P extends keyof T
-  ? T[P]
-  : never;
-
-type Props<TData extends Record<string, any>, TValue> = Pick<
+type Props<TData extends Record<string, any>> = Pick<
   TextInputProps,
   | "prefixIcon"
   | "onPrefixIconPressed"
@@ -45,11 +23,17 @@ type Props<TData extends Record<string, any>, TValue> = Pick<
   labelAccessorKey: Path<TData>;
   valueAccessorKey: Path<TData>;
   searchAccessorKey?: Path<TData>;
-  onSelectedItemChange?: (item: TData & { _index: number }) => void;
+  onSelectedItemChange?: (item: TData & { _index: number }) => void | undefined;
   selectedItem?: TData;
+  testPath?: Path<{
+    test1: 1;
+    test2: 2;
+    test3: 3;
+    test4: Array<{ nana: 21; mama: "87" }>;
+  }>;
 };
 
-const DropDown = <TData extends Record<string, any>, TValue>({
+const DropDown = <TData extends Record<string, any>>({
   data = [],
   prefixIcon,
   onPrefixIconPressed,
@@ -64,9 +48,11 @@ const DropDown = <TData extends Record<string, any>, TValue>({
   mode,
   labelAccessorKey,
   valueAccessorKey,
-  onSelectedItemChange = (item) => {},
+  onSelectedItemChange,
   selectedItem,
-}: Props<TData, TValue>) => {
+  searchAccessorKey,
+  testPath = "test4.0.mama",
+}: Props<TData>) => {
   const theme = useTheme();
   return (
     <Box width={"100%"} gap={"s"}>
@@ -76,6 +62,29 @@ const DropDown = <TData extends Record<string, any>, TValue>({
         </Text>
       )}
       <Dropdown
+        containerStyle={{
+          backgroundColor: Color(theme.colors.background)
+            .blacken(0.5)
+            .toString(),
+          borderWidth: 0,
+          shadowColor: theme.colors.outline,
+          borderRadius: theme.borderRadii.small,
+          ...Platform.select({
+            ios: {
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+            },
+            android: {
+              elevation: 5,
+            },
+          }),
+        }}
+        itemTextStyle={{
+          ...theme.textVariants.bodyMedium,
+          fontWeight: theme.textVariants.bodyMedium.fontWeight as any,
+          color: theme.colors.text,
+        }}
         disable={disabled}
         flatListProps={{ style: { backgroundColor: "transparent" } }}
         style={[
@@ -105,6 +114,7 @@ const DropDown = <TData extends Record<string, any>, TValue>({
             fontWeight: theme.textVariants.bodyMedium.fontWeight as any,
           },
         ]}
+        activeColor={Color(theme.colors.primary).alpha(0.2).toString()}
         searchPlaceholderTextColor={theme.colors.hintColor}
         iconStyle={[styles.iconStyle]}
         mode={mode}
@@ -114,6 +124,7 @@ const DropDown = <TData extends Record<string, any>, TValue>({
         maxHeight={300}
         labelField={labelAccessorKey as string | number | symbol}
         valueField={valueAccessorKey as string | number | symbol}
+        searchField={searchAccessorKey as string | number | symbol | undefined}
         placeholder="Select item"
         searchPlaceholder="Search..."
         value={selectedItem}

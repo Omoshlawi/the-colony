@@ -20,6 +20,21 @@ import React, { useState } from "react";
 import { LogBox, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
 LogBox.ignoreAllLogs();
 
+type User = {
+  id: number;
+  name: string;
+  email: string;
+  address: {
+    id: number;
+    chief: {
+      name: {
+        firstname: string;
+        lastname: string;
+      };
+    };
+  };
+};
+
 export default function HomeScreen() {
   const { currentOrganization } = useSession();
   const [search, setSearch] = useState("");
@@ -44,39 +59,33 @@ export default function HomeScreen() {
     <StyledPageLayout>
       <ScrollView>
         <Box gap={"m"} p={"m"}>
-          <SelectionInput
-            data={Array.from({ length: 20 }).map((_, index) => `${index}`)}
-            searchText={search}
-            onSearchTextChange={setSearch}
-            multiple
-            item={item}
-            onItemChange={(items) => setItem(Array.from(items))}
-            // onValueChange={setItem}
-            mode="search"
-            valueExtractor={(v) => v}
-          />
-          <TextInput
-            prefixIcon={<ExpoIconComponent family="AntDesign" name="Safety" />}
-          />
-          <DropDown
+          <DropDown<User>
             data={[
               {
-                label: { l: "Hi" },
-                value: { key: "HI", lol: { "1": { kaka: 12 } } },
-              },
-              {
-                label: { l: "their" },
-                value: { key: "their", lol: { "1": { kaka: 13 } } },
+                id: 1234,
+                name: "omosh lawi",
+                email: "omosh@gmail.com",
+                address: {
+                  id: 321,
+                  chief: {
+                    name: {
+                      firstname: "Laurent",
+                      lastname: "ouma",
+                    },
+                  },
+                },
               },
             ]}
-            labelAccessorKey="label.l"
-            valueAccessorKey="value.lol.1.kaka"
-            searchAccessorKey="label.l"
-            label="Label"
-            helperText="Hello their"
+            // valueAccessorKey="value.lol.1.kaka"
+            searchAccessorKey="name"
+            valueAccessorKey={"id"}
+            labelAccessorKey="name"
             searchable
-            onSelectedItemChange={setItem}
-            selectedItem={item}
+            // label="Label"
+            // helperText="Hello their"
+            // onSelectedItemChange={({}) => {}}
+            // selectedItem={{}}
+            // testPath={""}
           />
           <Button
             title="primary"
