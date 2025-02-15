@@ -1622,7 +1622,7 @@ __metadata:
     react: "npm:18.3.1"
     react-dom: "npm:18.3.1"
     react-native: "npm:0.76.6"
-    react-native-element-dropdown: "npm:^2.12.2"
+    react-native-element-dropdown: "npm:^2.12.4"
     react-native-media-query: "npm:^2.0.1"
     react-native-pager-view: "npm:6.5.1"
     react-native-safe-area-context: "npm:4.12.0"
@@ -9568,7 +9568,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-element-dropdown@npm:^2.12.2":
+"react-native-element-dropdown@npm:^2.12.4":
   version: 2.12.4
   resolution: "react-native-element-dropdown@npm:2.12.4"
   dependencies:

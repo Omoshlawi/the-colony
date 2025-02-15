@@ -1,5 +1,6 @@
 import {
   Button,
+  DropDown,
   ExpoIconComponent,
   FilePicker,
   IconButton,
@@ -17,17 +18,12 @@ import { Box, Text } from "@colony/core-theme";
 import { Redirect } from "expo-router";
 import React, { useState } from "react";
 import { LogBox, ScrollView, StyleSheet, TouchableOpacity } from "react-native";
-/*
-
-
-  
-  */
 LogBox.ignoreAllLogs();
 
 export default function HomeScreen() {
   const { currentOrganization } = useSession();
   const [search, setSearch] = useState("");
-  const [item, setItem] = useState<string[]>([]);
+  const [item, setItem] = useState<any>();
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
   const handleShowBottomsheet = (number: number) => {
@@ -58,6 +54,29 @@ export default function HomeScreen() {
             // onValueChange={setItem}
             mode="search"
             valueExtractor={(v) => v}
+          />
+          <TextInput
+            prefixIcon={<ExpoIconComponent family="AntDesign" name="Safety" />}
+          />
+          <DropDown
+            data={[
+              {
+                label: { l: "Hi" },
+                value: { key: "HI", lol: { "1": { kaka: 12 } } },
+              },
+              {
+                label: { l: "their" },
+                value: { key: "their", lol: { "1": { kaka: 13 } } },
+              },
+            ]}
+            labelAccessorKey="label.l"
+            valueAccessorKey="value.lol.1.kaka"
+            searchAccessorKey="label.l"
+            label="Label"
+            helperText="Hello their"
+            searchable
+            onSelectedItemChange={setItem}
+            selectedItem={item}
           />
           <Button
             title="primary"

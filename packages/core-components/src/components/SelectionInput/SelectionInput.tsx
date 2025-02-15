@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useMemo, useState } from "react";
 import { Box, Text, useTheme } from "@colony/core-theme";
-import { TextInput, ExpoIconComponent } from "@colony/core-components";
 import {
   DimensionValue,
   FlatList,
@@ -9,6 +8,8 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
+import { TextInput } from "../Input";
+import { ExpoIconComponent } from "../ExpoIcons";
 
 // Improved type definitions
 export interface SelectionInputProps<TData, TValue> {
@@ -133,11 +134,12 @@ const SelectionInput = <TData, TValue>({
 
       return (
         <TouchableOpacity
-          style={styles.option}
+          style={[styles.option, { borderBottomColor: theme.colors.outline }]}
           activeOpacity={0.7}
           onPress={() => handleSelect(_item)}
         >
           <Text
+            color={"text"}
             style={[styles.optionText, isSelected && styles.selectedOptionText]}
           >
             {labelExtractor(_item)}
@@ -162,7 +164,7 @@ const SelectionInput = <TData, TValue>({
             <TouchableOpacity
               onPress={() => setIsExpanded(!isExpanded)}
               disabled={disabled}
-            >
+            >w
               <ExpoIconComponent
                 family="MaterialCommunityIcons"
                 name={isExpanded ? "chevron-up" : "chevron-down"}
@@ -172,19 +174,37 @@ const SelectionInput = <TData, TValue>({
         }
       />
       {showOptions && (
-        <Box style={styles.dropdownContainer}>
+        <Box
+          height={height}
+          minHeight={minHeight}
+          maxHeight={maxHeight}
+          position={"absolute"}
+          zIndex={"low"}
+          width={"100%"}
+          top={"100%"}
+          left={0}
+          right={0}
+          backgroundColor={"background"}
+          p={"s"}
+          // borderWidth={1}
+          // borderColor={"outline"}
+          shadowColor={"outline"}
+          shadowOffset={{ width: 0, height: 2 }}
+          shadowOpacity={0.25}
+          shadowRadius={3.84}
+          elevation={5}
+          borderRadius={"small"}
+          style={{ zIndex: 1000 }}
+        >
           <FlatList
             data={data}
             keyExtractor={keyExtractor}
             renderItem={renderOptionItem}
-            style={[
-              styles.list,
-              {
-                height,
-                maxHeight,
-                minHeight,
-              },
-            ]}
+            style={{
+              height,
+              maxHeight,
+              minHeight,
+            }}
             keyboardShouldPersistTaps="handled"
             initialNumToRender={10}
             maxToRenderPerBatch={10}
@@ -216,15 +236,9 @@ const styles = StyleSheet.create({
       },
     }),
   },
-  list: {
-    borderWidth: 1,
-    borderColor: "#ccc",
-    borderRadius: 4,
-  },
   option: {
     padding: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: "#ccc",
   },
   optionText: {
     fontSize: 16,
