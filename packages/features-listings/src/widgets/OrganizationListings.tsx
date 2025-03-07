@@ -10,7 +10,7 @@ import {
   SeachableDropDown,
   showDialog,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
   TextInput,
   When,
 } from "@colony/core-components";
@@ -54,7 +54,7 @@ const OrganizationListings = () => {
     );
   }, []);
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Listings"
         actions={
@@ -117,7 +117,7 @@ const OrganizationListings = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

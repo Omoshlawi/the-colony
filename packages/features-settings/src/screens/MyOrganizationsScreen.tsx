@@ -4,7 +4,7 @@ import {
   AppBar,
   ExpoIconComponent,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
 } from "@colony/core-components";
 import { OrganizationForm } from "../forms";
 import { Box } from "@colony/core-theme";
@@ -20,7 +20,7 @@ export const MyOrganizationsScreen = () => {
     );
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="My Organizations"
         actions={
@@ -32,7 +32,7 @@ export const MyOrganizationsScreen = () => {
       <Box flex={1}>
         <MyOrganizations />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

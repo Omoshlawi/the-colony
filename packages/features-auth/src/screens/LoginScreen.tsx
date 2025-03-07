@@ -1,12 +1,12 @@
 import { ScrollView, StyleSheet } from "react-native";
 
-import { AppBar, Logo, StyledPageLayout } from "@colony/core-components";
+import { AppBar, Logo, ThemedPageLayout } from "@colony/core-components";
 import { Box, Text } from "@colony/core-theme";
 import { LoginForm } from "../forms";
 
 export const LoginScreen = () => {
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar title={"Login"} />
 
       <Box flexDirection={"column"} flex={1} justifyContent={"center"}>
@@ -33,7 +33,7 @@ export const LoginScreen = () => {
           </Box>
         </ScrollView>
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

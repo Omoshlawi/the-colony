@@ -4,7 +4,7 @@ import {
   AppBar,
   ExpoIconComponent,
   TextInput,
-  StyledPageLayout,
+  ThemedPageLayout,
 } from "@colony/core-components";
 import { dashboardMenuitems } from "../utils/constants";
 import { DashboardMenuItem } from "../widgets";
@@ -12,7 +12,7 @@ import { Box } from "@colony/core-theme";
 
 const DashboardsScreen = () => {
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <Box p={"m"} flex={1}>
         <AppBar title="App Menu" leading={false} />
         <Box p={"s"} mb={"m"}>
@@ -32,7 +32,7 @@ const DashboardsScreen = () => {
           renderItem={({ item }) => <DashboardMenuItem item={item} />}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

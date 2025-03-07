@@ -2,7 +2,7 @@ import {
   AppBar,
   ExpoIconComponent,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
@@ -21,7 +21,7 @@ const PropertiesScreen = () => {
     });
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Properties"
         actions={
@@ -41,7 +41,7 @@ const PropertiesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

@@ -1,1 +1,1 @@
-export { StyledPageLayout } from "./StyledPageLayout";
+export { ThemedPageLayout } from "./ThemedPageLayout";

@@ -1,4 +1,4 @@
-import { AppBar, StyledPageLayout } from "@colony/core-components";
+import { AppBar, ThemedPageLayout } from "@colony/core-components";
 import React from "react";
 import { StyleSheet } from "react-native";
 import { Listings, OrganizationListings } from "../widgets";

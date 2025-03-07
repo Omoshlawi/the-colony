@@ -1,13 +1,9 @@
 import Constants from "expo-constants";
 import React, { FC, PropsWithChildren } from "react";
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import AppBar from "../../AppBar";
 import { ExpoIconComponent } from "../../ExpoIcons";
-import { StyledPageLayout } from "../../StyledLayout";
+import { ThemedPageLayout } from "../../StyledLayout";
 type Props = PropsWithChildren<{
   title?: string;
   onClose?: () => void;
@@ -16,7 +12,7 @@ type Props = PropsWithChildren<{
 
 const ModalWrapper: FC<Props> = ({ children, title, onClose, actions }) => {
   return (
-    <StyledPageLayout withSafeArea={false}>
+    <ThemedPageLayout withSafeArea={false}>
       <View style={[styles.safeArea]}>
         <AppBar
           title={title}
@@ -33,7 +29,7 @@ const ModalWrapper: FC<Props> = ({ children, title, onClose, actions }) => {
         />
         <View style={styles.content}>{children}</View>
       </View>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

@@ -8,7 +8,7 @@ import {
   ListTile,
   ListTileSkeleton,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -26,7 +26,7 @@ const AddressBookScreen = () => {
     });
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Address Book"
         actions={
@@ -90,7 +90,7 @@ const AddressBookScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

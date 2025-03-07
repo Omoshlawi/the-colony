@@ -1,7 +1,7 @@
 import { useNavigation } from "expo-router";
 import { StyleSheet } from "react-native";
 
-import { StyledPageLayout } from "@colony/core-components";
+import { ThemedPageLayout } from "@colony/core-components";
 import { useEffect } from "react";
 import { Text } from "@colony/core-theme";
 
@@ -17,9 +17,9 @@ export const ChatWithUsScreen = () => {
   }, [navigation]);
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <Text style={styles.title}>All our agents are busy right now</Text>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

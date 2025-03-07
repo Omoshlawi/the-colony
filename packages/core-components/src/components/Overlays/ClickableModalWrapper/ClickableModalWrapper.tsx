@@ -4,7 +4,7 @@ import { Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import AppBar from "../../AppBar";
 import { ExpoIconComponent } from "../../ExpoIcons";
 import { Box } from "@colony/core-theme";
-import { StyledPageLayout } from "../../StyledLayout";
+import { ThemedPageLayout } from "../../StyledLayout";
 
 interface ClickableModalWrapperProps extends PropsWithChildren {
   renderContent: (dismiss?: () => void) => ReactNode;
@@ -38,7 +38,7 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
         accessibilityLabel="Close modal"
         accessibilityRole="button"
       >
-        <StyledPageLayout withSafeArea={false}>
+        <ThemedPageLayout withSafeArea={false}>
           <View style={[styles.safeArea]}>
             <AppBar
               title={title}
@@ -60,7 +60,7 @@ const ClickableModalWrapper: FC<ClickableModalWrapperProps> = ({
               {renderContent(handleDismiss)}
             </Box>
           </View>
-        </StyledPageLayout>
+        </ThemedPageLayout>
       </Modal>
     </>
   );

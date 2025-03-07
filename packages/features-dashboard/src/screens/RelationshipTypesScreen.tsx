@@ -7,7 +7,7 @@ import {
   showModal,
   showModalBottomSheet,
   Button,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -72,7 +72,7 @@ const RelationshipTypesScreen = () => {
     );
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Relationship types"
         actions={
@@ -132,7 +132,7 @@ const RelationshipTypesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

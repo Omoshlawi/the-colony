@@ -1,4 +1,4 @@
-import { Logo, Button, StyledPageLayout } from "@colony/core-components";
+import { Logo, Button, ThemedPageLayout } from "@colony/core-components";
 import { Box, Text } from "@colony/core-theme";
 import { useRouter } from "expo-router";
 import React from "react";
@@ -9,7 +9,7 @@ const WelcomeScreen = () => {
   const router = useRouter();
 
   return (
-    <StyledPageLayout withSafeArea={true}>
+    <ThemedPageLayout withSafeArea={true}>
       <Box flex={1} flexDirection={"column"} justifyContent={"center"}>
         <ScrollView style={{ flexGrow: 0 }}>
           <Box
@@ -43,7 +43,7 @@ const WelcomeScreen = () => {
           </Box>
         </ScrollView>
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

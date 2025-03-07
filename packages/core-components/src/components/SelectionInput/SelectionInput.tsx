@@ -153,6 +153,7 @@ const SelectionInput = <TData, TValue>({
   return (
     <Box>
       <TextInput
+      
         value={mode === "search" ? searchText : displayValue}
         onChangeText={onSearchTextChange}
         placeholder={placeHolderValue}

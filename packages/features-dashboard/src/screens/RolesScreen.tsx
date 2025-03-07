@@ -7,7 +7,7 @@ import {
   ListTile,
   ListTileSkeleton,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -26,7 +26,7 @@ const RolesScreen = () => {
   };
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Roles"
         actions={
@@ -89,7 +89,7 @@ const RolesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

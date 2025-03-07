@@ -8,7 +8,7 @@ import {
   ListTileSkeleton,
   showModal,
   TextInput,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -36,7 +36,7 @@ const StaffScreen = () => {
   };
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Staff"
         actions={
@@ -106,7 +106,7 @@ const StaffScreen = () => {
           error={(error) => <ErrorState error={error} />}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

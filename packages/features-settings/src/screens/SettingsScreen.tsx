@@ -5,7 +5,7 @@ import {
   ExpoIconComponent,
   ListTile,
   SectionCard,
-  StyledPageLayout
+  ThemedPageLayout,
 } from "@colony/core-components";
 import { ExtensionSlot } from "@colony/core-extensions";
 import { useSession } from "@colony/core-global";
@@ -17,7 +17,7 @@ export const SettingsScreen = () => {
   const { user } = useSession();
   const router = useRouter();
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar title="Settings" leading={false} />
       <ScrollView>
         <Box p={"m"} flex={1} flexDirection={"column"} gap={"m"}>
@@ -51,7 +51,7 @@ export const SettingsScreen = () => {
           <ExtensionSlot name="logout-slot" />
         </Box>
       </ScrollView>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

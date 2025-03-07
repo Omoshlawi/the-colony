@@ -3,7 +3,7 @@ import React from "react";
 import {
   EmptyState,
   ErrorState,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { useListings } from "../hooks";
@@ -13,7 +13,7 @@ const Listings = () => {
   const listingsAsync = useListings();
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <When
         asyncState={{ ...listingsAsync, data: listingsAsync.listings }}
         loading={() => <Text>Loading ...</Text>}
@@ -34,7 +34,7 @@ const Listings = () => {
           );
         }}
       />
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

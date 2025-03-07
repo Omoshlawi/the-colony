@@ -8,7 +8,7 @@ import {
   showModal,
   showModalBottomSheet,
   Button,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -68,7 +68,7 @@ const AttributeTypesScreen = () => {
     );
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Attribute types"
         actions={
@@ -125,7 +125,7 @@ const AttributeTypesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

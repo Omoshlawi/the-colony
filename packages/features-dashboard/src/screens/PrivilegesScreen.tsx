@@ -7,16 +7,12 @@ import {
   ListTile,
   ListTileSkeleton,
   showModal,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
 import React from "react";
-import {
-  FlatList,
-  StyleSheet,
-  TouchableOpacity
-} from "react-native";
+import { FlatList, StyleSheet, TouchableOpacity } from "react-native";
 import { PrivilegeForm } from "../forms";
 import { usePrivileges } from "../hooks";
 
@@ -29,7 +25,7 @@ const PrivilegesScreen = () => {
   };
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Privileges"
         actions={
@@ -96,7 +92,7 @@ const PrivilegesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

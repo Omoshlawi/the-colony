@@ -10,7 +10,7 @@ interface Props extends PropsWithChildren {
   backgroundColor?: string;
 }
 
-export const StyledPageLayout: FC<Props> = ({
+export const ThemedPageLayout: FC<Props> = ({
   children,
   withSafeArea = true,
   backgroundColor,

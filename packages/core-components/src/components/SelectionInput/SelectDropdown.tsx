@@ -29,7 +29,7 @@ type Props<TData extends Record<string, any>> = Pick<
   onAsyncSearch?: (search: string) => Promise<void>;
 };
 
-const DropDown = <TData extends Record<string, any>>({
+const SelectDropdown = <TData extends Record<string, any>>({
   data = [],
   prefixIcon,
   onPrefixIconPressed,
@@ -173,7 +173,7 @@ const DropDown = <TData extends Record<string, any>>({
   );
 };
 
-export default DropDown;
+export default SelectDropdown;
 
 const styles = StyleSheet.create({
   dropdown: {

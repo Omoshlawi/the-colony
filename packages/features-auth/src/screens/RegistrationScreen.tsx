@@ -1,4 +1,4 @@
-import { AppBar, Logo, StyledPageLayout } from "@colony/core-components";
+import { AppBar, Logo, ThemedPageLayout } from "@colony/core-components";
 import { ScrollView, StyleSheet } from "react-native";
 
 import { Box, Text } from "@colony/core-theme";
@@ -6,7 +6,7 @@ import { RegisterForm } from "../forms";
 
 export const RegistrationScreen = () => {
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar title={"Register"} />
       <Box flexDirection={"column"} flex={1} justifyContent={"center"}>
         <ScrollView style={{ flexGrow: 0 }}>
@@ -32,7 +32,7 @@ export const RegistrationScreen = () => {
           </Box>
         </ScrollView>
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 import {
   Button,
-  DropDown,
+  Dropdown,
   ExpoIconComponent,
   FilePicker,
   IconButton,
@@ -9,7 +9,7 @@ import {
   showDialog,
   showModal,
   showModalBottomSheet,
-  StyledPageLayout,
+  ThemedPageLayout,
 } from "@colony/core-components";
 import { useSession } from "@colony/core-global";
 import { Box, Text } from "@colony/core-theme";
@@ -37,6 +37,7 @@ export default function HomeScreen() {
   const { currentOrganization } = useSession();
   const [search, setSearch] = useState("");
   const [item, setItem] = useState<any>();
+  const [items, setItems] = useState<Array<any>>([]);
   if (currentOrganization) return <Redirect href={"/(tabs)/dashboard"} />;
 
   const handleShowBottomsheet = (number: number) => {
@@ -54,10 +55,40 @@ export default function HomeScreen() {
   };
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <ScrollView>
         <Box gap={"m"} p={"m"}>
-          <DropDown<User>
+          <Dropdown.Select<User>
+            data={[
+              {
+                id: 1234,
+                name: "omosh lawi",
+                email: "omosh@gmail.com",
+                address: {
+                  id: 321,
+                  chief: {
+                    name: {
+                      firstname: "Laurent",
+                      lastname: "ouma",
+                    },
+                  },
+                },
+              },
+            ]}
+            searchAccessorKey="name"
+            valueAccessorKey={"id"}
+            labelAccessorKey="name"
+            searchable
+            onAsyncSearch={async (txt) => {
+              console.log(txt);
+            }}
+            label="DropdownSelect"
+            // helperText="Hello their"
+            onSelectedItemChange={setItem}
+            selectedItem={item}
+            // testPath={""}
+          />
+          <Dropdown.MultiSelect<User>
             data={[
               {
                 id: 1234,
@@ -82,10 +113,10 @@ export default function HomeScreen() {
             onAsyncSearch={async (txt) => {
               console.log(txt);
             }}
-            // label="Label"
+            label="DropdownMultiselect"
             // helperText="Hello their"
-            // onSelectedItemChange={({}) => {}}
-            // selectedItem={{}}
+            onSelectedItemChange={setItems}
+            selectedItem={items}
             // testPath={""}
           />
           <Button
@@ -173,7 +204,7 @@ export default function HomeScreen() {
           />
         </Box>
       </ScrollView>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 }
 

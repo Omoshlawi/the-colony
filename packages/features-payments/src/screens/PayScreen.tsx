@@ -1,6 +1,6 @@
 import { StyleSheet, Text } from "react-native";
 
-import { StyledPageLayout } from "@colony/core-components";
+import { ThemedPageLayout } from "@colony/core-components";
 import { useNavigation } from "expo-router";
 import { useEffect } from "react";
 
@@ -16,9 +16,9 @@ export const PayScreen = () => {
   }, [navigation]);
 
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <Text style={styles.title}>Send a payment</Text>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 

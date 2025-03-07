@@ -7,7 +7,7 @@ import {
   showModal,
   showModalBottomSheet,
   Button,
-  StyledPageLayout,
+  ThemedPageLayout,
   When,
 } from "@colony/core-components";
 import { Box } from "@colony/core-theme";
@@ -63,7 +63,7 @@ const CategoriesScreen = () => {
     });
   };
   return (
-    <StyledPageLayout>
+    <ThemedPageLayout>
       <AppBar
         title="Categories"
         actions={
@@ -113,7 +113,7 @@ const CategoriesScreen = () => {
           }}
         />
       </Box>
-    </StyledPageLayout>
+    </ThemedPageLayout>
   );
 };
 
